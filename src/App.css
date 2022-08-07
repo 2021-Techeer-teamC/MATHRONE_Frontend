@@ -1,0 +1,78 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 0.1fr 5fr 0.1fr;
+}
+
+.main {
+  display: grid;
+  grid-template-rows: 2fr 1fr 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+}
+
+/*FONT*/
+
+@font-face {
+  font-family: "NotoSans-Black";
+  src: url("./assets/font/NotoSansKR-Black.otf");
+}
+@font-face {
+  font-family: "NotoSans-Bold";
+  src: url("./assets/font/NotoSansKR-Bold.otf");
+}
+@font-face {
+  font-family: "NotoSans-Light";
+  src: url("./assets/font/NotoSansKR-Light.otf");
+}
+@font-face {
+  font-family: "NotoSans-Medium";
+  src: url("./assets/font/NotoSansKR-Medium.otf");
+}
+@font-face {
+  font-family: "NotoSans-Regular";
+  src: url("./assets/font/NotoSansKR-Regular.otf");
+}
+@font-face {
+  font-family: "NotoSans-Thin";
+  src: url("./assets/font/NotoSansKR-Thin.otf");
+}

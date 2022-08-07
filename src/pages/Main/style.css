@@ -1,0 +1,185 @@
+.main-div {
+  display: grid;
+  grid-template-areas:
+    "main-carousel main-carousel"
+    "try-carousel try-carousel"
+    "star-carousel star-carousel"
+    "most-try-prob recommend-prob";
+}
+
+.main-carousel {
+  grid-area: main-carousel;
+  align-items: "center" !important;
+  justify-content: "center" !important;
+}
+
+.try-carousel {
+  grid-area: try-carousel;
+  padding-top: 30px;
+}
+
+.star-carousel {
+  grid-area: star-carousel;
+  padding-top: 30px;
+}
+
+.most-try-prob {
+  grid-area: most-try-prob;
+}
+
+.recommend-prob {
+  grid-area: recommend-prob;
+}
+
+/* main carousel */
+.main-carousel-div {
+  padding-bottom: 60px;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.main-carousel-link {
+  position: absolute;
+  transform: translate(40%, 1200%);
+}
+
+.year-label {
+  position: absolute;
+  transform: translate(100%, 230%);
+
+  font-size: 30px;
+  text-align: center;
+
+  color: black;
+  font-family: NotoSans-Regular;
+}
+
+.title-label {
+  position: absolute;
+  transform: translate(30%, 180%);
+
+  font-size: 50px;
+  text-align: center;
+
+  color: black;
+  font-family: NotoSans-Bold;
+}
+
+.content-label {
+  position: absolute;
+  transform: translate(20%, 800%);
+
+  font-size: 20px;
+  text-align: center;
+
+  color: #434343;
+  font-family: NotoSans-Thin;
+}
+
+/* WorkbookSlider */
+.slider-div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid #e4e4e4;
+}
+
+.slider-img-div {
+  float: left;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.slider-rating {
+  position: absolute !important;
+  transform: translate(530%, 800%);
+  z-index: 3;
+}
+
+.slider-styled-div {
+  position: absolute;
+  transform: translate(0%, 0%);
+
+  border-radius: 20px;
+  width: 200px;
+  height: 300px;
+
+  z-index: 2;
+}
+.slider-styled-div:hover {
+  background-color: rgb(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.slider-img {
+  border-radius: 20px;
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.4); /* 그림자효과 */
+}
+
+.slider-img-title {
+  position: absolute;
+  transform: translate(-100%, 50%);
+  z-index: 3;
+
+  padding: 10px;
+  width: 200px;
+  font-size: 20px;
+  text-align: left;
+
+  visibility: hidden;
+  color: white;
+}
+.slider-styled-div:hover ~ .slider-img-title {
+  visibility: visible;
+}
+
+.slider-none-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.slider-none-label {
+  text-align: center;
+  align-items: center;
+  color: #434343;
+  padding-top: 40px;
+}
+
+/* ProblemList */
+.problemlist-div {
+  display: flex;
+  text-align: left;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 15px;
+}
+
+.problemlist-title {
+  font-family: NotoSans-Bold;
+  font-size: 25px;
+  border-bottom: 2px solid #bcdcc4;
+}
+
+.problemlist-link {
+  padding-left: 30px;
+}
+
+.problemlist-div-none {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.problemlist-label-none {
+  text-align: center;
+  align-items: center;
+  color: #434343;
+  padding-top: 40px;
+}
