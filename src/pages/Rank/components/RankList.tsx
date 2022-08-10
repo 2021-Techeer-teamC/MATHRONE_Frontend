@@ -6,12 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Gold from "../../../assets/image/gold-medal.png";
 import Silver from "../../../assets/image/silver-medal.png";
 import Bronze from "../../../assets/image/bronze-medal.png";
-
-interface rankData {
-  user_name: string;
-  correct_count: number;
-  try_count: number;
-}
+import rankData from "../../../types/rankData";
 
 type dataList = {
   posts: rankData[];
