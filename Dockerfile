@@ -10,7 +10,7 @@ WORKDIR /app
 COPY . /app
 
 # 이미지가 빌드 될때 실행
-RUN npm install
+RUN yarn install
 
 
 #
