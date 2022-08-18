@@ -56,9 +56,7 @@ export default function SignInSide() {
 
   const snshandleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // const user_data: any = new FormData(event.currentTarget);
 
-    window.location.href = loginUrl;
     try {
       window.location.href = loginUrl;
     } catch (error) {
