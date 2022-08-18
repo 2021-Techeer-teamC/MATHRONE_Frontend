@@ -49,7 +49,7 @@ export default function SignInSide() {
   const queryStr = qs.stringify({
     client_id: CLIENT_ID,
     redirect_uri: "http://localhost:3000",
-    response_type: "token",
+    response_type: "code",
     scope: "https://www.googleapis.com/auth/userinfo.profile,https://www.googleapis.com/auth/userinfo.email".replaceAll(","," "),
   });
 
