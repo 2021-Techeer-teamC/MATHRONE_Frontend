@@ -11,9 +11,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SignInDiv } from "./style";
 import userService from "../../services/userService";
-import snsLoginService from "../../services/snsLoginService";
 import qs from "qs";
-import Link from "@mui/material/Link";
 
 const theme = createTheme();
 
