@@ -11,6 +11,9 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SignInDiv } from "./style";
 import userService from "../../services/userService";
+import snsLoginService from "../../services/snsLoginService";
+import qs from "qs";
+import Link from "@mui/material/Link";
 
 const theme = createTheme();
 
@@ -33,6 +36,33 @@ export default function SignInSide() {
       localStorage.setItem("userId", res.data.userInfo.id);
 
       return res;
+    } catch (error) {
+      console.log("error");
+    }
+  };
+
+
+  // //google login
+  const CLIENT_ID = "510387731827-nn7phkh1dd5oi8fdvjc7g5dv0sdq28i7.apps.googleusercontent.com";
+  const AUTHORIZE_URI = "https://accounts.google.com/o/oauth2/v2/auth";
+
+  const queryStr = qs.stringify({
+    client_id: CLIENT_ID,
+    redirect_uri: "http://localhost:3000",
+    response_type: "token",
+    scope: "https://www.googleapis.com/auth/userinfo.profile,https://www.googleapis.com/auth/userinfo.email".replaceAll(","," "),
+  });
+
+  const loginUrl = AUTHORIZE_URI + "?" + queryStr;
+
+
+  const snshandleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // const user_data: any = new FormData(event.currentTarget);
+
+    window.location.href = loginUrl;
+    try {
+      window.location.href = loginUrl;
     } catch (error) {
       console.log("error");
     }
@@ -121,6 +151,21 @@ export default function SignInSide() {
                 >
                   로그인
                 </Button>
+              </Box>
+              <Box
+                  component="form"
+                  noValidate
+                  onClick={snshandleSubmit}
+                  sx={{ mt: 1 }}
+              >
+                <Button
+                  id="sns_login_button"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 1 }}
+              >
+                구글아이디로 로그인
+              </Button>
               </Box>
             </Box>
           </Grid>
