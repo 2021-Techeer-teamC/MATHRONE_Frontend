@@ -14,6 +14,7 @@ import SignIn from "./pages/User/SignIn.tsx";
 import SignUp from "./pages/User/SignUp.tsx";
 import ProblemDetail from './pages/ProblemDetail';
 import Result from './pages/Result';
+import Oauth from './pages/Oauth2RedirectLoading';
 
 const sections = [
   { title: "소개", url: "/info" },
@@ -33,6 +34,7 @@ function App() {
             <Route path="/books" exact element={<Books sections={sections}/>} />
             <Route path="/books/:id" element={<BookDetail sections={sections}/>} />
             <Route path="/rank" exact element={<Rank sections={sections}/>} />
+            <Route path="/oauth/callback/google" exact element={<Oauth sections={sections}/>} />
             <Route path="/problem/:workbookId/:chapterId" element={<ProblemDetail sections={sections}/>} /> {/*임시 테스트용*/}
             <Route path="/result" exact element={<Result sections={sections}/>} /> {/*임시 테스트용*/}
           </Routes>
