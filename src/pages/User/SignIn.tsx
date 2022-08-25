@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SignInDiv } from "./style";
 import userService from "../../services/userService";
-import qs from "qs";
+import { GOOGLE_OAUTH_URI } from "../Oauth/OauthData";
 
 const theme = createTheme();
 
@@ -34,31 +34,6 @@ export default function SignInSide() {
       localStorage.setItem("userId", res.data.userInfo.id);
 
       return res;
-    } catch (error) {
-      console.log("error");
-    }
-  };
-
-
-  // //google login
-  const CLIENT_ID = "510387731827-nn7phkh1dd5oi8fdvjc7g5dv0sdq28i7.apps.googleusercontent.com";
-  const AUTHORIZE_URI = "https://accounts.google.com/o/oauth2/v2/auth";
-
-  const queryStr = qs.stringify({
-    client_id: CLIENT_ID,
-    redirect_uri: "http://localhost:3000",
-    response_type: "code",
-    scope: "https://www.googleapis.com/auth/userinfo.profile,https://www.googleapis.com/auth/userinfo.email".replaceAll(","," "),
-  });
-
-  const loginUrl = AUTHORIZE_URI + "?" + queryStr;
-
-
-  const snshandleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    try {
-      window.location.href = loginUrl;
     } catch (error) {
       console.log("error");
     }
@@ -151,7 +126,6 @@ export default function SignInSide() {
               <Box
                   component="form"
                   noValidate
-                  onClick={snshandleSubmit}
                   sx={{ mt: 1 }}
               >
                 <Button
@@ -159,6 +133,7 @@ export default function SignInSide() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 1 }}
+                  href = { GOOGLE_OAUTH_URI }
               >
                 구글아이디로 로그인
               </Button>
