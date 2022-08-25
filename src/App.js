@@ -14,7 +14,7 @@ import SignIn from "./pages/User/SignIn.tsx";
 import SignUp from "./pages/User/SignUp.tsx";
 import ProblemDetail from './pages/ProblemDetail';
 import Result from './pages/Result';
-import Oauth from './pages/Oauth2RedirectLoading';
+import Oauth from './pages/Oauth/Oauth2RedirectLoading';
 
 const sections = [
   { title: "소개", url: "/info" },
