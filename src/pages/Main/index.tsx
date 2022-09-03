@@ -7,8 +7,8 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import Header from "../../components/Header";
 import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
-import WorkbookSlider from "./components/WorkbookSlider";
-import ProblemList from "./components/ProblemList";
+import WorkbookSlider from "../../components/WorkbookSlider/index.js";
+import ProblemList from "../../components/ProblemList";
 import MainCarousel from "./components/MainCarousel";
 import "./style.css";
 

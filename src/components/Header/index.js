@@ -44,7 +44,7 @@ function Header(props) {
               <Grid container spacing={1}>
                 <Grid item xs={6} md={5}>
                   <Link to="/profile" style={{ textDecoration: 'none' }}>
-                    <CgProfile style={{fontSize:'36px', color:'#009688', margin:'auto'}}></CgProfile>
+                    <CgProfile style={{fontSize:'36px', color:'#009688', margin:'auto'}}/>
                   </Link>
                 </Grid>
                 <Grid item xs={6} md={7}>
