@@ -1,10 +1,11 @@
 import * as React from "react";
 import { Grid, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import List from "@mui/material/List";
-import Gold from "../../../assets/image/gold-medal.png";
-import Silver from "../../../assets/image/silver-medal.png";
-import Bronze from "../../../assets/image/bronze-medal.png";
-import Pencil from "../../../assets/image/pencil.png";
+import Gold from "../../assets/image/gold-medal.png";
+import Silver from "../../assets/image/silver-medal.png";
+import Bronze from "../../assets/image/bronze-medal.png";
+import Pencil from "../../assets/image/pencil.png";
+import "./style.css";
 
 import Link from "@mui/material/Link";
 

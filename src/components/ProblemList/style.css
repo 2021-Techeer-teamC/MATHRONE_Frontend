@@ -1,0 +1,32 @@
+/* ProblemList */
+.problemlist-div {
+  display: flex;
+  text-align: left;
+  align-items: center;
+  padding-bottom: 15px;
+}
+
+.problemlist-title {
+  font-family: NotoSans-Bold;
+  font-size: 25px;
+  border-bottom: 2px solid #bcdcc4;
+}
+
+.problemlist-link {
+  padding-left: 30px;
+}
+
+.problemlist-div-none {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.problemlist-label-none {
+  text-align: center;
+  align-items: center;
+  color: #434343;
+  padding-top: 40px;
+}

@@ -4,7 +4,8 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Rating from "@mui/material/Rating";
 import { useEffect } from "react";
-import Pencil from "../../../assets/image/pencil.png";
+import Pencil from "../../assets/image/pencil.png";
+import "./style.css";
 
 const BookSlider = ({ posts }) => {
   //시도 중인 문제집

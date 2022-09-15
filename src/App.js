@@ -12,6 +12,7 @@ import BookDetail from "./pages/WorkbookDetail";
 import Rank from "./pages/Rank/index.tsx";
 import SignIn from "./pages/User/SignIn.tsx";
 import SignUp from "./pages/User/SignUp.tsx";
+import Profile from "./pages/Profile";
 import ProblemDetail from './pages/ProblemDetail';
 import Result from './pages/Result';
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/" exact element={<Main sections={sections}/>} />
             <Route path="/signin" exact element={<SignIn/>} />
             <Route path="/signup" exact element={<SignUp/>} />
+            <Route path="/profile" exact element={<Profile sections={sections}/>} />
             <Route path="/info" exact element={<InfoPage sections={sections}/>} />
             <Route path="/books" exact element={<Books sections={sections}/>} />
             <Route path="/books/:id" element={<BookDetail sections={sections}/>} />
