@@ -5,19 +5,19 @@ import axios from "axios";
 class rankingService {
     getMyRanking(){
         return axios.get<myRankData>(
-            "http://localhost:8080/myrankdata",
+            "http://localhost:8080/rank/rank",
             {
                 headers: {
                   "Content-Type": "application/json",
                   "Accept": "application/json",
-                  "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
+                  "accessToken": `${localStorage.getItem("accessToken")}`
                 },
             }
         )
     }    
     getAllRankings(){
         return axios.get<rankData[]>(
-            "http://localhost:8080/rankdata",
+            "http://localhost:8080/rank/total-rank",
             {
                 headers: {
                   "Content-Type": "application/json",

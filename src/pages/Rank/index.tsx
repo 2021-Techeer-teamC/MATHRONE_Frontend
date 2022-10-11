@@ -18,11 +18,18 @@ import myRankData from "../../types/myRankData";
 
 export default function Rankpage(props: { sections: any }) {
   const [allRank, setAllRank] = React.useState<rankData[]|any>();
-  const [myRank, setMyRank] = React.useState<myRankData|any>();
+  const [myRank, setMyRank] = React.useState<myRankData>();
+
+  const getRank = async() => {
+    const res = await rankingService.getMyRanking();
+    setMyRank(res.data);
+    const response = await rankingService.getAllRankings();
+    setAllRank(response.data);    
+  }
+
 
   useEffect(() => {
-    setAllRank(rankingService.getAllRankings);
-    setMyRank(rankingService.getMyRanking);
+    getRank();
   }, []);
 
   return (
