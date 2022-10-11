@@ -95,17 +95,17 @@ export default function Rankpage(props: { sections: any }) {
           }}
         >
           <Typography variant="body1" component="p">
-            {myRank.rank}
+            {myRank?.rank}
           </Typography>
           <Typography />
           <Typography variant="body1" component="p">
-            {myRank.user_name}
+            {myRank?.user_name}
           </Typography>
           <Typography variant="body1" component="p">
-            {myRank.correct_count}
+            {myRank?.correct_count}
           </Typography>
           <Typography variant="body1" component="p">
-            {myRank.try_count}
+            {myRank?.try_count}
           </Typography>
         </Card>
         <Footer
