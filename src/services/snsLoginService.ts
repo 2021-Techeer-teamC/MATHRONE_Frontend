@@ -2,6 +2,7 @@ import axios from "axios";
 import {signInUserItem} from "../types/userItem";
 import qs from "qs";
 import bookItem from "../types/bookItem";
+import {googleAccessDTOtmp} from "../types/googleAccessDTOtmp";
 
 class snsLoginService {
     //Signin.tsx
@@ -18,10 +19,10 @@ class snsLoginService {
     //     )
     // }
 
-    //Signin.tsx
+    //get방식 안됨 data parpametre로 보내는 방식으로는 넘어가지 않음 ?code=${code} : nono
     signInWithGoogle( code : null | string ){
-        return axios.post<signInUserItem>(
-            "http://localhost:8080/user/login/google",
+        return axios.post<googleAccessDTOtmp>(
+            "http://localhost:8080/user/oauth/callback/google",
             { 'code': code },
             {
                 headers: {
