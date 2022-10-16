@@ -30,13 +30,15 @@ export default function Oauth2RedirectLoading(props: { sections: any }) {
             // return res;
 
         try {
+            console.log("내부임");
+            console.log(code);
             const res = await snsLoginService.signInWithGoogle(code);
             console.log(JSON.stringify(res));
 
             window.location.href = "/";
 
             localStorage.setItem("accessToken", res.data.accessToken);
-            localStorage.setItem("userId", res.data.userInfo.id);
+            localStorage.setItem("userId", res.data.idToken);
 
             return res;
         } catch (error) {
