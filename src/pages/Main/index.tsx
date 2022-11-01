@@ -11,6 +11,10 @@ import WorkbookSlider from "../../components/WorkbookSlider/index.js";
 import ProblemList from "../../components/ProblemList";
 import MainCarousel from "./components/MainCarousel";
 import "./style.css";
+import {useEffect} from "react";
+import qs from "qs";
+import snsLoginService from "../../services/snsLoginService";
+import {useParams} from "react-router-dom";
 
 const theme = createTheme();
 
@@ -20,6 +24,13 @@ export default function Main(props: { sections: any }) {
   //   width: window.innerWidth || document.body.clientWidth,
   //   height: window.innerHeight || document.body.clientHeight,
   // };
+
+  /* eslint no-restricted-globals: ["off"] */
+  //query string에서 param추출
+  // const code = new URLSearchParams(location.search).get("code");
+  // useEffect(() => {
+  //   snsLoginService.signInWithGoogle(code);
+  // },[code]);
 
   //시도 중인 문제집
 

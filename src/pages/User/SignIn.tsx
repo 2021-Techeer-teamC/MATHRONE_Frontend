@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SignInDiv } from "./style";
 import userService from "../../services/userService";
+import { GOOGLE_OAUTH_URI } from "../Oauth/OauthData";
 
 const theme = createTheme();
 
@@ -121,6 +122,21 @@ export default function SignInSide() {
                 >
                   로그인
                 </Button>
+              </Box>
+              <Box
+                  component="form"
+                  noValidate
+                  sx={{ mt: 1 }}
+              >
+                <Button
+                  id="sns_login_button"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 1 }}
+                  href = { GOOGLE_OAUTH_URI }
+              >
+                구글아이디로 로그인
+              </Button>
               </Box>
             </Box>
           </Grid>
