@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import Pagination from "../components/ProbPagination";
 import Header from "../components/Header";
-import ProbImg from "../components/ProbImg";
 import AnswerSheet from "../components/AnswerSheet";
 import { useParams } from "react-router-dom";
 import { Box } from "@mui/system";
 import { Container, Grid, Typography } from "@mui/material";
 import problemsService from "../services/problemsService";
 import problems from "../types/problems";
+import ProbImg from "../components/ProbImg";
 
 type WorkbookDetailProps = {
   name: string; // 해당 문제집의 이름
@@ -16,17 +16,17 @@ type WorkbookDetailProps = {
 
 export default function ProblemDetail({ name, sections }: WorkbookDetailProps) {
   const params = useParams();
-  const [data, setProbDatas] = React.useState<problems[]|any>([]);
-  const [num, setNum] = React.useState(1);
+  const [data, setProbDatas] = React.useState<problems[]>([]);
+  const [num, setNum] = React.useState(1);  
 
   useEffect(() => {
-    problemsService.getProblems(params.workbookId, params.chapterId).then(data => {
-      if(data) setProbDatas(data);
-      });
-    //setProbDatas(api 요청) /problem
+    problemsService.getProblems(params.workbookId, params.chapterId).then(response => 
+        setProbDatas(response.data));
   }, []);
 
+  console.log(data.length);
   return (
+    data.length !== 0 ? (
     <Box>
       <Header title="MATHrone" sections={sections} />
       <Container
@@ -51,7 +51,7 @@ export default function ProblemDetail({ name, sections }: WorkbookDetailProps) {
         </Grid>
         <Grid item xs={2} />
       </Grid>
-    </Box>
+    </Box>) :null
   );
 }
 
