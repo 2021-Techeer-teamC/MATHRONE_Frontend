@@ -3,10 +3,10 @@ import axios from "axios";
 
 class UserService {
   //Signin.tsx
-  signIn(email: string | null, password: string | null) {
+  signIn(accountId: string | null, password: string | null) {
     return axios.post<signInUserItem>(
       "http://localhost:8080/user/login",
-      { email: email, password: password },
+      { accountId: accountId, password: password },
       {
         headers: {
           "Content-Type": "application/json",

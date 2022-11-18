@@ -22,7 +22,7 @@ export default function SignInSide() {
 
     try {
       const res = await userService.signIn(
-        user_data.get("email"),
+        user_data.get("accountId"),
         user_data.get("password")
       );
 
@@ -31,7 +31,7 @@ export default function SignInSide() {
       window.location.href = "/";
 
       localStorage.setItem("accessToken", res.data.accessToken);
-      localStorage.setItem("userId", res.data.userInfo.id);
+      localStorage.setItem("accountId", res.data.userInfo.accountId);
 
       return res;
     } catch (error) {
@@ -93,10 +93,10 @@ export default function SignInSide() {
                   margin="normal"
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+                  id="accountId"
+                  label="Account ID"
+                  name="accountId"
+                  autoComplete="text"
                   autoFocus
                 />
                 <TextField
@@ -123,20 +123,16 @@ export default function SignInSide() {
                   로그인
                 </Button>
               </Box>
-              <Box
-                  component="form"
-                  noValidate
-                  sx={{ mt: 1 }}
-              >
+              <Box component="form" noValidate sx={{ mt: 1 }}>
                 <Button
                   id="sns_login_button"
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 1 }}
-                  href = { GOOGLE_OAUTH_URI }
-              >
-                구글아이디로 로그인
-              </Button>
+                  href={GOOGLE_OAUTH_URI}
+                >
+                  구글아이디로 로그인
+                </Button>
               </Box>
             </Box>
           </Grid>
