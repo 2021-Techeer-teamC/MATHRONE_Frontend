@@ -5,7 +5,6 @@ import problems from "../types/problems";
 export interface Props {
   posts: problems;
   setNum: React.Dispatch<React.SetStateAction<number>>;
-  //handlePagination: (page: number) => void;
   num: number;
   len: number;
 }

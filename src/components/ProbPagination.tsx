@@ -2,7 +2,13 @@ import React from "react";
 import Pagination from "rc-pagination";
 import "../../node_modules/rc-pagination/assets/index.css";
 
-const ProbPagination = ({ setNum, len, num }: any) => {
+interface Props {
+  setNum: React.Dispatch<React.SetStateAction<number>>;
+  len: number;
+  num: number;
+}
+
+const ProbPagination = ({ setNum, len, num }: Props) => {
   return (
     <div>
       <Pagination
