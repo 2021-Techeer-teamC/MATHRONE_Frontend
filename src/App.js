@@ -12,8 +12,8 @@ import BookDetail from "./pages/WorkbookDetail";
 import Rank from "./pages/Rank/index.tsx";
 import SignIn from "./pages/User/SignIn.tsx";
 import SignUp from "./pages/User/SignUp.tsx";
-import ProblemDetail from './pages/ProblemDetail';
-import Result from './pages/Result';
+import ProblemDetail from './pages/ProblemDetail/index.tsx';
+import Result from './pages/Result/index.tsx';
 
 const sections = [
   { title: "소개", url: "/info" },

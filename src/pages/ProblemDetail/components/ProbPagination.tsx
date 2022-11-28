@@ -1,6 +1,6 @@
 import React from "react";
 import Pagination from "rc-pagination";
-import "../../node_modules/rc-pagination/assets/index.css";
+import "../../../../node_modules/rc-pagination/assets/index.css";
 
 interface Props {
   setNum: React.Dispatch<React.SetStateAction<number>>;

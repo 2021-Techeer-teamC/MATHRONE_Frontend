@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Box, Button } from "@mui/material";
-import problems from "../types/problems";
+import problems from "../../../types/problems";
 
 export interface Props {
   posts: problems;

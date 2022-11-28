@@ -10,9 +10,9 @@ import { Box, TextField } from "@mui/material";
 import { MenuItem, ControlledMenu } from "@szhsin/react-menu";
 import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
-import grading from "../services/answerService";
+import grading from "../../../services/answerService";
 import { useNavigate } from "react-router-dom";
-import problems from "../types/problems";
+import problems from "../../../types/problems";
 
 // interface problemData {
 //   problem_id: string;

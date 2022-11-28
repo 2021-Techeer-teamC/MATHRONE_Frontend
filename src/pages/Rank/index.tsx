@@ -24,9 +24,8 @@ export default function Rankpage(props: { sections: any }) {
     const res = await rankingService.getMyRanking();
     setMyRank(res.data);
     const response = await rankingService.getAllRankings();
-    setAllRank(response.data);    
+    setAllRank(response.data);
   }
-
 
   useEffect(() => {
     getRank();
@@ -123,56 +122,3 @@ export default function Rankpage(props: { sections: any }) {
     </div>
   );
 }
-
-/*const rankData: rankData[] = [
-  {
-    user_name: "tester1",
-    correct_count: 904,
-    try_count: 1000,
-  },
-  {
-    user_name: "tester2",
-    correct_count: 860,
-    try_count: 1200,
-  },
-  {
-    user_name: "tester3",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester4",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester5",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester6",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester7",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester8",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester9",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester10",
-    correct_count: 123,
-    try_count: 506,
-  },
-];*/
