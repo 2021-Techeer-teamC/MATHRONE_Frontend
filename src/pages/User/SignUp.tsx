@@ -21,7 +21,7 @@ export default function SignUP() {
 
     try {
       const res = await userService.signUp(
-        user_data.get("ID"),
+        user_data.get("accountId"),
         user_data.get("email"),
         user_data.get("password")
       );
@@ -68,8 +68,8 @@ export default function SignUP() {
                       autoFocus
                       fullWidth
                       type="string"
-                      id="ID"
-                      name="ID"
+                      id="accountId"
+                      name="accountId"
                       label="사용자 ID"
                     />
                   </Grid>
