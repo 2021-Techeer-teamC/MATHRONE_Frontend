@@ -4,6 +4,7 @@ import {Box, Grid } from "@mui/material/";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import Logo from '../Logo/index.tsx';
+import {CgProfile} from 'react-icons/cg';
 import "../../assets/styles/components.css";
 import "./style.css";
 
@@ -41,11 +42,15 @@ function Header(props) {
               </Grid>
             ) :(
               <Grid container spacing={1}>
+                <Grid item xs={6} md={5}>
+                  <Link to="/profile" style={{ textDecoration: 'none' }}>
+                    <CgProfile style={{fontSize:'36px', color:'#009688', margin:'auto'}}/>
+                  </Link>
+                </Grid>
                 <Grid item xs={6} md={7}>
                   <Link to="/" style={{ textDecoration: 'none' }} onClick={onLogoutClick}>
                     <Button id="login-button">로그아웃</Button>
                   </Link>
-
                 </Grid>
               </Grid>
             )}

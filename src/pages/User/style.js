@@ -7,6 +7,12 @@ export const SignInDiv = styled.div`
       background: #009688;
     }
   }
+  #sns_login_button {
+    background: #A84949;
+    :hover {
+      background: #FC1225;
+    }
+  
 `;
 
 export const SignUpDiv = styled.div`
