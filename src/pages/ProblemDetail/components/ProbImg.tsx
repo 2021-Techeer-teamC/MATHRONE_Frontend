@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Box, Button } from "@mui/material";
-import problems from "../../../types/problems";
+import problemData from "../../../types/problems";
 
 export interface Props {
-  posts: problems;
+  posts: problemData;
   setNum: React.Dispatch<React.SetStateAction<number>>;
   num: number;
   len: number;

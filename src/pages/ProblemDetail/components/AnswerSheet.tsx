@@ -12,54 +12,39 @@ import "@szhsin/react-menu/dist/index.css";
 import "@szhsin/react-menu/dist/transitions/slide.css";
 import grading from "../../../services/answerService";
 import { useNavigate } from "react-router-dom";
-import problems from "../../../types/problems";
+import problemData from "../../../types/problems";
 
-// interface problemData {
-//   problem_id: string;
-//   prob_num: number;
-//   chapter_id: string;
-//   prob_img: string;
-//   level_of_diff: number;
-//   category: boolean;
-// }
-
-interface myAnswerData {
-  problemSolveList: problems[];
-}
-
-const AnswerSheet = (props: { propsdata: problems[] }) => {
+const AnswerSheet = (props: { propsdata: problemData[] }) => {
   const navigator = useNavigate();
   const ref = React.useRef(null);
   const [isOpen, setOpen] = React.useState(false);
   const temp = Array.from(props.propsdata);
   const [inputs, setInputs] = React.useState(
-    ([] = temp.map((probData: problems) => ({
-      problem_id: probData.problemId,
-      my_answer: "a",
+    ([] = temp.map((probData: problemData) => ({
+      problemId: probData.problemId,
+      solution: "0",
     })))
   );
 
   const onChange = (value: string, prob_num: string) => {
     setInputs(
       inputs.map((answer) =>
-        answer.problem_id === prob_num
-          ? { ...answer, my_answer: value }
+        answer.problemId === prob_num
+          ? { ...answer, solution: value }
           : answer
       )
     );
+    console.log(inputs);
   };
 
-  const submitAnswer = (inputs: any) => async () => {
-    const postData: myAnswerData = {
-      problemSolveList: inputs,
-    }; //console.log(postData);
+  const submitAnswer = async(inputs: any) => {
     try {
-      const res = await grading.postAnswer(postData);
-      navigator("/Result", { state: { answerData: res } });
+      const res = await grading.postAnswer({"answerSubmitList":inputs});
+      console.log(res.data);
+      navigator("/Result", { state: { data: res.data } });
     } catch (error) {
       console.log(error);
     }
-    // answersheet 데이터를 보내고 답을 포함한 데이터 받아오기
   };
 
   return (
@@ -88,7 +73,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
               </TableCell>
             </TableRow>
           </TableHead>
-          {props.propsdata.map((probData: problems) => (
+          {props.propsdata.map((probData: problemData) => (
             <TableBody key={probData.problemNum}>
               {probData.category === false ? (
                 <TableRow>
@@ -104,7 +89,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   <TableCell colSpan={5} align="center" padding="none">
                     <TextField
                       sx={{ pt: "0px" }}
-                      value={inputs[probData.problemNum - 1].my_answer}
+                      value={inputs[probData.problemNum - 1].solution}
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
                       }
@@ -129,7 +114,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].my_answer) === 1
+                        parseInt(inputs[probData.problemNum - 1].solution) === 1
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
@@ -142,7 +127,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].my_answer) === 2
+                        parseInt(inputs[probData.problemNum - 1].solution) === 2
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
@@ -155,7 +140,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].my_answer) === 3
+                        parseInt(inputs[probData.problemNum - 1].solution) === 3
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
@@ -168,7 +153,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].my_answer) === 4
+                        parseInt(inputs[probData.problemNum - 1].solution) === 4
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
@@ -181,7 +166,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].my_answer) === 5
+                        parseInt(inputs[probData.problemNum - 1].solution) === 5
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)

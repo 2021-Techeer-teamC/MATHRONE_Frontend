@@ -37,7 +37,9 @@ export default function Result(props: { sections: any }) {
   wrong = 0;
 
   const location = useLocation();
-  const answerData = location.state.model_id;
+  console.log(location.state);
+  
+  const answerData = location.state.data;
   answerData.map((answerData: answerData) => {
     answerData.my_answer === answerData.answer ? correct++ : wrong++;
   });
