@@ -90,7 +90,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
           </TableHead>
           {props.propsdata.map((probData: problems) => (
             <TableBody key={probData.problemNum}>
-              {probData.category === false ? (
+              {probData.is_multiple === false ? (
                 <TableRow>
                   <TableCell
                     component="th"
