@@ -16,9 +16,9 @@ import Footer from "../../components/Footer";
 import { useLocation } from "react-router-dom";
 
 interface answerData {
-  problem_id: string;
-  my_answer: number;
-  answer: number;
+  problemId: string;
+  solution: number; // 내가 입력한 정답
+  answer: number; // 실제 정답
 }
 
 interface score {
@@ -37,11 +37,11 @@ export default function Result(props: { sections: any }) {
   wrong = 0;
 
   const location = useLocation();
-  console.log(location.state);
   
   const answerData = location.state.data;
+  
   answerData.map((answerData: answerData) => {
-    answerData.my_answer === answerData.answer ? correct++ : wrong++;
+    answerData.answer == answerData.solution ? correct++ : wrong++;
   });
 
   var score: score[] = [
@@ -84,19 +84,19 @@ export default function Result(props: { sections: any }) {
                 </TableHead>
                 <TableBody>
                   {answerData.map((answerData: answerData) => (
-                    <TableRow key={answerData.problem_id}>
+                    <TableRow key={answerData.problemId}>
                       <TableCell align="center" padding="none">
-                        {++count}
+                        {++count /* 문항 번호 */} 
                       </TableCell>
                       <TableCell align="center" padding="none">
-                        {answerData.answer}
+                        {answerData.answer /* 실제 답안 */} 
                       </TableCell>
                       <TableCell align="center" padding="none">
-                        {answerData.my_answer}
+                        {answerData.solution /* 내가 입력한 답 */} 
                       </TableCell>
                       <TableCell align="center" padding="none">
                         <Box sx={{ display: "flex", justifyContent: "center" }}>
-                          {answerData.my_answer === answerData.answer ? (
+                          {answerData.answer == answerData.solution ? (
                             <Card
                               sx={{
                                 backgroundColor: "#73C23A",

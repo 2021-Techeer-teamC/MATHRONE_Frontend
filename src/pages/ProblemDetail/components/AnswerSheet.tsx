@@ -22,7 +22,7 @@ const AnswerSheet = (props: { propsdata: problemData[] }) => {
   const [inputs, setInputs] = React.useState(
     ([] = temp.map((probData: problemData) => ({
       problemId: probData.problemId,
-      solution: "0",
+      solution: "00",
     })))
   );
 
@@ -40,8 +40,7 @@ const AnswerSheet = (props: { propsdata: problemData[] }) => {
   const submitAnswer = async(inputs: any) => {
     try {
       const res = await grading.postAnswer({"answerSubmitList":inputs});
-      console.log(res.data);
-      navigator("/Result", { state: { data: res.data } });
+      navigator("/Result", { state: { data: res.data} });
     } catch (error) {
       console.log(error);
     }
