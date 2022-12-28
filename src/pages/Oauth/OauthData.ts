@@ -9,7 +9,7 @@ export const GOOGLE_OAUTH_URI = `https://accounts.google.com/o/oauth2/v2/auth?cl
 
 
 //kakao
-const KAKAO_CLIENT_ID = "5183426c2a1230b4bf686ee4488898da"; //REST API KEY (CLIENT ID)
+const KAKAO_CLIENT_ID = "b05cd2c325a6d15c882233502e21a1fc"; //REST API KEY (CLIENT ID)
 const KAKAO_REDIRECT_URI =  "http://localhost:3000/oauth/callback/kakao";
 
-export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code&scope=account_email,openid,profile_image`;
