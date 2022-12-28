@@ -16,18 +16,6 @@ export default function Oauth2RedirectLoading(props: { sections: any }) {
     console.log(code);
     // @ts-ignore
     useEffect(async () => {
-            // console.log("내부임");
-            // console.log(code);
-            // const user_data: any = new FormData();
-            //
-            // const res = await snsLoginService.signInWithGoogle(code);
-
-            // window.location.href = "/";
-            //
-            // localStorage.setItem("accessToken", res.data.accessToken);
-            // localStorage.setItem("userId", res.data.userInfo.id);
-
-            // return res;
 
         try {
             console.log("내부임");
@@ -39,6 +27,7 @@ export default function Oauth2RedirectLoading(props: { sections: any }) {
 
             localStorage.setItem("accessToken", res.data.accessToken);
             localStorage.setItem("userId", res.data.idToken);
+            localStorage.setItem("thirdParty","google"); //로그아웃이나 정보 요청시 필요
 
             return res;
         } catch (error) {

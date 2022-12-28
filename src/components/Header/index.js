@@ -7,15 +7,26 @@ import Logo from '../Logo/index.tsx';
 import {CgProfile} from 'react-icons/cg';
 import "../../assets/styles/components.css";
 import "./style.css";
+import snsLoginService from "../../services/snsLoginService";
 
 function Header(props) {
   const [loginStatus, setLoginStatus] = useState(localStorage.getItem('accessToken')?true:false);
-  
+
   const onLogoutClick = () =>{
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userId');
+    localStorage.removeItem('thirdParty');
+
     window.location.href='/';
+
     setLoginStatus(false);
+  }
+
+
+  const onKakaoLogoutClick = () => {
+
+    snsLoginService.signInWithKakao();
+
   }
 
   return (
