@@ -5,5 +5,5 @@ export default interface problemData {
     workbookId: string;
     problemImg: string;
     levelOfDiff: number;
-    is_multiple: boolean;
+    multiple: boolean;
 }
