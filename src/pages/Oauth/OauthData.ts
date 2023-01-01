@@ -11,5 +11,8 @@ export const GOOGLE_OAUTH_URI = `https://accounts.google.com/o/oauth2/v2/auth?cl
 //kakao
 const KAKAO_CLIENT_ID = "b05cd2c325a6d15c882233502e21a1fc"; //REST API KEY (CLIENT ID)
 const KAKAO_REDIRECT_URI =  "http://localhost:3000/oauth/callback/kakao";
+const KAKAO_LOGOUT_REDIRECT_URI = "http://localhost:3000";
 
 export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code&scope=account_email,openid,profile_image`;
+
+export const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${KAKAO_CLIENT_ID}&logout_redirect_uri=${KAKAO_LOGOUT_REDIRECT_URI}`
