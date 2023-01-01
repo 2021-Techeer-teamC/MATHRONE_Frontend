@@ -25,7 +25,7 @@ class snsLoginService {
 
 
     signInWithKakao( code : null | string ){
-        return axios.post<kakaoAccessDTO>(
+        return axios.post<signInUserItem>(
             "http://localhost:8080/user/oauth/callback/kakao",
             { 'code': code },
             {
@@ -35,6 +35,21 @@ class snsLoginService {
                 },
             }
         );
+    }
+
+
+    //엑세스 토큰을 만료시키는 로그아웃 방식 -> 채택하지 않았음
+    signOutWithKakao(){
+        return axios.post(
+            "https://kapi.kakao.com/v1/user/logout",
+            {},
+            {
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "Authorization": `Bearer ${localStorage.getItem("snsAccessToken")}`, // but 형식을 맞춰두기 위해 !
+                }
+            }
+        )
     }
 
 }
