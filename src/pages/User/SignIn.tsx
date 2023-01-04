@@ -131,7 +131,7 @@ export default function SignInSide() {
                   sx={{ mt: 3, mb: 1 }}
                   href={GOOGLE_OAUTH_URI}
                 >
-                  구글아이디로 로그인
+                  구글아이디로 로그인/회원가입
                 </Button>
               </Box>
             </Box>
