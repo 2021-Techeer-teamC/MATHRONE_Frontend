@@ -12,29 +12,23 @@ import NavBar from "../../components/NavBar";
 import Footer from "../../components/Footer";
 import RankList from "./components/RankList";
 import Trophy from "../../assets/image/trophy.png";
-
-interface rankData {
-  user_name: string;
-  correct_count: number;
-  try_count: number;
-}
-
-// interface sections {
-//   title: string;
-//   url: string;
-// }
+import rankingService from "../../services/rankingService"
+import rankData from "../../types/rankData";
+import myRankData from "../../types/myRankData";
 
 export default function Rankpage(props: { sections: any }) {
-  const [rankDatas, setRankDatas] = React.useState([...rankData]);
-  const [res, setRes] = React.useState([...rankDatas]);
+  const [allRank, setAllRank] = React.useState<rankData[]|any>();
+  const [myRank, setMyRank] = React.useState<myRankData>();
+
+  const getRank = async() => {
+    const res = await rankingService.getMyRanking();
+    setMyRank(res.data);
+    const response = await rankingService.getAllRankings();
+    setAllRank(response.data);
+  }
 
   useEffect(() => {
-    // axios 요청보낼 주소 URI? 내 점수 조회를 위한 나의 user_name?
-    // axios.get(url, { my_user_name }).then((rank) => {
-    //  setItemDatas([...rank])
-    //   setResult(rankDatas);
-    // 랭크데이터 받아오기
-    setRes(rankDatas);
+    getRank();
   }, []);
 
   return (
@@ -91,7 +85,7 @@ export default function Rankpage(props: { sections: any }) {
             </div>
           </Card>
 
-          <RankList posts={res} />
+          <RankList posts={allRank} />
         </Card>
 
         <Card
@@ -107,17 +101,17 @@ export default function Rankpage(props: { sections: any }) {
           }}
         >
           <Typography variant="body1" component="p">
-            10000
+            {myRank?.rank}
           </Typography>
           <Typography />
           <Typography variant="body1" component="p">
-            its meeee
+            {myRank?.user_name}
           </Typography>
           <Typography variant="body1" component="p">
-            100
+            {myRank?.correct_count}
           </Typography>
           <Typography variant="body1" component="p">
-            124
+            {myRank?.try_count}
           </Typography>
         </Card>
         <Footer
@@ -128,56 +122,3 @@ export default function Rankpage(props: { sections: any }) {
     </div>
   );
 }
-
-const rankData: rankData[] = [
-  {
-    user_name: "tester1",
-    correct_count: 904,
-    try_count: 1000,
-  },
-  {
-    user_name: "tester2",
-    correct_count: 860,
-    try_count: 1200,
-  },
-  {
-    user_name: "tester3",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester4",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester5",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester6",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester7",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester8",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester9",
-    correct_count: 123,
-    try_count: 506,
-  },
-  {
-    user_name: "tester10",
-    correct_count: 123,
-    try_count: 506,
-  },
-];

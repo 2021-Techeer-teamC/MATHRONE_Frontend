@@ -6,12 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Gold from "../../../assets/image/gold-medal.png";
 import Silver from "../../../assets/image/silver-medal.png";
 import Bronze from "../../../assets/image/bronze-medal.png";
-
-interface rankData {
-  user_name: string;
-  correct_count: number;
-  try_count: number;
-}
+import rankData from "../../../types/rankData";
 
 type dataList = {
   posts: rankData[];
@@ -61,7 +56,7 @@ const RankList = ({ posts }: dataList) => {
   count = 1;
   return (
     <Container>
-      {posts.map((data: rankData) => (
+      {posts && posts.map((data: rankData) => (
         <Card
           key={data.user_name}
           elevation={1}
@@ -81,10 +76,10 @@ const RankList = ({ posts }: dataList) => {
             {data.user_name}
           </Typography>
           <Typography variant="body1" component="p">
-            {data.try_count}
+            {data.correct_count}
           </Typography>
           <Typography variant="body1" component="p">
-            {data.correct_count}
+            {data.try_count}
           </Typography>
         </Card>
       ))}

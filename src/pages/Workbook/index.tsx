@@ -213,7 +213,7 @@ export default function BookPage(props: { sections: any }) {
 
 const itemData: bookItem[] = [
   {
-    workbookId: "01-01-00001",
+    workbookId: "01",
     title: "Breakfast",
     profileImg: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
     publisher: "교육청",
@@ -221,7 +221,7 @@ const itemData: bookItem[] = [
     like: 2,
   },
   {
-    workbookId: "01-01-00002",
+    workbookId: "02",
     title: "Burger",
     profileImg: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
     publisher: "EBS",
@@ -229,7 +229,7 @@ const itemData: bookItem[] = [
     like: 3,
   },
   {
-    workbookId: "01-01-00003",
+    workbookId: "03",
     title: "Camera",
     profileImg: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
     publisher: "교육청",
@@ -237,7 +237,7 @@ const itemData: bookItem[] = [
     like: 2,
   },
   {
-    workbookId: "01-01-00004",
+    workbookId: "04",
     title: "Camera",
     profileImg: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
     publisher: "EBS",
@@ -245,7 +245,7 @@ const itemData: bookItem[] = [
     like: 1,
   },
   {
-    workbookId: "01-01-00005",
+    workbookId: "05",
     title: "Hats",
     profileImg: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
     publisher: "EBS",
@@ -253,7 +253,7 @@ const itemData: bookItem[] = [
     like: 6,
   },
   {
-    workbookId: "01-01-00006",
+    workbookId: "06",
     title: "Honey",
     profileImg: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
     publisher: "평가원",
@@ -261,7 +261,7 @@ const itemData: bookItem[] = [
     like: 10,
   },
   {
-    workbookId: "01-01-00007",
+    workbookId: "07",
     title: "Basketball",
     profileImg: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
     publisher: "평가원",
@@ -269,7 +269,7 @@ const itemData: bookItem[] = [
     like: 7,
   },
   {
-    workbookId: "01-01-00008",
+    workbookId: "08",
     title: "Fern",
     profileImg: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
     publisher: "EBS",
@@ -277,7 +277,7 @@ const itemData: bookItem[] = [
     like: 12,
   },
   {
-    workbookId: "01-01-00009",
+    workbookId: "09",
     title: "Mushrooms",
     profileImg: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
     publisher: "EBS",
