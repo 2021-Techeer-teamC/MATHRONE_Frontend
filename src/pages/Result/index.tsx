@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Header from "../components/Header";
+import Header from "../../components/Header";
 import { Box } from "@mui/system";
 import Card from "@mui/material/Card";
 import {
@@ -12,8 +11,8 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import Chart from "../components/Chart";
-import Footer from "../components/Footer";
+import Chart from "./components/Chart";
+import Footer from "../../components/Footer";
 import { useLocation } from "react-router-dom";
 
 interface answerData {
