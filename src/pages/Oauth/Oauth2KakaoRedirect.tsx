@@ -8,26 +8,25 @@ import {useEffect} from "react";
 import snsLoginService from "../../services/snsLoginService";
 import userService from "../../services/userService";
 
-export default function Oauth2RedirectLoading(props: { sections: any }) {
+export default function Oauth2KakaoRedirect(props: { sections: any }) {
 
     // Ouathcode
     let code = new URL(window.location.href).searchParams.get("code");
-    console.log("외부임");
-    console.log(code);
     // @ts-ignore
     useEffect(async () => {
 
         try {
-            console.log("내부임");
-            console.log(code);
-            const res = await snsLoginService.signInWithGoogle(code);
+            const res = await snsLoginService.signInWithKakao(code);
             console.log(JSON.stringify(res));
 
             window.location.href = "/";
 
             localStorage.setItem("accessToken", res.data.accessToken);
-            localStorage.setItem("userId", res.data.idToken);
-            localStorage.setItem("thirdParty","google"); //로그아웃이나 정보 요청시 필요
+            localStorage.setItem("accountId", res.data.userInfo.accountId);
+            console.log(res.data.snsInfo.accessToken);
+            localStorage.setItem("snsAccessToken", res.data.snsInfo.accessToken);
+
+            localStorage.setItem("thirdParty","kakao"); //로그아웃이나 정보 요청시 필요
 
             return res;
         } catch (error) {
@@ -43,9 +42,9 @@ export default function Oauth2RedirectLoading(props: { sections: any }) {
 
     return (
         <Box sx={{ display: 'flex' }}>
-            <CircularProgress />
-        </Box>
-    );
+    <CircularProgress />
+    </Box>
+);
 
 };
 
