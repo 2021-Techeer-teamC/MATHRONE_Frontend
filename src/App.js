@@ -16,6 +16,7 @@ import Profile from "./pages/Profile";
 import ProblemDetail from './pages/ProblemDetail';
 import Result from './pages/Result';
 import Oauth from './pages/Oauth/Oauth2RedirectLoading';
+import Error from './pages/Error/index';
 
 const sections = [
   { title: "소개", url: "/info" },
@@ -29,6 +30,7 @@ function App() {
       <div className="App">
           <Routes>
             <Route path="/" exact element={<Main sections={sections}/>} />
+            <Route path="/error" exact element={<Error sections={sections}/>} />
             <Route path="/signin" exact element={<SignIn/>} />
             <Route path="/signup" exact element={<SignUp/>} />
             <Route path="/profile" exact element={<Profile sections={sections}/>} />
