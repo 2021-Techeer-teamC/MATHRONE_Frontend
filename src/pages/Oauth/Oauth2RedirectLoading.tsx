@@ -12,37 +12,25 @@ export default function Oauth2RedirectLoading(props: { sections: any }) {
 
     // Ouathcode
     let code = new URL(window.location.href).searchParams.get("code");
-    console.log("외부임");
-    console.log(code);
+
     // @ts-ignore
     useEffect(async () => {
-            // console.log("내부임");
-            // console.log(code);
-            // const user_data: any = new FormData();
-            //
-            // const res = await snsLoginService.signInWithGoogle(code);
-
-            // window.location.href = "/";
-            //
-            // localStorage.setItem("accessToken", res.data.accessToken);
-            // localStorage.setItem("userId", res.data.userInfo.id);
-
-            // return res;
 
         try {
-            console.log("내부임");
-            console.log(code);
+
             const res = await snsLoginService.signInWithGoogle(code);
-            console.log(JSON.stringify(res));
 
             window.location.href = "/";
 
             localStorage.setItem("accessToken", res.data.accessToken);
-            localStorage.setItem("userId", res.data.idToken);
+            localStorage.setItem("userId", res.data.userInfo.userId);
+            localStorage.setItem("accountId", res.data.userInfo.accountId);
+            localStorage.setItem("thirdParty", "google");
 
             return res;
         } catch (error) {
-            console.log("login error");
+
+            window.location.href = `/Error`;
         }
 
     },[]);
