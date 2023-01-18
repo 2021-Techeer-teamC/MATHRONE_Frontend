@@ -1,7 +1,15 @@
 import * as React from "react";
 import { Box, Button } from "@mui/material";
+import problems from "../../../types/problems";
 
-const ProbImg = ({ posts, setNum, num, len }: any) => {
+export interface Props {
+  posts: problems;
+  setNum: React.Dispatch<React.SetStateAction<number>>;
+  num: number;
+  len: number;
+}
+
+const ProbImg = ({ posts, setNum, num, len }: Props) => {
   return (
     <Box
       sx={{
@@ -16,7 +24,7 @@ const ProbImg = ({ posts, setNum, num, len }: any) => {
       <Button onClick={() => (num === 1 ? null : setNum(num - 1))}>이전</Button>
       <Box
         component="img"
-        src={posts.prob_img}
+        src={posts.problemImg}
         sx={{ overflow: "hidden" }}
       ></Box>
       <Button onClick={() => (num === len ? null : setNum(num + 1))}>

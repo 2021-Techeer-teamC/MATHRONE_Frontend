@@ -130,19 +130,19 @@ export default function BookDetail({ name, sections }: WorkbookDetailProps) {
               <List component="div" disablePadding>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("0101")}
+                  onClick={() => handleChapterClick("01")}
                 >
                   <ListItemText primary="지수함수와 로그함수" />
                 </ListItemButton>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("0102")}
+                  onClick={() => handleChapterClick("02")}
                 >
                   <ListItemText primary="삼각함수" />
                 </ListItemButton>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("0103")}
+                  onClick={() => handleChapterClick("03")}
                 >
                   <ListItemText primary="수열" />
                 </ListItemButton>
@@ -157,19 +157,19 @@ export default function BookDetail({ name, sections }: WorkbookDetailProps) {
               <List component="div" disablePadding>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("0201")}
+                  onClick={() => handleChapterClick("01")}
                 >
                   <ListItemText primary="함수의 극한과 연속" />
                 </ListItemButton>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("0202")}
+                  onClick={() => handleChapterClick("02")}
                 >
                   <ListItemText primary="다항함수의 미분법" />
                 </ListItemButton>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("0203")}
+                  onClick={() => handleChapterClick("03")}
                 >
                   <ListItemText primary="다항함수의 적분법" />
                 </ListItemButton>
