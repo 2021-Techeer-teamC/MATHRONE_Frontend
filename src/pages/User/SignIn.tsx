@@ -31,6 +31,7 @@ export default function SignInSide() {
       window.location.href = "/";
 
       localStorage.setItem("accessToken", res.data.accessToken);
+      localStorage.setItem("userId", res.data.userInfo.userId);
       localStorage.setItem("accountId", res.data.userInfo.accountId);
 
       return res;

@@ -4,6 +4,7 @@ export interface signInUserItem {
   refreshToken: string;
   accessTokenExpiresIn: number;
   userInfo: {
+    userId: string;
     accountId: string;
   };
   snsInfo :  {

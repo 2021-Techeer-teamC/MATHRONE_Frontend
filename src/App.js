@@ -17,6 +17,7 @@ import Result from './pages/Result/index.tsx';
 import Profile from "./pages/Profile";
 import ProblemDetail from './pages/ProblemDetail';
 import Result from './pages/Result';
+import Error from './pages/Error/index';
 import OauthGoogle from './pages/Oauth/Oauth2RedirectLoading';
 import OauthKakao from './pages/Oauth/Oauth2KakaoRedirect';
 
@@ -33,6 +34,7 @@ function App() {
       <div className="App">
           <Routes>
             <Route path="/" exact element={<Main sections={sections}/>} />
+            <Route path="/error" exact element={<Error sections={sections}/>} />
             <Route path="/signin" exact element={<SignIn/>} />
             <Route path="/signup" exact element={<SignUp/>} />
             <Route path="/profile" exact element={<Profile sections={sections}/>} />

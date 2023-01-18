@@ -12,26 +12,27 @@ export default function Oauth2RedirectLoading(props: { sections: any }) {
 
     // Ouathcode
     let code = new URL(window.location.href).searchParams.get("code");
-    console.log("외부임");
-    console.log(code);
+
     // @ts-ignore
     useEffect(async () => {
 
         try {
-            console.log("내부임");
-            console.log(code);
+
             const res = await snsLoginService.signInWithGoogle(code);
-            console.log(JSON.stringify(res));
 
             window.location.href = "/";
 
             localStorage.setItem("accessToken", res.data.accessToken);
-            localStorage.setItem("userId", res.data.idToken);
-            localStorage.setItem("thirdParty","google"); //로그아웃이나 정보 요청시 필요
+
+            localStorage.setItem("userId", res.data.userInfo.userId);
+            localStorage.setItem("accountId", res.data.userInfo.accountId);
+            localStorage.setItem("thirdParty", "google");
+
 
             return res;
         } catch (error) {
-            console.log("login error");
+
+            window.location.href = `/Error`;
         }
 
     },[]);
