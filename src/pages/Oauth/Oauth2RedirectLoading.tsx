@@ -23,10 +23,9 @@ export default function Oauth2RedirectLoading(props: { sections: any }) {
             window.location.href = "/";
 
             localStorage.setItem("accessToken", res.data.accessToken);
-
-            localStorage.setItem("userId", res.data.userInfo.userId);
             localStorage.setItem("accountId", res.data.userInfo.accountId);
-            localStorage.setItem("thirdParty", "google");
+            localStorage.setItem("snsAccessToken", res.data.snsInfo.snsAccessToken);
+            localStorage.setItem("thirdParty","google"); //로그아웃이나 정보 요청시 필요
 
 
             return res;

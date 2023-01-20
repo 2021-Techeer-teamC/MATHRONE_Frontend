@@ -23,8 +23,7 @@ export default function Oauth2KakaoRedirect(props: { sections: any }) {
 
             localStorage.setItem("accessToken", res.data.accessToken);
             localStorage.setItem("accountId", res.data.userInfo.accountId);
-            console.log(res.data.snsInfo.accessToken);
-            localStorage.setItem("snsAccessToken", res.data.snsInfo.accessToken);
+            localStorage.setItem("snsAccessToken", res.data.snsInfo.snsAccessToken);
 
             localStorage.setItem("thirdParty","kakao"); //로그아웃이나 정보 요청시 필요
 

@@ -34,6 +34,9 @@ export default function Main(props: { sections: any }) {
 
   //시도 중인 문제집
 
+  // console.log(localStorage.getItem("snsAccessToken"));
+  // console.log(localStorage.getItem("accountId"));
+
   return (
     <ThemeProvider theme={theme}>
       <Header title="MATHrone" sections={props.sections} />
