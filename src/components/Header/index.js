@@ -28,9 +28,9 @@ function Header(props) {
 
       if (thirdParty === 'kakao') {
 
-
+            try{
               //mathrone서버에서 로그아웃
-              const res = snsLoginService.signOutWithKakao().then(()=>{
+              const res = await snsLoginService.signOutWithKakao().then(()=>{
                   window.location.href = KAKAO_LOGOUT_URL;
                   localStorage.removeItem('thirdParty');
                   localStorage.removeItem('snsAccessToken');
@@ -42,7 +42,10 @@ function Header(props) {
               localStorage.removeItem('accountId');
 
               setLoginStatus(false);
-
+            } catch (error) {
+                console.log("error");
+                window.location.href = `/Error`;
+             }
 
 
       }
