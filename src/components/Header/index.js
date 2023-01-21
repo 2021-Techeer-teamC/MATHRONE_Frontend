@@ -9,24 +9,92 @@ import "../../assets/styles/components.css";
 import "./style.css";
 import snsLoginService from "../../services/snsLoginService";
 import {KAKAO_LOGOUT_URL} from "../../pages/Oauth/OauthData";
+import userService from "../../services/userService";
 
 function Header(props) {
   const [loginStatus, setLoginStatus] = useState(localStorage.getItem('accessToken')?true:false);
   const [thirdParty, setThirdParty] = useState(localStorage.getItem('thirdParty'));
 
-  const onLogoutClick = () =>{
 
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('thirdParty');
-    localStorage.removeItem('snsAccessToken');
+  const logouttmp = async () => {
+
+      setLoginStatus(false);
+
+  }
+
+  const onLogoutClick = async () => {
 
 
-    setLoginStatus(false);
 
-    if(thirdParty === 'kakao') {
-        window.location.href = KAKAO_LOGOUT_URL; //카카오 로그아웃
-    }
+      if (thirdParty === 'kakao') {
+
+
+              //mathrone서버에서 로그아웃
+              const res = snsLoginService.signOutWithKakao().then(()=>{
+                  window.location.href = KAKAO_LOGOUT_URL;
+                  localStorage.removeItem('thirdParty');
+                  localStorage.removeItem('snsAccessToken');
+              });
+
+
+              localStorage.removeItem('accessToken');
+              localStorage.removeItem('userId');
+              localStorage.removeItem('accountId');
+
+              setLoginStatus(false);
+
+
+
+      }
+
+      if (thirdParty === 'google') {
+
+          console.log("구글 로그아웃 진행");
+
+          try {
+              const res1 = await snsLoginService.signOutFromGoogle(localStorage.getItem("snsAccessToken"));
+              const res2 = await snsLoginService.signOutWithGoogle();
+
+              localStorage.removeItem('thirdParty');
+              localStorage.removeItem('snsAccessToken');
+              localStorage.removeItem('accessToken');
+              localStorage.removeItem('userId');
+              localStorage.removeItem('accountId');
+
+
+              setLoginStatus(false);
+
+              return res2;
+          } catch (error) {
+              console.log("error");
+              window.location.href = `/Error`;
+          }
+
+      }
+
+      if (thirdParty === 'mathrone') {
+
+          try {
+              const res = await userService.signOut(); //await없으면 CORS 에러 + 401 Error
+
+              localStorage.removeItem('thirdParty');
+              localStorage.removeItem('snsAccessToken');
+              localStorage.removeItem('accessToken');
+              localStorage.removeItem('userId');
+              localStorage.removeItem('accountId');
+
+              setLoginStatus(false);
+
+              return res;
+          } catch (error) {
+              console.log("error");
+              window.location.href = `/Error`;
+          }
+
+
+      }
+
+
 
   }
 
