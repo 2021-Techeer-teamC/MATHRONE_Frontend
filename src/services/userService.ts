@@ -32,6 +32,23 @@ class UserService {
       }
     );
   }
+
+  //logout
+  signOut(){
+      return axios.post(
+          "http://localhost:8080/user/logout",
+          {},
+          {
+              headers: {
+                  "Content-Type": "application/json'",
+                  Accept: "application/json'",
+                  "Authorization": `${localStorage.getItem("accessToken")}`,
+              //    Bearer 붙이면 에러
+              },
+          }
+      );
+  }
+
 }
 
 export default new UserService();
