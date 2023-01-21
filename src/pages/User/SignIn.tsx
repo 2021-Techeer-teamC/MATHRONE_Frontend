@@ -33,6 +33,7 @@ export default function SignInSide() {
       localStorage.setItem("accessToken", res.data.accessToken);
       localStorage.setItem("userId", res.data.userInfo.userId);
       localStorage.setItem("accountId", res.data.userInfo.accountId);
+      localStorage.setItem("thirdParty", "mathrone");
 
       return res;
     } catch (error) {
