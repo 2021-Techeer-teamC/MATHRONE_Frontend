@@ -30,6 +30,7 @@ export default function Oauth2KakaoRedirect(props: { sections: any }) {
             return res;
         } catch (error) {
             console.log("login error");
+            window.location.href = `/Error`;
         }
 
     },[]);
