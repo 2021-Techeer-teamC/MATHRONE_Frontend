@@ -16,13 +16,13 @@ export default function Oauth2RedirectLoading(props: { sections: any }) {
     try {
       const res = await snsLoginService.signInWithGoogle(code);
 
-      window.location.href = "/";
-
       localStorage.setItem("accessToken", res.data.accessToken);
 
       localStorage.setItem("userId", res.data.userInfo.userId);
       localStorage.setItem("accountId", res.data.userInfo.accountId);
       localStorage.setItem("thirdParty", "google");
+
+      window.location.href = "/";
 
       return res;
     } catch (error) {
