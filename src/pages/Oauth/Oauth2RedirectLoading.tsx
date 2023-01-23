@@ -1,53 +1,44 @@
 // 리다이렉트될 화면
 // OAuth2RedirectHandeler.js
-
-import * as React from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import {useEffect} from "react";
+import { Grid, Typography } from "@mui/material/";
+import { useEffect } from "react";
+import Logo from "../../components/Logo";
 import snsLoginService from "../../services/snsLoginService";
-import userService from "../../services/userService";
+import { SNSLoadingWrapper, LoadingCircular } from "./style";
 
 export default function Oauth2RedirectLoading(props: { sections: any }) {
+  // Ouathcode
+  let code = new URL(window.location.href).searchParams.get("code");
 
-    // Ouathcode
-    let code = new URL(window.location.href).searchParams.get("code");
+  // @ts-ignore
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(async () => {
+    try {
+      const res = await snsLoginService.signInWithGoogle(code);
 
-    // @ts-ignore
-    useEffect(async () => {
+      window.location.href = "/";
 
-        try {
+      localStorage.setItem("accessToken", res.data.accessToken);
 
-            const res = await snsLoginService.signInWithGoogle(code);
+      localStorage.setItem("userId", res.data.userInfo.userId);
+      localStorage.setItem("accountId", res.data.userInfo.accountId);
+      localStorage.setItem("thirdParty", "google");
 
-            window.location.href = "/";
+      return res;
+    } catch (error) {
+      window.location.href = `/Error`;
+    }
+  }, []);
 
-            localStorage.setItem("accessToken", res.data.accessToken);
-
-            localStorage.setItem("userId", res.data.userInfo.userId);
-            localStorage.setItem("accountId", res.data.userInfo.accountId);
-            localStorage.setItem("thirdParty", "google");
-
-
-            return res;
-        } catch (error) {
-
-            window.location.href = `/Error`;
-        }
-
-    },[]);
-
-
-
-
-
-
-    return (
-        <Box sx={{ display: 'flex' }}>
-            <CircularProgress />
-        </Box>
-    );
-
-};
-
-
+  return (
+    <SNSLoadingWrapper container direction="column">
+      <Grid item style={{ marginTop: "auto", marginBottom: "auto" }}>
+        <Logo />
+        <Typography component="h2" variant="h5">
+          구글 계정을 이용하여 로그인 중입니다...
+        </Typography>
+        <LoadingCircular />
+      </Grid>
+    </SNSLoadingWrapper>
+  );
+}
