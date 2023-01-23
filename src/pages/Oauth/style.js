@@ -4,7 +4,7 @@ import { Grid, CircularProgress } from "@mui/material/";
 export const SNSLoadingWrapper = styled(Grid)`
   min-height: 100vh;
   justify-content: center;
-  aligh-items: center;
+  align-items: center;
 `;
 
 export const LoadingCircular = styled(CircularProgress)`
