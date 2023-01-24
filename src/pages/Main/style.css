@@ -79,11 +79,19 @@
 
 /* AccountID 생성 모달창 */
 .Mui-focused,
+.MuiInputLabel-root,
+.MuiInput-input,
 .accountId-submit-button {
   color: rgb(0, 150, 136) !important;
   font-weight: bold !important;
 }
-
 .MuiInput-underline:after {
-  border-bottom-color: rgb(0, 150, 136) !important;
+  border-bottom-color: gray !important;
+}
+.dialog-main-content {
+  display: flex;
+}
+#id-check-button {
+  font-size: 14px;
+  background-color: #315c72 !important;
 }

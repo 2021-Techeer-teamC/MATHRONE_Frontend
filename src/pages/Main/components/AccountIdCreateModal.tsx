@@ -1,57 +1,13 @@
 import { useState, useEffect } from "react";
-import { styled } from "@mui/material/styles";
 import {
   Button,
-  IconButton,
+  Grid,
   TextField,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
-  Typography,
   DialogTitle,
 } from "@mui/material/";
-import CloseIcon from "@mui/icons-material/Close";
-
-// export default function AccountIdCreateModal() {
-//   const [modalOpen, setModalOpen] = useState<boolean>(false);
-//   const [idCheck, setIdCheck] = useState<boolean>(false);
-
-//   useEffect(() => {
-//     return setModalOpen(localStorage.getItem("accountId")?.slice(0, 1) === "@");
-//   }, []);
-
-//   const handleClose = () => {
-//     setModalOpen(false);
-//   };
-
-//   return (
-//     <div>
-//       <Dialog open={modalOpen} onClose={handleClose}>
-//         <DialogTitle>ACCOUNT ID</DialogTitle>
-//         <DialogContent>
-//           <DialogContentText>
-//             SNS 계정으로 가입되었습니다. <br />
-//             MATHRONE 페이지에서 표시될 Account ID가 필요합니다.
-//           </DialogContentText>
-//           <TextField
-//             autoFocus
-//             margin="dense"
-//             id="name"
-//             label="사용할 Account ID"
-//             type="email"
-//             fullWidth
-//             variant="standard"
-//           />
-//         </DialogContent>
-//         <DialogActions>
-//           <Button onClick={handleClose}>취소</Button>
-//           <Button onClick={handleClose}>AccountID 제출</Button>
-//         </DialogActions>
-//       </Dialog>
-//     </div>
-//   );
-// }
 
 export default function AccountIdCreateModal() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -67,22 +23,39 @@ export default function AccountIdCreateModal() {
 
   return (
     <div className="account-id-modal">
-      <Dialog onClose={handleClose} open={modalOpen}>
+      <Dialog open={modalOpen} fullWidth maxWidth="md">
         <DialogTitle>ACCOUNT ID</DialogTitle>
         <DialogContent dividers>
-          SNS 계정으로 가입되었습니다. <br />
-          MATHRONE 페이지에서 표시될 Account ID가 필요합니다.
-          <Typography gutterBottom>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              label="사용할 Account ID"
-              type="email"
-              fullWidth
-              variant="standard"
-            />
-          </Typography>
+          <div className="dialog-description">
+            SNS 계정으로 가입되었습니다. <br />
+            MATHRONE 페이지에서 표시될 Account ID를 생성한 후, 서비스 이용이
+            가능합니다.
+          </div>
+          <Grid
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            spacing={3}
+          >
+            <Grid item md={8} lg={8}>
+              <TextField
+                autoFocus
+                error={true}
+                margin="dense"
+                id="name"
+                label="사용할 Account ID"
+                type="email"
+                fullWidth
+                variant="standard"
+              />
+            </Grid>
+            <Grid item md={4} lg={4}>
+              <Button variant="contained" id="id-check-button">
+                중복확인
+              </Button>
+            </Grid>
+          </Grid>
         </DialogContent>
         <DialogActions>
           <Button className="accountId-submit-button" onClick={handleClose}>
