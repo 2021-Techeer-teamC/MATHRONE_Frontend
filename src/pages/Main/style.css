@@ -95,3 +95,19 @@
   font-size: 14px;
   background-color: #315c72 !important;
 }
+.non-show {
+  visibility: hidden !important;
+}
+.show {
+  display: block;
+}
+.error-helper {
+  padding-top: 0px !important;
+  font-size: 12px;
+  color: #d32f2f;
+}
+.correct-helper {
+  padding-top: 0px !important;
+  font-size: 12px;
+  color: #315c72;
+}

@@ -1,4 +1,5 @@
 import { signInUserItem, signUpUserItem } from "../types/userItem";
+import userCheckItem from "../types/statusItem";
 import axios from "axios";
 
 class UserService {
@@ -30,6 +31,13 @@ class UserService {
           Accept: "application/json",
         },
       }
+    );
+  }
+
+  //snsAccountId.tsx
+  checkAccountId(accountId: string) {
+    return axios.get<userCheckItem>(
+      `http://localhost:8080/user/check/accountId?userAccountId=${accountId}`
     );
   }
 }
