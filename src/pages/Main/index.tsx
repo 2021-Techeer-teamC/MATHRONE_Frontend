@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -10,21 +10,14 @@ import Footer from "../../components/Footer";
 import WorkbookSlider from "../../components/WorkbookSlider/index.js";
 import ProblemList from "../../components/ProblemList";
 import MainCarousel from "./components/MainCarousel";
-import "./style.css";
-import {useEffect} from "react";
-import qs from "qs";
+import { useEffect } from "react";
 import snsLoginService from "../../services/snsLoginService";
-import {useParams} from "react-router-dom";
+import "./style.css";
+import AccountIdCreateModal from "./components/AccountIdCreateModal";
 
 const theme = createTheme();
 
 export default function Main(props: { sections: any }) {
-  //화면 크기
-  // const size = {
-  //   width: window.innerWidth || document.body.clientWidth,
-  //   height: window.innerHeight || document.body.clientHeight,
-  // };
-
   /* eslint no-restricted-globals: ["off"] */
   //query string에서 param추출
   // const code = new URLSearchParams(location.search).get("code");
@@ -41,6 +34,7 @@ export default function Main(props: { sections: any }) {
       <CssBaseline />
       <Container maxWidth="lg">
         <main className="main-div">
+          <AccountIdCreateModal />
           <div className="main-carousel">
             <MainCarousel posts={addData} />
           </div>

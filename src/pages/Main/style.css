@@ -76,3 +76,14 @@
   color: #434343;
   font-family: NotoSans-Thin;
 }
+
+/* AccountID 생성 모달창 */
+.Mui-focused,
+.accountId-submit-button {
+  color: rgb(0, 150, 136) !important;
+  font-weight: bold !important;
+}
+
+.MuiInput-underline:after {
+  border-bottom-color: rgb(0, 150, 136) !important;
+}
