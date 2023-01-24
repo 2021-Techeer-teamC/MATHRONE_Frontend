@@ -33,11 +33,23 @@ class UserService {
       }
     );
   }
-
   //snsAccountId.tsx
   checkAccountId(accountId: string) {
     return axios.get<userCheckItem>(
       `http://localhost:8080/user/check/accountId?userAccountId=${accountId}`
+    );
+  }
+  //snsAccountId.tsx
+  updateAccountId(accountId: string) {
+    return axios.put<any>(
+      `http://localhost:8080/user/accountID?accountID=${accountId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
     );
   }
 }

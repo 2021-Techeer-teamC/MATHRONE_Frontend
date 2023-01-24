@@ -12,6 +12,7 @@ import {
 import userService from "../../../services/userService";
 
 export default function AccountIdCreateModal() {
+  const [newId, setNewId] = useState<string>("");
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [isIdChecked, setIsIdChecked] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
@@ -32,14 +33,28 @@ export default function AccountIdCreateModal() {
     try {
       console.log(data.get("accountId"));
       const res = await userService.checkAccountId(data.get("accountId"));
-
       console.log(JSON.stringify(res));
+      setNewId(data.get("accountId"));
       setError(false);
-      // handleClose();
-
       return true;
     } catch (error) {
       setError(true);
+      console.log(error);
+      console.log("error");
+    }
+  };
+
+  const onSubmitAccountId = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+    try {
+      const res = await userService.updateAccountId(newId);
+      console.log(JSON.stringify(res));
+      localStorage.setItem("accountId", newId);
+      handleClose();
+      return true;
+    } catch (error) {
       console.log(error);
       console.log("error");
     }
@@ -49,13 +64,13 @@ export default function AccountIdCreateModal() {
     <div className="account-id-modal">
       <Dialog open={modalOpen} onClose={handleClose} fullWidth maxWidth="sm">
         <DialogTitle>ACCOUNT ID</DialogTitle>
-        <DialogContent dividers>
-          <div className="dialog-description">
-            SNS 계정으로 가입되었습니다. <br />
-            MATHRONE 페이지에서 표시될 Account ID를 생성한 후, <br />
-            서비스 이용이 가능합니다.
-          </div>
-          <FormControl onSubmit={onClickCheckId} component="form">
+        <FormControl onSubmit={onClickCheckId} component="form">
+          <DialogContent dividers>
+            <div className="dialog-description">
+              SNS 계정으로 가입되었습니다. <br />
+              MATHRONE 페이지에서 표시될 Account ID를 생성한 후, <br />
+              서비스 이용이 가능합니다.
+            </div>
             <Grid
               container
               direction="row"
@@ -98,10 +113,14 @@ export default function AccountIdCreateModal() {
                 {error ? "중복된 아이디입니다." : "사용가능한 아이디입니다."}
               </Grid>
             </Grid>
-          </FormControl>
-        </DialogContent>
+          </DialogContent>
+        </FormControl>
         <DialogActions>
-          <Button className="accountId-submit-button" onClick={handleClose}>
+          <Button
+            className="accountId-submit-button"
+            type="button"
+            onClick={onSubmitAccountId}
+          >
             AccountID 생성
           </Button>
         </DialogActions>
