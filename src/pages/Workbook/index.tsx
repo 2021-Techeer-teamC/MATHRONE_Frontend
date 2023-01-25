@@ -11,8 +11,7 @@ import NavBar from "../../components/NavBar/index.js";
 import Footer from "../../components/Footer/index.js";
 import WorkbookSidebar from "./components/WorkbookSidebar.js";
 import workbookService from "../../services/workbookService";
-import bookItem from "../../types/bookItem";
-import bookContent from "../../types/bookContent";
+import { workbookSidebarItem, workbookItem } from "../../types/workbookItem";
 import "./style.css";
 
 export default function WorkBook(props: { sections: any }) {
@@ -94,9 +93,9 @@ export default function WorkBook(props: { sections: any }) {
 
   const [resultCnt, setResultCnt] = React.useState<number>(10);
   // const [itemDatas, setItemDatas] = React.useState<bookItem[]>([]); //axios결과 임시용
-  const [result, setResult] = React.useState<bookItem[]>(itemData);
+  const [result, setResult] = React.useState<workbookItem[]>(workbookList);
   const [bookContents, setBookContents] =
-    React.useState<bookContent[]>(bookInfo); //empty bookList
+    React.useState<workbookSidebarItem[]>(workbookListSummary); //empty bookList
 
   //case 2. 파라미터 변경시 마다 실행
   const getWorkbooks =
@@ -211,7 +210,7 @@ export default function WorkBook(props: { sections: any }) {
   );
 }
 
-const itemData: bookItem[] = [
+const workbookList: workbookItem[] = [
   {
     workbookId: "01",
     title: "Breakfast",
@@ -286,27 +285,20 @@ const itemData: bookItem[] = [
   },
 ];
 
-const bookInfo: bookContent[] = [
+const workbookListSummary: workbookSidebarItem[] = [
   {
+    id: 0,
     publisher: "EBS",
     categories: ["수능완성", "수능특강"],
-    id: 0,
   },
   {
-    publisher: "교육청",
-    categories: [
-      "3월 모의고사",
-      "4월 모의고사",
-      "5월 모의고사",
-      "7월 모의고사",
-      "8월 모의고사",
-      "10월 모의고사",
-    ],
     id: 1,
+    publisher: "교육청",
+    categories: ["4월 모의고사", "10월 모의고사"],
   },
   {
-    publisher: "평가원",
-    categories: ["6월 모의고사", "9월 모의고사", "대학수학능력시험"],
     id: 2,
+    publisher: "평가원",
+    categories: ["9월 모의고사", "11월 모의고사"],
   },
 ];

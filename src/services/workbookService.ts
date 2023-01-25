@@ -1,46 +1,45 @@
-import bookItem from "../types/bookItem";
-import bookContent from "../types/bookContent";
+import { workbookItem, workbookSidebarItem } from "../types/workbookItem";
 import axios from "axios";
 
+class WorkbookService {
+  //Books.txs
 
-class WorkbookService{
+  //1. 출판사를 보내면 출판사 별 문제집을 반환
+  getWorkbook(
+    publisher: string,
+    sortType: string,
+    pageNum: number,
+    category: string
+  ) {
+    return axios.get<workbookItem[]>(
+      `/workbook?publisher=${publisher}&sortType=${sortType}&category=${category}&pageNum=${pageNum}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      }
+    );
+    //url+/publisher
+  }
 
-//Books.txs
+  //2.모든 문제집을 반환
+  getWorkbookList() {
+    return axios.get<workbookSidebarItem[]>("/workbook", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    });
+  }
 
-    //1. 출판사를 보내면 출판사 별 문제집을 반환
-    getWorkbook(publisher : string, sortType: string, pageNum: number, category: string){
-        return axios.get<bookItem[]>(
-            `/workbook?publisher=${publisher}&sortType=${sortType}&category=${category}&pageNum=${pageNum}`,
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
-                },
-            }
-        );
-        //url+/publisher
-    }
-
-    //2.모든 문제집을 반환
-    getWorkbookList(){
-        return axios.get<bookItem[]>(
-            "/workbook",
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Authorization": `Bearer ${localStorage.getItem("accessToken")}`,
-                },
-            }
-        );
-    }
-
-    //3. 문제집 리스트를 반환
-    //보류(어떤 api인지 확인 필요)
-    getAllBookContent(){
-        return axios.get<bookContent[]>("");
-    }
+  //3. 문제집 리스트를 반환
+  //보류(어떤 api인지 확인 필요)
+  getAllBookContent() {
+    return axios.get<workbookItem[]>("");
+  }
 }
 
 export default new WorkbookService();
