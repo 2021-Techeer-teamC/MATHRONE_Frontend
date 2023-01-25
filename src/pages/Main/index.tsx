@@ -36,7 +36,7 @@ export default function Main(props: { sections: any }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header title="MATHrone" sections={props.sections} />
+      <Header />
       <NavBar sections={props.sections} />
       <CssBaseline />
       <Container maxWidth="lg">

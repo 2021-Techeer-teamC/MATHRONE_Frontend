@@ -44,7 +44,7 @@ export default function BookDetail({ name, sections }: WorkbookDetailProps) {
 
   return (
     <>
-      <Header title="MATHrone" sections={sections} />
+      <Header />
       <NavBar sections={sections} />
       <div>
         <Card className="detail-card-div" sx={{ display: "flex" }}>

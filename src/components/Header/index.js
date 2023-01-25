@@ -10,7 +10,7 @@ import "./style.css";
 import snsLoginService from "../../services/snsLoginService";
 import {KAKAO_LOGOUT_URL} from "../../pages/Oauth/OauthData";
 
-function Header(props) {
+function Header() {
   const [loginStatus, setLoginStatus] = useState(localStorage.getItem('accessToken')?true:false);
   const [thirdParty, setThirdParty] = useState(localStorage.getItem('thirdParty'));
 
@@ -72,16 +72,6 @@ function Header(props) {
       </Box>
   );
 }
-
-Header.propTypes = {
-  sections: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  title: PropTypes.string.isRequired,
-};
 
 export default Header;
 

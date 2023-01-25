@@ -49,7 +49,7 @@ export default function Result(props: { sections: any }) {
 
   return (
     <div>
-      <Header title="MATHrone" sections={props.sections} />
+      <Header />
       <Grid container spacing={1} justifyContent="center" alignItems="center">
         <Grid item xs={6}>
           <Box sx={{ display: "flex", justifyContent: "center", margin: "3%" }}>

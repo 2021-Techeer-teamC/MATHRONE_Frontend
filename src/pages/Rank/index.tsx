@@ -33,7 +33,7 @@ export default function Rankpage(props: { sections: any }) {
 
   return (
     <div>
-      <Header title="MATHrone" sections={props.sections} />
+      <Header />
       <NavBar sections={props.sections} />
       <Container>
         <Box sx={{ display: "flex", paddingBottom: 0.1 }}>

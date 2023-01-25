@@ -18,7 +18,7 @@ const theme = createTheme();
 export default function ProfilePage(props: { sections: any }) {
   return (
     <ThemeProvider theme={theme}>
-      <Header title="MATHrone" sections={props.sections} />
+      <Header />
       <NavBar sections={props.sections} />
       <Container maxWidth="lg">
         <Paper elevation={3} className="profile-paper">

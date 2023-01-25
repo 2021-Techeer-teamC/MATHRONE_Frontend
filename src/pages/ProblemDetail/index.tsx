@@ -28,7 +28,7 @@ export default function ProblemDetail({ name, sections }: WorkbookDetailProps) {
   return (
     data.length !== 0 ? (
     <Box>
-      <Header title="MATHrone" sections={sections} />
+      <Header />
       <Container
         style={{ alignItems: "center", justifyContent: "center", height: 100 }}
       >

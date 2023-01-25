@@ -155,7 +155,7 @@ export default function WorkBook(props: { sections: any }) {
 
   return (
     <div>
-      <Header title="MATHrone" sections={props.sections} />
+      <Header />
       <NavBar sections={props.sections} />
       <SearchBar></SearchBar>
       <Container>
