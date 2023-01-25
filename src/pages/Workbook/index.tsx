@@ -14,6 +14,100 @@ import workbookService from "../../services/workbookService";
 import { workbookSidebarItem, workbookItem } from "../../types/workbookItem";
 import "./style.css";
 
+// dummy data
+const workbookList: workbookItem[] = [
+  {
+    workbookId: "01",
+    title: "Breakfast",
+    profileImg: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+    publisher: "교육청",
+    level: "1",
+    star: 2,
+  },
+  {
+    workbookId: "02",
+    title: "Burger",
+    profileImg: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+    publisher: "EBS",
+    level: "3",
+    star: 3,
+  },
+  {
+    workbookId: "03",
+    title: "Camera",
+    profileImg: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
+    publisher: "교육청",
+    level: "1",
+    star: 2,
+  },
+  {
+    workbookId: "04",
+    title: "Camera",
+    profileImg: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
+    publisher: "EBS",
+    level: "2",
+    star: 1,
+  },
+  {
+    workbookId: "05",
+    title: "Hats",
+    profileImg: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
+    publisher: "EBS",
+    level: "2",
+    star: 6,
+  },
+  {
+    workbookId: "06",
+    title: "Honey",
+    profileImg: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
+    publisher: "평가원",
+    level: "2",
+    star: 10,
+  },
+  {
+    workbookId: "07",
+    title: "Basketball",
+    profileImg: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
+    publisher: "평가원",
+    level: "2",
+    star: 7,
+  },
+  {
+    workbookId: "08",
+    title: "Fern",
+    profileImg: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
+    publisher: "EBS",
+    level: "3",
+    star: 12,
+  },
+  {
+    workbookId: "09",
+    title: "Mushrooms",
+    profileImg: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
+    publisher: "EBS",
+    level: "2",
+    star: 6,
+  },
+];
+
+const workbookListSummary: workbookSidebarItem[] = [
+  {
+    id: 0,
+    publisher: "EBS",
+    categories: ["수능완성", "수능특강"],
+  },
+  {
+    id: 1,
+    publisher: "교육청",
+    categories: ["4월 모의고사", "10월 모의고사"],
+  },
+  {
+    id: 2,
+    publisher: "평가원",
+    categories: ["9월 모의고사", "11월 모의고사"],
+  },
+];
+
 export default function WorkBook(props: { sections: any }) {
   //책 토글 관련
   //책 리스트 토글마다 열림/닫힘 상태를 저장함
@@ -36,27 +130,64 @@ export default function WorkBook(props: { sections: any }) {
 
   //파라미터 (sortType/publisher/pageNum)
   //분류(book nav bar에서의 분류) 선택
-  const [publisher, setPublisher] = React.useState<string>("전체"); //출판사
-  const [sorted, setSorted] = React.useState<string>("star");
-  const [currentPage, setCurrentPage] = React.useState<number>(1);
-  const [category, setCategory] = React.useState<string>("all");
+  const [publisher, setPublisher] = React.useState<string>('all'); //출판사
+  const [sortType, setSortType] = React.useState<string>('star');
+  const [category, setCategory] = React.useState<string>('all');
+  const [pageNum, setPageNum] = React.useState<number>(1);
+  
+  const [result, setResult] = React.useState<workbookItem[] | undefined>();
+
+  useEffect( () => {
+    getWorkbookList();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const getWorkbookList = async () => {
+      try {
+        const res = await workbookService.getWorkbookList(publisher,sortType,category,pageNum,);
+        console.log(res.data);
+        setResult(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+  };
+
+  // const getWorkbooks =
+  //   (publisher: string, sortType: string, pageNum: number, category: string) =>
+  //   async () => {
+  //     console.log("start2");
+  //     try {
+  //       const res = await workbookService.getWorkbook(
+  //         publisher,
+  //         sorted,
+  //         currentPage,
+  //         category
+  //       );
+  //       //res 가 없어서 현재 error
+  //       // setResult(res.data.workbooks);
+  //       // setResultCnt(res.data.resultNumber);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //     console.log("end2");
+  //   };
+  // }
 
   //setting parameter
   //정렬기준(난이도순, 인기순 등)
-  //sortType 변경시 변수 수정
+  // sortType 변경시 변수 수정
   const selectSort = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const sortType = event.target.value;
-    setSorted(sortType);
+    setSortType(sortType);
   };
 
   const selectPublisher = (publisher: string) => {
-    console.log("pub hi");
     setPublisher(publisher);
     setCategory("all");
   };
 
   const selectPage = (event: React.ChangeEvent<unknown>, page: number) => {
-    setCurrentPage(page);
+    setPageNum(page);
   };
 
   const selectCategory = (publisher: string, category: string) => {
@@ -93,65 +224,54 @@ export default function WorkBook(props: { sections: any }) {
 
   const [resultCnt, setResultCnt] = React.useState<number>(10);
   // const [itemDatas, setItemDatas] = React.useState<bookItem[]>([]); //axios결과 임시용
-  const [result, setResult] = React.useState<workbookItem[]>(workbookList);
+  // const [result, setResult] = React.useState<workbookItem[]>(workbookList);
   const [bookContents, setBookContents] =
     React.useState<workbookSidebarItem[]>(workbookListSummary); //empty bookList
 
   //case 2. 파라미터 변경시 마다 실행
-  const getWorkbooks =
-    (publisher: string, sortType: string, pageNum: number, category: string) =>
-    async () => {
-      console.log("start2");
-      try {
-        const res = await workbookService.getWorkbook(
-          publisher,
-          sorted,
-          currentPage,
-          category
-        );
-        //res 가 없어서 현재 error
-        // setResult(res.data.workbooks);
-        // setResultCnt(res.data.resultNumber);
-      } catch (err) {
-        console.log(err);
-      }
-      console.log("end2");
-    };
+  // const getWorkbooks =
+  //   (publisher: string, sortType: string, pageNum: number, category: string) =>
+  //   async () => {
+  //     console.log("start2");
+  //     try {
+  //       const res = await workbookService.getWorkbookList(
+  //         publisher,
+  //         sortType,
+  //         category,
+  //         pageNum
+  //       );
+  //       //res 가 없어서 현재 error
+  //       // setResult(res.data.workbooks);
+  //       // setResultCnt(res.data.resultNumber);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //     console.log("end2");
+  //   };
 
   // case 1) 최초 1회 실행
-  const getWorkList =
-    (publisher: string, sortType: string, pageNum: number, category: string) =>
-    async () => {
-      console.log("start2");
-      try {
-        const res = await workbookService.getWorkbookList();
-        // res가 없어서 에러 일단 주석
-        // setResult(res.data.workbooks);
-        // setResultCnt(res.data.resultNumber);
-        // setBookContents(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-      console.log("end2");
-    };
+  // const getWorkList =
+  //   (publisher: string, sortType: string, pageNum: number, category: string) =>
+  //   async () => {
+  //     console.log("start2");
+  //     try {
+  //       const res = await workbookService.getWorkbookList();
+  //       // res가 없어서 에러 일단 주석
+  //       // setResult(res.data.workbooks);
+  //       // setResultCnt(res.data.resultNumber);
+  //       // setBookContents(res.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //     console.log("end2");
+  //   };
 
-  //기타 변수
-  const [postsPerPage, setPostsPerPage] = React.useState<number>(3 * 3); //한페이지에 보여질 책의 수
-
-  useEffect(() => {
-    /*
-     출판사/카테고리 (왼쪽 문제집리스트를 변경한 경우 페이지를 1로 디폴트로 설정 후 api얻음)
-     */
-    setCurrentPage(1);
-    getWorkbooks(publisher, sorted, currentPage, category);
-  }, [publisher, category]);
-
-  useEffect(() => {
-    /*
-    정렬 방법이나 페이지가 변경된 경우에 페이지를 1로 변경하지 않음
-     */
-    getWorkbooks(publisher, sorted, currentPage, category);
-  }, [sorted, currentPage]);
+  // useEffect(() => {
+  //   /*
+  //   정렬 방법이나 페이지가 변경된 경우에 페이지를 1로 변경하지 않음
+  //    */
+  //   getWorkbooks(publisher, sorted, currentPage, category);
+  // }, [sorted, currentPage]);
 
   return (
     <div>
@@ -194,9 +314,9 @@ export default function WorkBook(props: { sections: any }) {
           <div className="dummy-div"></div>
           <div className="pagination-div">
             <Pagination
-              count={Math.ceil(resultCnt / postsPerPage)}
+              count={Math.ceil(resultCnt / 9)}
               defaultPage={1}
-              page={currentPage} //current page와 버튼상 보여지는 page를 동기화
+              page={pageNum} //current page와 버튼상 보여지는 page를 동기화
               onChange={selectPage}
             />
           </div>
@@ -209,96 +329,3 @@ export default function WorkBook(props: { sections: any }) {
     </div>
   );
 }
-
-const workbookList: workbookItem[] = [
-  {
-    workbookId: "01",
-    title: "Breakfast",
-    profileImg: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    publisher: "교육청",
-    level: 1,
-    like: 2,
-  },
-  {
-    workbookId: "02",
-    title: "Burger",
-    profileImg: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    publisher: "EBS",
-    level: 3,
-    like: 3,
-  },
-  {
-    workbookId: "03",
-    title: "Camera",
-    profileImg: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    publisher: "교육청",
-    level: 1,
-    like: 2,
-  },
-  {
-    workbookId: "04",
-    title: "Camera",
-    profileImg: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    publisher: "EBS",
-    level: 2,
-    like: 1,
-  },
-  {
-    workbookId: "05",
-    title: "Hats",
-    profileImg: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    publisher: "EBS",
-    level: 2,
-    like: 6,
-  },
-  {
-    workbookId: "06",
-    title: "Honey",
-    profileImg: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    publisher: "평가원",
-    level: 2,
-    like: 10,
-  },
-  {
-    workbookId: "07",
-    title: "Basketball",
-    profileImg: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    publisher: "평가원",
-    level: 2,
-    like: 7,
-  },
-  {
-    workbookId: "08",
-    title: "Fern",
-    profileImg: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    publisher: "EBS",
-    level: 3,
-    like: 12,
-  },
-  {
-    workbookId: "09",
-    title: "Mushrooms",
-    profileImg: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    publisher: "EBS",
-    level: 2,
-    like: 6,
-  },
-];
-
-const workbookListSummary: workbookSidebarItem[] = [
-  {
-    id: 0,
-    publisher: "EBS",
-    categories: ["수능완성", "수능특강"],
-  },
-  {
-    id: 1,
-    publisher: "교육청",
-    categories: ["4월 모의고사", "10월 모의고사"],
-  },
-  {
-    id: 2,
-    publisher: "평가원",
-    categories: ["9월 모의고사", "11월 모의고사"],
-  },
-];

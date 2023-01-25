@@ -2,17 +2,15 @@ import { workbookItem, workbookSidebarItem } from "../types/workbookItem";
 import axios from "axios";
 
 class WorkbookService {
-  //Books.txs
-
   //1. 출판사를 보내면 출판사 별 문제집을 반환
-  getWorkbook(
+  getWorkbookList(
     publisher: string,
     sortType: string,
-    pageNum: number,
-    category: string
+    category: string,
+    pageNum: number
   ) {
     return axios.get<workbookItem[]>(
-      `/workbook?publisher=${publisher}&sortType=${sortType}&category=${category}&pageNum=${pageNum}`,
+      `http://localhost:8080/book/workbook?publisher=${publisher}&sortType=${sortType}&category=${category}&pageNum=${pageNum}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -21,11 +19,10 @@ class WorkbookService {
         },
       }
     );
-    //url+/publisher
   }
 
   //2.모든 문제집을 반환
-  getWorkbookList() {
+  getWorkbookSummaryList() {
     return axios.get<workbookSidebarItem[]>("/workbook", {
       headers: {
         "Content-Type": "application/json",

@@ -3,8 +3,8 @@ export interface workbookItem {
   title: string;
   profileImg: string;
   publisher: string;
-  level: number;
-  like: number;
+  level: string;
+  star: number;
 }
 
 export interface workbookSidebarItem {
