@@ -2,14 +2,14 @@ import "./App.css";
 import Main from "./pages/Main";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import InfoPage from "./pages/InfoPage.js";
-import Workbook from "./pages/Workbook/index.tsx";
-import BookDetail from "./pages/WorkbookDetail";
-import Rank from "./pages/Rank/index.tsx";
 import SignIn from "./pages/User/SignIn.tsx";
 import SignUp from "./pages/User/SignUp.tsx";
-import ProblemDetail from "./pages/ProblemDetail/index.tsx";
-import Result from "./pages/Result/index.tsx";
+import InfoPage from "./pages/InfoPage.js";
+import Workbook from "./pages/Workbook";
+import WorkbookDetail from "./pages/WorkbookDetail";
+import Rank from "./pages/Rank/index.tsx";
+import ProblemDetail from "./pages/ProblemDetail";
+import Result from "./pages/Result";
 import Profile from "./pages/Profile/index";
 import Error from "./pages/Error/index";
 import OauthGoogle from "./pages/Oauth/Oauth2RedirectLoading";
@@ -47,7 +47,7 @@ function App() {
           />
           <Route
             path="/workbook/:id"
-            element={<BookDetail sections={sections} />}
+            element={<WorkbookDetail sections={sections} />}
           />
           <Route path="/rank" exact element={<Rank sections={sections} />} />
           <Route

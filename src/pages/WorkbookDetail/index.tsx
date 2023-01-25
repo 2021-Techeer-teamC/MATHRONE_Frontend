@@ -20,14 +20,13 @@ import { green } from "@mui/material/colors";
 import Header from "../../components/Header";
 import NavBar from "../../components/NavBar/index.js";
 import "./style.css";
-import { ArrowLeftTwoTone } from "@mui/icons-material";
 
 type WorkbookDetailProps = {
   name: string;
   sections: any;
 };
 
-export default function BookDetail({ name, sections }: WorkbookDetailProps) {
+export default function WorkBookDetail({ name, sections }: WorkbookDetailProps) {
   const params = useParams();
   const [open, setOpen] = React.useState(true);
   const [id, setId] = React.useState();
