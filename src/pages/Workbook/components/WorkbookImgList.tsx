@@ -15,7 +15,7 @@ const BookImgList = ({ posts }: BookListProps) => {
   return (
     <ImageList sx={{ width: "100%", height: "100%" }} cols={3} gap={10}>
       {posts.map((item: bookItem) => (
-        <Link to={`/books/${item.workbookId}`}>
+        <Link to={`/workbook/${item.workbookId}`}>
           <ImageListItem key={item.workbookId}>
             <img
               src={`${item.profileImg}?w=248&fit=crop&auto=format`}

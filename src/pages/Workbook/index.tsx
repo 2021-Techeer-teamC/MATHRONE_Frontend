@@ -15,7 +15,7 @@ import bookItem from "../../types/bookItem";
 import bookContent from "../../types/bookContent";
 import "./style.css";
 
-export default function BookPage(props: { sections: any }) {
+export default function WorkBook(props: { sections: any }) {
   //책 토글 관련
   //책 리스트 토글마다 열림/닫힘 상태를 저장함
   const [open, setOpen] = React.useState<boolean[]>([false]); //각 토글들의 상태를 배열로 관리함
