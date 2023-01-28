@@ -41,14 +41,14 @@ class UserService {
   }
   //snsAccountId.tsx
   updateAccountId(accountId: string) {
-    return axios.put<any>(
+    return axios.put(
       "http://localhost:8080/user/accountId",
         {accountId: accountId},
       {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `${localStorage.getItem("accessToken")}`,
         },
       }
     );
