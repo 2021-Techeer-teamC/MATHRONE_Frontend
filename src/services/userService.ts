@@ -42,7 +42,8 @@ class UserService {
   //snsAccountId.tsx
   updateAccountId(accountId: string) {
     return axios.put<any>(
-      `http://localhost:8080/user/accountID?accountID=${accountId}`,
+      "http://localhost:8080/user/accountId",
+        {accountId: accountId},
       {
         headers: {
           "Content-Type": "application/json",
