@@ -14,7 +14,7 @@ type BookListProps = {
 const BookImgList = ({ posts }: BookListProps) => {
   return (
     <ImageList sx={{ width: "100%", height: "100%" }} cols={3} gap={10}>
-      {posts!.map((item) => (
+      {/* {posts.map((item) => (
         <Link to={`/workbook/${item.workbookId}`}>
           <ImageListItem key={item.workbookId}>
             <img
@@ -30,7 +30,7 @@ const BookImgList = ({ posts }: BookListProps) => {
             />
           </ImageListItem>
         </Link>
-      ))}
+      ))} */}
     </ImageList>
   );
 };
