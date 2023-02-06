@@ -41,7 +41,7 @@ export default function Result(props: { sections: any }) {
   const answerData = location.state.data;
   
   answerData.map((answerData: answerData) => {
-    answerData.answer == answerData.solution ? correct++ : wrong++;
+    answerData.answer === answerData.solution ? correct++ : wrong++;
   });
 
   var score: score[] = [
@@ -70,11 +70,11 @@ export default function Result(props: { sections: any }) {
                     </TableCell>
                     <TableCell align="center" padding="none">
                       {" "}
-                      정 답{" "}
+                      나의 답{" "}
                     </TableCell>
                     <TableCell align="center" padding="none">
                       {" "}
-                      나의 답{" "}
+                      정 답{" "}
                     </TableCell>
                     <TableCell align="center" padding="none">
                       {" "}
@@ -89,14 +89,14 @@ export default function Result(props: { sections: any }) {
                         {++count /* 문항 번호 */} 
                       </TableCell>
                       <TableCell align="center" padding="none">
-                        {answerData.answer /* 실제 답안 */} 
-                      </TableCell>
-                      <TableCell align="center" padding="none">
                         {answerData.solution /* 내가 입력한 답 */} 
                       </TableCell>
                       <TableCell align="center" padding="none">
+                        {answerData.answer /* 실제 답안 */} 
+                      </TableCell>
+                      <TableCell align="center" padding="none">
                         <Box sx={{ display: "flex", justifyContent: "center" }}>
-                          {answerData.answer == answerData.solution ? (
+                          {answerData.answer === answerData.solution ? (
                             <Card
                               sx={{
                                 backgroundColor: "#73C23A",
