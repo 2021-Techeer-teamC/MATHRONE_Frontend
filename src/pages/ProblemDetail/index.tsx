@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { Box } from "@mui/system";
 import { Container, Grid, Typography } from "@mui/material";
 import problemsService from "../../services/problemsService";
-import problemData from "../../types/problems";
+import problems from "../../types/problems";
 import ProbImg from "./components/ProbImg";
 
 type WorkbookDetailProps = {
@@ -16,7 +16,7 @@ type WorkbookDetailProps = {
 
 export default function ProblemDetail({ name, sections }: WorkbookDetailProps) {
   const params = useParams();
-  const [data, setProbDatas] = React.useState<problemData[]>([]);
+  const [data, setProbDatas] = React.useState<problems[]>([]);
   const [num, setNum] = React.useState(1);  
 
   useEffect(() => {

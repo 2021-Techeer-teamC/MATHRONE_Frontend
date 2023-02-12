@@ -16,9 +16,9 @@ import Footer from "../../components/Footer";
 import { useLocation } from "react-router-dom";
 
 interface answerData {
-  problemId: string;
-  solution: number; // 내가 입력한 정답
-  answer: number; // 실제 정답
+  problem_id: string;
+  my_answer: number;
+  answer: number;
 }
 
 interface score {
@@ -37,11 +37,9 @@ export default function Result(props: { sections: any }) {
   wrong = 0;
 
   const location = useLocation();
-  
-  const answerData = location.state.data;
-  
+  const answerData = location.state.model_id;
   answerData.map((answerData: answerData) => {
-    answerData.answer === answerData.solution ? correct++ : wrong++;
+    answerData.my_answer === answerData.answer ? correct++ : wrong++;
   });
 
   var score: score[] = [
@@ -70,11 +68,11 @@ export default function Result(props: { sections: any }) {
                     </TableCell>
                     <TableCell align="center" padding="none">
                       {" "}
-                      나의 답{" "}
+                      정 답{" "}
                     </TableCell>
                     <TableCell align="center" padding="none">
                       {" "}
-                      정 답{" "}
+                      나의 답{" "}
                     </TableCell>
                     <TableCell align="center" padding="none">
                       {" "}
@@ -84,19 +82,19 @@ export default function Result(props: { sections: any }) {
                 </TableHead>
                 <TableBody>
                   {answerData.map((answerData: answerData) => (
-                    <TableRow key={answerData.problemId}>
+                    <TableRow key={answerData.problem_id}>
                       <TableCell align="center" padding="none">
-                        {++count /* 문항 번호 */} 
+                        {++count}
                       </TableCell>
                       <TableCell align="center" padding="none">
-                        {answerData.solution /* 내가 입력한 답 */} 
+                        {answerData.answer}
                       </TableCell>
                       <TableCell align="center" padding="none">
-                        {answerData.answer /* 실제 답안 */} 
+                        {answerData.my_answer}
                       </TableCell>
                       <TableCell align="center" padding="none">
                         <Box sx={{ display: "flex", justifyContent: "center" }}>
-                          {answerData.answer === answerData.solution ? (
+                          {answerData.my_answer === answerData.answer ? (
                             <Card
                               sx={{
                                 backgroundColor: "#73C23A",

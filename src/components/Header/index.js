@@ -7,16 +7,29 @@ import Logo from '../Logo/index.tsx';
 import {CgProfile} from 'react-icons/cg';
 import "../../assets/styles/components.css";
 import "./style.css";
+import snsLoginService from "../../services/snsLoginService";
+import {KAKAO_LOGOUT_URL} from "../../pages/Oauth/OauthData";
 
 function Header(props) {
   const [loginStatus, setLoginStatus] = useState(localStorage.getItem('accessToken')?true:false);
-  
+  const [thirdParty, setThirdParty] = useState(localStorage.getItem('thirdParty'));
+
   const onLogoutClick = () =>{
+
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userId');
-    window.location.href='/';
+    localStorage.removeItem('thirdParty');
+    localStorage.removeItem('snsAccessToken');
+
+
     setLoginStatus(false);
+
+    if(thirdParty === 'kakao') {
+        window.location.href = KAKAO_LOGOUT_URL; //카카오 로그아웃
+    }
+
   }
+
 
   return (
       <Box className="header-box" sx={{ flexGrow: 1 }}>
