@@ -49,13 +49,13 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
     );
   };
 
-  const submitAnswer = (inputs: any) => async () => {
+  const submitAnswer = async(inputs: any) => {
     const postData: myAnswerData = {
       problemSolveList: inputs,
     }; //console.log(postData);
     try {
       const res = await grading.postAnswer(postData);
-      navigator("/Result", { state: { answerData: res } });
+      navigator("/Result", { state: { answerData: res.data } });
     } catch (error) {
       console.log(error);
     }
