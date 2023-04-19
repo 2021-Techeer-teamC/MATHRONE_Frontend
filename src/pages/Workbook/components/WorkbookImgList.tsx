@@ -12,7 +12,7 @@ type BookListProps = {
 };
 
 // {}로 감싸주지 않으면 posts: bookItem[]을 인식하지 못함
-const BookImgList = ({ posts }: BookListProps) => {
+const WorkbookImgList = ({ posts }: BookListProps) => {
   return (
     <Grid container spacing={2} className="workbook-img-list-div">
       {posts!.map((item) => (
@@ -24,11 +24,6 @@ const BookImgList = ({ posts }: BookListProps) => {
               alt={item.title}
               loading="lazy"
             />
-            {/* <ImageListItemBar
-                title={item.title}
-                subtitle={<span>{item.publisher}</span>}
-                position="below"
-              /> */}
             <div className="workbook-desc">
               <Typography
                 className="workbook-title"
@@ -50,26 +45,7 @@ const BookImgList = ({ posts }: BookListProps) => {
         </Grid>
       ))}
     </Grid>
-    // <ImageList sx={{ width: "100%", height: "100%" }} cols={3} gap={10}>
-    //   {posts!.map((item) => (
-    //     <Link to={`/workbook/${item.workbookId}`}>
-    //       <ImageListItem key={item.workbookId}>
-    //         <img
-    //           src={`${item.profileImg}?w=248&fit=crop&auto=format`}
-    //           srcSet={`${item.profileImg}?w=248&fit=crop&auto=format&dpr=2 2x`}
-    //           alt={item.title}
-    //           loading="lazy"
-    //         />
-    //         <ImageListItemBar
-    //           title={item.title}
-    //           subtitle={<span>{item.publisher}</span>}
-    //           position="below"
-    //         />
-    //       </ImageListItem>
-    //     </Link>
-    //   ))}
-    // </ImageList>
   );
 };
 
-export default BookImgList;
+export default WorkbookImgList;
