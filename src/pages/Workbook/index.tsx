@@ -1,91 +1,91 @@
-import React, { useEffect } from "react";
-import Paper from "@mui/material/Paper";
-import Container from "@mui/material/Container";
-import FormControl from "@mui/material/FormControl";
-import NativeSelect from "@mui/material/NativeSelect";
-import Pagination from "@mui/material/Pagination";
-import SearchBar from "./components/SearchBar";
-import WorkbookImgList from "./components/WorkbookImgList";
-import Header from "../../components/Header";
-import NavBar from "../../components/NavBar/index.js";
-import Footer from "../../components/Footer/index.js";
-import WorkbookSidebar from "./components/WorkbookSidebar.js";
-import workbookService from "../../services/workbookService";
-import { workbookSidebarItem, workbookItem } from "../../types/workbookItem";
-import "./style.css";
+import React, { useEffect } from 'react';
+import Paper from '@mui/material/Paper';
+import Container from '@mui/material/Container';
+import FormControl from '@mui/material/FormControl';
+import NativeSelect from '@mui/material/NativeSelect';
+import Pagination from '@mui/material/Pagination';
+import SearchBar from './components/SearchBar';
+import WorkbookImgList from './components/WorkbookImgList';
+import Header from '../../components/Header';
+import NavBar from '../../components/NavBar/index.js';
+import Footer from '../../components/Footer/index.js';
+import WorkbookSidebar from './components/WorkbookSidebar.js';
+import workbookService from '../../services/workbookService';
+import { workbookSidebarItem, workbookItem } from '../../types/workbookItem';
+import { WorkbookListContainer } from './style';
 
 // dummy data
 const workbookList: workbookItem[] = [
   {
-    workbookId: "01",
-    title: "Breakfast",
-    profileImg: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    publisher: "교육청",
-    level: "1",
+    workbookId: '01',
+    title: '책 01',
+    profileImg: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
+    publisher: '교육청',
+    level: '1',
     star: 2,
   },
   {
-    workbookId: "02",
-    title: "Burger",
-    profileImg: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    publisher: "EBS",
-    level: "3",
+    workbookId: '02',
+    title: '책 02',
+    profileImg: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
+    publisher: 'EBS',
+    level: '3',
     star: 3,
   },
   {
-    workbookId: "03",
-    title: "Camera",
-    profileImg: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    publisher: "교육청",
-    level: "1",
+    workbookId: '03',
+    title: '책 03',
+    profileImg: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
+    publisher: '교육청',
+    level: '1',
     star: 2,
   },
   {
-    workbookId: "04",
-    title: "Camera",
-    profileImg: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    publisher: "EBS",
-    level: "2",
+    workbookId: '04',
+    title: '책 04',
+    profileImg: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
+    publisher: 'EBS',
+    level: '2',
     star: 1,
   },
   {
-    workbookId: "05",
-    title: "Hats",
-    profileImg: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    publisher: "EBS",
-    level: "2",
+    workbookId: '05',
+    title: '책 05',
+    profileImg: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
+    publisher: 'EBS',
+    level: '2',
     star: 6,
   },
   {
-    workbookId: "06",
-    title: "Honey",
-    profileImg: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    publisher: "평가원",
-    level: "2",
+    workbookId: '06',
+    title: '책 06',
+    profileImg: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
+    publisher: '평가원',
+    level: '2',
     star: 10,
   },
   {
-    workbookId: "07",
-    title: "Basketball",
-    profileImg: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    publisher: "평가원",
-    level: "2",
+    workbookId: '07',
+    title: '책 07',
+    profileImg: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
+    publisher: '평가원',
+    level: '2',
     star: 7,
   },
   {
-    workbookId: "08",
-    title: "Fern",
-    profileImg: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    publisher: "EBS",
-    level: "3",
+    workbookId: '08',
+    title: '책 08',
+    profileImg: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
+    publisher: 'EBS',
+    level: '3',
     star: 12,
   },
   {
-    workbookId: "09",
-    title: "Mushrooms",
-    profileImg: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    publisher: "EBS",
-    level: "2",
+    workbookId: '09',
+    title: '책 09',
+    profileImg: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
+    publisher: 'EBS',
+    level: '2',
     star: 6,
   },
 ];
@@ -93,18 +93,18 @@ const workbookList: workbookItem[] = [
 const workbookListSummary: workbookSidebarItem[] = [
   {
     id: 0,
-    publisher: "EBS",
-    categories: ["수능완성", "수능특강"],
+    publisher: 'EBS',
+    categories: ['수능완성', '수능특강'],
   },
   {
     id: 1,
-    publisher: "교육청",
-    categories: ["4월 모의고사", "10월 모의고사"],
+    publisher: '교육청',
+    categories: ['4월 모의고사', '10월 모의고사'],
   },
   {
     id: 2,
-    publisher: "평가원",
-    categories: ["9월 모의고사", "11월 모의고사"],
+    publisher: '평가원',
+    categories: ['9월 모의고사', '11월 모의고사'],
   },
 ];
 
@@ -134,23 +134,23 @@ export default function WorkBook(props: { sections: any }) {
   const [sortType, setSortType] = React.useState<string>('star');
   const [category, setCategory] = React.useState<string>('all');
   const [pageNum, setPageNum] = React.useState<number>(1);
-  
-  const [result, setResult] = React.useState<workbookItem[] | undefined>();
 
-  useEffect( () => {
-    getWorkbookList();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // const [result, setResult] = React.useState<workbookItem[] | undefined>();
 
-  const getWorkbookList = async () => {
-      try {
-        const res = await workbookService.getWorkbookList(publisher,sortType,category,pageNum,);
-        console.log(res.data);
-        setResult(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-  };
+  // useEffect( () => {
+  //   getWorkbookList();
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
+  // const getWorkbookList = async () => {
+  //     try {
+  //       const res = await workbookService.getWorkbookList(publisher,sortType,category,pageNum,);
+  //       console.log(res.data);
+  //       setResult(res.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  // };
 
   // const getWorkbooks =
   //   (publisher: string, sortType: string, pageNum: number, category: string) =>
@@ -183,7 +183,7 @@ export default function WorkBook(props: { sections: any }) {
 
   const selectPublisher = (publisher: string) => {
     setPublisher(publisher);
-    setCategory("all");
+    setCategory('all');
   };
 
   const selectPage = (event: React.ChangeEvent<unknown>, page: number) => {
@@ -224,7 +224,7 @@ export default function WorkBook(props: { sections: any }) {
 
   const [resultCnt, setResultCnt] = React.useState<number>(10);
   // const [itemDatas, setItemDatas] = React.useState<bookItem[]>([]); //axios결과 임시용
-  // const [result, setResult] = React.useState<workbookItem[]>(workbookList);
+  const [result, setResult] = React.useState<workbookItem[]>(workbookList);
   const [bookContents, setBookContents] =
     React.useState<workbookSidebarItem[]>(workbookListSummary); //empty bookList
 
@@ -278,24 +278,24 @@ export default function WorkBook(props: { sections: any }) {
       <Header />
       <NavBar sections={props.sections} />
       <SearchBar></SearchBar>
-      <Container>
+      <WorkbookListContainer>
         <div className="container sorting-div">
           <div className="dummy-div" />
-          <div>
+          <div style={{ marginBottom: '20px' }}>
             <span className="count-span">
-              {category === "all" ? publisher : category}({resultCnt})
+              {category === 'all' ? publisher : category}({resultCnt})
             </span>
-            <FormControl sx={{ minWidth: 120, float: "right" }}>
+            <FormControl sx={{ minWidth: 120, float: 'right' }}>
               <NativeSelect
-                defaultValue={"star"}
+                defaultValue={'star'}
                 inputProps={{
-                  name: "category",
-                  id: "uncontrolled-native",
+                  name: 'category',
+                  id: 'uncontrolled-native',
                 }}
                 onChange={selectSort}
               >
-                <option value={"star"}>인기순</option>
-                <option value={"level"}>난이도순</option>
+                <option value={'star'}>인기순</option>
+                <option value={'level'}>난이도순</option>
               </NativeSelect>
             </FormControl>
           </div>
@@ -321,7 +321,7 @@ export default function WorkBook(props: { sections: any }) {
             />
           </div>
         </div>
-      </Container>
+      </WorkbookListContainer>
       <Footer
         title="Footer"
         description="Something here to give the footer a purpose!"
