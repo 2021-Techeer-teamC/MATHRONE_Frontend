@@ -1,12 +1,16 @@
-import { Container, styled } from '@mui/material';
+import { Grid, styled } from '@mui/material';
 
-export const WorkbookListContainer = styled(Container)(
+export const WorkbookListContainer = styled(Grid)(
   () => `
-    
-  .sorting-div {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    grid-template-rows: 0.1fr 5fr 0.1fr;
+  padding: 50px;
+  // .sorting-div {
+  //   display: grid;
+  //   grid-template-columns: 1fr 3fr;
+  //   grid-template-rows: 0.1fr 5fr 0.1fr;
+  // }
+
+  .workbook-sort-div{
+    margin-bottom: 40px;
   }
   
   .count-span {

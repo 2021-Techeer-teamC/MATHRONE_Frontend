@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
-import Paper from '@mui/material/Paper';
-import Container from '@mui/material/Container';
-import FormControl from '@mui/material/FormControl';
-import NativeSelect from '@mui/material/NativeSelect';
-import Pagination from '@mui/material/Pagination';
-import SearchBar from './components/SearchBar';
-import WorkbookImgList from './components/WorkbookImgList';
-import Header from '../../components/Header';
+import {
+  Grid,
+  Paper,
+  FormControl,
+  NativeSelect,
+  Pagination,
+} from '@mui/material';
+import Header from '../../components/Header/index.js';
 import NavBar from '../../components/NavBar/index.js';
 import Footer from '../../components/Footer/index.js';
 import WorkbookSidebar from './components/WorkbookSidebar.js';
+import SearchBar from './components/SearchBar';
+import WorkbookImgList from './components/WorkbookImgList';
 import workbookService from '../../services/workbookService';
 import { workbookSidebarItem, workbookItem } from '../../types/workbookItem';
 import { WorkbookListContainer } from './style';
@@ -277,11 +279,58 @@ export default function WorkBook(props: { sections: any }) {
     <div>
       <Header />
       <NavBar sections={props.sections} />
-      <SearchBar></SearchBar>
-      <WorkbookListContainer>
+      <Grid>
+        <SearchBar />
+      </Grid>
+      <WorkbookListContainer container spacing={3}>
+        <Grid item md={2}>
+          <WorkbookSidebar
+          // lists={bookContents}
+          // onPublisherClick={selectPublisher}
+          // onCategoryClick={selectCategory}
+          />
+        </Grid>
+        <Grid item md={9} container>
+          <Grid item md={12} className="workbook-sort-div">
+            <span className="count-span">
+              {category === 'all' ? publisher : category}({resultCnt})
+            </span>
+            <FormControl sx={{ minWidth: 120, float: 'right' }}>
+              <NativeSelect
+                defaultValue={'star'}
+                inputProps={{
+                  name: 'category',
+                  id: 'uncontrolled-native',
+                }}
+                onChange={selectSort}
+              >
+                <option value={'star'}>인기순</option>
+                <option value={'level'}>난이도순</option>
+              </NativeSelect>
+            </FormControl>
+          </Grid>
+          <Grid item md={12}>
+            <div>
+              <Paper>
+                <WorkbookImgList posts={result} />
+              </Paper>
+            </div>
+            <div className="dummy-div"></div>
+            <div className="pagination-div">
+              <Pagination
+                count={Math.ceil(resultCnt / 9)}
+                defaultPage={1}
+                page={pageNum} //current page와 버튼상 보여지는 page를 동기화
+                onChange={selectPage}
+              />
+            </div>
+          </Grid>
+        </Grid>
+      </WorkbookListContainer>
+      {/* <WorkbookListContainer>
         <div className="container sorting-div">
           <div className="dummy-div" />
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: '20px' }} className="workbook-sort-div">
             <span className="count-span">
               {category === 'all' ? publisher : category}({resultCnt})
             </span>
@@ -321,7 +370,7 @@ export default function WorkBook(props: { sections: any }) {
             />
           </div>
         </div>
-      </WorkbookListContainer>
+      </WorkbookListContainer> */}
       <Footer
         title="Footer"
         description="Something here to give the footer a purpose!"
