@@ -1,8 +1,4 @@
-import {
-  workbookItem,
-  workbookCountItem,
-  workbookSidebarItem,
-} from '../types/workbookItem';
+import { workbookItem, workbookSidebarItem } from '../types/workbookItem';
 import axios from 'axios';
 
 class WorkbookService {
@@ -38,10 +34,17 @@ class WorkbookService {
     );
   }
 
-  //3. 문제집 리스트를 반환
-  //보류(어떤 api인지 확인 필요)
-  getAllBookContent() {
-    return axios.get<workbookItem[]>('');
+  getWorkbookListSummary() {
+    return axios.get<workbookSidebarItem[]>(
+      `http://localhost:8080/book/workbook/list`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+        },
+      },
+    );
   }
 }
 

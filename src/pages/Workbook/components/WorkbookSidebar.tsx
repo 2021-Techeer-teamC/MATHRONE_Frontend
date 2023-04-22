@@ -14,25 +14,24 @@ import { workbookSidebarItem } from '../../../types/workbookItem';
 
 interface SidebarProps {
   onMenuClick: (publisher: string, category: string) => void;
-  workbookListSummary: workbookSidebarItem[];
+  workbookListSummary: workbookSidebarItem[] | undefined;
 }
 
 export default function WorkbookSidebar({
   onMenuClick,
   workbookListSummary,
 }: SidebarProps) {
-  const [open, setOpen] = useState<boolean[]>(
-    workbookListSummary.map((workbook) => {
-      return true;
-    }),
-  );
+  const [open, setOpen] = useState<boolean[]>([]);
+
+  useEffect(() => {
+    setOpen(new Array(workbookListSummary?.length).fill(true));
+  }, [workbookListSummary]);
 
   const handlePublisherClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     _idx: number,
     publisher: string,
   ) => {
-    console.log(open[_idx]);
     const newOpenArray = open.map((o, idx) => (idx === _idx ? !o : o));
     setOpen(newOpenArray);
     onMenuClick(publisher, 'all');
@@ -58,13 +57,13 @@ export default function WorkbookSidebar({
         <ListItemText primary="전체" />
       </ListItemButton>
 
-      {workbookListSummary.map((group, groupIdx) => {
+      {workbookListSummary?.map((group) => {
         return (
           <>
             <ListItemButton
-              key={groupIdx}
+              key={group.id}
               onClick={(e) =>
-                handlePublisherClick(e, groupIdx, group.publisher)
+                handlePublisherClick(e, group.id, group.publisher)
               }
               className="sidebar-menu"
             >
@@ -72,13 +71,13 @@ export default function WorkbookSidebar({
                 <MenuBookIcon />
               </ListItemIcon>
               <ListItemText primary={group.publisher} />
-              {open[groupIdx] ? <ExpandLess /> : <ExpandMore />}
+              {open[group.id] ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
             <Collapse
-              in={open[groupIdx]}
+              in={open[group.id]}
               timeout="auto"
               unmountOnExit
-              key={groupIdx}
+              key={group.publisher}
             >
               {group.categories.map((category, categoryIdx) => {
                 return (
