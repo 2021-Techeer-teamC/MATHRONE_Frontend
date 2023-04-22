@@ -327,50 +327,6 @@ export default function WorkBook(props: { sections: any }) {
           </Grid>
         </Grid>
       </WorkbookListContainer>
-      {/* <WorkbookListContainer>
-        <div className="container sorting-div">
-          <div className="dummy-div" />
-          <div style={{ marginBottom: '20px' }} className="workbook-sort-div">
-            <span className="count-span">
-              {category === 'all' ? publisher : category}({resultCnt})
-            </span>
-            <FormControl sx={{ minWidth: 120, float: 'right' }}>
-              <NativeSelect
-                defaultValue={'star'}
-                inputProps={{
-                  name: 'category',
-                  id: 'uncontrolled-native',
-                }}
-                onChange={selectSort}
-              >
-                <option value={'star'}>인기순</option>
-                <option value={'level'}>난이도순</option>
-              </NativeSelect>
-            </FormControl>
-          </div>
-
-          <WorkbookSidebar
-            lists={bookContents}
-            onPublisherClick={selectPublisher}
-            onCategoryClick={selectCategory}
-          />
-
-          <div>
-            <Paper>
-              <WorkbookImgList posts={result} />
-            </Paper>
-          </div>
-          <div className="dummy-div"></div>
-          <div className="pagination-div">
-            <Pagination
-              count={Math.ceil(resultCnt / 9)}
-              defaultPage={1}
-              page={pageNum} //current page와 버튼상 보여지는 page를 동기화
-              onChange={selectPage}
-            />
-          </div>
-        </div>
-      </WorkbookListContainer> */}
       <Footer
         title="Footer"
         description="Something here to give the footer a purpose!"
