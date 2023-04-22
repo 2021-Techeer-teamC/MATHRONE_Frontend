@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
 import Logo from '../Logo/index.tsx';
 import { CgProfile } from 'react-icons/cg';
 import '../../assets/styles/components.css';
-import './style.css';
+import './style.js';
 import snsLoginService from '../../services/snsLoginService';
 import { KAKAO_LOGOUT_URL } from '../../pages/Oauth/OauthData';
+import { HeaderBox } from './style';
 
 function Header() {
   const [loginStatus, setLoginStatus] = useState(
@@ -32,12 +33,10 @@ function Header() {
   };
 
   return (
-    <Box className="header-box" sx={{ flexGrow: 1 }}>
-      <div className="header">
+    <HeaderBox sx={{ flexGrow: 1 }}>
+      <div className="header header-box">
         <Logo />
-
         <Box sx={{ flexGrow: 1 }} />
-
         <Box sx={{ display: { xs: 'flex' } }}>
           {!loginStatus ? (
             <Grid container spacing={1}>
@@ -78,7 +77,7 @@ function Header() {
           )}
         </Box>
       </div>
-    </Box>
+    </HeaderBox>
   );
 }
 
