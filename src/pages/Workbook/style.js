@@ -1,13 +1,8 @@
-import { Grid, styled } from '@mui/material';
+import { Grid, List, styled } from '@mui/material';
 
 export const WorkbookListContainer = styled(Grid)(
   () => `
-  padding: 50px;
-  // .sorting-div {
-  //   display: grid;
-  //   grid-template-columns: 1fr 3fr;
-  //   grid-template-rows: 0.1fr 5fr 0.1fr;
-  // }
+  padding: 40px;
 
   .workbook-sort-div{
     margin-bottom: 40px;
@@ -103,5 +98,16 @@ export const WorkbookListContainer = styled(Grid)(
   }
 
   
+  `,
+);
+
+export const SidebarList = styled(List)(
+  () => `
+    margin-right: 16px;
+    margin-top: 40px;
+
+    .subWorkbook-title span {
+      font-size: 0.9em !important;
+    }
   `,
 );
