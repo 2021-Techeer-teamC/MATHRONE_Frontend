@@ -10,6 +10,7 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import { SidebarList } from '../style';
+import { workbookSidebarItem } from '../../../types/workbookItem';
 
 const menu = [
   {
@@ -50,10 +51,12 @@ const menu = [
 
 interface SidebarProps {
   onPublisherMenuClick: (publisher: string) => void;
+  workbookListSummary: workbookSidebarItem[];
 }
 
 export default function WorkbookSidebar({
   onPublisherMenuClick,
+  workbookListSummary,
 }: SidebarProps) {
   const [open, setOpen] = useState([true, true]);
 
@@ -62,7 +65,6 @@ export default function WorkbookSidebar({
     _idx: number,
     publisher: string,
   ) => {
-    if (_idx === -1) return;
     const newOpenArray = open.map((o, idx) => (idx === _idx ? !o : o));
     setOpen(newOpenArray);
     onPublisherMenuClick(publisher);

@@ -7,6 +7,11 @@ export interface workbookItem {
   star: number;
 }
 
+export interface workbookCountItem {
+  publisher: string;
+  category: string;
+}
+
 export interface workbookListItem {
   publisher: string;
   category: string;

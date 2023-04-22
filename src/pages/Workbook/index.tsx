@@ -17,6 +17,7 @@ import {
   workbookSidebarItem,
   workbookItem,
   workbookListItem,
+  workbookCountItem,
 } from '../../types/workbookItem';
 import { WorkbookListContainer } from './style';
 
@@ -115,32 +116,35 @@ const workbookListSummary: workbookSidebarItem[] = [
 ];
 
 export default function WorkBook(props: { sections: any }) {
-  const [open, setOpen] = React.useState<boolean[]>([false]); //각 토글들의 상태를 배열로 관리함
+  // const [open, setOpen] = React.useState<boolean[]>([false]); //각 토글들의 상태를 배열로 관리함
 
-  const handleClick = (value: number) => () => {
-    //value : 토글의 인덱스를 받아옴(몇번째 토글이 눌렸는지)
-    const newOpen: boolean[] = [...open]; //상태를 저장한 open배열을 복사해옴
-    const currentBool: boolean | undefined = open[value]; //현재 눌린 토글의 상태를 받아옴
+  // const handleClick = (value: number) => () => {
+  //   //value : 토글의 인덱스를 받아옴(몇번째 토글이 눌렸는지)
+  //   const newOpen: boolean[] = [...open]; //상태를 저장한 open배열을 복사해옴
+  //   const currentBool: boolean | undefined = open[value]; //현재 눌린 토글의 상태를 받아옴
 
-    if (currentBool === undefined) {
-      //존재하지 않음-> 누른적이 없음(닫힌상태)
-      newOpen.push(true); //새로 true(열린상태)로 추가함
-    } else {
-      newOpen.splice(value, 1, !currentBool); //이미 배열에 존재하면, 상태를 반전시킴
-    }
+  //   if (currentBool === undefined) {
+  //     //존재하지 않음-> 누른적이 없음(닫힌상태)
+  //     newOpen.push(true); //새로 true(열린상태)로 추가함
+  //   } else {
+  //     newOpen.splice(value, 1, !currentBool); //이미 배열에 존재하면, 상태를 반전시킴
+  //   }
 
-    setOpen(newOpen); //변경된 배열을 open배열에 복사해서 상태를 변경
-  };
+  //   setOpen(newOpen); //변경된 배열을 open배열에 복사해서 상태를 변경
+  // };
 
   //파라미터 (sortType/publisher/pageNum)
   //분류(book nav bar에서의 분류) 선택
   const [workbookFilter, setWorkbookFilter] = useState<workbookListItem>({
     publisher: 'all',
-    category: 'all',
     sortType: 'star',
+    category: 'all',
     pageNum: 1,
   });
-  const [result, setResult] = React.useState<workbookItem[] | undefined>();
+  const [workbookList, setWorkbookList] =
+    React.useState<workbookItem[] | undefined>();
+  const [workbookCount, setWorkbookCount] =
+    React.useState<number | undefined>();
 
   const handleChangeWorkbookFilter = (newValue: object) => {
     const newFilter = { ...workbookFilter, ...newValue };
@@ -149,13 +153,18 @@ export default function WorkBook(props: { sections: any }) {
 
   useMemo(async () => {
     const { publisher, category, sortType, pageNum } = workbookFilter;
-    const res = await workbookService.getWorkbookList(
+    const workbookListRes = await workbookService.getWorkbookList(
       publisher,
       sortType,
       category,
       pageNum,
     );
-    setResult(res.data);
+    const workbookCountRes = await workbookService.getWorkbookCount(
+      publisher,
+      category,
+    );
+    setWorkbookList(workbookListRes.data);
+    setWorkbookCount(workbookCountRes.data);
   }, [workbookFilter]);
 
   const selectSort = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -170,77 +179,6 @@ export default function WorkBook(props: { sections: any }) {
   const selectPage = (event: React.ChangeEvent<unknown>, page: number) => {
     handleChangeWorkbookFilter({ pageNum: page });
   };
-
-  //get result
-  /*
-  case 1. book page 최초 입장시
-  ~/workbook
-    1) bookItem[]
-    publisher=all
-    page = 1
-    category = all
-    sort = star(좋아요/인기순)
-    디폴트로 하는 9개의 고정 결과
-    2) 해당 디폴트 값에서 결과의 수
-    3) bookList : bookContents[]
-    왼쪽의 북 리스트
-
-
-  case 2. 변경되는 파라미터 값에 따른 결과
-  ~/workbook?publisher=${publisher}&sortType=${sortType}&category=${category}&pageNum=${pageNum}
-      1) bookItem[]
-      publisher=??
-      page = ??
-      category = ??
-      sort = ??
-      달라지는 파라미터에 대한 결과 9
-    2) 해당 파라미터 값에서 결과의 수
-
-   */
-
-  const [resultCnt, setResultCnt] = React.useState<number>(10);
-  // const [itemDatas, setItemDatas] = React.useState<bookItem[]>([]); //axios결과 임시용
-  const [bookContents, setBookContents] =
-    React.useState<workbookSidebarItem[]>(workbookListSummary); //empty bookList
-
-  //case 2. 파라미터 변경시 마다 실행
-  // const getWorkbooks =
-  //   (publisher: string, sortType: string, pageNum: number, category: string) =>
-  //   async () => {
-  //     console.log("start2");
-  //     try {
-  //       const res = await workbookService.getWorkbookList(
-  //         publisher,
-  //         sortType,
-  //         category,
-  //         pageNum
-  //       );
-  //       //res 가 없어서 현재 error
-  //       // setResult(res.data.workbooks);
-  //       // setResultCnt(res.data.resultNumber);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //     console.log("end2");
-  //   };
-
-  // case 1) 최초 1회 실행
-  // const getWorkList =
-  //   (publisher: string, sortType: string, pageNum: number, category: string) =>
-  //   async () => {
-  //     console.log("start2");
-  //     try {
-  //       const res = await workbookService.getWorkbookList();
-  //       // res가 없어서 에러 일단 주석
-  //       // setResult(res.data.workbooks);
-  //       // setResultCnt(res.data.resultNumber);
-  //       // setBookContents(res.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //     console.log("end2");
-  //   };
-
   // useEffect(() => {
   //   /*
   //   정렬 방법이나 페이지가 변경된 경우에 페이지를 1로 변경하지 않음
@@ -259,15 +197,14 @@ export default function WorkBook(props: { sections: any }) {
         <Grid item md={2} sx={{ mr: 4 }}>
           <WorkbookSidebar
             onPublisherMenuClick={selectPublisher}
+            workbookListSummary={workbookListSummary}
             // lists={bookContents}
-            // onPublisherClick={selectPublisher}
-            // onCategoryClick={selectCategory}
           />
         </Grid>
         <Grid item md={9} container>
           <Grid item md={12} className="workbook-sort-div">
             <span className="count-span">
-              {/* {category === 'all' ? publisher : category}({resultCnt}) */}
+              {`${workbookFilter.publisher} (${workbookCount})`}
             </span>
             <FormControl sx={{ minWidth: 120, float: 'right' }}>
               <NativeSelect
@@ -286,13 +223,13 @@ export default function WorkBook(props: { sections: any }) {
           <Grid item md={12}>
             <div>
               <Paper>
-                <WorkbookImgList workbookList={result} />
+                <WorkbookImgList workbookList={workbookList} />
               </Paper>
             </div>
             <div className="dummy-div"></div>
             <div className="pagination-div">
               <Pagination
-                count={Math.ceil(resultCnt / 9)}
+                count={Math.ceil((workbookCount || 0) / 9)}
                 defaultPage={1}
                 page={workbookFilter.pageNum} //current page와 버튼상 보여지는 page를 동기화
                 onChange={selectPage}
