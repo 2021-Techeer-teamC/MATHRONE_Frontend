@@ -2,9 +2,7 @@ import { Box, styled } from '@mui/material';
 
 export const HeaderBox = styled(Box)(
   () => `
-  .header-box {
-    width: 100%;
-  }
+  width: 100%;
   
   .header {
     background-color: none;
