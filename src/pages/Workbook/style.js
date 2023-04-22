@@ -18,6 +18,15 @@ export const WorkbookListContainer = styled(Grid)(
     justify-content: center;
   }
   
+  .workbook-img-list-paper {
+    min-height: 400px;
+    margin-bottom: 20px;
+
+    .MuiCircularProgress-root  {
+      margin-top: 150px;
+    }
+  }
+
   /* WorkbookImgList */
   .workbook-img-list-div {
     padding: 16px;

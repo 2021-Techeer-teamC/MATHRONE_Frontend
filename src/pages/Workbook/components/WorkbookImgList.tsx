@@ -1,14 +1,11 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Typography } from '@mui/material';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { workbookItem } from '../../../types/workbookItem';
 
 //props로 전달받은 값들
 type BookListProps = {
-  workbookList?: workbookItem[] | undefined;
+  workbookList?: workbookItem[];
 };
 
 // {}로 감싸주지 않으면 posts: bookItem[]을 인식하지 못함

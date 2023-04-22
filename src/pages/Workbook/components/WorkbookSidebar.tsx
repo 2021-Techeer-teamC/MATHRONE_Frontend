@@ -14,7 +14,7 @@ import { workbookSidebarItem } from '../../../types/workbookItem';
 
 interface SidebarProps {
   onMenuClick: (publisher: string, category: string) => void;
-  workbookListSummary: workbookSidebarItem[] | undefined;
+  workbookListSummary: workbookSidebarItem[];
 }
 
 export default function WorkbookSidebar({

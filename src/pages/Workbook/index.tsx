@@ -1,4 +1,4 @@
-import React, { Suspense, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
   Grid,
   Paper,
@@ -30,11 +30,11 @@ export default function WorkBook(props: { sections: any }) {
     category: 'all',
     pageNum: 1,
   });
-  const [workbookList, setWorkbookList] =
-    useState<workbookItem[] | undefined>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [workbookList, setWorkbookList] = useState<workbookItem[]>();
   const [workbookCount, setWorkbookCount] = useState<number>();
   const [workbookListSummary, setWorkbookListSummary] =
-    useState<workbookSidebarItem[] | undefined>();
+    useState<workbookSidebarItem[]>();
 
   const handleChangeWorkbookFilter = (newValue: object) => {
     const newFilter = { ...workbookFilter, ...newValue };
@@ -43,23 +43,19 @@ export default function WorkBook(props: { sections: any }) {
 
   useMemo(async () => {
     const { publisher, category, sortType, pageNum } = workbookFilter;
-
-    const workbookListRes = await workbookService.getWorkbookList(
-      publisher,
-      sortType,
-      category,
-      pageNum,
-    );
-    const workbookCountRes = await workbookService.getWorkbookCount(
-      publisher,
-      category,
-    );
-    const workbookListSummaryRes =
-      await workbookService.getWorkbookListSummary();
-
-    setWorkbookList(workbookListRes.data);
-    setWorkbookCount(workbookCountRes.data);
-    setWorkbookListSummary(workbookListSummaryRes.data);
+    setLoading(true);
+    workbookService
+      .getWorkbookList(publisher, sortType, category, pageNum)
+      .then((res) => {
+        setWorkbookList(res.data);
+        setLoading(false);
+      });
+    workbookService
+      .getWorkbookCount(publisher, category)
+      .then((res) => setWorkbookCount(res.data));
+    workbookService
+      .getWorkbookListSummary()
+      .then((res) => setWorkbookListSummary(res.data));
   }, [workbookFilter]);
 
   const selectSort = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -86,52 +82,54 @@ export default function WorkBook(props: { sections: any }) {
       <Grid>
         <SearchBar />
       </Grid>
-      <Suspense fallback={<CircularProgress />}>
-        <WorkbookListContainer container spacing={3}>
-          <Grid item md={2} sx={{ mr: 4 }}>
-            <WorkbookSidebar
-              onMenuClick={selectMenuClick}
-              workbookListSummary={workbookListSummary}
-            />
+      <WorkbookListContainer container spacing={3}>
+        <Grid item md={2} sx={{ mr: 4 }}>
+          <WorkbookSidebar
+            onMenuClick={selectMenuClick}
+            workbookListSummary={workbookListSummary || []}
+          />
+        </Grid>
+        <Grid item md={9} container>
+          <Grid item md={12} className="workbook-sort-div">
+            <span className="count-span">
+              {`${workbookFilter.publisher} (${workbookCount || 0})`}
+            </span>
+            <FormControl sx={{ minWidth: 120, float: 'right' }}>
+              <NativeSelect
+                defaultValue={'star'}
+                inputProps={{
+                  name: 'category',
+                  id: 'uncontrolled-native',
+                }}
+                onChange={selectSort}
+              >
+                <option value={'star'}>인기순</option>
+                <option value={'level'}>난이도순</option>
+              </NativeSelect>
+            </FormControl>
           </Grid>
-          <Grid item md={9} container>
-            <Grid item md={12} className="workbook-sort-div">
-              <span className="count-span">
-                {`${workbookFilter.publisher} (${workbookCount || 0})`}
-              </span>
-              <FormControl sx={{ minWidth: 120, float: 'right' }}>
-                <NativeSelect
-                  defaultValue={'star'}
-                  inputProps={{
-                    name: 'category',
-                    id: 'uncontrolled-native',
-                  }}
-                  onChange={selectSort}
-                >
-                  <option value={'star'}>인기순</option>
-                  <option value={'level'}>난이도순</option>
-                </NativeSelect>
-              </FormControl>
-            </Grid>
-            <Grid item md={12}>
-              <div>
-                <Paper>
-                  <WorkbookImgList workbookList={workbookList} />
-                </Paper>
-              </div>
-              <div className="dummy-div"></div>
-              <div className="pagination-div">
-                <Pagination
-                  count={Math.ceil((workbookCount || 0) / 9)}
-                  defaultPage={1}
-                  page={workbookFilter.pageNum}
-                  onChange={selectPage}
-                />
-              </div>
-            </Grid>
+          <Grid item md={12}>
+            <div>
+              <Paper className="workbook-img-list-paper">
+                {loading ? (
+                  <CircularProgress />
+                ) : (
+                  <WorkbookImgList workbookList={workbookList || []} />
+                )}
+              </Paper>
+            </div>
+            <div className="dummy-div"></div>
+            <div className="pagination-div">
+              <Pagination
+                count={Math.ceil((workbookCount || 0) / 9)}
+                defaultPage={1}
+                page={workbookFilter.pageNum}
+                onChange={selectPage}
+              />
+            </div>
           </Grid>
-        </WorkbookListContainer>
-      </Suspense>
+        </Grid>
+      </WorkbookListContainer>
 
       <Footer
         title="Footer"
