@@ -171,8 +171,8 @@ export default function WorkBook(props: { sections: any }) {
     handleChangeWorkbookFilter({ sortType: event.target.value });
   };
 
-  const selectPublisher = (publisher: string) => {
-    handleChangeWorkbookFilter({ publisher: publisher });
+  const selectMenuClick = (publisher: string, category: string) => {
+    handleChangeWorkbookFilter({ publisher: publisher, category: category });
     return;
   };
 
@@ -196,7 +196,7 @@ export default function WorkBook(props: { sections: any }) {
       <WorkbookListContainer container spacing={3}>
         <Grid item md={2} sx={{ mr: 4 }}>
           <WorkbookSidebar
-            onPublisherMenuClick={selectPublisher}
+            onMenuClick={selectMenuClick}
             workbookListSummary={workbookListSummary}
             // lists={bookContents}
           />

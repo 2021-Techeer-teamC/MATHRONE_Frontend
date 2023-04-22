@@ -12,68 +12,44 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import { SidebarList } from '../style';
 import { workbookSidebarItem } from '../../../types/workbookItem';
 
-const menu = [
-  {
-    name: 'EBS',
-    children: [
-      {
-        name: '수능특강',
-        id: '수능특강',
-      },
-      {
-        name: '수능완성',
-        id: '수능완성',
-      },
-      {
-        name: '기출문제 모음',
-        id: '기출문제 모음',
-      },
-    ],
-  },
-  {
-    name: '모의고사',
-    children: [
-      {
-        name: '6월 모의고사',
-        id: '6월 모의고사',
-      },
-      {
-        name: '9월 모의고사',
-        id: '9월 모의고사',
-      },
-      {
-        name: '수능기출',
-        id: '수능기출',
-      },
-    ],
-  },
-];
-
 interface SidebarProps {
-  onPublisherMenuClick: (publisher: string) => void;
+  onMenuClick: (publisher: string, category: string) => void;
   workbookListSummary: workbookSidebarItem[];
 }
 
 export default function WorkbookSidebar({
-  onPublisherMenuClick,
+  onMenuClick,
   workbookListSummary,
 }: SidebarProps) {
-  const [open, setOpen] = useState([true, true]);
+  const [open, setOpen] = useState<boolean[]>(
+    workbookListSummary.map((workbook) => {
+      return true;
+    }),
+  );
 
-  const handleClick = (
+  const handlePublisherClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     _idx: number,
     publisher: string,
   ) => {
+    console.log(open[_idx]);
     const newOpenArray = open.map((o, idx) => (idx === _idx ? !o : o));
     setOpen(newOpenArray);
-    onPublisherMenuClick(publisher);
+    onMenuClick(publisher, 'all');
+  };
+
+  const handleCategoryClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    publisher: string,
+    category: string,
+  ) => {
+    onMenuClick(publisher, category);
   };
 
   return (
     <SidebarList aria-labelledby="nested-list-subheader">
       <ListItemButton
-        onClick={(e) => handleClick(e, -1, 'all')}
+        onClick={(e) => handlePublisherClick(e, -1, 'all')}
         className="sidebar-menu"
       >
         <ListItemIcon>
@@ -82,30 +58,42 @@ export default function WorkbookSidebar({
         <ListItemText primary="전체" />
       </ListItemButton>
 
-      {menu.map((m, mIdx) => {
+      {workbookListSummary.map((group, groupIdx) => {
         return (
           <>
             <ListItemButton
-              key={mIdx}
-              onClick={(e) => handleClick(e, mIdx, m.name)}
+              key={groupIdx}
+              onClick={(e) =>
+                handlePublisherClick(e, groupIdx, group.publisher)
+              }
               className="sidebar-menu"
             >
               <ListItemIcon>
                 <MenuBookIcon />
               </ListItemIcon>
-              <ListItemText primary={m.name} />
-              {open[mIdx] ? <ExpandLess /> : <ExpandMore />}
+              <ListItemText primary={group.publisher} />
+              {open[groupIdx] ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-            <Collapse in={open[mIdx]} timeout="auto" unmountOnExit key={mIdx}>
-              {m.children.map((c, _cIdx) => {
+            <Collapse
+              in={open[groupIdx]}
+              timeout="auto"
+              unmountOnExit
+              key={groupIdx}
+            >
+              {group.categories.map((category, categoryIdx) => {
                 return (
-                  <List component="div" disablePadding key={_cIdx}>
-                    <ListItemButton sx={{ pl: 4 }}>
+                  <List component="div" disablePadding key={categoryIdx}>
+                    <ListItemButton
+                      sx={{ pl: 4 }}
+                      onClick={(e) =>
+                        handleCategoryClick(e, group.publisher, category)
+                      }
+                    >
                       <ListItemIcon>
                         <AutoStoriesIcon fontSize="small" />
                       </ListItemIcon>
                       <ListItemText
-                        primary={c.name}
+                        primary={category}
                         className="subWorkbook-title"
                       />
                     </ListItemButton>
@@ -118,7 +106,4 @@ export default function WorkbookSidebar({
       })}
     </SidebarList>
   );
-}
-function onPublisherMenuClick() {
-  throw new Error('Function not implemented.');
 }
