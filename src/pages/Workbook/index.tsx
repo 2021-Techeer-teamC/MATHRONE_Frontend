@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   Grid,
   Paper,
@@ -9,11 +9,15 @@ import {
 import Header from '../../components/Header/index.js';
 import NavBar from '../../components/NavBar/index.js';
 import Footer from '../../components/Footer/index.js';
-import WorkbookSidebar from './components/WorkbookSidebar.js';
+import WorkbookSidebar from './components/WorkbookSidebar';
 import SearchBar from './components/SearchBar';
 import WorkbookImgList from './components/WorkbookImgList';
 import workbookService from '../../services/workbookService';
-import { workbookSidebarItem, workbookItem } from '../../types/workbookItem';
+import {
+  workbookSidebarItem,
+  workbookItem,
+  workbookListItem,
+} from '../../types/workbookItem';
 import { WorkbookListContainer } from './style';
 
 // dummy data
@@ -111,8 +115,6 @@ const workbookListSummary: workbookSidebarItem[] = [
 ];
 
 export default function WorkBook(props: { sections: any }) {
-  //책 토글 관련
-  //책 리스트 토글마다 열림/닫힘 상태를 저장함
   const [open, setOpen] = React.useState<boolean[]>([false]); //각 토글들의 상태를 배열로 관리함
 
   const handleClick = (value: number) => () => {
@@ -132,69 +134,41 @@ export default function WorkBook(props: { sections: any }) {
 
   //파라미터 (sortType/publisher/pageNum)
   //분류(book nav bar에서의 분류) 선택
-  const [publisher, setPublisher] = React.useState<string>('all'); //출판사
-  const [sortType, setSortType] = React.useState<string>('star');
-  const [category, setCategory] = React.useState<string>('all');
-  const [pageNum, setPageNum] = React.useState<number>(1);
+  const [workbookFilter, setWorkbookFilter] = useState<workbookListItem>({
+    publisher: 'all',
+    category: 'all',
+    sortType: 'star',
+    pageNum: 1,
+  });
+  const [result, setResult] = React.useState<workbookItem[] | undefined>();
 
-  // const [result, setResult] = React.useState<workbookItem[] | undefined>();
+  const handleChangeWorkbookFilter = (newValue: object) => {
+    const newFilter = { ...workbookFilter, ...newValue };
+    setWorkbookFilter(newFilter);
+  };
 
-  // useEffect( () => {
-  //   getWorkbookList();
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  useMemo(async () => {
+    const { publisher, category, sortType, pageNum } = workbookFilter;
+    const res = await workbookService.getWorkbookList(
+      publisher,
+      sortType,
+      category,
+      pageNum,
+    );
+    setResult(res.data);
+  }, [workbookFilter]);
 
-  // const getWorkbookList = async () => {
-  //     try {
-  //       const res = await workbookService.getWorkbookList(publisher,sortType,category,pageNum,);
-  //       console.log(res.data);
-  //       setResult(res.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  // };
-
-  // const getWorkbooks =
-  //   (publisher: string, sortType: string, pageNum: number, category: string) =>
-  //   async () => {
-  //     console.log("start2");
-  //     try {
-  //       const res = await workbookService.getWorkbook(
-  //         publisher,
-  //         sorted,
-  //         currentPage,
-  //         category
-  //       );
-  //       //res 가 없어서 현재 error
-  //       // setResult(res.data.workbooks);
-  //       // setResultCnt(res.data.resultNumber);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //     console.log("end2");
-  //   };
-  // }
-
-  //setting parameter
-  //정렬기준(난이도순, 인기순 등)
-  // sortType 변경시 변수 수정
   const selectSort = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const sortType = event.target.value;
-    setSortType(sortType);
+    handleChangeWorkbookFilter({ sortType: event.target.value });
   };
 
   const selectPublisher = (publisher: string) => {
-    setPublisher(publisher);
-    setCategory('all');
+    handleChangeWorkbookFilter({ publisher: publisher });
+    return;
   };
 
   const selectPage = (event: React.ChangeEvent<unknown>, page: number) => {
-    setPageNum(page);
-  };
-
-  const selectCategory = (publisher: string, category: string) => {
-    setCategory(category);
-    setPublisher(publisher);
+    handleChangeWorkbookFilter({ pageNum: page });
   };
 
   //get result
@@ -226,7 +200,6 @@ export default function WorkBook(props: { sections: any }) {
 
   const [resultCnt, setResultCnt] = React.useState<number>(10);
   // const [itemDatas, setItemDatas] = React.useState<bookItem[]>([]); //axios결과 임시용
-  const [result, setResult] = React.useState<workbookItem[]>(workbookList);
   const [bookContents, setBookContents] =
     React.useState<workbookSidebarItem[]>(workbookListSummary); //empty bookList
 
@@ -285,15 +258,16 @@ export default function WorkBook(props: { sections: any }) {
       <WorkbookListContainer container spacing={3}>
         <Grid item md={2} sx={{ mr: 4 }}>
           <WorkbookSidebar
-          // lists={bookContents}
-          // onPublisherClick={selectPublisher}
-          // onCategoryClick={selectCategory}
+            onPublisherMenuClick={selectPublisher}
+            // lists={bookContents}
+            // onPublisherClick={selectPublisher}
+            // onCategoryClick={selectCategory}
           />
         </Grid>
         <Grid item md={9} container>
           <Grid item md={12} className="workbook-sort-div">
             <span className="count-span">
-              {category === 'all' ? publisher : category}({resultCnt})
+              {/* {category === 'all' ? publisher : category}({resultCnt}) */}
             </span>
             <FormControl sx={{ minWidth: 120, float: 'right' }}>
               <NativeSelect
@@ -312,7 +286,7 @@ export default function WorkBook(props: { sections: any }) {
           <Grid item md={12}>
             <div>
               <Paper>
-                <WorkbookImgList posts={result} />
+                <WorkbookImgList workbookList={result} />
               </Paper>
             </div>
             <div className="dummy-div"></div>
@@ -320,7 +294,7 @@ export default function WorkBook(props: { sections: any }) {
               <Pagination
                 count={Math.ceil(resultCnt / 9)}
                 defaultPage={1}
-                page={pageNum} //current page와 버튼상 보여지는 page를 동기화
+                page={workbookFilter.pageNum} //current page와 버튼상 보여지는 page를 동기화
                 onChange={selectPage}
               />
             </div>

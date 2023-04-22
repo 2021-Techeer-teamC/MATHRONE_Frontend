@@ -7,6 +7,13 @@ export interface workbookItem {
   star: number;
 }
 
+export interface workbookListItem {
+  publisher: string;
+  category: string;
+  sortType: string;
+  pageNum: number;
+}
+
 export interface workbookSidebarItem {
   publisher: string;
   categories: string[];

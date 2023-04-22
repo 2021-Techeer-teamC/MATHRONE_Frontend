@@ -47,17 +47,33 @@ const menu = [
     ],
   },
 ];
-export default function WorkbookSidebar() {
+
+interface SidebarProps {
+  onPublisherMenuClick: (publisher: string) => void;
+}
+
+export default function WorkbookSidebar({
+  onPublisherMenuClick,
+}: SidebarProps) {
   const [open, setOpen] = useState([true, true]);
 
-  const handleClick = (_idx) => {
-    if (_idx === undefined || null) return;
+  const handleClick = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    _idx: number,
+    publisher: string,
+  ) => {
+    if (_idx === -1) return;
     const newOpenArray = open.map((o, idx) => (idx === _idx ? !o : o));
     setOpen(newOpenArray);
+    onPublisherMenuClick(publisher);
   };
+
   return (
-    <SidebarList component="nav" aria-labelledby="nested-list-subheader">
-      <ListItemButton onClick={handleClick} className="sidebar-menu">
+    <SidebarList aria-labelledby="nested-list-subheader">
+      <ListItemButton
+        onClick={(e) => handleClick(e, -1, 'all')}
+        className="sidebar-menu"
+      >
         <ListItemIcon>
           <MenuBookIcon />
         </ListItemIcon>
@@ -69,7 +85,7 @@ export default function WorkbookSidebar() {
           <>
             <ListItemButton
               key={mIdx}
-              onClick={() => handleClick(mIdx)}
+              onClick={(e) => handleClick(e, mIdx, m.name)}
               className="sidebar-menu"
             >
               <ListItemIcon>
@@ -100,4 +116,7 @@ export default function WorkbookSidebar() {
       })}
     </SidebarList>
   );
+}
+function onPublisherMenuClick() {
+  throw new Error('Function not implemented.');
 }

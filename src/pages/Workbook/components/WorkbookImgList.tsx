@@ -8,14 +8,14 @@ import { workbookItem } from '../../../types/workbookItem';
 
 //props로 전달받은 값들
 type BookListProps = {
-  posts?: workbookItem[];
+  workbookList?: workbookItem[] | undefined;
 };
 
 // {}로 감싸주지 않으면 posts: bookItem[]을 인식하지 못함
-const WorkbookImgList = ({ posts }: BookListProps) => {
+const WorkbookImgList = ({ workbookList }: BookListProps) => {
   return (
     <Grid container spacing={2} className="workbook-img-list-div">
-      {posts!.map((item) => (
+      {workbookList?.map((item) => (
         <Grid item md={4} className="workbook-item">
           <Link to={`/workbook/${item.workbookId}`}>
             <img
