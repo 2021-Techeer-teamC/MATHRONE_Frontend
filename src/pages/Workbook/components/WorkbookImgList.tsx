@@ -37,7 +37,7 @@ const WorkbookImgList = ({ workbookList }: BookListProps) => {
                 display="block"
                 gutterBottom
               >
-                {item.publisher}
+                [{item.publisher}]
               </Typography>
             </div>
           </Link>

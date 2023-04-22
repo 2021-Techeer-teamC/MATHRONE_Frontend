@@ -31,6 +31,7 @@ export const WorkbookListContainer = styled(Grid)(
   .workbook-img-list-div {
     padding: 16px;
     margin-bottom: 24px;
+    
     a {
       text-decoration-line: none !important;
     }
@@ -52,7 +53,6 @@ export const WorkbookListContainer = styled(Grid)(
 
     .MuiTypography-root {
       margin: 0px !important;
-      color: black !important;
     }
 
     .workbook-desc {
@@ -74,6 +74,12 @@ export const WorkbookListContainer = styled(Grid)(
         color: #315c72 !important;
         font-weight: bold !important;
       }
+      .workbook-title:hover {
+        text-decoration-line: underline !important;
+      }
+    }
+    .workbook-publisher {
+      color: #009688 !important;
     }
   }
   
