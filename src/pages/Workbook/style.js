@@ -41,6 +41,7 @@ export const WorkbookListContainer = styled(Grid)(
 
     .workbook-img {
       width: 80%;
+      height: 80%;
       border-radius: 20px;
       box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.4); /* 그림자효과 */
       
@@ -54,9 +55,25 @@ export const WorkbookListContainer = styled(Grid)(
       color: black !important;
     }
 
-    .workbook-title {
-      color: #315c72 !important;
-      font-weight: bold !important;
+    .workbook-desc {
+      margin-top: 8px;
+    }
+
+    .workbook-title-div {
+      padding-left: 60px;
+      padding-right: 60px;
+      justify-content: center;
+      width: 200px;
+      display: -webkit-box;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+
+      .workbook-title {
+        color: #315c72 !important;
+        font-weight: bold !important;
+      }
     }
   }
   

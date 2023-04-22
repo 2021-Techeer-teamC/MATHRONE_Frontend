@@ -22,13 +22,15 @@ const WorkbookImgList = ({ workbookList }: BookListProps) => {
               loading="lazy"
             />
             <div className="workbook-desc">
-              <Typography
-                className="workbook-title"
-                variant="subtitle1"
-                gutterBottom
-              >
-                {item.title}
-              </Typography>
+              <div className="workbook-title-div">
+                <Typography
+                  className="workbook-title"
+                  variant="subtitle1"
+                  gutterBottom
+                >
+                  {item.title}
+                </Typography>
+              </div>
               <Typography
                 className="workbook-publisher"
                 variant="caption"
