@@ -1,14 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react';
-import ListSubheader from '@mui/material/ListSubheader';
-import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import Collapse from '@mui/material/Collapse';
+import React, { useEffect, useState } from 'react';
+import {
+  List,
+  Divider,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
+} from '@mui/material';
+import {
+  MenuBook,
+  AutoStories,
+  ExpandLess,
+  ExpandMore,
+} from '@mui/icons-material';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
-import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
 import { SidebarList } from '../style';
 import { workbookSidebarItem } from '../../../types/workbookItem';
 
@@ -52,11 +57,11 @@ export default function WorkbookSidebar({
         className="sidebar-menu"
       >
         <ListItemIcon>
-          <MenuBookIcon />
+          <MenuBook />
         </ListItemIcon>
         <ListItemText primary="전체" />
       </ListItemButton>
-
+      <Divider />
       {workbookListSummary?.map((group) => {
         return (
           <>
@@ -73,6 +78,7 @@ export default function WorkbookSidebar({
               <ListItemText primary={group.publisher} />
               {open[group.id] ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
+            <Divider />
             <Collapse
               in={open[group.id]}
               timeout="auto"
@@ -83,13 +89,13 @@ export default function WorkbookSidebar({
                 return (
                   <List component="div" disablePadding key={categoryIdx}>
                     <ListItemButton
-                      sx={{ pl: 4 }}
+                      className="subWorkbook-button"
                       onClick={(e) =>
                         handleCategoryClick(e, group.publisher, category)
                       }
                     >
                       <ListItemIcon>
-                        <AutoStoriesIcon fontSize="small" />
+                        <AutoStories fontSize="small" />
                       </ListItemIcon>
                       <ListItemText
                         primary={category}

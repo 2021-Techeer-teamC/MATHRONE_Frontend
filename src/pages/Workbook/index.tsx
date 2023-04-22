@@ -94,7 +94,7 @@ export default function WorkBook(props: { sections: any }) {
             <span className="count-span">
               {`${workbookFilter.publisher} (${workbookCount || 0})`}
             </span>
-            <FormControl sx={{ minWidth: 120, float: 'right' }}>
+            <FormControl className="sortType-form">
               <NativeSelect
                 defaultValue={'star'}
                 inputProps={{

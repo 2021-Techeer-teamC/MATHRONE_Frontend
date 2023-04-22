@@ -6,6 +6,12 @@ export const WorkbookListContainer = styled(Grid)(
 
   .workbook-sort-div{
     margin-bottom: 40px;
+    
+    .MuiFormControl-root {
+      min-width: 120;
+      float: right;
+    }
+
   }
   
   .count-span {
@@ -83,53 +89,11 @@ export const WorkbookListContainer = styled(Grid)(
     }
   }
   
-  
-  /* WorkbookSlidebar */
-  .nested-navbar {
-    height: 55px;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .nested-navbar .navbar-item {
-    background-color: white;
-    padding: 5px 15px;
-    border-radius: 5px;
-    line-height: 20px;
-    margin: 0 10px;
-    cursor: pointer;
-  }
-  
-  .items {
-    /* background-color: rgb(146, 146, 221); */
-    min-width: 100px;
-  }
-  
-  .items .item {
-    cursor: pointer;
-    margin: 2px 0;
-    /* font-size: 20px; */
-    color: black;
-    padding: 2px 10px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  .items .item:hover {
-    background-color: #ebebeb;
-  }
-  
-  .items .item span {
-    float: right;
-  }
-  
   /* SearchBar */
   .searchbar-div {
     margin: 20px;
     padding: 20px;
   }
-
-  
   `,
 );
 
@@ -137,6 +101,10 @@ export const SidebarList = styled(List)(
   () => `
     margin-right: 16px;
     margin-top: 40px;
+
+    .subWorkbook-button {
+      padding-left: 32px;
+    }
 
     .subWorkbook-title span {
       font-size: 0.9em !important;
