@@ -26,7 +26,7 @@ class WorkbookService {
   }
 
   getWorkbookCount(publisher: string, category: string) {
-    return axios.get<number | undefined>(
+    return axios.get<number>(
       `http://localhost:8080/book/workbook/info?publisher=${publisher}&category=${category}`,
       {
         headers: {

@@ -141,10 +141,8 @@ export default function WorkBook(props: { sections: any }) {
     category: 'all',
     pageNum: 1,
   });
-  const [workbookList, setWorkbookList] =
-    React.useState<workbookItem[] | undefined>();
-  const [workbookCount, setWorkbookCount] =
-    React.useState<number | undefined>();
+  const [workbookList, setWorkbookList] = React.useState<workbookItem[]>();
+  const [workbookCount, setWorkbookCount] = React.useState<number>();
 
   const handleChangeWorkbookFilter = (newValue: object) => {
     const newFilter = { ...workbookFilter, ...newValue };
@@ -172,19 +170,17 @@ export default function WorkBook(props: { sections: any }) {
   };
 
   const selectMenuClick = (publisher: string, category: string) => {
-    handleChangeWorkbookFilter({ publisher: publisher, category: category });
+    handleChangeWorkbookFilter({
+      publisher: publisher,
+      category: category,
+      pageNum: 1,
+    });
     return;
   };
 
   const selectPage = (event: React.ChangeEvent<unknown>, page: number) => {
     handleChangeWorkbookFilter({ pageNum: page });
   };
-  // useEffect(() => {
-  //   /*
-  //   정렬 방법이나 페이지가 변경된 경우에 페이지를 1로 변경하지 않음
-  //    */
-  //   getWorkbooks(publisher, sorted, currentPage, category);
-  // }, [sorted, currentPage]);
 
   return (
     <div>
@@ -197,14 +193,14 @@ export default function WorkBook(props: { sections: any }) {
         <Grid item md={2} sx={{ mr: 4 }}>
           <WorkbookSidebar
             onMenuClick={selectMenuClick}
-            workbookListSummary={workbookListSummary}
+            workbookListSummary={workbookListSummary || []}
             // lists={bookContents}
           />
         </Grid>
         <Grid item md={9} container>
           <Grid item md={12} className="workbook-sort-div">
             <span className="count-span">
-              {`${workbookFilter.publisher} (${workbookCount})`}
+              {`${workbookFilter.publisher} (${workbookCount || 0})`}
             </span>
             <FormControl sx={{ minWidth: 120, float: 'right' }}>
               <NativeSelect
