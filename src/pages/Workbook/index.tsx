@@ -21,7 +21,7 @@ import {
 } from '../../types/workbookItem';
 import { WorkbookListContainer } from './style';
 
-export default function WorkBook(props: { sections: any }) {
+export default function WorkBook() {
   //파라미터 (sortType/publisher/pageNum)
   //분류(book nav bar에서의 분류) 선택
   const [workbookFilter, setWorkbookFilter] = useState<workbookListItem>({
@@ -78,7 +78,7 @@ export default function WorkBook(props: { sections: any }) {
   return (
     <div>
       <Header />
-      <NavBar sections={props.sections} />
+      <NavBar />
       <Grid>
         <SearchBar />
       </Grid>

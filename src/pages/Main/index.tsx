@@ -1,24 +1,24 @@
-import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import Header from "../../components/Header";
-import NavBar from "../../components/NavBar";
-import Footer from "../../components/Footer";
-import WorkbookSlider from "../../components/WorkbookSlider/index.js";
-import ProblemList from "../../components/ProblemList";
-import MainCarousel from "./components/MainCarousel";
-import "./style.css";
-import {useEffect} from "react";
-import qs from "qs";
-import snsLoginService from "../../services/snsLoginService";
-import {useParams} from "react-router-dom";
+import * as React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import Header from '../../components/Header';
+import NavBar from '../../components/NavBar';
+import Footer from '../../components/Footer';
+import WorkbookSlider from '../../components/WorkbookSlider/index.js';
+import ProblemList from '../../components/ProblemList';
+import MainCarousel from './components/MainCarousel';
+import './style.css';
+import { useEffect } from 'react';
+import qs from 'qs';
+import snsLoginService from '../../services/snsLoginService';
+import { useParams } from 'react-router-dom';
 
 const theme = createTheme();
 
-export default function Main(props: { sections: any }) {
+export default function Main() {
   //화면 크기
   // const size = {
   //   width: window.innerWidth || document.body.clientWidth,
@@ -37,7 +37,7 @@ export default function Main(props: { sections: any }) {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <NavBar sections={props.sections} />
+      <NavBar />
       <CssBaseline />
       <Container maxWidth="lg">
         <main className="main-div">
@@ -55,7 +55,7 @@ export default function Main(props: { sections: any }) {
               fontFamily="NotoSans-Bold"
               padding="5px"
             >
-              {"시도 중인 문제집"}
+              {'시도 중인 문제집'}
             </Typography>
             <WorkbookSlider posts={itemData} />
           </div>
@@ -70,16 +70,16 @@ export default function Main(props: { sections: any }) {
               fontFamily="NotoSans-Bold"
               padding="5px"
             >
-              {"즐겨 찾기"}
+              {'즐겨 찾기'}
             </Typography>
 
             <WorkbookSlider posts={itemData} />
           </div>
           <div className="most-try-prob">
-            <ProblemList data={tryData} title={"오늘 가장 많이 시도한 문제"} />
+            <ProblemList data={tryData} title={'오늘 가장 많이 시도한 문제'} />
           </div>
           <div className="recommend-prob">
-            <ProblemList data={recData} title={"추천 문제"} />
+            <ProblemList data={recData} title={'추천 문제'} />
           </div>
         </main>
       </Container>
@@ -93,122 +93,122 @@ export default function Main(props: { sections: any }) {
 
 const addData = [
   {
-    workbook_id: "01",
+    workbook_id: '01',
     year: 2022,
-    img: "https://storage.googleapis.com/mathrone-bucket/addthumb/2022.png",
-    title: "수능완성",
-    content: "2022학년도 수능 대비 수능완성과 함께",
+    img: 'https://storage.googleapis.com/mathrone-bucket/addthumb/2022.png',
+    title: '수능완성',
+    content: '2022학년도 수능 대비 수능완성과 함께',
   },
   {
-    workbook_id: "02",
+    workbook_id: '02',
     year: 2021,
-    img: "https://storage.googleapis.com/mathrone-bucket/addthumb/2021.png",
-    title: "수능완성",
-    content: "2021학년도 수능 대비 수능완성과 함께",
+    img: 'https://storage.googleapis.com/mathrone-bucket/addthumb/2021.png',
+    title: '수능완성',
+    content: '2021학년도 수능 대비 수능완성과 함께',
   },
   {
-    workbook_id: "03",
+    workbook_id: '03',
     year: 2020,
-    img: "https://storage.googleapis.com/mathrone-bucket/addthumb/2020.png",
-    title: "수능완성",
-    content: "2020학년도 수능 대비 수능완성과 함께",
+    img: 'https://storage.googleapis.com/mathrone-bucket/addthumb/2020.png',
+    title: '수능완성',
+    content: '2020학년도 수능 대비 수능완성과 함께',
   },
 ];
 
 const itemData = [
   {
-    workbook_id: "01",
-    title: "2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/01.jpg",
-    publisher: "교육청",
+    workbook_id: '01',
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
+    publisher: '교육청',
     level: 1,
     star: true,
   },
   {
-    workbook_id: "01",
-    title: "2021학년도 수능 연계교재 수능완성 수학영역 수학 가형",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/02.jpg",
-    publisher: "EBS",
+    workbook_id: '01',
+    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/02.jpg',
+    publisher: 'EBS',
     level: 3,
     star: true,
   },
   {
-    workbook_id: "01",
-    title: "2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/03.jpeg",
-    publisher: "교육청",
+    workbook_id: '01',
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/03.jpeg',
+    publisher: '교육청',
     level: 1,
     star: false,
   },
   {
-    workbook_id: "01",
-    title: "2021학년도 수능 연계교재 수능완성 수학영역 수학 가형",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/04.jpg",
-    publisher: "EBS",
+    workbook_id: '01',
+    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/04.jpg',
+    publisher: 'EBS',
     level: 2,
     star: false,
   },
   {
-    workbook_id: "01",
-    title: "2021학년도 수능 연계교재 수능완성 수학영역 수학 가형",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/05.jpg",
-    publisher: "EBS",
+    workbook_id: '01',
+    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/05.jpg',
+    publisher: 'EBS',
     level: 2,
     star: false,
   },
   {
-    workbook_id: "01",
-    title: "2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/06.jpg",
-    publisher: "평가원",
+    workbook_id: '01',
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/06.jpg',
+    publisher: '평가원',
     level: 2,
     star: true,
   },
   {
-    workbook_id: "01",
-    title: "2021학년도 대학수학능력시험 문제지 수학 영역 (나형)",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/07.jpg",
-    publisher: "평가원",
+    workbook_id: '01',
+    title: '2021학년도 대학수학능력시험 문제지 수학 영역 (나형)',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/07.jpg',
+    publisher: '평가원',
     level: 2,
     star: false,
   },
   {
-    workbook_id: "01",
-    title: "2021학년도 수능 연계교재 수능완성 수학영역 수학 가형",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/05.jpg",
-    publisher: "EBS",
+    workbook_id: '01',
+    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/05.jpg',
+    publisher: 'EBS',
     level: 3,
     star: false,
   },
   {
-    workbook_id: "01",
-    title: "2021학년도 수능 연계교재 수능완성 수학영역 수학 가형",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/02.jpg",
-    publisher: "EBS",
+    workbook_id: '01',
+    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/02.jpg',
+    publisher: 'EBS',
     level: 2,
     star: false,
   },
   {
-    workbook_id: "01",
-    title: "2021학년도 대학수학능력시험 문제지 수학 영역 (나형)",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/01.jpg",
-    publisher: "평가원",
+    workbook_id: '01',
+    title: '2021학년도 대학수학능력시험 문제지 수학 영역 (나형)',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
+    publisher: '평가원',
     level: 3,
     star: false,
   },
   {
-    workbook_id: "01",
-    title: "2021학년도 수능 연계교재 수능완성 수학영역 수학 가형",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/06.jpg",
-    publisher: "EBS",
+    workbook_id: '01',
+    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/06.jpg',
+    publisher: 'EBS',
     level: 3,
     star: true,
   },
   {
-    workbook_id: "01",
-    title: "2021학년도 대학수학능력시험 문제지 수학 영역 (나형)",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/03.jpeg",
-    publisher: "평가원",
+    workbook_id: '01',
+    title: '2021학년도 대학수학능력시험 문제지 수학 영역 (나형)',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/03.jpeg',
+    publisher: '평가원',
     level: 3,
     star: true,
   },
@@ -216,44 +216,44 @@ const itemData = [
 
 const starData = [
   {
-    workbook_id: "01",
-    title: "2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/01.jpg",
-    publisher: "교육청",
+    workbook_id: '01',
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
+    publisher: '교육청',
     level: 1,
     star: true,
   },
   {
-    workbook_id: "01",
-    title: "2021학년도 수능 연계교재 수능완성 수학영역 수학 가형",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/02.jpg",
-    publisher: "EBS",
+    workbook_id: '01',
+    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/02.jpg',
+    publisher: 'EBS',
     level: 3,
     star: true,
   },
 
   {
-    workbook_id: "01",
-    title: "2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/06.jpg",
-    publisher: "평가원",
+    workbook_id: '01',
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/06.jpg',
+    publisher: '평가원',
     level: 2,
     star: true,
   },
 
   {
-    workbook_id: "01",
-    title: "2021학년도 수능 연계교재 수능완성 수학영역 수학 가형",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/06.jpg",
-    publisher: "EBS",
+    workbook_id: '01',
+    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/06.jpg',
+    publisher: 'EBS',
     level: 3,
     star: true,
   },
   {
-    workbook_id: "01",
-    title: "2021학년도 대학수학능력시험 문제지 수학 영역 (나형)",
-    img: "https://storage.googleapis.com/mathrone-bucket/test/03.jpeg",
-    publisher: "평가원",
+    workbook_id: '01',
+    title: '2021학년도 대학수학능력시험 문제지 수학 영역 (나형)',
+    img: 'https://storage.googleapis.com/mathrone-bucket/test/03.jpeg',
+    publisher: '평가원',
     level: 3,
     star: true,
   },
@@ -261,92 +261,92 @@ const starData = [
 
 const tryData = [
   {
-    problem_id: "01-01-00001",
-    problem_num: "2",
-    workbook_title: "수능완성",
+    problem_id: '01-01-00001',
+    problem_num: '2',
+    workbook_title: '수능완성',
     level: 1,
-    subject: "미적분",
-    chapter: "수열의 극한",
+    subject: '미적분',
+    chapter: '수열의 극한',
   },
   {
-    problem_id: "01-01-00002",
-    problem_num: "4",
-    workbook_title: "수능완성",
+    problem_id: '01-01-00002',
+    problem_num: '4',
+    workbook_title: '수능완성',
     level: 3,
-    subject: "미적분",
-    chapter: "수열의 극한",
+    subject: '미적분',
+    chapter: '수열의 극한',
   },
   {
-    problem_id: "01-01-00003",
-    problem_num: "5",
-    workbook_title: "수능완성",
+    problem_id: '01-01-00003',
+    problem_num: '5',
+    workbook_title: '수능완성',
     level: 2,
-    subject: "미적분",
-    chapter: "수열의 극한",
+    subject: '미적분',
+    chapter: '수열의 극한',
   },
   {
-    problem_id: "01-01-00004",
-    problem_num: "12",
-    workbook_title: "모의고사",
+    problem_id: '01-01-00004',
+    problem_num: '12',
+    workbook_title: '모의고사',
     level: 2,
-    subject: "미적분",
-    chapter: "수열의 극한",
+    subject: '미적분',
+    chapter: '수열의 극한',
   },
   {
-    problem_id: "01-01-00005",
-    problem_num: "34",
-    workbook_title: "모의고사",
+    problem_id: '01-01-00005',
+    problem_num: '34',
+    workbook_title: '모의고사',
     level: 3,
-    subject: "미적분",
-    chapter: "수열의 극한",
+    subject: '미적분',
+    chapter: '수열의 극한',
   },
   {
-    problem_id: "01-01-00006",
-    problem_num: "22",
-    workbook_title: "수능완성",
+    problem_id: '01-01-00006',
+    problem_num: '22',
+    workbook_title: '수능완성',
     level: 2,
-    subject: "미적분",
-    chapter: "수열의 극한",
+    subject: '미적분',
+    chapter: '수열의 극한',
   },
   {
-    problem_id: "01-01-00007",
-    problem_num: "1",
-    workbook_title: "수능완성",
+    problem_id: '01-01-00007',
+    problem_num: '1',
+    workbook_title: '수능완성',
     level: 1,
-    subject: "미적분",
-    chapter: "수열의 극한",
+    subject: '미적분',
+    chapter: '수열의 극한',
   },
   {
-    problem_id: "01-01-00008",
-    problem_num: "29",
-    workbook_title: "수능완성",
+    problem_id: '01-01-00008',
+    problem_num: '29',
+    workbook_title: '수능완성',
     level: 1,
-    subject: "미적분",
-    chapter: "수열의 극한",
+    subject: '미적분',
+    chapter: '수열의 극한',
   },
   {
-    problem_id: "01-01-00009",
-    problem_num: "13",
-    workbook_title: "수능완성",
+    problem_id: '01-01-00009',
+    problem_num: '13',
+    workbook_title: '수능완성',
     level: 3,
-    subject: "수학I",
-    chapter: "삼각함수",
+    subject: '수학I',
+    chapter: '삼각함수',
   },
   {
-    problem_id: "01-01-00010",
-    problem_num: "18",
-    workbook_title: "수능완성",
+    problem_id: '01-01-00010',
+    problem_num: '18',
+    workbook_title: '수능완성',
     level: 2,
-    subject: "미적분",
-    chapter: "적분법",
+    subject: '미적분',
+    chapter: '적분법',
   },
   {
-    problem_id: "01-01-00011",
-    problem_num: "20",
-    workbook_title: "수능완성",
+    problem_id: '01-01-00011',
+    problem_num: '20',
+    workbook_title: '수능완성',
     level: 3,
-    subject: "미적분",
-    chapter: "미분",
+    subject: '미적분',
+    chapter: '미분',
   },
 ];
 

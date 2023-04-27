@@ -1,7 +1,7 @@
-import * as React from "react";
-import { useParams } from "react-router-dom";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
+import * as React from 'react';
+import { useParams } from 'react-router-dom';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 import {
   Grid,
   Paper,
@@ -15,18 +15,17 @@ import {
   List,
   Collapse,
   LinearProgress,
-} from "@mui/material";
-import { green } from "@mui/material/colors";
-import Header from "../../components/Header";
-import NavBar from "../../components/NavBar/index.js";
-import "./style.css";
+} from '@mui/material';
+import { green } from '@mui/material/colors';
+import Header from '../../components/Header';
+import NavBar from '../../components/NavBar/index.js';
+import './style.css';
 
 type WorkbookDetailProps = {
   name: string;
-  sections: any;
 };
 
-export default function WorkBookDetail({ name, sections }: WorkbookDetailProps) {
+export default function WorkBookDetail({ name }: WorkbookDetailProps) {
   const params = useParams();
   const [open, setOpen] = React.useState(true);
   const [id, setId] = React.useState();
@@ -44,17 +43,17 @@ export default function WorkBookDetail({ name, sections }: WorkbookDetailProps) 
   return (
     <>
       <Header />
-      <NavBar sections={sections} />
+      <NavBar />
       <div>
-        <Card className="detail-card-div" sx={{ display: "flex" }}>
+        <Card className="detail-card-div" sx={{ display: 'flex' }}>
           <CardMedia
             className="detail-img"
             component="img"
-            sx={{ width: "250px", borderRadius: 2, boxShadow: 7 }}
+            sx={{ width: '250px', borderRadius: 2, boxShadow: 7 }}
             image="https://storage.googleapis.com/mathrone-bucket/thumbnail/sample_workbook_thumnail.png"
             alt="workbook thumbnail"
           />
-          <CardContent className="detail-content" sx={{ width: "50%" }}>
+          <CardContent className="detail-content" sx={{ width: '50%' }}>
             {params.id}
             <Typography
               sx={{ fontSize: 14 }}
@@ -129,19 +128,19 @@ export default function WorkBookDetail({ name, sections }: WorkbookDetailProps) 
               <List component="div" disablePadding>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("01")}
+                  onClick={() => handleChapterClick('01')}
                 >
                   <ListItemText primary="지수함수와 로그함수" />
                 </ListItemButton>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("02")}
+                  onClick={() => handleChapterClick('02')}
                 >
                   <ListItemText primary="삼각함수" />
                 </ListItemButton>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("03")}
+                  onClick={() => handleChapterClick('03')}
                 >
                   <ListItemText primary="수열" />
                 </ListItemButton>
@@ -156,19 +155,19 @@ export default function WorkBookDetail({ name, sections }: WorkbookDetailProps) 
               <List component="div" disablePadding>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("01")}
+                  onClick={() => handleChapterClick('01')}
                 >
                   <ListItemText primary="함수의 극한과 연속" />
                 </ListItemButton>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("02")}
+                  onClick={() => handleChapterClick('02')}
                 >
                   <ListItemText primary="다항함수의 미분법" />
                 </ListItemButton>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("03")}
+                  onClick={() => handleChapterClick('03')}
                 >
                   <ListItemText primary="다항함수의 적분법" />
                 </ListItemButton>
@@ -183,13 +182,13 @@ export default function WorkBookDetail({ name, sections }: WorkbookDetailProps) 
               <List component="div" disablePadding>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("0301")}
+                  onClick={() => handleChapterClick('0301')}
                 >
                   <ListItemText primary="수열의 극한" />
                 </ListItemButton>
                 <ListItemButton
                   sx={{ pl: 6 }}
-                  onClick={() => handleChapterClick("0302")}
+                  onClick={() => handleChapterClick('0302')}
                 >
                   <ListItemText primary="미분법" />
                 </ListItemButton>

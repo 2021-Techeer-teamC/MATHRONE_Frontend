@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 import { NavBarContainer } from './style.js';
 
 function NavBar(props) {
-  const { sections } = props;
+  const sections = [
+    { title: '소개', url: '/info' },
+    { title: '문제집', url: '/workbook' },
+    { title: '랭킹', url: '/rank' },
+  ];
 
   return (
     <NavBarContainer maxWidth="sm">

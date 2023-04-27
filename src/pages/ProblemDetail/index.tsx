@@ -1,36 +1,34 @@
-import React, { useEffect } from "react";
-import Pagination from "./components/ProbPagination";
-import Header from "../../components/Header";
-import AnswerSheet from "./components/AnswerSheet";
-import { useParams } from "react-router-dom";
-import { Box } from "@mui/system";
-import { Container, Grid, Typography } from "@mui/material";
-import problemsService from "../../services/problemsService";
-import problems from "../../types/problems";
-import ProbImg from "./components/ProbImg";
+import React, { useEffect } from 'react';
+import Pagination from './components/ProbPagination';
+import Header from '../../components/Header';
+import AnswerSheet from './components/AnswerSheet';
+import { useParams } from 'react-router-dom';
+import { Box } from '@mui/system';
+import { Container, Grid, Typography } from '@mui/material';
+import problemsService from '../../services/problemsService';
+import problems from '../../types/problems';
+import ProbImg from './components/ProbImg';
 
 type WorkbookDetailProps = {
   name: string; // 해당 문제집의 이름
-  sections: any;
 };
 
-export default function ProblemDetail({ name, sections }: WorkbookDetailProps) {
+export default function ProblemDetail({ name }: WorkbookDetailProps) {
   const params = useParams();
   const [data, setProbDatas] = React.useState<problems[]>([]);
-  const [num, setNum] = React.useState(1);  
+  const [num, setNum] = React.useState(1);
 
   useEffect(() => {
-    problemsService.getProblems(params.workbookId, params.chapterId).then(response => 
-        setProbDatas(response.data));
+    problemsService
+      .getProblems(params.workbookId, params.chapterId)
+      .then((response) => setProbDatas(response.data));
   }, [params.workbookId, params.chapterId]);
 
-  console.log(data.length);
-  return (
-    data.length !== 0 ? (
+  return data.length !== 0 ? (
     <Box>
       <Header />
       <Container
-        style={{ alignItems: "center", justifyContent: "center", height: 100 }}
+        style={{ alignItems: 'center', justifyContent: 'center', height: 100 }}
       >
         <Typography variant="h4" component="div" color="text.secondary">
           {name}
@@ -51,6 +49,6 @@ export default function ProblemDetail({ name, sections }: WorkbookDetailProps) {
         </Grid>
         <Grid item xs={2} />
       </Grid>
-    </Box>) :null
-  );
+    </Box>
+  ) : null;
 }
