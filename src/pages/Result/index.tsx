@@ -12,7 +12,6 @@ import {
   Typography,
 } from "@mui/material";
 import Chart from "./components/Chart";
-import Footer from "../../components/Footer";
 import { useLocation } from "react-router-dom";
 
 interface answerData {
@@ -125,10 +124,6 @@ export default function Result(props: { sections: any }) {
           </Box>
         </Grid>
       </Grid>
-      <Footer
-        title="Footer"
-        description="Something here to give the footer a purpose!"
-      />
     </div>
   );
 }
