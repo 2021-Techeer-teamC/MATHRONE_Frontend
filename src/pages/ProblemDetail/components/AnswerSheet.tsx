@@ -14,15 +14,6 @@ import grading from "../../../services/answerService";
 import { useNavigate } from "react-router-dom";
 import problems from "../../../types/problems";
 
-// interface problemData {
-//   problem_id: string;
-//   prob_num: number;
-//   chapter_id: string;
-//   prob_img: string;
-//   level_of_diff: number;
-//   category: boolean;
-// }
-
 interface myAnswerData {
   answerSubmitList: problems[];
   isAll: Boolean;
@@ -57,7 +48,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
     }; //console.log(postData);
     try {
       const res = await grading.postAnswer(postData);
-      navigator("/Result", { state: { answerData: res.data } });
+      navigator("/result", { state: { answerData: res.data } });
     } catch (error) {
       console.log(error);
     }
