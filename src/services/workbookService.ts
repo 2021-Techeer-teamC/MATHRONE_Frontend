@@ -10,7 +10,7 @@ class WorkbookService {
     pageNum: number,
   ) {
     return axios.get<workbookItem[]>(
-      `http://localhost:8080/book/workbook?publisher=${publisher}&sortType=${sortType}&category=${category}&pageNum=${pageNum}`,
+      `http://localhost:8080/workbook/list?publisher=${publisher}&sortType=${sortType}&category=${category}&pageNum=${pageNum}`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ class WorkbookService {
 
   getWorkbookCount(publisher: string, category: string) {
     return axios.get<number>(
-      `http://localhost:8080/book/workbook/info?publisher=${publisher}&category=${category}`,
+      `http://localhost:8080/workbook/count?publisher=${publisher}&category=${category}`,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ class WorkbookService {
 
   getWorkbookListSummary() {
     return axios.get<workbookSidebarItem[]>(
-      `http://localhost:8080/book/workbook/list`,
+      `http://localhost:8080/workbook/summary`,
       {
         headers: {
           'Content-Type': 'application/json',
