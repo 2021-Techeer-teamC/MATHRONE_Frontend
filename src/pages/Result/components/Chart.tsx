@@ -34,7 +34,7 @@ export default function Chart(props: Props) {
       segmentsStyle={{ transition: "stroke .3s", cursor: "pointer" }}
       segmentsShift={(index) => (index === selected ? 6 : 1)}
       animate
-      label={({ dataEntry }) => Math.round(dataEntry.percentage) + "%"}
+      label={({ dataEntry }) => dataEntry.percentage? Math.round(dataEntry.percentage) + "%": ""}
       labelPosition={100 - lineWidth / 2}
       labelStyle={{
         fill: "#fff",

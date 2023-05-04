@@ -3,14 +3,14 @@ import axios from "axios";
 
 class gradingService {
     postAnswer(answer: any){
-        return axios.post<answersList>(
-            "http://localhost:8080/problem/detail-page/grade", // api 주소
-            {answer},   // body에 들어갈 데이터
+        return axios.put<answersList>(
+            "http://localhost:8080/answer/problem", // api 주소
+            answer,
             {
                 headers: {
                   "Content-Type": "application/json",
                   "Accept": "application/json",
-                  "Authorization": `Bearer ${localStorage.getItem("accessToken")}`
+                  "accessToken": `${localStorage.getItem("accessToken")}`
                 },
             } // header 정의
         )
