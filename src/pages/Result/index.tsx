@@ -10,15 +10,14 @@ import {
   TableHead,
   TableRow,
   Typography,
-} from '@mui/material';
-import Chart from './components/Chart';
-import Footer from '../../components/Footer';
-import { useLocation } from 'react-router-dom';
+} from "@mui/material";
+import Chart from "./components/Chart";
+import { useLocation } from "react-router-dom";
 
 interface answerData {
-  problem_id: string;
-  my_answer: number;
-  answer: number;
+  problemId: string;
+  solution: number; // 나의 답
+  answer: number;  // 실제 정답
 }
 
 interface score {
@@ -35,11 +34,11 @@ export default function Result() {
   count = 0;
   correct = 0;
   wrong = 0;
-
   const location = useLocation();
-  const answerData = location.state.model_id;
+  const answerData = location.state.answerData;
+  console.log(answerData);
   answerData.map((answerData: answerData) => {
-    answerData.my_answer === answerData.answer ? correct++ : wrong++;
+    answerData.solution === answerData.answer ? correct++ : wrong++;
   });
 
   var score: score[] = [
@@ -82,7 +81,7 @@ export default function Result() {
                 </TableHead>
                 <TableBody>
                   {answerData.map((answerData: answerData) => (
-                    <TableRow key={answerData.problem_id}>
+                    <TableRow key={answerData.problemId}>
                       <TableCell align="center" padding="none">
                         {++count}
                       </TableCell>
@@ -90,11 +89,11 @@ export default function Result() {
                         {answerData.answer}
                       </TableCell>
                       <TableCell align="center" padding="none">
-                        {answerData.my_answer}
+                        {answerData.solution}
                       </TableCell>
                       <TableCell align="center" padding="none">
-                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                          {answerData.my_answer === answerData.answer ? (
+                        <Box sx={{ display: "flex", justifyContent: "center" }}>
+                          {answerData.solution === answerData.answer ? (
                             <Card
                               sx={{
                                 backgroundColor: '#73C23A',
@@ -125,10 +124,6 @@ export default function Result() {
           </Box>
         </Grid>
       </Grid>
-      <Footer
-        title="Footer"
-        description="Something here to give the footer a purpose!"
-      />
     </div>
   );
 }
