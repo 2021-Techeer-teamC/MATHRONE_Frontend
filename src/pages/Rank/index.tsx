@@ -1,31 +1,31 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import Typography from "@mui/material/Typography";
-import { Container } from "@mui/material";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import { useEffect } from "react";
-import "./style.css";
-import Header from "../../components/Header";
-import NavBar from "../../components/NavBar";
-import Footer from "../../components/Footer";
-import RankList from "./components/RankList";
-import Trophy from "../../assets/image/trophy.png";
-import rankingService from "../../services/rankingService"
-import rankData from "../../types/rankData";
-import myRankData from "../../types/myRankData";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import Typography from '@mui/material/Typography';
+import { Container } from '@mui/material';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import { useEffect } from 'react';
+import './style.css';
+import Header from '../../components/Header';
+import NavBar from '../../components/NavBar';
+import Footer from '../../components/Footer';
+import RankList from './components/RankList';
+import Trophy from '../../assets/image/trophy.png';
+import rankingService from '../../services/rankingService';
+import rankData from '../../types/rankData';
+import myRankData from '../../types/myRankData';
 
-export default function Rankpage(props: { sections: any }) {
-  const [allRank, setAllRank] = React.useState<rankData[]|any>();
+export default function Rankpage() {
+  const [allRank, setAllRank] = React.useState<rankData[] | any>();
   const [myRank, setMyRank] = React.useState<myRankData>();
 
-  const getRank = async() => {
+  const getRank = async () => {
     const res = await rankingService.getMyRanking();
     setMyRank(res.data);
     const response = await rankingService.getAllRankings();
     setAllRank(response.data);
-  }
+  };
 
   useEffect(() => {
     getRank();
@@ -33,12 +33,12 @@ export default function Rankpage(props: { sections: any }) {
 
   return (
     <div>
-      <Header title="MATHrone" sections={props.sections} />
-      <NavBar sections={props.sections} />
+      <Header />
+      <NavBar />
       <Container>
-        <Box sx={{ display: "flex", paddingBottom: 0.1 }}>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Box sx={{ display: "flex", alignItems: "center", pt: 5 }}>
+        <Box sx={{ display: 'flex', paddingBottom: 0.1 }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', pt: 5 }}>
               <CardMedia
                 component="img"
                 sx={{ width: 90, pr: 2 }}
@@ -59,8 +59,8 @@ export default function Rankpage(props: { sections: any }) {
           <Card
             elevation={5}
             sx={{
-              display: "flex",
-              flexDirection: "column",
+              display: 'flex',
+              flexDirection: 'column',
               pb: 2,
               pt: 2,
               mb: 3,
@@ -91,8 +91,8 @@ export default function Rankpage(props: { sections: any }) {
         <Card
           variant="outlined"
           sx={{
-            display: "grid",
-            gridTemplateColumns: "0.5fr 0.5fr 3fr 1fr 1fr",
+            display: 'grid',
+            gridTemplateColumns: '0.5fr 0.5fr 3fr 1fr 1fr',
             mt: 2,
             pt: 3,
             pb: 3,

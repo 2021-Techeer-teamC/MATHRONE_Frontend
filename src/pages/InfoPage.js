@@ -1,13 +1,12 @@
+import Header from '../components/Header/index.js';
+import NavBar from '../components/NavBar/index.js';
+import Footer from '../components/Footer/index.js';
 
-import Header from "../components/Header/index.js";
-import NavBar from "../components/NavBar/index.js";
-import Footer from "../components/Footer/index.js";
-
-export default function InfoPage(props) {  
+export default function InfoPage(props) {
   return (
     <>
-    <Header title="MATHrone" />
-      <NavBar sections={props.sections} />
+      <Header title="MATHrone" />
+      <NavBar />
       <h1>Info Page</h1>
       <Footer
         title="Footer"
@@ -16,4 +15,3 @@ export default function InfoPage(props) {
     </>
   );
 }
-

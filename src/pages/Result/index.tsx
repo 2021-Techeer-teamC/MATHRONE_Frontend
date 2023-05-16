@@ -1,6 +1,6 @@
-import Header from "../../components/Header";
-import { Box } from "@mui/system";
-import Card from "@mui/material/Card";
+import Header from '../../components/Header';
+import { Box } from '@mui/system';
+import Card from '@mui/material/Card';
 import {
   Grid,
   Table,
@@ -30,7 +30,7 @@ let count: number;
 let correct: number;
 let wrong: number;
 
-export default function Result(props: { sections: any }) {
+export default function Result() {
   count = 0;
   correct = 0;
   wrong = 0;
@@ -42,40 +42,40 @@ export default function Result(props: { sections: any }) {
   });
 
   var score: score[] = [
-    { title: "correct", value: correct, color: "#73C23A" },
-    { title: "wrong", value: wrong, color: "#C13C37" },
+    { title: 'correct', value: correct, color: '#73C23A' },
+    { title: 'wrong', value: wrong, color: '#C13C37' },
   ];
 
   return (
     <div>
-      <Header title="MATHrone" sections={props.sections} />
+      <Header />
       <Grid container spacing={1} justifyContent="center" alignItems="center">
         <Grid item xs={6}>
-          <Box sx={{ display: "flex", justifyContent: "center", margin: "3%" }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', margin: '3%' }}>
             <Chart data={score} />
           </Box>
         </Grid>
         <Grid item xs={6} justifyContent="left">
-          <Box ml={2} sx={{ width: "90%", overflow: "hidden" }}>
+          <Box ml={2} sx={{ width: '90%', overflow: 'hidden' }}>
             <TableContainer sx={{ maxHeight: 600 }}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
-                  <TableRow style={{ backgroundColor: "#d2d2d2" }}>
+                  <TableRow style={{ backgroundColor: '#d2d2d2' }}>
                     <TableCell align="center" padding="none">
-                      {" "}
-                      No.{" "}
+                      {' '}
+                      No.{' '}
                     </TableCell>
                     <TableCell align="center" padding="none">
-                      {" "}
-                      정 답{" "}
+                      {' '}
+                      정 답{' '}
                     </TableCell>
                     <TableCell align="center" padding="none">
-                      {" "}
-                      나의 답{" "}
+                      {' '}
+                      나의 답{' '}
                     </TableCell>
                     <TableCell align="center" padding="none">
-                      {" "}
-                      결 과{" "}
+                      {' '}
+                      결 과{' '}
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -96,9 +96,9 @@ export default function Result(props: { sections: any }) {
                           {answerData.solution === answerData.answer ? (
                             <Card
                               sx={{
-                                backgroundColor: "#73C23A",
-                                p: "none",
-                                width: "50%",
+                                backgroundColor: '#73C23A',
+                                p: 'none',
+                                width: '50%',
                               }}
                             >
                               <Typography>정답</Typography>
@@ -106,9 +106,9 @@ export default function Result(props: { sections: any }) {
                           ) : (
                             <Card
                               sx={{
-                                backgroundColor: "#C13C37",
-                                p: "none",
-                                width: "50%",
+                                backgroundColor: '#C13C37',
+                                p: 'none',
+                                width: '50%',
                               }}
                             >
                               <Typography>오답</Typography>
