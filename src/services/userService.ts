@@ -1,35 +1,35 @@
-import { signInUserItem, signUpUserItem } from "../types/userItem";
-import axios from "axios";
+import { signInUserItem, signUpUserItem } from '../types/userItem';
+import axios from '../utils/axios';
 
 class UserService {
   //Signin.tsx
   signIn(accountId: string | null, password: string | null) {
     return axios.post<signInUserItem>(
-      "http://localhost:8080/user/login",
+      'http://localhost:8080/user/login',
       { accountId: accountId, password: password },
       {
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
-      }
+      },
     );
   }
   //SignUp.tsx
   signUp(
     accountId: string | null,
     email: string | null,
-    password: string | null
+    password: string | null,
   ) {
     return axios.post<signUpUserItem>(
-      "http://localhost:8080/user/signup",
+      'http://localhost:8080/user/signup',
       { accountId: accountId, email: email, password: password },
       {
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
-      }
+      },
     );
   }
 }
