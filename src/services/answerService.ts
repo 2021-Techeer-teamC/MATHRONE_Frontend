@@ -1,5 +1,5 @@
 import answersList from '../types/answers';
-import axios from 'axios';
+import axios from '../utils/axios';
 
 class gradingService {
   postAnswer(answer: any) {

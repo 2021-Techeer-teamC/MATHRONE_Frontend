@@ -1,5 +1,5 @@
 import problemData from '../types/problems';
-import axios from 'axios';
+import axios from '../utils/axios';
 
 class problemsService {
   getProblems(workbookId: string | undefined, chapterId: string | undefined) {
