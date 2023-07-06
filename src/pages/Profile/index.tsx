@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Logo from '../../components/Logo';
-import { CgProfile } from 'react-icons/cg';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Header from '../../components/Header';
