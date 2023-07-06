@@ -32,7 +32,16 @@
 
 .profile-info-text {
   font-size: 15px !important;
-  font-family: "NotoSans" !important;
+  font-family: 'NotoSans' !important;
+  margin-bottom: 18px;
+}
+
+.subscription_button {
+  background-color: #009688;
+}
+.subscription_button:hover {
+  background-color: #009688;
+  opacity: 0.7;
 }
 
 .horizontal-divider {
@@ -47,7 +56,7 @@
 }
 
 .profile-try-text {
-  font-family: "NotoSans-Bold";
+  font-family: 'NotoSans-Bold';
   text-align: left;
   font-size: 25px;
   font-weight: 500;
