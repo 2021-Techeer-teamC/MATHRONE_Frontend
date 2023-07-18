@@ -37,10 +37,12 @@
 }
 
 .subscription_button {
-  background-color: #009688;
+  margin-top: 16px !important;
+  background-color: #009688 !important;
 }
+
 .subscription_button:hover {
-  background-color: #009688;
+  background-color: #009688 !important;
   opacity: 0.7;
 }
 
