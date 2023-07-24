@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 import Logo from '../../components/Logo';
-import { CgProfile } from 'react-icons/cg';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
 import Header from '../../components/Header';
@@ -16,6 +16,10 @@ import './style.css';
 const theme = createTheme();
 
 export default function ProfilePage() {
+  const handleClickUpgradeButton = () => {
+    alert('click upgrade button');
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Header />
@@ -37,6 +41,13 @@ export default function ProfilePage() {
               <Typography className="profile-info-text">
                 서연주 / h01010@email.com / ranking 07
               </Typography>
+              <Button
+                className="subscription_button"
+                variant="contained"
+                onClick={handleClickUpgradeButton}
+              >
+                Premium Upgrade
+              </Button>
             </Grid>
             <Grid item xs={6} md={7}>
               <ProblemList data={tryData} title={'시도한 문제'} />

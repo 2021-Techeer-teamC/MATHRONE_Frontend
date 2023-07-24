@@ -14,6 +14,9 @@ import Profile from './pages/Profile/index';
 import Error from './pages/Error/index';
 import OauthGoogle from './pages/Oauth/Oauth2RedirectLoading';
 import OauthKakao from './pages/Oauth/Oauth2KakaoRedirect';
+import Success from './pages/Payment/result/Success';
+import Fail from './pages/Payment/result/Fail';
+import Cancel from './pages/Payment/result/Cancel';
 
 function App() {
   return (
@@ -42,6 +45,9 @@ function App() {
           {/*임시 테스트용*/}
           <Route path="/result" exact element={<Result />} />
           {/*임시 테스트용*/}
+          <Route path="/payment/success" exact element={<Success />} />
+          <Route path="/payment/fail" exact element={<Fail />} />
+          <Route path="/payment/cancel" exact element={<Cancel />} />
         </Routes>
       </div>
     </Router>
