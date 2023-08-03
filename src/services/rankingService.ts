@@ -4,7 +4,7 @@ import axios from '../utils/axios';
 
 class rankingService {
   getMyRanking() {
-    return axios.get<myRankData>('http://localhost:8080/rank/rank');
+    return axios.get<myRankData>('http://localhost:8080/rank/my-rank');
   }
   getAllRankings() {
     return axios.get<rankData[]>('http://localhost:8080/rank/total-rank');
