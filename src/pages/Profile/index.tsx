@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
@@ -11,11 +11,20 @@ import NavBar from '../../components/NavBar/index.js';
 import Footer from '../../components/Footer/index.js';
 import WorkbookSlider from '../../components/WorkbookSlider';
 import ProblemList from '../../components/ProblemList';
+import profileService from '../../services/profileService';
+// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+// import { profileItem } from '../../types/profileItem';
 import './style.css';
 
 const theme = createTheme();
 
 export default function ProfilePage() {
+  useEffect(() => {
+    profileService.getMyProfile().then((res) => {
+      console.log(res);
+    });
+  }, []);
+
   const handleClickUpgradeButton = () => {
     alert('click upgrade button');
   };
@@ -30,7 +39,7 @@ export default function ProfilePage() {
             <Grid item xs={6} md={5} className="profile-img-grid">
               <Logo />
               {/* 이미지 없으면 */}
-              {/* <CgProfile className="profile-icon" /> */}
+              {/* <AccountCircleIcon className="profile-icon" /> */}
               <div className="profile-div">
                 <img
                   className="profile-img"
