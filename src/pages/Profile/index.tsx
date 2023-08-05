@@ -14,6 +14,7 @@ import ProblemList from '../../components/ProblemList';
 import profileService from '../../services/profileService';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // import { profileItem } from '../../types/profileItem';
 import './style.css';
@@ -41,20 +42,22 @@ const ProfilePage = observer(() => {
           <Grid container spacing={2}>
             <Grid item xs={6} md={5} className="profile-img-grid">
               <Logo />
-              {/* 이미지 없으면 */}
-              {/* <AccountCircleIcon className="profile-icon" /> */}
               <div className="profile-div">
-                <img
-                  className="profile-img"
-                  alt="profile_img"
-                  src="https://i.pinimg.com/550x/e4/08/8f/e4088ff707bfa7775a26b401fdecbe3e.jpg"
-                ></img>
+                {account.profileImg ? (
+                  <img
+                    className="profile-img"
+                    alt="profile_img"
+                    src={account.profileImg || ''}
+                  />
+                ) : (
+                  <AccountCircleIcon className="profile-img" />
+                )}
               </div>
               <Typography className="profile-info-text">
-                {/* 서연주 / h01010@email.com / ranking 07 */}
-                {`${account.id} / ${account.email} / ranking ${
-                  account.rankInfo.rank || '[없음]'
-                }`}
+                {`${account.id} / ${account.email}`}
+              </Typography>
+              <Typography className="profile-info-text">
+                {`순위: ${account.rankInfo.rank || '[없음]'}`}
               </Typography>
               <Button
                 className="subscription_button"
