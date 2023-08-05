@@ -1,5 +1,5 @@
 export default interface profileItem {
-  userId: number;
+  userId: number | null;
   id: string;
   password: string;
   profileImg: string | null;

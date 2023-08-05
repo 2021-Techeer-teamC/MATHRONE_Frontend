@@ -12,18 +12,21 @@ import Footer from '../../components/Footer/index.js';
 import WorkbookSlider from '../../components/WorkbookSlider';
 import ProblemList from '../../components/ProblemList';
 import profileService from '../../services/profileService';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store';
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // import { profileItem } from '../../types/profileItem';
 import './style.css';
 
 const theme = createTheme();
 
-export default function ProfilePage() {
+const ProfilePage = observer(() => {
+  const { accountStore } = useStore();
+  const { account, getProfile } = accountStore;
+
   useEffect(() => {
-    profileService.getMyProfile().then((res) => {
-      console.log(res);
-    });
-  }, []);
+    getProfile();
+  }, [getProfile]);
 
   const handleClickUpgradeButton = () => {
     alert('click upgrade button');
@@ -48,7 +51,10 @@ export default function ProfilePage() {
                 ></img>
               </div>
               <Typography className="profile-info-text">
-                서연주 / h01010@email.com / ranking 07
+                {/* 서연주 / h01010@email.com / ranking 07 */}
+                {`${account.id} / ${account.email} / ranking ${
+                  account.rankInfo.rank || '[없음]'
+                }`}
               </Typography>
               <Button
                 className="subscription_button"
@@ -78,7 +84,9 @@ export default function ProfilePage() {
       />
     </ThemeProvider>
   );
-}
+});
+
+export default ProfilePage;
 
 const itemData = [
   {
