@@ -10,19 +10,19 @@ class WorkbookService {
     pageNum: number,
   ) {
     return axios.get<workbookItem[]>(
-      `http://localhost:8080/workbook/list?publisher=${publisher}&sortType=${sortType}&category=${category}&pageNum=${pageNum}`,
+      `${process.env.REACT_APP_IP}/workbook/list?publisher=${publisher}&sortType=${sortType}&category=${category}&pageNum=${pageNum}`,
     );
   }
 
   getWorkbookCount(publisher: string, category: string) {
     return axios.get<number>(
-      `http://localhost:8080/workbook/count?publisher=${publisher}&category=${category}`,
+      `${process.env.REACT_APP_IP}/workbook/count?publisher=${publisher}&category=${category}`,
     );
   }
 
   getWorkbookListSummary() {
     return axios.get<workbookSidebarItem[]>(
-      `http://localhost:8080/workbook/summary`,
+      `${process.env.REACT_APP_IP}/workbook/summary`,
     );
   }
 }

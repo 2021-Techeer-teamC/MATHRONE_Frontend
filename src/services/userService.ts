@@ -5,7 +5,7 @@ class UserService {
   //Signin.tsx
   signIn(accountId: string | null, password: string | null) {
     return axios.post<signInUserItem>(
-      'http://localhost:8080/user/login',
+      `${process.env.REACT_APP_IP}/user/login`,
       { accountId: accountId, password: password },
       {
         headers: {
@@ -22,7 +22,7 @@ class UserService {
     password: string | null,
   ) {
     return axios.post<signUpUserItem>(
-      'http://localhost:8080/user/signup',
+      `${process.env.REACT_APP_IP}/user/signup`,
       { accountId: accountId, email: email, password: password },
       {
         headers: {
