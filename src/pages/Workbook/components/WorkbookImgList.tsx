@@ -17,7 +17,7 @@ const WorkbookImgList = ({ workbookList }: BookListProps) => {
           <Link to={`/workbook/${item.workbookId}`}>
             <img
               className="workbook-img"
-              src={item.profileImg}
+              src={item.thumbnail}
               alt={item.title}
               loading="lazy"
             />
