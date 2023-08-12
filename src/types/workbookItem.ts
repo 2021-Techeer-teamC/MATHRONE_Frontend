@@ -1,7 +1,7 @@
 export interface workbookItem {
   workbookId: string;
   title: string;
-  profileImg: string;
+  thumbnail: string;
   publisher: string;
   level: string;
   star: number;
