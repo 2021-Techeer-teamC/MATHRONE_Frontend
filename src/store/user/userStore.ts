@@ -1,8 +1,9 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import profileService from '../../services/profileService';
+import userService from '../../services/userService';
 import profileItem from '../../types/profileItem';
 
-class AccountStore {
+class UserStore {
   account: profileItem = {
     userId: null,
     id: '',
@@ -25,6 +26,20 @@ class AccountStore {
     makeAutoObservable(this);
   }
 
+  submitSignIn = async (id: string, password: string) => {
+    try {
+      userService.signIn(id, password).then((res) => {
+        localStorage.setItem('accessToken', res.data.accessToken);
+        localStorage.setItem('userId', res.data.userInfo.userId);
+        localStorage.setItem('accountId', res.data.userInfo.accountId);
+      });
+      return true;
+    } catch (error) {
+      console.error('Error: ', error);
+      return error;
+    }
+  };
+
   getProfile = async () => {
     try {
       profileService.getMyProfile().then((res) => {
@@ -41,4 +56,4 @@ class AccountStore {
   };
 }
 
-export default AccountStore;
+export default UserStore;

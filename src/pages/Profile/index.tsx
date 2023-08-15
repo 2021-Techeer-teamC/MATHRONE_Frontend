@@ -22,8 +22,8 @@ import './style.css';
 const theme = createTheme();
 
 const ProfilePage = observer(() => {
-  const { accountStore } = useStore();
-  const { account, getProfile } = accountStore;
+  const { userStore } = useStore();
+  const { account, getProfile } = userStore;
 
   useEffect(() => {
     getProfile();
