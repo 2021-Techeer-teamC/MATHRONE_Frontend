@@ -3,6 +3,11 @@ import { Box, styled } from '@mui/material';
 export const HeaderBox = styled(Box)(
   () => `
   width: 100%;
+  flex-grow: 1;
+
+  #dummy-box {
+    flex-grow: 1;
+  }
   
   .header {
     background-color: none;

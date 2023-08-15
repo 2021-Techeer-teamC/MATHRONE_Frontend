@@ -33,10 +33,10 @@ function Header() {
   };
 
   return (
-    <HeaderBox sx={{ flexGrow: 1 }}>
+    <HeaderBox>
       <div className="header header-box">
         <Logo />
-        <Box sx={{ flexGrow: 1 }} />
+        <Box id="dummy-box" />
         <Box sx={{ display: { xs: 'flex' } }}>
           {!loginStatus ? (
             <Grid container spacing={1}>
@@ -54,7 +54,7 @@ function Header() {
           ) : (
             <Grid container spacing={1}>
               <Grid item xs={6} md={5}>
-                <Link to="/profile" style={{ textDecoration: 'none' }}>
+                <Link to="/profile" className="header-link">
                   <CgProfile
                     style={{
                       fontSize: '36px',
@@ -65,11 +65,7 @@ function Header() {
                 </Link>
               </Grid>
               <Grid item xs={6} md={7}>
-                <Link
-                  to="/"
-                  style={{ textDecoration: 'none' }}
-                  onClick={onLogoutClick}
-                >
+                <Link to="/" className="header-link" onClick={onLogoutClick}>
                   <Button id="login-button">로그아웃</Button>
                 </Link>
               </Grid>
