@@ -9,9 +9,9 @@
 }
 
 .profile-icon {
-  font-size: 36px;
-  color: #009688;
-  margin: auto;
+  font-size: 53px !important;
+  color: #315c72;
+  margin-top: 25px;
 }
 
 .profile-div {

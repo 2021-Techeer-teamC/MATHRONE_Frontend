@@ -50,7 +50,7 @@ const ProfilePage = observer(() => {
                     src={account.profileImg || ''}
                   />
                 ) : (
-                  <AccountCircleIcon className="profile-img" />
+                  <AccountCircleIcon className="profile-icon" />
                 )}
               </div>
               <Typography className="profile-info-text">
