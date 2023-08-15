@@ -40,6 +40,17 @@ class UserStore {
     }
   };
 
+  submitSignUp = async (id: string, email: string, password: string) => {
+    try {
+      const res = userService.signUp(id, email, password);
+      console.log(id, email, password);
+      return res;
+    } catch (error) {
+      console.error('Error: ', error);
+      return error;
+    }
+  };
+
   getProfile = async () => {
     try {
       profileService.getMyProfile().then((res) => {

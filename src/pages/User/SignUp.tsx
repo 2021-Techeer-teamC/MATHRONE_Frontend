@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Button,
   CssBaseline,
@@ -8,35 +8,32 @@ import {
   Box,
   Typography,
   Container,
-} from "@mui/material/";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Logo from "../../components/Logo";
-import { SignUpDiv } from "./style";
-import userService from "../../services/userService";
-import { GOOGLE_OAUTH_URI } from "../Oauth/OauthData";
+} from '@mui/material/';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Logo from '../../components/Logo';
+import { SignUpDiv } from './style';
+import { useStore } from '../../store';
+import { GOOGLE_OAUTH_URI } from '../Oauth/OauthData';
 
 export default function SignUP() {
+  const { userStore } = useStore();
+  const { submitSignUp } = userStore;
+  const theme = createTheme();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const user_data: any = new FormData(event.currentTarget);
-
     try {
-      const res = await userService.signUp(
-        user_data.get("accountId"),
-        user_data.get("email"),
-        user_data.get("password")
+      await submitSignUp(
+        user_data.get('accountId'),
+        user_data.get('email'),
+        user_data.get('password'),
       );
-
-      console.log(JSON.stringify(res));
-
-      window.location.href = "/signin";
-
-      return res;
+      window.location.href = '/signin';
     } catch (error) {
-      console.log("error");
+      console.log('error');
     }
   };
-  const theme = createTheme();
 
   return (
     <SignUpDiv>
@@ -46,9 +43,9 @@ export default function SignUP() {
           <Box
             sx={{
               marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
             }}
           >
             <Logo />

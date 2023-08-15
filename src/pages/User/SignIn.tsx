@@ -14,7 +14,6 @@ import {
 import LoadingButton from '@mui/lab/LoadingButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { SignInDiv } from './style';
-import userService from '../../services/userService';
 import { useStore } from '../../store';
 import { GOOGLE_OAUTH_URI, KAKAO_AUTH_URL } from '../Oauth/OauthData';
 
@@ -35,7 +34,7 @@ const SignInSide = () => {
       const res = await submitSignIn(
         user_data.get('accountId'),
         user_data.get('password'),
-      ).then((res) => {
+      ).then(() => {
         window.location.href = '/';
         setLoading(false);
       });
