@@ -1,35 +1,39 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Box, Grid } from '@mui/material/';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import Logo from '../Logo/index.tsx';
+import { Link, useNavigate } from 'react-router-dom';
+import { Box, Grid, Button } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { CgProfile } from 'react-icons/cg';
 import '../../assets/styles/components.css';
-import './style.js';
+import Logo from '../Logo/index.tsx';
 import snsLoginService from '../../services/snsLoginService';
+import userService from '../../services/userService';
 import { KAKAO_LOGOUT_URL } from '../../pages/Oauth/OauthData';
 import { HeaderBox } from './style';
 
-function Header() {
+const Header = () => {
+  const navigate = useNavigate();
   const [loginStatus, setLoginStatus] = useState(
     localStorage.getItem('accessToken') ? true : false,
   );
   const [thirdParty, setThirdParty] = useState(
     localStorage.getItem('thirdParty'),
   );
+  const [loading, setLoading] = useState(false);
 
   const onLogoutClick = () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('thirdParty');
-    localStorage.removeItem('snsAccessToken');
-
-    setLoginStatus(false);
-
-    if (thirdParty === 'kakao') {
-      window.location.href = KAKAO_LOGOUT_URL; //카카오 로그아웃
-    }
+    setLoading(true);
+    userService.logOut().then(() => {
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('userId');
+      localStorage.removeItem('thirdParty');
+      localStorage.removeItem('snsAccessToken');
+      if (thirdParty === 'kakao') {
+        window.location.href = KAKAO_LOGOUT_URL; //카카오 로그아웃
+      }
+      setLoginStatus(false);
+      setLoading(false);
+      navigate('/signin');
+    });
   };
 
   return (
@@ -66,7 +70,9 @@ function Header() {
               </Grid>
               <Grid item xs={6} md={7}>
                 <Link to="/" className="header-link" onClick={onLogoutClick}>
-                  <Button id="login-button">로그아웃</Button>
+                  <LoadingButton id="login-button" loading={loading}>
+                    로그아웃
+                  </LoadingButton>
                 </Link>
               </Grid>
             </Grid>
@@ -75,6 +81,6 @@ function Header() {
       </div>
     </HeaderBox>
   );
-}
+};
 
 export default Header;
