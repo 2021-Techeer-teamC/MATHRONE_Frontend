@@ -15,11 +15,15 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { SignInDiv } from './style';
 import userService from '../../services/userService';
+import { useStore } from '../../store';
 import { GOOGLE_OAUTH_URI, KAKAO_AUTH_URL } from '../Oauth/OauthData';
 
 const theme = createTheme();
 
 const SignInSide = () => {
+  const { userStore } = useStore();
+  const { submitSignIn } = userStore;
+
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -28,15 +32,13 @@ const SignInSide = () => {
 
     try {
       setLoading(true);
-      const res = await userService
-        .signIn(user_data.get('accountId'), user_data.get('password'))
-        .then((res) => {
-          window.location.href = '/';
-          localStorage.setItem('accessToken', res.data.accessToken);
-          localStorage.setItem('userId', res.data.userInfo.userId);
-          localStorage.setItem('accountId', res.data.userInfo.accountId);
-          setLoading(false);
-        });
+      const res = await submitSignIn(
+        user_data.get('accountId'),
+        user_data.get('password'),
+      ).then((res) => {
+        window.location.href = '/';
+        setLoading(false);
+      });
       return res;
     } catch (error) {
       console.log('error');
