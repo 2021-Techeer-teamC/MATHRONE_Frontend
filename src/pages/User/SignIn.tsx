@@ -14,12 +14,13 @@ import {
 import LoadingButton from '@mui/lab/LoadingButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useStore } from '../../store';
+import { observer } from 'mobx-react-lite';
 import { GOOGLE_OAUTH_URI, KAKAO_AUTH_URL } from '../Oauth/OauthData';
 import { SignInDiv, FormBox } from './style';
 
 const theme = createTheme();
 
-const SignInSide = () => {
+const SignInSide = observer(() => {
   const { userStore } = useStore();
   const { submitSignIn } = userStore;
 
@@ -142,6 +143,6 @@ const SignInSide = () => {
       </ThemeProvider>
     </SignInDiv>
   );
-};
+});
 
 export default SignInSide;

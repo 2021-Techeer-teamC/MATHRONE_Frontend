@@ -5,8 +5,8 @@ import profileItem from '../../types/profileItem';
 
 class UserStore {
   account: profileItem = {
-    userId: null,
-    id: '',
+    userId: null, // ex) userId: 17
+    id: '', // ex) accountId: tester
     password: '',
     profileImg: '',
     exp: 0,
@@ -32,8 +32,8 @@ class UserStore {
         localStorage.setItem('accessToken', res.data.accessToken);
         localStorage.setItem('userId', res.data.userInfo.userId);
         localStorage.setItem('accountId', res.data.userInfo.accountId);
+        // console.log(res.data);
       });
-      return true;
     } catch (error) {
       console.error('Error: ', error);
       return error;
