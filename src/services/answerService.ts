@@ -4,7 +4,7 @@ import axios from '../utils/axios';
 class gradingService {
   postAnswer(answer: any) {
     return axios.put<answersList>(
-      'http://localhost:8080/answer/problem', // api 주소
+      `${process.env.REACT_APP_IP}/answer/problem`, // api 주소
       answer,
     );
   }
