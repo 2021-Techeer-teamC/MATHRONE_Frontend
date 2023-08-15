@@ -11,9 +11,9 @@ import {
 } from '@mui/material/';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Logo from '../../components/Logo';
-import { SignUpDiv } from './style';
 import { useStore } from '../../store';
 import { GOOGLE_OAUTH_URI } from '../Oauth/OauthData';
+import { SignUpDiv, FormBox } from './style';
 
 export default function SignUP() {
   const { userStore } = useStore();
@@ -40,14 +40,7 @@ export default function SignUP() {
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
+          <FormBox>
             <Logo />
             <Typography component="h1" variant="h5">
               회원가입
@@ -56,7 +49,7 @@ export default function SignUP() {
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
+              className="signup-box"
             >
               <FormControl component="fieldset" variant="standard">
                 <Grid container spacing={2}>
@@ -98,25 +91,23 @@ export default function SignUP() {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
                   size="large"
                 >
                   회원가입
                 </Button>
               </FormControl>
             </Box>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Box component="form" noValidate>
               <Button
-                id="sns_login_button"
+                className="sns_login_button"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 1 }}
                 href={GOOGLE_OAUTH_URI}
               >
                 구글아이디로 로그인/회원가입
               </Button>
             </Box>
-          </Box>
+          </FormBox>
         </Container>
       </ThemeProvider>
     </SignUpDiv>

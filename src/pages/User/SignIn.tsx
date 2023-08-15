@@ -13,9 +13,9 @@ import {
 } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { SignInDiv } from './style';
 import { useStore } from '../../store';
 import { GOOGLE_OAUTH_URI, KAKAO_AUTH_URL } from '../Oauth/OauthData';
+import { SignInDiv, FormBox } from './style';
 
 const theme = createTheme();
 
@@ -76,25 +76,12 @@ const SignInSide = () => {
             elevation={6}
             square
           >
-            <Box
-              sx={{
-                my: 8,
-                mx: 4,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
+            <FormBox id="signin-formbox">
               <LogoIcon />
               <Typography component="h1" variant="h5">
                 로그인
               </Typography>
-              <Box
-                component="form"
-                noValidate
-                onSubmit={handleSubmit}
-                sx={{ mt: 1 }}
-              >
+              <Box component="form" noValidate onSubmit={handleSubmit}>
                 <TextField
                   margin="normal"
                   required
@@ -130,29 +117,26 @@ const SignInSide = () => {
                   로그인
                 </LoadingButton>
               </Box>
-              <Box component="form" noValidate sx={{ mt: 1 }}>
+              <Box component="form" noValidate>
                 <Button
-                  id="sns_login_button"
+                  className="sns_login_button"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 1 }}
                   href={GOOGLE_OAUTH_URI}
                 >
                   구글아이디로 로그인/회원가입
                 </Button>
-              </Box>
-              <Box component="form" noValidate sx={{ mt: 1 }}>
                 <Button
-                  id="sns_login_button"
+                  className="sns_login_button"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 1 }}
                   href={KAKAO_AUTH_URL}
                 >
                   카카오아이디로 로그인
                 </Button>
               </Box>
-            </Box>
+              <Box component="form" noValidate></Box>
+            </FormBox>
           </Grid>
         </Grid>
       </ThemeProvider>
