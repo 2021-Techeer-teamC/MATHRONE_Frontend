@@ -42,6 +42,12 @@ export const HeaderBox = styled(Box)(
   .header-link {
     text-decoration: none;
   }
+
+  #profile-icon {
+    font-size: 36px;
+    color: #009688;
+    margin: auto;
+  }
   
   #register-button {
     width: 90px;

@@ -59,13 +59,7 @@ const Header = () => {
             <Grid container spacing={1}>
               <Grid item xs={6} md={5}>
                 <Link to="/profile" className="header-link">
-                  <CgProfile
-                    style={{
-                      fontSize: '36px',
-                      color: '#009688',
-                      margin: 'auto',
-                    }}
-                  />
+                  <CgProfile id="profile-icon" />
                 </Link>
               </Grid>
               <Grid item xs={6} md={7}>
