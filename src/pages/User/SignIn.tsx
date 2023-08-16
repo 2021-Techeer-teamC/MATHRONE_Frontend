@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import LogoIcon from '../../components/Logo';
 import {
@@ -21,6 +22,7 @@ import { SignInDiv, FormBox } from './style';
 const theme = createTheme();
 
 const SignInSide = observer(() => {
+  const navigate = useNavigate();
   const { userStore } = useStore();
   const { submitSignIn } = userStore;
 
@@ -36,7 +38,7 @@ const SignInSide = observer(() => {
         user_data.get('accountId'),
         user_data.get('password'),
       ).then(() => {
-        window.location.href = '/';
+        navigate('/');
         setLoading(false);
       });
       return res;
