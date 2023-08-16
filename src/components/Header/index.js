@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Box, Grid, Button } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -8,13 +8,14 @@ import Logo from '../Logo/index.tsx';
 import snsLoginService from '../../services/snsLoginService';
 import userService from '../../services/userService';
 import { KAKAO_LOGOUT_URL } from '../../pages/Oauth/OauthData';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store';
 import { HeaderBox } from './style';
 
-const Header = () => {
+const Header = observer(() => {
   const navigate = useNavigate();
-  const [loginStatus, setLoginStatus] = useState(
-    localStorage.getItem('accessToken') ? true : false,
-  );
+  const { userStore } = useStore();
+  const { account, submitLogout } = userStore;
   const [thirdParty, setThirdParty] = useState(
     localStorage.getItem('thirdParty'),
   );
@@ -22,15 +23,10 @@ const Header = () => {
 
   const onLogoutClick = () => {
     setLoading(true);
-    userService.logOut().then(() => {
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('userId');
-      localStorage.removeItem('thirdParty');
-      localStorage.removeItem('snsAccessToken');
+    submitLogout().then(() => {
       if (thirdParty === 'kakao') {
         window.location.href = KAKAO_LOGOUT_URL; //카카오 로그아웃
       }
-      setLoginStatus(false);
       setLoading(false);
       navigate('/signin');
     });
@@ -42,7 +38,7 @@ const Header = () => {
         <Logo />
         <Box id="dummy-box" />
         <Box sx={{ display: { xs: 'flex' } }}>
-          {!loginStatus ? (
+          {!account.id ? (
             <Grid container spacing={1}>
               <Grid item xs={6} md={7}>
                 <Link to="/signup" className="header-link">
@@ -75,6 +71,6 @@ const Header = () => {
       </div>
     </HeaderBox>
   );
-};
+});
 
 export default Header;
