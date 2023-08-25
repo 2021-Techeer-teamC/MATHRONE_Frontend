@@ -4,7 +4,7 @@ import axios from '../utils/axios';
 
 class rankingService {
   getMyRanking() {
-    return axios.get<myRankData>(`${process.env.REACT_APP_IP}/rank/rank`);
+    return axios.get<myRankData>(`${process.env.REACT_APP_IP}/rank/my-rank`);
   }
   getAllRankings() {
     return axios.get<rankData[]>(`${process.env.REACT_APP_IP}/rank/total-rank`);
