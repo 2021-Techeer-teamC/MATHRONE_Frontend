@@ -1,5 +1,6 @@
 import { Grid, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import List from '@mui/material/List';
+import { useNavigate } from 'react-router-dom';
 // import Gold from '../../../../assets/image/gold-medal.png';
 // import Silver from '../../../../assets/image/silver-medal.png';
 // import Bronze from '../../../../assets/image/bronze-medal.png';
@@ -10,11 +11,16 @@ import './style.css';
 
 // only for Profile page
 const ProblemList = ({ data, title }) => {
+  const navigate = useNavigate();
   // let icon = {
   //   1: Bronze,
   //   2: Silver,
   //   3: Gold,
   // };
+
+  const handleViewProblemClick = (workbookId, chapterId) => {
+    navigate(`/problem/${workbookId}/${chapterId}`);
+  };
 
   return (
     <>
@@ -32,7 +38,11 @@ const ProblemList = ({ data, title }) => {
                 primary={item.title + ' ' + item.problemNum + '번'}
                 secondary={`점수: ${item.levelOfDiff}`}
               />
-              <ListItemIcon>
+              <ListItemIcon
+                onClick={() =>
+                  handleViewProblemClick(item.workbookId, item.chapterId)
+                }
+              >
                 <OpenInNewIcon />
               </ListItemIcon>
             </ListItem>
