@@ -25,6 +25,7 @@ const Header = observer(() => {
     setLoading(true);
     submitLogout().then(() => {
       if (thirdParty === 'kakao') {
+        // kakao logout api call
         window.location.href = KAKAO_LOGOUT_URL; //카카오 로그아웃
       }
       setLoading(false);

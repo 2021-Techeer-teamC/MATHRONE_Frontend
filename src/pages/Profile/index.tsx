@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
@@ -10,10 +12,8 @@ import Header from '../../components/Header';
 import NavBar from '../../components/NavBar/index.js';
 import Footer from '../../components/Footer/index.js';
 import WorkbookSlider from '../../components/WorkbookSlider';
-import ProblemList from '../../components/ProblemList';
+import ProblemList from './components/ProblemList';
 import profileService from '../../services/profileService';
-import { observer } from 'mobx-react-lite';
-import { useStore } from '../../store';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 // import { profileItem } from '../../types/profileItem';
@@ -120,27 +120,46 @@ const itemData = [
 
 const tryData = [
   {
-    problem_id: '01-01-00001',
-    problem_num: '2',
-    workbook_title: '수능완성',
-    level: 1,
-    subject: '미적분',
-    chapter: '수열의 극한',
+    problemId: '04-01-00001',
+    problemNum: 1,
+    chapterId: '01',
+    workbookId: '04',
+    levelOfDiff: 2,
+    iscorrect: true,
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
   },
   {
-    problem_id: '01-01-00002',
-    problem_num: '4',
-    workbook_title: '수능완성',
-    level: 3,
-    subject: '미적분',
-    chapter: '수열의 극한',
+    problemId: '04-01-00001',
+    problemNum: 1,
+    chapterId: '01',
+    workbookId: '04',
+    levelOfDiff: 2,
+    iscorrect: true,
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
   },
   {
-    problem_id: '01-01-00003',
-    problem_num: '5',
-    workbook_title: '수능완성',
-    level: 2,
-    subject: '미적분',
-    chapter: '수열의 극한',
+    problemId: '04-01-00001',
+    problemNum: 1,
+    chapterId: '01',
+    workbookId: '04',
+    levelOfDiff: 2,
+    iscorrect: true,
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
   },
+  // {
+  //   problem_id: '01-01-00002',
+  //   problem_num: '4',
+  //   workbook_title: '수능완성',
+  //   level: 3,
+  //   subject: '미적분',
+  //   chapter: '수열의 극한',
+  // },
+  // {
+  //   problem_id: '01-01-00003',
+  //   problem_num: '5',
+  //   workbook_title: '수능완성',
+  //   level: 2,
+  //   subject: '미적분',
+  //   chapter: '수열의 극한',
+  // },
 ];

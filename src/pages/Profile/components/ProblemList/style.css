@@ -1,0 +1,40 @@
+/* ProblemList */
+.problemlist-title-div {
+  display: flex;
+  text-align: left;
+  align-items: center;
+  padding-bottom: 15px;
+}
+
+.problemlist-title {
+  font-family: NotoSans-Bold;
+  /* font-size: 25px; */
+  border-bottom: 2px solid #bcdcc4;
+}
+
+.problemlist-view-more {
+  color: #009688 !important;
+  padding-left: 30px;
+  cursor: pointer;
+}
+
+.problemlist-no-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 100px;
+}
+
+.problemlist-label-none {
+  text-align: center;
+  align-items: center;
+  color: #434343;
+  padding-top: 40px;
+}
+
+.MuiListItemIcon-root {
+  color: #315c72 !important;
+  margin-left: 32px;
+  cursor: pointer;
+}
