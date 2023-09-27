@@ -1,4 +1,5 @@
-import * as React from 'react';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -10,11 +11,10 @@ import Footer from '../../components/Footer';
 import WorkbookSlider from '../../components/WorkbookSlider/index.js';
 import ProblemList from '../../components/ProblemList';
 import MainCarousel from './components/MainCarousel';
+import { Subtitle } from '../../components/Typography';
 import './style.css';
-import { useEffect } from 'react';
 import qs from 'qs';
 import snsLoginService from '../../services/snsLoginService';
-import { useParams } from 'react-router-dom';
 
 const theme = createTheme();
 
@@ -45,34 +45,11 @@ export default function Main() {
             <MainCarousel posts={addData} />
           </div>
           <div className="try-carousel">
-            <Typography
-              component="h2"
-              variant="h5"
-              color="inherit"
-              align="left"
-              noWrap
-              sx={{ flex: 1 }}
-              fontFamily="NotoSans-Bold"
-              padding="5px"
-            >
-              {'시도 중인 문제집'}
-            </Typography>
+            <Subtitle>시도 중인 문제집</Subtitle>
             <WorkbookSlider posts={itemData} />
           </div>
           <div className="star-carousel">
-            <Typography
-              component="h2"
-              variant="h5"
-              color="inherit"
-              align="left"
-              noWrap
-              sx={{ flex: 1 }}
-              fontFamily="NotoSans-Bold"
-              padding="5px"
-            >
-              {'즐겨 찾기'}
-            </Typography>
-
+            <Subtitle>시도 중인 문제집</Subtitle>
             <WorkbookSlider posts={itemData} />
           </div>
           <div className="most-try-prob">

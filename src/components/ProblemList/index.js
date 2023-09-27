@@ -3,12 +3,12 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  Typography,
   ListItemText,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Pencil from '../../assets/image/pencil.png';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { UnderlinedSubtitle } from '../../components/Typography';
 import './style.css';
 
 const ProblemList = ({ data, title }) => {
@@ -21,18 +21,7 @@ const ProblemList = ({ data, title }) => {
   return (
     <>
       <div className="problemlist-title-div">
-        <Typography
-          component="h2"
-          variant="h5"
-          color="inherit"
-          align="left"
-          noWrap
-          className="problemlist-title"
-          fontFamily="NotoSans-Bold"
-          padding="5px"
-        >
-          {title}
-        </Typography>
+        <UnderlinedSubtitle>{title}</UnderlinedSubtitle>
         <Link className="problemlist-view-more" underline="hover">
           {'더보기'}
         </Link>

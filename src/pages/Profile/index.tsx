@@ -13,8 +13,9 @@ import NavBar from '../../components/NavBar/index.js';
 import Footer from '../../components/Footer/index.js';
 import WorkbookSlider from '../../components/WorkbookSlider';
 import ProblemList from '../../components/ProblemList';
-import profileService from '../../services/profileService';
+import { Subtitle } from '../../components/Typography';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import profileService from '../../services/profileService';
 import './style.css';
 
 const theme = createTheme();
@@ -71,17 +72,7 @@ const ProfilePage = observer(() => {
           </Grid>
           <hr className="horizontal-divider" />
           <div className="profile-try-problem-div">
-            <Typography
-              component="h2"
-              variant="h5"
-              color="inherit"
-              align="left"
-              noWrap
-              className="profile-try-text"
-              fontFamily="NotoSans-Bold"
-            >
-              {'시도 중인 문제집'}
-            </Typography>
+            <Subtitle>시도 중인 문제집</Subtitle>
             <WorkbookSlider posts={itemData} />
           </div>
         </Paper>
