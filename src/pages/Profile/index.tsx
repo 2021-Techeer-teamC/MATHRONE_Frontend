@@ -69,11 +69,18 @@ const ProfilePage = observer(() => {
               <ProblemList data={tryData} title={'시도한 문제'} />
             </Grid>
           </Grid>
-
           <hr className="horizontal-divider" />
           <div className="profile-try-problem-div">
-            <Typography className="profile-try-text">
-              최근에 푼 문제집
+            <Typography
+              component="h2"
+              variant="h5"
+              color="inherit"
+              align="left"
+              noWrap
+              className="profile-try-text"
+              fontFamily="NotoSans-Bold"
+            >
+              {'시도 중인 문제집'}
             </Typography>
             <WorkbookSlider posts={itemData} />
           </div>

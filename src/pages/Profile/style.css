@@ -50,16 +50,14 @@
 .horizontal-divider {
   background: #315c72;
   height: 5px;
-  margin: 20px;
+  margin-top: 50px;
+  margin-bottom: 50px;
   border: none;
-}
-
-.profile-try-problem-div {
-  padding: 20px;
 }
 
 .profile-try-text {
   font-family: 'NotoSans-Bold';
+  padding: 5px;
   text-align: left;
   font-size: 25px;
   font-weight: 500;
