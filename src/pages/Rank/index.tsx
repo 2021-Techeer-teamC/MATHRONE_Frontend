@@ -1,11 +1,12 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import Typography from '@mui/material/Typography';
-import { Container } from '@mui/material';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import {
+  Card,
+  Box,
+  Typography,
+  Container,
+  CardContent,
+  CardMedia,
+} from '@mui/material';
 import './style.css';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
@@ -17,8 +18,8 @@ import rankData from '../../types/rankData';
 import myRankData from '../../types/myRankData';
 
 export default function Rankpage() {
-  const [allRank, setAllRank] = React.useState<rankData[] | any>();
-  const [myRank, setMyRank] = React.useState<myRankData>();
+  const [allRank, setAllRank] = useState<rankData[] | any>();
+  const [myRank, setMyRank] = useState<myRankData>();
 
   const getRank = async () => {
     const res = await rankingService.getMyRanking();

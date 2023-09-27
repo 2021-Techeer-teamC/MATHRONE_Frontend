@@ -6,12 +6,6 @@
   padding-bottom: 15px;
 }
 
-.problemlist-title {
-  font-family: NotoSans-Bold;
-  /* font-size: 25px; */
-  border-bottom: 2px solid #bcdcc4;
-}
-
 .problemlist-view-more {
   color: #009688 !important;
   padding-left: 30px;

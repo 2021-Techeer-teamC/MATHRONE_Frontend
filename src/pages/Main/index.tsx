@@ -1,10 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import { CssBaseline, Container, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
@@ -12,9 +9,10 @@ import WorkbookSlider from '../../components/WorkbookSlider/index.js';
 import ProblemList from '../../components/ProblemList';
 import MainCarousel from './components/MainCarousel';
 import { Subtitle } from '../../components/Typography';
-import './style.css';
 import qs from 'qs';
 import snsLoginService from '../../services/snsLoginService';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import './style.css';
 
 const theme = createTheme();
 

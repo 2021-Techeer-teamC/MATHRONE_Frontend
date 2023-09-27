@@ -1,13 +1,9 @@
 import { useEffect } from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
+import { Typography, Paper, Button, Grid, Container } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Logo from '../../components/Logo';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar/index.js';
 import Footer from '../../components/Footer/index.js';
