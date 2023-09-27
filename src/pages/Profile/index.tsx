@@ -12,11 +12,9 @@ import Header from '../../components/Header';
 import NavBar from '../../components/NavBar/index.js';
 import Footer from '../../components/Footer/index.js';
 import WorkbookSlider from '../../components/WorkbookSlider';
-import ProblemList from './components/ProblemList';
+import ProblemList from '../../components/ProblemList';
 import profileService from '../../services/profileService';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-// import { profileItem } from '../../types/profileItem';
 import './style.css';
 
 const theme = createTheme();
@@ -29,7 +27,7 @@ const ProfilePage = observer(() => {
     getProfile();
   }, [getProfile]);
 
-  const handleClickUpgradeButton = () => {
+  const handleUpgradeClick = () => {
     alert('click upgrade button');
   };
 
@@ -62,7 +60,7 @@ const ProfilePage = observer(() => {
               <Button
                 className="subscription_button"
                 variant="contained"
-                onClick={handleClickUpgradeButton}
+                onClick={handleUpgradeClick}
               >
                 Premium Upgrade
               </Button>
@@ -146,20 +144,4 @@ const tryData = [
     iscorrect: true,
     title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
   },
-  // {
-  //   problem_id: '01-01-00002',
-  //   problem_num: '4',
-  //   workbook_title: '수능완성',
-  //   level: 3,
-  //   subject: '미적분',
-  //   chapter: '수열의 극한',
-  // },
-  // {
-  //   problem_id: '01-01-00003',
-  //   problem_num: '5',
-  //   workbook_title: '수능완성',
-  //   level: 2,
-  //   subject: '미적분',
-  //   chapter: '수열의 극한',
-  // },
 ];

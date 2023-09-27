@@ -1,61 +1,68 @@
-import * as React from 'react';
-import { Grid, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import List from '@mui/material/List';
-import Gold from '../../assets/image/gold-medal.png';
-import Silver from '../../assets/image/silver-medal.png';
-import Bronze from '../../assets/image/bronze-medal.png';
+import {
+  Link,
+  List,
+  ListItem,
+  ListItemIcon,
+  Typography,
+  ListItemText,
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import Pencil from '../../assets/image/pencil.png';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import './style.css';
 
-import Link from '@mui/material/Link';
-
 const ProblemList = ({ data, title }) => {
-  let icon = {
-    1: Bronze,
-    2: Silver,
-    3: Gold,
+  const navigate = useNavigate();
+
+  const handleViewProblemClick = (workbookId, chapterId) => {
+    navigate(`/problem/${workbookId}/${chapterId}`);
   };
 
   return (
     <>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={10}>
-          <div className="problemlist-div">
-            <label className="problemlist-title">{title}</label>
-            <Link className="problemlist-link" href="#" underline="hover">
-              {'더보기'}
-            </Link>
-          </div>
-          {data.length !== 0 ? (
-            <List>
-              {data.slice(0, 10).map((item) => (
-                <ListItem>
-                  <ListItemText
-                    primary={
-                      item.workbook_title + ' ' + item.problem_num + '번'
-                    }
-                    secondary={item.subject + ' - ' + item.chapter}
-                  />
-                  <ListItemIcon>
-                    <img
-                      src={icon[item.level]}
-                      width="30px"
-                      alt="list-item-img"
-                    />
-                  </ListItemIcon>
-                </ListItem>
-              ))}
-            </List>
-          ) : (
-            <div className="problemlist-div-none">
-              <img src={Pencil} width="100px" alt="pencil" />
-              <label className="problemlist-label-none">
-                충분한 데이터가 수집되지 않았습니다.
-              </label>
-            </div>
-          )}
-        </Grid>
-      </Grid>
+      <div className="problemlist-title-div">
+        <Typography
+          component="h2"
+          variant="h5"
+          color="inherit"
+          align="left"
+          noWrap
+          className="problemlist-title"
+          fontFamily="NotoSans-Bold"
+          padding="5px"
+        >
+          {title}
+        </Typography>
+        <Link className="problemlist-view-more" underline="hover">
+          {'더보기'}
+        </Link>
+      </div>
+      {data.length !== 0 ? (
+        <List>
+          {data.slice(0, 10).map((item) => (
+            <ListItem>
+              <ListItemText
+                primary={item.title + ' ' + item.problemNum + '번'}
+                secondary={`점수: ${item.levelOfDiff}`}
+              />
+              <ListItemIcon
+                onClick={() =>
+                  handleViewProblemClick(item.workbookId, item.chapterId)
+                }
+              >
+                <OpenInNewIcon />
+              </ListItemIcon>
+            </ListItem>
+          ))}
+        </List>
+      ) : (
+        <div className="problemlist-no-data">
+          <img src={Pencil} width="100px" alt="pencil" />
+          <label className="problemlist-label-none">
+            충분한 데이터가 수집되지 않았습니다.
+          </label>
+        </div>
+      )}
     </>
   );
 };
