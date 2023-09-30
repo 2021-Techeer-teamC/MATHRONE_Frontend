@@ -12,6 +12,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SignInDiv } from "./style";
 import userService from "../../services/userService";
 import {GOOGLE_OAUTH_URI, KAKAO_AUTH_URL} from "../Oauth/OauthData";
+import snsLoginService from "../../services/snsLoginService";
 
 const theme = createTheme();
 
@@ -38,6 +39,32 @@ export default function SignInSide() {
     } catch (error) {
       console.log("error");
     }
+  };
+
+  const handleKakaoSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // try {
+    //   const res = await snsLoginService.signInRequestKakao();
+    //
+    //   console.log(JSON.stringify(res));
+
+    window.location.href = `${process.env.REACT_APP_IP}/user/kakao/login-request`;
+
+    //   localStorage.setItem("accessToken", res.data.accessToken);
+    //   localStorage.setItem("userId", res.data.userInfo.userId);
+    //   localStorage.setItem("accountId", res.data.userInfo.accountId);
+    //
+    //   return res;
+    // } catch (error:any) {
+    //   if(error.response) {
+    //     console.log(error.response.headers.location);
+    //   }
+    //   console.log("error");
+    // }
+
+
+
   };
 
   return (
@@ -135,13 +162,13 @@ export default function SignInSide() {
                   구글아이디로 로그인/회원가입
                 </Button>
               </Box>
-              <Box component="form" noValidate sx={{ mt: 1 }}>
+              <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleKakaoSignIn}>
               <Button
                   id="sns_login_button"
+                  type="submit"
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 1 }}
-                  href={KAKAO_AUTH_URL}
               >
                 카카오아이디로 로그인
               </Button>
