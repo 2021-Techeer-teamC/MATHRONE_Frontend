@@ -13,12 +13,7 @@ import {
 } from "@mui/material";
 import Chart from "./components/Chart";
 import { useLocation } from "react-router-dom";
-
-interface answerData {
-  problemId: string;
-  solution: number; // 나의 답
-  answer: number;  // 실제 정답
-}
+import answersList from '../../types/answers';
 
 interface score {
   title: string;
