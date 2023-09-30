@@ -36,9 +36,8 @@ export default function Result() {
   wrong = 0;
   const location = useLocation();
   const answerData = location.state.answerData;
-  console.log(answerData);
-  answerData.map((answerData: answerData) => {
-    answerData.solution === answerData.answer ? correct++ : wrong++;
+  answerData.map((answerData: answersList) => {
+    answerData.correctAnswer === answerData.myAnswer ? correct++ : wrong++;
   });
 
   var score: score[] = [
@@ -80,20 +79,20 @@ export default function Result() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {answerData.map((answerData: answerData) => (
+                  {answerData.map((answerData: answersList) => (
                     <TableRow key={answerData.problemId}>
                       <TableCell align="center" padding="none">
                         {++count}
                       </TableCell>
                       <TableCell align="center" padding="none">
-                        {answerData.answer}
+                        {answerData.myAnswer}
                       </TableCell>
                       <TableCell align="center" padding="none">
-                        {answerData.solution}
+                        {answerData.correctAnswer}
                       </TableCell>
                       <TableCell align="center" padding="none">
                         <Box sx={{ display: "flex", justifyContent: "center" }}>
-                          {answerData.solution === answerData.answer ? (
+                          {answerData.correctAnswer === answerData.myAnswer ? (
                             <Card
                               sx={{
                                 backgroundColor: '#73C23A',
