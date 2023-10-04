@@ -1,4 +1,4 @@
-import { Typography, styled } from '@mui/material';
+import { Typography, Link, styled } from '@mui/material';
 
 export const Subtitle = styled(Typography)(
   () => `
@@ -22,5 +22,13 @@ export const UnderlinedSubtitle = styled(Typography)(
   line-height: 1.334;
   letter-spacing: 0em;
   text-align: left;
+    `,
+);
+
+export const ViewMoreLink = styled(Link)(
+  () => `
+  color: #009688 !important;
+  padding-left: 30px;
+  cursor: pointer;
     `,
 );

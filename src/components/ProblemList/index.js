@@ -1,14 +1,8 @@
-import {
-  Link,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from '@mui/material';
+import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Pencil from '../../assets/image/pencil.png';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import { UnderlinedSubtitle } from '../../components/Typography';
+import { UnderlinedSubtitle, ViewMoreLink } from '../../components/Typography';
 import './style.css';
 
 const ProblemList = ({ data, title }) => {
@@ -22,9 +16,7 @@ const ProblemList = ({ data, title }) => {
     <>
       <div className="problemlist-title-div">
         <UnderlinedSubtitle>{title}</UnderlinedSubtitle>
-        <Link className="problemlist-view-more" underline="hover">
-          {'더보기'}
-        </Link>
+        <ViewMoreLink underline="hover">{'더보기'}</ViewMoreLink>
       </div>
       {data.length !== 0 ? (
         <List>
