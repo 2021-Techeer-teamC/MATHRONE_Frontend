@@ -7,6 +7,15 @@ export interface workbookItem {
   star: number;
 }
 
+export interface workbookSliderItem {
+  workbook_id: string;
+  title: string;
+  img: string;
+  publisher: string;
+  level: number;
+  star: boolean;
+}
+
 export interface workbookCountItem {
   publisher: string;
   category: string;

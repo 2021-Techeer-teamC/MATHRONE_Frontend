@@ -7,7 +7,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a lo
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
-import WorkbookSlider from '../../components/WorkbookSlider/index.js';
+import WorkbookSlider from '../../components/WorkbookSlider/index';
 import ProblemList from '../../components/ProblemList';
 import MainCarousel from './components/MainCarousel';
 import './style.css';
@@ -57,7 +57,7 @@ export default function Main() {
             >
               {'시도 중인 문제집'}
             </Typography>
-            <WorkbookSlider posts={itemData} />
+            <WorkbookSlider id="try-workbook-carousel" posts={itemData} />
           </div>
           <div className="star-carousel">
             <Typography
@@ -72,8 +72,7 @@ export default function Main() {
             >
               {'즐겨 찾기'}
             </Typography>
-
-            <WorkbookSlider posts={itemData} />
+            <WorkbookSlider id="star-workbook-carousel" posts={itemData} />
           </div>
           <div className="most-try-prob">
             <ProblemList data={tryData} title={'오늘 가장 많이 시도한 문제'} />

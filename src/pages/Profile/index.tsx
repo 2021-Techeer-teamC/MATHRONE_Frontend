@@ -9,7 +9,7 @@ import Container from '@mui/material/Container';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar/index.js';
 import Footer from '../../components/Footer/index.js';
-import WorkbookSlider from '../../components/WorkbookSlider';
+import WorkbookSlider from '../../components/WorkbookSlider/index';
 import ProblemList from '../../components/ProblemList';
 import './style.css';
 
@@ -59,7 +59,7 @@ export default function ProfilePage() {
             <Typography className="profile-try-text">
               최근에 푼 문제집
             </Typography>
-            <WorkbookSlider posts={itemData} />
+            <WorkbookSlider id="try-my-workbook" posts={itemData} />
           </div>
         </Paper>
       </Container>
