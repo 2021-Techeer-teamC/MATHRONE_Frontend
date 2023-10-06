@@ -13,19 +13,14 @@ type WorkbookSliderProps = {
 };
 
 const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
-  //시도 중인 문제집
   const [firstIdx, setFirstIdx] = useState<number>(0);
+  //defalut로 보여질 갯수 + 1개
   const [lastIdx, setLastIdx] = useState<number>(
     Number((window.innerWidth - 200) / 280),
-  ); //defalut로 보여질 갯수 + 1개
+  );
   const [data, setData] = useState<workbookSliderItem[]>([]);
   const [btnR, setBtnR] = useState<boolean>(false);
   const [btnL, setBtnL] = useState<boolean>(true);
-
-  useEffect(() => {
-    const workbookItems = posts.slice(firstIdx, lastIdx);
-    setData(workbookItems);
-  }, [posts, firstIdx, lastIdx]);
 
   const moveBackward = () => {
     let f_idx = firstIdx;
@@ -61,6 +56,11 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
     const tmp = posts.slice(firstIdx, lastIdx);
     setData(tmp);
   };
+
+  useEffect(() => {
+    const workbookItems = posts.slice(firstIdx, lastIdx);
+    setData(workbookItems);
+  }, [posts, firstIdx, lastIdx]);
 
   useEffect(() => {
     const resize = () => {
