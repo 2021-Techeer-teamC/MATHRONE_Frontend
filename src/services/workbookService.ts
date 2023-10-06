@@ -31,6 +31,12 @@ class WorkbookService {
       `${process.env.REACT_APP_IP}/workbook/try`,
     );
   }
+
+  getWorkbookStar() {
+    return axios.get<workbookItem[]>(
+      `${process.env.REACT_APP_IP}/workbook/star`,
+    );
+  }
 }
 
 export default new WorkbookService();

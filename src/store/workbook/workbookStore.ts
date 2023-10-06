@@ -23,6 +23,8 @@ class WorkbookStore {
 
   triedWorkbooks: workbookItem[] | null = null;
 
+  starWorkbooks: workbookItem[] | null = null;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -30,9 +32,22 @@ class WorkbookStore {
   getTriedWorkbook = async () => {
     try {
       workbookService.getWorkbookTry().then((res) => {
-        console.log(res.data);
         runInAction(() => {
           this.triedWorkbooks = res.data;
+        });
+      });
+      return true;
+    } catch (error) {
+      console.error('Error: ', error);
+      return error;
+    }
+  };
+
+  getStarWorkbook = async () => {
+    try {
+      workbookService.getWorkbookStar().then((res) => {
+        runInAction(() => {
+          this.starWorkbooks = res.data;
         });
       });
       return true;

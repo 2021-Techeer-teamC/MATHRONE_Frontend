@@ -21,7 +21,8 @@ const theme = createTheme();
 const Main = observer(() => {
   const { userStore, workbookStore } = useStore();
   const { account } = userStore;
-  const { getTriedWorkbook, triedWorkbooks } = workbookStore;
+  const { getTriedWorkbook, triedWorkbooks, starWorkbooks, getStarWorkbook } =
+    workbookStore;
   // 화면 크기
   // const size = {
   //   width: window.innerWidth || document.body.clientWidth,
@@ -37,7 +38,8 @@ const Main = observer(() => {
 
   useEffect(() => {
     getTriedWorkbook();
-  }, [getTriedWorkbook, account]);
+    getStarWorkbook();
+  }, [getTriedWorkbook, getStarWorkbook, account]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -63,7 +65,7 @@ const Main = observer(() => {
                 ? '즐겨찾기 문제집'
                 : '유저들이 가장 많이 즐겨찾는 문제집'}
             </Subtitle>
-            <WorkbookSlider id="star-workbook" workbooks={null} />
+            <WorkbookSlider id="star-workbook" workbooks={starWorkbooks} />
           </div>
           <div className="most-try-prob">
             <ProblemList data={tryData} title={'오늘 가장 많이 시도한 문제'} />
