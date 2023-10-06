@@ -5,7 +5,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Pencil from '../../assets/image/pencil.png';
 import { workbookSliderItem } from '../../types/workbookItem';
-import './style.css';
+import { StyledWorkbookSlider } from './style.js';
 
 type WorkbookSliderProps = {
   id: string;
@@ -19,8 +19,8 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
     Number((window.innerWidth - 200) / 280),
   ); //defalut로 보여질 갯수 + 1개
   const [data, setData] = useState<workbookSliderItem[]>([]);
-  const [btnR, setBtnR] = useState(false);
-  const [btnL, setBtnL] = useState(true);
+  const [btnR, setBtnR] = useState<boolean>(false);
+  const [btnL, setBtnL] = useState<boolean>(true);
 
   useEffect(() => {
     const workbookItems = posts.slice(firstIdx, lastIdx);
@@ -56,10 +56,8 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
     } else {
       setBtnL(true);
     }
-
     setFirstIdx(f_idx);
     setLastIdx(l_idx);
-
     const tmp = posts.slice(firstIdx, lastIdx);
     setData(tmp);
   };
@@ -67,7 +65,6 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
   useEffect(() => {
     const resize = () => {
       let value = Number(firstIdx + (window.innerWidth - 200) / 280);
-
       if (value <= 4 && value >= 1) {
         //최대 범위
         setLastIdx(value);
@@ -83,52 +80,43 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
   });
 
   return (
-    <>
-      {posts.length !== 0 ? (
+    <StyledWorkbookSlider>
+      {posts.length ? (
         <div className="slider-div">
-          <div>
-            <IconButton
-              aria-label="arrow"
-              size="large"
-              onClick={moveForward}
-              disabled={btnL}
-            >
-              <ArrowBackIosNewIcon />
-            </IconButton>
-          </div>
-          <div>
-            {data.map((item) => (
-              <div className="slider-img-div">
-                <Rating
-                  className="slider-rating"
-                  name="size-large"
-                  defaultValue={item.star === true ? 1 : 0}
-                  max={1}
-                  size="large"
-                  color="red"
-                />
-                <div className="slider-styled-div" />
-                <img
-                  className="slider-img"
-                  src={item.img}
-                  width={'200px'}
-                  height={'300px'}
-                  alt="workbook img"
-                />
-                <text className="slider-img-title">{item.title}</text>
+          <IconButton
+            aria-label="arrow"
+            size="large"
+            onClick={moveForward}
+            disabled={btnL}
+          >
+            <ArrowBackIosNewIcon />
+          </IconButton>
+          {data.map((item) => (
+            <div className="workbook-item-div">
+              <img
+                className="workbook-thumbnail"
+                alt="workbook-thumbnail"
+                src={item.img}
+              />
+              <Rating
+                className="workbook-star"
+                max={1}
+                size="large"
+                defaultValue={item.star ? 1 : 0}
+              />
+              <div className="workbook-thumbnail-overlay">
+                <div className="workbook-title">{item.title}</div>
               </div>
-            ))}
-          </div>
-          <div>
-            <IconButton
-              aria-label="arrow"
-              size="large"
-              onClick={moveBackward}
-              disabled={btnR}
-            >
-              <ArrowForwardIosIcon />
-            </IconButton>
-          </div>
+            </div>
+          ))}
+          <IconButton
+            aria-label="arrow"
+            size="large"
+            onClick={moveBackward}
+            disabled={btnR}
+          >
+            <ArrowForwardIosIcon />
+          </IconButton>
         </div>
       ) : (
         <div className="slider-none-div">
@@ -136,7 +124,7 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
           <label>등록된 문제집이 없습니다.</label>
         </div>
       )}
-    </>
+    </StyledWorkbookSlider>
   );
 };
 
