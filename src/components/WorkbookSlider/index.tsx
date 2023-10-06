@@ -5,7 +5,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Pencil from '../../assets/image/pencil.png';
 import { workbookSliderItem } from '../../types/workbookItem';
-import { StyledWorkbookSlider } from './style.js';
+import { WorkbookSliderData, WorkbookSliderNoneData } from './style.js';
 
 type WorkbookSliderProps = {
   id: string;
@@ -72,7 +72,6 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
         setData(tmp);
       }
     };
-
     window.addEventListener('resize', resize);
     return () => {
       window.removeEventListener('resize', resize);
@@ -80,9 +79,9 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
   });
 
   return (
-    <StyledWorkbookSlider>
+    <>
       {posts.length ? (
-        <div className="slider-div">
+        <WorkbookSliderData>
           <IconButton
             aria-label="arrow"
             size="large"
@@ -117,14 +116,14 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
           >
             <ArrowForwardIosIcon />
           </IconButton>
-        </div>
+        </WorkbookSliderData>
       ) : (
-        <div className="slider-none-div">
+        <WorkbookSliderNoneData>
           <img src={Pencil} width="100px" alt="no-img" />
           <label>등록된 문제집이 없습니다.</label>
-        </div>
+        </WorkbookSliderNoneData>
       )}
-    </StyledWorkbookSlider>
+    </>
   );
 };
 

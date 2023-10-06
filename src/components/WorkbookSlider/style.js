@@ -1,15 +1,13 @@
 import { styled } from '@mui/material';
 
-export const StyledWorkbookSlider = styled('div')(
+export const WorkbookSliderData = styled('div')(
   () => `
-  .slider-div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 20px;
-    padding-bottom: 60px;
-    border-bottom: 1px solid #e4e4e4;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid #e4e4e4;
 
   .workbook-item-div {
     display: flex;
@@ -61,15 +59,17 @@ export const StyledWorkbookSlider = styled('div')(
     transform: translate(530%, 800%);
     z-index: 3;
   }
-  
-  .slider-none-div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 50px;
-    padding-bottom: 50px;
-  }
+  `,
+);
+
+export const WorkbookSliderNoneData = styled('div')(
+  () => `
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
   
   .slider-none-label {
     text-align: center;
