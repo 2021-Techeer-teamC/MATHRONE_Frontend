@@ -25,6 +25,12 @@ class WorkbookService {
       `${process.env.REACT_APP_IP}/workbook/summary`,
     );
   }
+
+  getWorkbookTry() {
+    return axios.get<workbookItem[]>(
+      `${process.env.REACT_APP_IP}/workbook/try`,
+    );
+  }
 }
 
 export default new WorkbookService();

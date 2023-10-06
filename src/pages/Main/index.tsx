@@ -21,7 +21,7 @@ const theme = createTheme();
 const Main = observer(() => {
   const { userStore, workbookStore } = useStore();
   const { account } = userStore;
-  const { getTriedWorkbook } = workbookStore;
+  const { getTriedWorkbook, triedWorkbooks } = workbookStore;
   // 화면 크기
   // const size = {
   //   width: window.innerWidth || document.body.clientWidth,
@@ -37,7 +37,7 @@ const Main = observer(() => {
 
   useEffect(() => {
     getTriedWorkbook();
-  });
+  }, [getTriedWorkbook, account]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -55,7 +55,7 @@ const Main = observer(() => {
                 ? '시도 중인 문제집'
                 : '유저들이 가장 많이 시도한 문제집'}
             </Subtitle>
-            <WorkbookSlider id="try-workbook" posts={itemData} />
+            <WorkbookSlider id="try-workbook" workbooks={triedWorkbooks} />
           </div>
           <div className="star-carousel">
             <Subtitle>
@@ -63,7 +63,7 @@ const Main = observer(() => {
                 ? '즐겨찾기 문제집'
                 : '유저들이 가장 많이 즐겨찾는 문제집'}
             </Subtitle>
-            <WorkbookSlider id="star-workbook" posts={itemData} />
+            <WorkbookSlider id="star-workbook" workbooks={null} />
           </div>
           <div className="most-try-prob">
             <ProblemList data={tryData} title={'오늘 가장 많이 시도한 문제'} />

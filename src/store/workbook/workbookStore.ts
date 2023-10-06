@@ -1,5 +1,6 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import workbookService from '../../services/workbookService';
+import { workbookItem } from '../../types/workbookItem';
 
 class WorkbookStore {
   //   account: profileItem = {
@@ -20,13 +21,21 @@ class WorkbookStore {
   //     },
   //   };
 
+  triedWorkbooks: workbookItem[] | null = null;
+
   constructor() {
     makeAutoObservable(this);
   }
 
   getTriedWorkbook = async () => {
     try {
-      console.log('get tried workbook');
+      workbookService.getWorkbookTry().then((res) => {
+        console.log(res.data);
+        runInAction(() => {
+          this.triedWorkbooks = res.data;
+        });
+      });
+      return true;
     } catch (error) {
       console.error('Error: ', error);
       return error;

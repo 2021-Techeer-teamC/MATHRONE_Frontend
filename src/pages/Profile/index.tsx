@@ -17,12 +17,14 @@ import './style.css';
 const theme = createTheme();
 
 const ProfilePage = observer(() => {
-  const { userStore } = useStore();
+  const { userStore, workbookStore } = useStore();
   const { account, getProfile } = userStore;
+  const { triedWorkbooks, getTriedWorkbook } = workbookStore;
 
   useEffect(() => {
     getProfile();
-  }, [getProfile]);
+    getTriedWorkbook();
+  }, [getProfile, getTriedWorkbook, account]);
 
   const handleUpgradeClick = () => {
     alert('click upgrade button');
@@ -69,7 +71,7 @@ const ProfilePage = observer(() => {
           <hr className="horizontal-divider" />
           <div className="profile-try-problem-div">
             <Subtitle>시도 중인 문제집</Subtitle>
-            <WorkbookSlider id="try-workbook" posts={itemData} />
+            <WorkbookSlider id="try-workbook" workbooks={triedWorkbooks} />
           </div>
         </Paper>
       </Container>

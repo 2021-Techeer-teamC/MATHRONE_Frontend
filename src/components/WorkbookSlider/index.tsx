@@ -4,21 +4,23 @@ import Rating from '@mui/material/Rating';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Pencil from '../../assets/image/pencil.png';
-import { workbookSliderItem } from '../../types/workbookItem';
+import { workbookItem } from '../../types/workbookItem';
 import { WorkbookSliderData, WorkbookSliderNoneData } from './style.js';
 
 type WorkbookSliderProps = {
   id: string;
-  posts: workbookSliderItem[];
+  workbooks: workbookItem[] | null;
 };
 
-const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
+const WorkbookSlider = ({ id, workbooks }: WorkbookSliderProps) => {
   const [firstIdx, setFirstIdx] = useState<number>(0);
   //defalut로 보여질 갯수 + 1개
   const [lastIdx, setLastIdx] = useState<number>(
     Number((window.innerWidth - 200) / 280),
   );
-  const [data, setData] = useState<workbookSliderItem[]>([]);
+  const [filteredWorkbooks, setFilteredWorkbooks] = useState<
+    workbookItem[] | null
+  >([]);
   const [btnR, setBtnR] = useState<boolean>(false);
   const [btnL, setBtnL] = useState<boolean>(true);
 
@@ -26,7 +28,7 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
     let f_idx = firstIdx;
     let l_idx = lastIdx;
 
-    if (l_idx + 1 <= posts.length) {
+    if (workbooks && l_idx + 1 <= workbooks?.length) {
       //범위를 넘어가지 않을 때만
       f_idx += 1;
       l_idx += 1;
@@ -36,8 +38,8 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
     }
     setFirstIdx(f_idx);
     setLastIdx(l_idx);
-    const tmp = posts.slice(firstIdx, lastIdx);
-    setData(tmp);
+    const selectedworkbooks = workbooks?.slice(firstIdx, lastIdx) || null;
+    setFilteredWorkbooks(selectedworkbooks);
   };
 
   const moveForward = () => {
@@ -53,14 +55,14 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
     }
     setFirstIdx(f_idx);
     setLastIdx(l_idx);
-    const tmp = posts.slice(firstIdx, lastIdx);
-    setData(tmp);
+    const tmp = workbooks?.slice(firstIdx, lastIdx) || null;
+    setFilteredWorkbooks(tmp);
   };
 
   useEffect(() => {
-    const workbookItems = posts.slice(firstIdx, lastIdx);
-    setData(workbookItems);
-  }, [posts, firstIdx, lastIdx]);
+    const workbookItems = workbooks?.slice(firstIdx, lastIdx) || null;
+    setFilteredWorkbooks(workbookItems);
+  }, [workbooks, firstIdx, lastIdx]);
 
   useEffect(() => {
     const resize = () => {
@@ -68,8 +70,8 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
       if (value <= 4 && value >= 1) {
         //최대 범위
         setLastIdx(value);
-        const tmp = posts.slice(firstIdx, lastIdx);
-        setData(tmp);
+        const tmp = workbooks?.slice(firstIdx, lastIdx) || null;
+        setFilteredWorkbooks(tmp);
       }
     };
     window.addEventListener('resize', resize);
@@ -80,7 +82,7 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
 
   return (
     <>
-      {posts.length ? (
+      {workbooks?.length ? (
         <WorkbookSliderData>
           <IconButton
             aria-label="arrow"
@@ -90,12 +92,12 @@ const WorkbookSlider = ({ id, posts }: WorkbookSliderProps) => {
           >
             <ArrowBackIosNewIcon />
           </IconButton>
-          {data.map((item) => (
+          {filteredWorkbooks?.map((item) => (
             <div className="workbook-item-div">
               <img
                 className="workbook-thumbnail"
                 alt="workbook-thumbnail"
-                src={item.img}
+                src={item.thumbnail}
               />
               <Rating
                 className="workbook-star"
