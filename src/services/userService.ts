@@ -32,6 +32,12 @@ class UserService {
       },
     );
   }
+
+  logOut() {
+    return axios.post<signUpUserItem>(
+      `${process.env.REACT_APP_IP}/user/logout`,
+    );
+  }
 }
 
 export default new UserService();

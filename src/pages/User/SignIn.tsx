@@ -1,49 +1,57 @@
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import LogoIcon from "../../components/Logo";
-import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { SignInDiv } from "./style";
-import userService from "../../services/userService";
-import {GOOGLE_OAUTH_URI, KAKAO_AUTH_URL} from "../Oauth/OauthData";
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import LogoIcon from '../../components/Logo';
+import {
+  Button,
+  CssBaseline,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Paper,
+  Box,
+  Grid,
+  Typography,
+} from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useStore } from '../../store';
+import { observer } from 'mobx-react-lite';
+import { GOOGLE_OAUTH_URI, KAKAO_AUTH_URL } from '../Oauth/OauthData';
+import { SignInDiv, FormBox } from './style';
 
 const theme = createTheme();
 
-export default function SignInSide() {
+const SignInSide = observer(() => {
+  const navigate = useNavigate();
+  const { userStore } = useStore();
+  const { submitSignIn } = userStore;
+
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const user_data: any = new FormData(event.currentTarget);
 
     try {
-      const res = await userService.signIn(
-        user_data.get("accountId"),
-        user_data.get("password")
-      );
-
-      console.log(JSON.stringify(res));
-
-      window.location.href = "/";
-
-      localStorage.setItem("accessToken", res.data.accessToken);
-      localStorage.setItem("userId", res.data.userInfo.userId);
-      localStorage.setItem("accountId", res.data.userInfo.accountId);
-
+      setLoading(true);
+      const res = await submitSignIn(
+        user_data.get('accountId'),
+        user_data.get('password'),
+      ).then(() => {
+        navigate('/');
+        setLoading(false);
+      });
       return res;
     } catch (error) {
-      console.log("error");
+      console.log('error');
+      setLoading(false);
     }
   };
 
   return (
     <SignInDiv>
       <ThemeProvider theme={theme}>
-        <Grid container component="main" sx={{ height: "100vh" }}>
+        <Grid container component="main" sx={{ height: '100vh' }}>
           <CssBaseline />
           <Grid
             item
@@ -52,14 +60,14 @@ export default function SignInSide() {
             md={7}
             sx={{
               backgroundImage:
-                "url(https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070)",
-              backgroundRepeat: "no-repeat",
+                'url(https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070)',
+              backgroundRepeat: 'no-repeat',
               backgroundColor: (t) =>
-                t.palette.mode === "light"
+                t.palette.mode === 'light'
                   ? t.palette.grey[50]
                   : t.palette.grey[900],
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
             }}
           />
           <Grid
@@ -71,25 +79,12 @@ export default function SignInSide() {
             elevation={6}
             square
           >
-            <Box
-              sx={{
-                my: 8,
-                mx: 4,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
+            <FormBox id="signin-formbox">
               <LogoIcon />
               <Typography component="h1" variant="h5">
                 로그인
               </Typography>
-              <Box
-                component="form"
-                noValidate
-                onSubmit={handleSubmit}
-                sx={{ mt: 1 }}
-              >
+              <Box component="form" noValidate onSubmit={handleSubmit}>
                 <TextField
                   margin="normal"
                   required
@@ -114,42 +109,42 @@ export default function SignInSide() {
                   control={<Checkbox value="remember" color="primary" />}
                   label="로그인 정보 유지하기"
                 />
-                <Button
-                  id="login_button"
+                <LoadingButton
                   type="submit"
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
+                  id="login_button"
+                  loading={loading}
                 >
                   로그인
-                </Button>
+                </LoadingButton>
               </Box>
-              <Box component="form" noValidate sx={{ mt: 1 }}>
+              <Box component="form" noValidate>
                 <Button
-                  id="sns_login_button"
+                  className="sns_login_button"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 1 }}
                   href={GOOGLE_OAUTH_URI}
                 >
                   구글아이디로 로그인/회원가입
                 </Button>
-              </Box>
-              <Box component="form" noValidate sx={{ mt: 1 }}>
-              <Button
-                  id="sns_login_button"
+                <Button
+                  className="sns_login_button"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 1 }}
                   href={KAKAO_AUTH_URL}
-              >
-                카카오아이디로 로그인
-              </Button>
-            </Box>
-            </Box>
+                >
+                  카카오아이디로 로그인
+                </Button>
+              </Box>
+              <Box component="form" noValidate></Box>
+            </FormBox>
           </Grid>
         </Grid>
       </ThemeProvider>
     </SignInDiv>
   );
-}
+});
+
+export default SignInSide;
