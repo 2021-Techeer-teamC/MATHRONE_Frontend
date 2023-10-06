@@ -19,8 +19,9 @@ import './style.css';
 const theme = createTheme();
 
 const Main = observer(() => {
-  const { userStore } = useStore();
+  const { userStore, workbookStore } = useStore();
   const { account } = userStore;
+  const { getTriedWorkbook } = workbookStore;
   // 화면 크기
   // const size = {
   //   width: window.innerWidth || document.body.clientWidth,
@@ -33,6 +34,10 @@ const Main = observer(() => {
   // useEffect(() => {
   //   snsLoginService.signInWithGoogle(code);
   // },[code]);
+
+  useEffect(() => {
+    getTriedWorkbook();
+  });
 
   return (
     <ThemeProvider theme={theme}>
