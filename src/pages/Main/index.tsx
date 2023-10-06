@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store';
 import { CssBaseline, Container, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../../components/Header';
@@ -16,8 +18,10 @@ import './style.css';
 
 const theme = createTheme();
 
-export default function Main() {
-  //화면 크기
+const Main = observer(() => {
+  const { userStore } = useStore();
+  const { account } = userStore;
+  // 화면 크기
   // const size = {
   //   width: window.innerWidth || document.body.clientWidth,
   //   height: window.innerHeight || document.body.clientHeight,
@@ -30,8 +34,6 @@ export default function Main() {
   //   snsLoginService.signInWithGoogle(code);
   // },[code]);
 
-  //시도 중인 문제집
-
   return (
     <ThemeProvider theme={theme}>
       <Header />
@@ -43,11 +45,19 @@ export default function Main() {
             <MainCarousel posts={addData} />
           </div>
           <div className="try-carousel">
-            <Subtitle>시도 중인 문제집</Subtitle>
+            <Subtitle>
+              {account.id
+                ? '시도 중인 문제집'
+                : '유저들이 가장 많이 시도한 문제집'}
+            </Subtitle>
             <WorkbookSlider id="try-workbook" posts={itemData} />
           </div>
           <div className="star-carousel">
-            <Subtitle>즐겨찾는 문제집</Subtitle>
+            <Subtitle>
+              {account.id
+                ? '즐겨찾기 문제집'
+                : '유저들이 가장 많이 즐겨찾는 문제집'}
+            </Subtitle>
             <WorkbookSlider id="star-workbook" posts={itemData} />
           </div>
           <div className="most-try-prob">
@@ -64,7 +74,9 @@ export default function Main() {
       />
     </ThemeProvider>
   );
-}
+});
+
+export default Main;
 
 const addData = [
   {
