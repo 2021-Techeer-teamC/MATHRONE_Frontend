@@ -1,20 +1,18 @@
-import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { CssBaseline, Container, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
 import Footer from '../../components/Footer';
 import WorkbookSlider from '../../components/WorkbookSlider/index.js';
 import ProblemList from '../../components/ProblemList';
 import MainCarousel from './components/MainCarousel';
-import './style.css';
-import { useEffect } from 'react';
+import { Subtitle } from '../../components/Typography';
 import qs from 'qs';
 import snsLoginService from '../../services/snsLoginService';
-import { useParams } from 'react-router-dom';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import './style.css';
 
 const theme = createTheme();
 
@@ -45,34 +43,11 @@ export default function Main() {
             <MainCarousel posts={addData} />
           </div>
           <div className="try-carousel">
-            <Typography
-              component="h2"
-              variant="h5"
-              color="inherit"
-              align="left"
-              noWrap
-              sx={{ flex: 1 }}
-              fontFamily="NotoSans-Bold"
-              padding="5px"
-            >
-              {'시도 중인 문제집'}
-            </Typography>
+            <Subtitle>시도 중인 문제집</Subtitle>
             <WorkbookSlider posts={itemData} />
           </div>
           <div className="star-carousel">
-            <Typography
-              component="h2"
-              variant="h5"
-              color="inherit"
-              align="left"
-              noWrap
-              sx={{ flex: 1 }}
-              fontFamily="NotoSans-Bold"
-              padding="5px"
-            >
-              {'즐겨 찾기'}
-            </Typography>
-
+            <Subtitle>시도 중인 문제집</Subtitle>
             <WorkbookSlider posts={itemData} />
           </div>
           <div className="most-try-prob">
@@ -261,92 +236,40 @@ const starData = [
 
 const tryData = [
   {
-    problem_id: '01-01-00001',
-    problem_num: '2',
-    workbook_title: '수능완성',
-    level: 1,
-    subject: '미적분',
-    chapter: '수열의 극한',
+    problemId: '04-01-00001',
+    problemNum: 1,
+    chapterId: '01',
+    workbookId: '04',
+    levelOfDiff: 2,
+    iscorrect: true,
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
   },
   {
-    problem_id: '01-01-00002',
-    problem_num: '4',
-    workbook_title: '수능완성',
-    level: 3,
-    subject: '미적분',
-    chapter: '수열의 극한',
+    problemId: '04-01-00001',
+    problemNum: 2,
+    chapterId: '01',
+    workbookId: '04',
+    levelOfDiff: 2,
+    iscorrect: true,
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
   },
   {
-    problem_id: '01-01-00003',
-    problem_num: '5',
-    workbook_title: '수능완성',
-    level: 2,
-    subject: '미적분',
-    chapter: '수열의 극한',
+    problemId: '04-01-00001',
+    problemNum: 3,
+    chapterId: '01',
+    workbookId: '04',
+    levelOfDiff: 2,
+    iscorrect: true,
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
   },
   {
-    problem_id: '01-01-00004',
-    problem_num: '12',
-    workbook_title: '모의고사',
-    level: 2,
-    subject: '미적분',
-    chapter: '수열의 극한',
-  },
-  {
-    problem_id: '01-01-00005',
-    problem_num: '34',
-    workbook_title: '모의고사',
-    level: 3,
-    subject: '미적분',
-    chapter: '수열의 극한',
-  },
-  {
-    problem_id: '01-01-00006',
-    problem_num: '22',
-    workbook_title: '수능완성',
-    level: 2,
-    subject: '미적분',
-    chapter: '수열의 극한',
-  },
-  {
-    problem_id: '01-01-00007',
-    problem_num: '1',
-    workbook_title: '수능완성',
-    level: 1,
-    subject: '미적분',
-    chapter: '수열의 극한',
-  },
-  {
-    problem_id: '01-01-00008',
-    problem_num: '29',
-    workbook_title: '수능완성',
-    level: 1,
-    subject: '미적분',
-    chapter: '수열의 극한',
-  },
-  {
-    problem_id: '01-01-00009',
-    problem_num: '13',
-    workbook_title: '수능완성',
-    level: 3,
-    subject: '수학I',
-    chapter: '삼각함수',
-  },
-  {
-    problem_id: '01-01-00010',
-    problem_num: '18',
-    workbook_title: '수능완성',
-    level: 2,
-    subject: '미적분',
-    chapter: '적분법',
-  },
-  {
-    problem_id: '01-01-00011',
-    problem_num: '20',
-    workbook_title: '수능완성',
-    level: 3,
-    subject: '미적분',
-    chapter: '미분',
+    problemId: '04-01-00001',
+    problemNum: 4,
+    chapterId: '01',
+    workbookId: '04',
+    levelOfDiff: 2,
+    iscorrect: true,
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
   },
 ];
 
