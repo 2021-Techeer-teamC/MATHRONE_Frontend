@@ -6,6 +6,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Pencil from '../../assets/image/pencil.png';
 import { workbookItem } from '../../types/workbookItem';
 import { WorkbookSliderData, WorkbookSliderNoneData } from './style.js';
+import Workbook from '../../components/Workbook';
 
 type WorkbookSliderProps = {
   id: string;
@@ -93,22 +94,7 @@ const WorkbookSlider = ({ id, workbooks }: WorkbookSliderProps) => {
             <ArrowBackIosNewIcon />
           </IconButton>
           {filteredWorkbooks?.map((item) => (
-            <div className="workbook-item-div">
-              <img
-                className="workbook-thumbnail"
-                alt="workbook-thumbnail"
-                src={item.thumbnail}
-              />
-              <Rating
-                className="workbook-star"
-                max={1}
-                size="large"
-                defaultValue={item.star ? 1 : 0}
-              />
-              <div className="workbook-thumbnail-overlay">
-                <div className="workbook-title">{item.title}</div>
-              </div>
-            </div>
+            <Workbook workbook={item} type="workbook-slider" />
           ))}
           <IconButton
             aria-label="arrow"
