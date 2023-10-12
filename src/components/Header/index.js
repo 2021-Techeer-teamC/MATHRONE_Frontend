@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Box, Grid, Button } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -15,14 +15,13 @@ import { HeaderBox } from './style';
 const Header = observer(() => {
   const navigate = useNavigate();
   const { userStore } = useStore();
-  const { account, submitLogout } = userStore;
+  const { account, submitLogout, getProfile } = userStore;
   const [thirdParty, setThirdParty] = useState(
     localStorage.getItem('thirdParty'),
   );
   const [loading, setLoading] = useState(false);
 
   const onLogoutClick = () => {
-    console.log('log out clicked');
     setLoading(true);
     submitLogout().then(() => {
       if (thirdParty === 'kakao') {
@@ -33,6 +32,10 @@ const Header = observer(() => {
       navigate('/signin');
     });
   };
+
+  useEffect(() => {
+    getProfile();
+  }, [getProfile]);
 
   return (
     <HeaderBox>
