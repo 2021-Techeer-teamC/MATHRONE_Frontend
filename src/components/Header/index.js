@@ -22,6 +22,7 @@ const Header = observer(() => {
   const [loading, setLoading] = useState(false);
 
   const onLogoutClick = () => {
+    console.log('log out clicked');
     setLoading(true);
     submitLogout().then(() => {
       if (thirdParty === 'kakao') {

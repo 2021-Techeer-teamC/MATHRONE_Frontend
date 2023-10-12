@@ -39,7 +39,8 @@ const Main = observer(() => {
   useEffect(() => {
     getTriedWorkbook();
     getStarWorkbook();
-  }, [getTriedWorkbook, getStarWorkbook, account]);
+    // console.log(account);
+  }, [getTriedWorkbook, getStarWorkbook]);
 
   return (
     <ThemeProvider theme={theme}>

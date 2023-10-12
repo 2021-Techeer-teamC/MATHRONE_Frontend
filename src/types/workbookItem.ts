@@ -4,7 +4,7 @@ export interface workbookItem {
   thumbnail: string;
   publisher: string;
   level: string;
-  star: number;
+  star: boolean;
 }
 
 export interface workbookCountItem {

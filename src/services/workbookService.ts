@@ -37,6 +37,18 @@ class WorkbookService {
       `${process.env.REACT_APP_IP}/workbook/star`,
     );
   }
+
+  starWorkbook(workbookId: string) {
+    return axios.post(
+      `${process.env.REACT_APP_IP}/workbook/star/${workbookId}`,
+    );
+  }
+
+  unStarWorkbook(workbookId: string) {
+    return axios.delete(
+      `${process.env.REACT_APP_IP}/workbook/star/${workbookId}`,
+    );
+  }
 }
 
 export default new WorkbookService();

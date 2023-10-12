@@ -3,24 +3,6 @@ import workbookService from '../../services/workbookService';
 import { workbookItem } from '../../types/workbookItem';
 
 class WorkbookStore {
-  //   account: profileItem = {
-  //     userId: -1, // ex) userId: 17
-  //     id: '', // ex) accountId: tester
-  //     password: '',
-  //     profileImg: '',
-  //     exp: 0,
-  //     premium: false,
-  //     email: '',
-  //     phoneNum: null,
-  //     userImg: null,
-  //     role: null,
-  //     rankInfo: {
-  //       rank: null,
-  //       score: null,
-  //       trycnt: null,
-  //     },
-  //   };
-
   triedWorkbooks: workbookItem[] | null = null;
 
   starWorkbooks: workbookItem[] | null = null;
@@ -49,6 +31,30 @@ class WorkbookStore {
         runInAction(() => {
           this.starWorkbooks = res.data;
         });
+      });
+      return true;
+    } catch (error) {
+      console.error('Error: ', error);
+      return error;
+    }
+  };
+
+  starWorkbook = async (workbookId: string) => {
+    try {
+      workbookService.starWorkbook(workbookId).then((res) => {
+        console.log(res);
+      });
+      return true;
+    } catch (error) {
+      console.error('Error: ', error);
+      return error;
+    }
+  };
+
+  unStarWorkbook = async (workbookId: string) => {
+    try {
+      workbookService.unStarWorkbook(workbookId).then((res) => {
+        console.log(res);
       });
       return true;
     } catch (error) {
