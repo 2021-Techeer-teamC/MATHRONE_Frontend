@@ -1,5 +1,5 @@
 export default interface answersList{
-    answer: boolean;
+    myAnswer: number;
     problemId: string;
-    solution: number;
+    correctAnswer: number;
 }

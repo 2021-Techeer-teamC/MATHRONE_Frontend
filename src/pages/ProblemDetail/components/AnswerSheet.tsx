@@ -27,7 +27,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
   const [inputs, setInputs] = React.useState(
     ([] = temp.map((probData: problems) => ({
       problemId: probData.problemId,
-      solution: "a",
+      myAnswer: "a",
     })))
   );
 
@@ -35,7 +35,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
     setInputs(
       inputs.map((answer) =>
         answer.problemId === prob_num
-          ? { ...answer, solution: value }
+          ? { ...answer, myAnswer: value }
           : answer
       )
     );
@@ -97,7 +97,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   <TableCell colSpan={5} align="center" padding="none">
                     <TextField
                       sx={{ pt: "0px" }}
-                      value={inputs[probData.problemNum - 1].solution}
+                      value={inputs[probData.problemNum - 1].myAnswer}
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
                       }
@@ -122,7 +122,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].solution) === 1
+                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 1
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
@@ -135,7 +135,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].solution) === 2
+                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 2
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
@@ -148,7 +148,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].solution) === 3
+                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 3
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
@@ -161,7 +161,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].solution) === 4
+                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 4
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
@@ -174,7 +174,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].solution) === 5
+                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 5
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
