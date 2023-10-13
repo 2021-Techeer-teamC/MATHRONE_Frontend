@@ -17,57 +17,25 @@ const WorkbookSlider = ({ id, workbooks }: WorkbookSliderProps) => {
   const [firstIdx, setFirstIdx] = useState<number>(0);
   //defalut로 보여질 갯수 + 1개
   const [lastIdx, setLastIdx] = useState<number>(
-    Number((window.innerWidth - 200) / 280),
+    Math.floor((window.innerWidth - 200) / 280),
   );
   const [filteredWorkbooks, setFilteredWorkbooks] = useState<
     workbookItem[] | null
   >([]);
-  const [btnR, setBtnR] = useState<boolean>(false);
-  const [btnL, setBtnL] = useState<boolean>(true);
 
-  const moveBackward = () => {
-    let f_idx = firstIdx;
-    let l_idx = lastIdx;
-
-    if (workbooks && l_idx + 1 <= workbooks?.length) {
-      //범위를 넘어가지 않을 때만
-      f_idx += 1;
-      l_idx += 1;
-      setBtnL(false);
-    } else {
-      setBtnR(true);
-    }
-    setFirstIdx(f_idx);
-    setLastIdx(l_idx);
-    const selectedworkbooks = workbooks?.slice(firstIdx, lastIdx) || null;
-    setFilteredWorkbooks(selectedworkbooks);
-  };
-
-  const moveForward = () => {
-    let f_idx = firstIdx;
-    let l_idx = lastIdx;
-
-    if (f_idx - 1 >= 0) {
-      f_idx -= 1;
-      l_idx -= 1;
-      setBtnR(false);
-    } else {
-      setBtnL(true);
-    }
-    setFirstIdx(f_idx);
-    setLastIdx(l_idx);
-    const tmp = workbooks?.slice(firstIdx, lastIdx) || null;
-    setFilteredWorkbooks(tmp);
-  };
+  const [disableBtnF, setDisableBtnF] = useState<boolean>(true);
+  const [disableBtnB, setDisableBtnB] = useState<boolean>(false);
 
   useEffect(() => {
-    const workbookItems = workbooks?.slice(firstIdx, lastIdx) || null;
+    const workbookItems = workbooks?.slice(firstIdx, lastIdx) || [];
     setFilteredWorkbooks(workbookItems);
+    if (firstIdx === 0) setDisableBtnF(true);
+    if (workbooks && lastIdx + 1 > workbooks.length) setDisableBtnB(true);
   }, [workbooks, firstIdx, lastIdx]);
 
   useEffect(() => {
     const resize = () => {
-      let value = Number(firstIdx + (window.innerWidth - 200) / 280);
+      let value = Math.floor(firstIdx + (window.innerWidth - 200) / 280);
       if (value <= 4 && value >= 1) {
         //최대 범위
         setLastIdx(value);
@@ -81,6 +49,29 @@ const WorkbookSlider = ({ id, workbooks }: WorkbookSliderProps) => {
     };
   });
 
+  const moveForward = () => {
+    if (firstIdx - 1 >= 0) {
+      setFirstIdx(firstIdx - 1);
+      setLastIdx(lastIdx - 1);
+      setDisableBtnB(false);
+    } else {
+      setDisableBtnF(true);
+    }
+    setFilteredWorkbooks(workbooks?.slice(firstIdx, lastIdx) || []);
+  };
+
+  const moveBackward = () => {
+    if (workbooks && lastIdx + 1 <= workbooks?.length) {
+      //범위를 넘어가지 않을 때만
+      setFirstIdx(firstIdx + 1);
+      setLastIdx(lastIdx + 1);
+      setDisableBtnF(false);
+    } else {
+      setDisableBtnB(true);
+    }
+    setFilteredWorkbooks(workbooks?.slice(firstIdx, lastIdx) || []);
+  };
+
   return (
     <>
       {workbooks?.length ? (
@@ -89,7 +80,7 @@ const WorkbookSlider = ({ id, workbooks }: WorkbookSliderProps) => {
             aria-label="arrow"
             size="large"
             onClick={moveForward}
-            disabled={btnL}
+            disabled={disableBtnF}
           >
             <ArrowBackIosNewIcon />
           </IconButton>
@@ -100,7 +91,7 @@ const WorkbookSlider = ({ id, workbooks }: WorkbookSliderProps) => {
             aria-label="arrow"
             size="large"
             onClick={moveBackward}
-            disabled={btnR}
+            disabled={disableBtnB}
           >
             <ArrowForwardIosIcon />
           </IconButton>
