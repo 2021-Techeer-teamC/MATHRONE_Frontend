@@ -1,6 +1,6 @@
-import Rating from '@mui/material/Rating';
-import { useStore } from '../../store';
+import { useNavigate } from 'react-router-dom';
 import { workbookItem } from '../../types/workbookItem';
+import StarButton from '../Button/StarButton';
 import { WorkbookDiv } from './style.js';
 
 type WorkbookProps = {
@@ -9,12 +9,10 @@ type WorkbookProps = {
 };
 
 const Workbook = ({ workbook, type }: WorkbookProps) => {
-  const { workbookStore } = useStore();
-  const { starWorkbook, unStarWorkbook } = workbookStore;
+  const navigate = useNavigate();
 
-  const handleStarClick = (workbookId: string, star: boolean) => {
-    if (!star) starWorkbook(workbookId);
-    else unStarWorkbook(workbookId);
+  const handleWorkbookClick = () => {
+    navigate(`/workbook/${workbook.workbookId}`);
   };
 
   return (
@@ -24,14 +22,8 @@ const Workbook = ({ workbook, type }: WorkbookProps) => {
         alt="workbook-thumbnail"
         src={workbook.thumbnail}
       />
-      <Rating
-        className="workbook-star"
-        max={1}
-        size="large"
-        defaultValue={workbook.star ? 1 : 0}
-        onClick={() => handleStarClick(workbook.workbookId, workbook.star)}
-      />
-      <div className="workbook-thumbnail-overlay">
+      <StarButton workbookId={workbook.workbookId} star={workbook.star} />
+      <div className="workbook-thumbnail-overlay" onClick={handleWorkbookClick}>
         <div className="workbook-title">{workbook.title}</div>
       </div>
     </WorkbookDiv>
