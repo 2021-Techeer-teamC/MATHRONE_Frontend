@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, Typography } from '@mui/material';
 import { workbookItem } from '../../../types/workbookItem';
+import StarButton from '../../../components/Button/StarButton';
 
 //props로 전달받은 값들
 type BookListProps = {
@@ -15,12 +16,16 @@ const WorkbookImgList = ({ workbookList }: BookListProps) => {
       {workbookList?.map((item) => (
         <Grid item md={4} className="workbook-item">
           <Link to={`/workbook/${item.workbookId}`}>
-            <img
-              className="workbook-img"
-              src={item.thumbnail}
-              alt={item.title}
-              loading="lazy"
-            />
+            <div className="workbook-img-div">
+              <img
+                className="workbook-img"
+                src={item.thumbnail}
+                alt={item.title}
+                loading="lazy"
+              />
+              {item.star}
+              <StarButton workbookId={item.workbookId} star={item.star} />
+            </div>
             <div className="workbook-desc">
               <div className="workbook-title-div">
                 <Typography

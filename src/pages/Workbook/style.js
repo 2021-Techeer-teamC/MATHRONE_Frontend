@@ -46,6 +46,17 @@ export const WorkbookListContainer = styled(Grid)(
       margin-bottom: 8px !important;
     }
 
+    .workbook-img-div {
+      position: relative;
+      .workbook-star {
+        position: absolute !important;
+        bottom: 30px;
+        right: 60px;
+        // transform: translate(530%, 800%);
+        z-index: 3;
+      }
+    }
+
     .workbook-img {
       width: 80%;
       height: 80%;
