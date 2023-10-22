@@ -12,11 +12,10 @@ export default function Oauth2KakaoRedirect(props: { sections: any }) {
 
     // Ouathcode
     let code = new URL(window.location.href).searchParams.get("code");
-    const [access,setAccess] = useState<string>('');
+
     // @ts-ignore
     useEffect(async () => {
 
-        console.log(code)
 
        // try {
             await snsLoginService.signInWithKakao(code)
@@ -25,9 +24,7 @@ export default function Oauth2KakaoRedirect(props: { sections: any }) {
 
                     localStorage.setItem("accessToken", res.data.accessToken);
                     localStorage.setItem("accountId", res.data.userInfo.accountId);
-                    setAccess(res.data.accessToken);
                     localStorage.setItem("snsAccessToken", res.data.snsInfo.accessToken);
-
                     localStorage.setItem("thirdParty","kakao"); //로그아웃이나 정보 요청시 필요
 
 
@@ -55,9 +52,8 @@ export default function Oauth2KakaoRedirect(props: { sections: any }) {
 
     return (
         <Box sx={{ display: 'flex' }}>
-    <CircularProgress />
-            <h1>{access}</h1>
-    </Box>
+            <CircularProgress />
+        </Box>
 );
 
 };
