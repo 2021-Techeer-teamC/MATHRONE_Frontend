@@ -44,27 +44,7 @@ export default function SignInSide() {
   const handleKakaoSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // try {
-    //   const res = await snsLoginService.signInRequestKakao();
-    //
-    //   console.log(JSON.stringify(res));
-
     window.location.href = `${process.env.REACT_APP_IP}/user/kakao/login-request`;
-
-    //   localStorage.setItem("accessToken", res.data.accessToken);
-    //   localStorage.setItem("userId", res.data.userInfo.userId);
-    //   localStorage.setItem("accountId", res.data.userInfo.accountId);
-    //
-    //   return res;
-    // } catch (error:any) {
-    //   if(error.response) {
-    //     console.log(error.response.headers.location);
-    //   }
-    //   console.log("error");
-    // }
-
-
-
   };
 
   return (

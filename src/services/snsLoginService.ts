@@ -23,7 +23,33 @@ class snsLoginService {
 
   //엑세스 토큰을 만료시키는 로그아웃 방식 -> 채택하지 않았음
   signOutWithKakao() {
-    return axios.post('https://kapi.kakao.com/v1/user/logout');
+    return axios.post(
+        `${process.env.REACT_APP_IP}/user/kakao/logout`,
+        {
+          headers: {
+            Authorization: localStorage.getItem('accessToken')
+          },
+        },
+    );
   }
+
+  signInRequestKakao(){
+    return axios.get(`${process.env.REACT_APP_IP}/user/kakao/login-request`)
+  }
+
+  signOutRequestKakao(){
+    return axios.post(`${process.env.REACT_APP_IP}/user/kakao/logout`,
+        {
+          headers: {
+            Authorization: localStorage.getItem('accessToken')
+          },
+        }
+
+        );
+  }
+
+
+
+
 }
 export default new snsLoginService();
