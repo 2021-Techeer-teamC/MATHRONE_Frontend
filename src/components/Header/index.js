@@ -10,6 +10,7 @@ import './style.js';
 import snsLoginService from '../../services/snsLoginService';
 import { KAKAO_LOGOUT_URL } from '../../pages/Oauth/OauthData';
 import { HeaderBox } from './style';
+import userService from "../../services/userService";
 
 function Header() {
   const [loginStatus, setLoginStatus] = useState(
@@ -19,17 +20,45 @@ function Header() {
     localStorage.getItem('thirdParty'),
   );
 
-  const onLogoutClick = () => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('thirdParty');
-    localStorage.removeItem('snsAccessToken');
+  const onLogoutClick = async () => {
+    // localStorage.removeItem('accessToken');
+    // localStorage.removeItem('userId');
+    // localStorage.removeItem('thirdParty');
+    // localStorage.removeItem('snsAccessToken');
 
     setLoginStatus(false);
 
     if (thirdParty === 'kakao') {
-      window.location.href = KAKAO_LOGOUT_URL; //카카오 로그아웃
+
+      try {
+
+        //console.log(localStorage.getItem("accessToken"))
+
+        snsLoginService.signOutWithKakao()
+            .then(res => {
+
+              window.location.href = `${process.env.REACT_APP_IP}/user/kakao/logout-request`; //카카오 로그아웃
+
+
+              localStorage.removeItem('accessToken');
+              localStorage.removeItem('userId');
+              localStorage.removeItem('thirdParty');
+              localStorage.removeItem('snsAccessToken');
+
+            })
+
+        //window.location.href = `${process.env.REACT_APP_IP}/user/kakao/logout-request`; //카카오 로그아웃
+
+
+      } catch (error) {
+        console.log("error");
+      }
+
     }
+
+
+
+
   };
 
   return (
