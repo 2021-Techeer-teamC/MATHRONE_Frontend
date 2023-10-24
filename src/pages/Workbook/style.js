@@ -113,6 +113,11 @@ export const SidebarList = styled(List)(
     margin-right: 16px;
     margin-top: 40px;
 
+    .MuiListItemIcon-root {
+      margin-left: 0px !important;
+      color: red;
+    }
+
     .subWorkbook-button {
       padding-left: 32px;
     }

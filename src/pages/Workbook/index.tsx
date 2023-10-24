@@ -10,7 +10,7 @@ import {
 import Header from '../../components/Header/index.js';
 import NavBar from '../../components/NavBar/index.js';
 import Footer from '../../components/Footer/index.js';
-import WorkbookSidebar from './components/WorkbookSidebar';
+import CategorySidebar from './components/CategorySidebar';
 import SearchBar from './components/SearchBar';
 import WorkbookImgList from './components/WorkbookImgList';
 import workbookService from '../../services/workbookService';
@@ -84,7 +84,7 @@ export default function WorkBook() {
       </Grid>
       <WorkbookListContainer container spacing={3}>
         <Grid item md={2} sx={{ mr: 4 }}>
-          <WorkbookSidebar
+          <CategorySidebar
             onMenuClick={selectMenuClick}
             workbookListSummary={workbookListSummary || []}
           />

@@ -10,8 +10,8 @@ import {
 import {
   MenuBook,
   AutoStories,
-  ExpandLess,
-  ExpandMore,
+  // ExpandLess,
+  // ExpandMore,
 } from '@mui/icons-material';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { SidebarList } from '../style';
@@ -22,7 +22,7 @@ interface SidebarProps {
   workbookListSummary: workbookSidebarItem[];
 }
 
-export default function WorkbookSidebar({
+export default function CategorySidebar({
   onMenuClick,
   workbookListSummary,
 }: SidebarProps) {
@@ -37,8 +37,8 @@ export default function WorkbookSidebar({
     _idx: number,
     publisher: string,
   ) => {
-    const newOpenArray = open.map((o, idx) => (idx === _idx ? !o : o));
-    setOpen(newOpenArray);
+    // const newOpenArray = open.map((o, idx) => (idx === _idx ? !o : o));
+    // setOpen(newOpenArray);
     onMenuClick(publisher, 'all');
   };
 
@@ -76,7 +76,7 @@ export default function WorkbookSidebar({
                 <MenuBookIcon />
               </ListItemIcon>
               <ListItemText primary={group.publisher} />
-              {open[group.id] ? <ExpandLess /> : <ExpandMore />}
+              {/* {open[group.id] ? <ExpandLess /> : <ExpandMore />} */}
             </ListItemButton>
             <Divider />
             <Collapse
