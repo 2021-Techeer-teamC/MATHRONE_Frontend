@@ -92,7 +92,11 @@ export default function WorkBook() {
         <Grid item md={9} container>
           <Grid item md={12} className="workbook-sort-div">
             <span className="count-span">
-              {`${workbookFilter.publisher} (${workbookCount || 0})`}
+              {`${
+                workbookFilter.publisher === 'all'
+                  ? '전체'
+                  : workbookFilter.publisher
+              } (${workbookCount || 0})`}
             </span>
             <FormControl className="sortType-form">
               <NativeSelect
