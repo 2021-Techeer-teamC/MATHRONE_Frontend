@@ -15,19 +15,20 @@ const WorkbookImgList = ({ workbookList }: BookListProps) => {
     <Grid container spacing={2} className="workbook-img-list-div">
       {workbookList?.map((item) => (
         <Grid item md={4} className="workbook-item">
-          <Link to={`/workbook/${item.workbookId}`}>
-            <div className="workbook-img-div">
+          <div className="workbook-img-div">
+            <Link to={`/workbook/${item.workbookId}`}>
               <img
                 className="workbook-img"
                 src={item.thumbnail}
                 alt={item.title}
                 loading="lazy"
               />
-              {item.star}
-              <StarButton workbookId={item.workbookId} star={item.star} />
-            </div>
-            <div className="workbook-desc">
-              <div className="workbook-title-div">
+            </Link>
+            <StarButton workbookId={item.workbookId} star={item.star} />
+          </div>
+          <div className="workbook-desc">
+            <div className="workbook-title-div">
+              <Link to={`/workbook/${item.workbookId}`}>
                 <Typography
                   className="workbook-title"
                   variant="subtitle1"
@@ -35,17 +36,17 @@ const WorkbookImgList = ({ workbookList }: BookListProps) => {
                 >
                   {item.title}
                 </Typography>
-              </div>
-              <Typography
-                className="workbook-publisher"
-                variant="caption"
-                display="block"
-                gutterBottom
-              >
-                [{item.publisher}]
-              </Typography>
+              </Link>
             </div>
-          </Link>
+            <Typography
+              className="workbook-publisher"
+              variant="caption"
+              display="block"
+              gutterBottom
+            >
+              [{item.publisher}]
+            </Typography>
+          </div>
         </Grid>
       ))}
     </Grid>
