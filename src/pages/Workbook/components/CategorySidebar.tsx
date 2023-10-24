@@ -52,14 +52,11 @@ export default function CategorySidebar({
 
   return (
     <SidebarList aria-labelledby="nested-list-subheader">
-      <ListItemButton
-        onClick={(e) => handlePublisherClick(e, -1, 'all')}
-        className="sidebar-menu"
-      >
+      <ListItemButton onClick={(e) => handlePublisherClick(e, -1, 'all')}>
         <ListItemIcon>
           <MenuBook />
         </ListItemIcon>
-        <ListItemText primary="전체" />
+        <ListItemText primary="전체" className="parent-category" />
       </ListItemButton>
       <Divider />
       {workbookListSummary?.map((group) => {
@@ -70,12 +67,14 @@ export default function CategorySidebar({
               onClick={(e) =>
                 handlePublisherClick(e, group.id, group.publisher)
               }
-              className="sidebar-menu"
             >
               <ListItemIcon>
                 <MenuBookIcon />
               </ListItemIcon>
-              <ListItemText primary={group.publisher} />
+              <ListItemText
+                primary={group.publisher}
+                className="parent-category"
+              />
               {/* {open[group.id] ? <ExpandLess /> : <ExpandMore />} */}
             </ListItemButton>
             <Divider />

@@ -83,7 +83,7 @@ export default function WorkBook() {
         <SearchBar />
       </Grid>
       <WorkbookListContainer container spacing={3}>
-        <Grid item md={2} sx={{ mr: 4 }}>
+        <Grid item md={2} sx={{ mr: 2 }}>
           <CategorySidebar
             onMenuClick={selectMenuClick}
             workbookListSummary={workbookListSummary || []}
@@ -110,7 +110,7 @@ export default function WorkBook() {
           </Grid>
           <Grid item md={12}>
             <div>
-              <Paper className="workbook-img-list-paper">
+              <Paper className="workbook-img-list-paper" elevation={16}>
                 {loading ? (
                   <CircularProgress />
                 ) : (
