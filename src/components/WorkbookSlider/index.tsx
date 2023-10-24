@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
-import Rating from '@mui/material/Rating';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import Pencil from '../../assets/image/pencil.png';
