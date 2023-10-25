@@ -21,6 +21,7 @@ class snsLoginService {
     );
   }
 
+
   //엑세스 토큰을 만료시키는 로그아웃 방식 -> 채택하지 않았음
   signOutWithKakao() {
     return axios.post(
@@ -31,6 +32,17 @@ class snsLoginService {
           },
         },
     );
+  }
+
+  signOutWithGoogle(){
+      return axios.post(
+          `${process.env.REACT_APP_IP}/user/google/logout`,
+          {
+              headers: {
+                  Authorization: localStorage.getItem('accessToken')
+              },
+          },
+      );
   }
 
   signInRequestKakao(){

@@ -8,9 +8,7 @@ import { CgProfile } from 'react-icons/cg';
 import '../../assets/styles/components.css';
 import './style.js';
 import snsLoginService from '../../services/snsLoginService';
-import { KAKAO_LOGOUT_URL } from '../../pages/Oauth/OauthData';
 import { HeaderBox } from './style';
-import userService from "../../services/userService";
 
 function Header() {
   const [loginStatus, setLoginStatus] = useState(
@@ -54,6 +52,35 @@ function Header() {
         console.log("error");
       }
 
+    }else if(thirdParty === 'google'){
+        try {
+
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('userId');
+            localStorage.removeItem('thirdParty');
+            localStorage.removeItem('snsAccessToken');
+
+            //console.log(localStorage.getItem("accessToken"))
+
+            snsLoginService.signOutWithGoogle()
+                .then(res => {
+
+                    window.location.href = `${process.env.REACT_APP_IP}/user/google/logout-request`; //카카오 로그아웃
+
+
+                    localStorage.removeItem('accessToken');
+                    localStorage.removeItem('userId');
+                    localStorage.removeItem('thirdParty');
+                    localStorage.removeItem('snsAccessToken');
+
+                })
+
+            //window.location.href = `${process.env.REACT_APP_IP}/user/kakao/logout-request`; //카카오 로그아웃
+
+
+        } catch (error) {
+            console.log("error");
+        }
     }
 
 

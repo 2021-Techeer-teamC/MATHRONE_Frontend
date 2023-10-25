@@ -11,7 +11,6 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SignInDiv } from "./style";
 import userService from "../../services/userService";
-import {GOOGLE_OAUTH_URI, KAKAO_AUTH_URL} from "../Oauth/OauthData";
 import snsLoginService from "../../services/snsLoginService";
 
 const theme = createTheme();
@@ -45,6 +44,13 @@ export default function SignInSide() {
     event.preventDefault();
 
     window.location.href = `${process.env.REACT_APP_IP}/user/kakao/login-request`;
+  };
+
+
+  const handleGoogleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    window.location.href = `${process.env.REACT_APP_IP}/user/google/login-request`;
   };
 
   return (
@@ -131,13 +137,13 @@ export default function SignInSide() {
                   로그인
                 </Button>
               </Box>
-              <Box component="form" noValidate sx={{ mt: 1 }}>
+              <Box component="form" noValidate sx={{ mt: 1 }} onSubmit={handleGoogleSignIn}>
                 <Button
                   id="sns_login_button"
+                  type="submit"
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 1 }}
-                  href={GOOGLE_OAUTH_URI}
                 >
                   구글아이디로 로그인/회원가입
                 </Button>
