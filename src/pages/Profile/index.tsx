@@ -18,14 +18,16 @@ const theme = createTheme();
 const ProfilePage = observer(() => {
   const { userStore, workbookStore, problemStore } = useStore();
   const { account, getProfile } = userStore;
-  const { triedWorkbooks, getTriedWorkbook } = workbookStore;
+  const { triedWorkbooks, starWorkbooks, getStarWorkbook, getTriedWorkbook } =
+    workbookStore;
   const { getTriedProblems, triedProblems } = problemStore;
 
   useEffect(() => {
     getProfile();
     getTriedWorkbook();
+    getStarWorkbook();
     getTriedProblems(false, 3);
-  }, [getProfile, getTriedWorkbook, getTriedProblems]);
+  }, [getProfile, getTriedWorkbook, getTriedProblems, getStarWorkbook]);
 
   const handleUpgradeClick = () => {
     alert('click upgrade button');
@@ -35,7 +37,7 @@ const ProfilePage = observer(() => {
     <ThemeProvider theme={theme}>
       <Header />
       <NavBar />
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Paper elevation={3} className="profile-paper">
           <Grid container spacing={2}>
             <Grid item xs={6} md={5} className="profile-img-grid">
@@ -70,9 +72,13 @@ const ProfilePage = observer(() => {
             </Grid>
           </Grid>
           <hr className="horizontal-divider" />
-          <div className="profile-try-problem-div">
+          <div>
             <Subtitle>시도 중인 문제집</Subtitle>
             <WorkbookSlider id="try-workbook" workbooks={triedWorkbooks} />
+          </div>
+          <div>
+            <Subtitle>즐겨찾기 문제집</Subtitle>
+            <WorkbookSlider id="star-workbook" workbooks={starWorkbooks} />
           </div>
         </Paper>
       </Container>
