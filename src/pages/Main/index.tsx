@@ -68,7 +68,7 @@ const Main = observer(() => {
             <WorkbookSlider id="star-workbook" workbooks={starWorkbooks} />
           </div>
           <div className="most-try-prob">
-            <ProblemList data={tryData} title={'오늘 가장 많이 시도한 문제'} />
+            <ProblemList data={[]} title={'오늘 가장 많이 시도한 문제'} />
           </div>
           <div className="recommend-prob">
             <ProblemList data={recData} title={'추천 문제'} />
