@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Box, Grid } from '@mui/material/';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import Logo from '../Logo/index.tsx';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Box, Grid, Button } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 import { CgProfile } from 'react-icons/cg';
 import '../../assets/styles/components.css';
-import './style.js';
+import Logo from '../Logo/index.tsx';
 import snsLoginService from '../../services/snsLoginService';
+import userService from '../../services/userService';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store';
 import { HeaderBox } from './style';
 
-function Header() {
-  const [loginStatus, setLoginStatus] = useState(
-    localStorage.getItem('accessToken') ? true : false,
-  );
+const Header = observer(() => {
+  const navigate = useNavigate();
+  const { userStore } = useStore();
+  const { account, submitLogout } = userStore;
   const [thirdParty, setThirdParty] = useState(
     localStorage.getItem('thirdParty'),
   );
+  const [loading, setLoading] = useState(false);
 
   const onLogoutClick = async () => {
     // localStorage.removeItem('accessToken');
@@ -24,77 +26,57 @@ function Header() {
     // localStorage.removeItem('thirdParty');
     // localStorage.removeItem('snsAccessToken');
 
-    setLoginStatus(false);
+    // setLoginStatus(false);
 
     if (thirdParty === 'kakao') {
-
       try {
+        //console.log(localStorage.getItem("accessToken"))
+
+        snsLoginService.signOutWithKakao().then((res) => {
+          window.location.href = `${process.env.REACT_APP_IP}/user/kakao/logout-request`; //카카오 로그아웃
+
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('userId');
+          localStorage.removeItem('thirdParty');
+          localStorage.removeItem('snsAccessToken');
+        });
+
+        //window.location.href = `${process.env.REACT_APP_IP}/user/kakao/logout-request`; //카카오 로그아웃
+      } catch (error) {
+        console.log('error');
+      }
+    } else if (thirdParty === 'google') {
+      try {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('thirdParty');
+        localStorage.removeItem('snsAccessToken');
 
         //console.log(localStorage.getItem("accessToken"))
 
-        snsLoginService.signOutWithKakao()
-            .then(res => {
+        snsLoginService.signOutWithGoogle().then((res) => {
+          window.location.href = `${process.env.REACT_APP_IP}/user/google/logout-request`; //카카오 로그아웃
 
-              window.location.href = `${process.env.REACT_APP_IP}/user/kakao/logout-request`; //카카오 로그아웃
-
-
-              localStorage.removeItem('accessToken');
-              localStorage.removeItem('userId');
-              localStorage.removeItem('thirdParty');
-              localStorage.removeItem('snsAccessToken');
-
-            })
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('userId');
+          localStorage.removeItem('thirdParty');
+          localStorage.removeItem('snsAccessToken');
+        });
 
         //window.location.href = `${process.env.REACT_APP_IP}/user/kakao/logout-request`; //카카오 로그아웃
-
-
       } catch (error) {
-        console.log("error");
+        console.log('error');
       }
-
-    }else if(thirdParty === 'google'){
-        try {
-
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('userId');
-            localStorage.removeItem('thirdParty');
-            localStorage.removeItem('snsAccessToken');
-
-            //console.log(localStorage.getItem("accessToken"))
-
-            snsLoginService.signOutWithGoogle()
-                .then(res => {
-
-                    window.location.href = `${process.env.REACT_APP_IP}/user/google/logout-request`; //카카오 로그아웃
-
-
-                    localStorage.removeItem('accessToken');
-                    localStorage.removeItem('userId');
-                    localStorage.removeItem('thirdParty');
-                    localStorage.removeItem('snsAccessToken');
-
-                })
-
-            //window.location.href = `${process.env.REACT_APP_IP}/user/kakao/logout-request`; //카카오 로그아웃
-
-
-        } catch (error) {
-            console.log("error");
-        }
     }
-
-
-
-
   };
 
   return (
-    <HeaderBox sx={{ flexGrow: 1 }}>
+    <HeaderBox>
       <div className="header header-box">
         <Logo />
-        <Box sx={{ flexGrow: 1 }} />
+        <Box id="dummy-box" />
         <Box sx={{ display: { xs: 'flex' } }}>
-          {!loginStatus ? (
+          {!account.id ? (
             <Grid container spacing={1}>
               <Grid item xs={6} md={7}>
                 <Link to="/signup" className="header-link">
@@ -110,23 +92,15 @@ function Header() {
           ) : (
             <Grid container spacing={1}>
               <Grid item xs={6} md={5}>
-                <Link to="/profile" style={{ textDecoration: 'none' }}>
-                  <CgProfile
-                    style={{
-                      fontSize: '36px',
-                      color: '#009688',
-                      margin: 'auto',
-                    }}
-                  />
+                <Link to="/profile" className="header-link">
+                  <CgProfile id="profile-icon" />
                 </Link>
               </Grid>
               <Grid item xs={6} md={7}>
-                <Link
-                  to="/"
-                  style={{ textDecoration: 'none' }}
-                  onClick={onLogoutClick}
-                >
-                  <Button id="login-button">로그아웃</Button>
+                <Link to="/" className="header-link" onClick={onLogoutClick}>
+                  <LoadingButton id="login-button" loading={loading}>
+                    로그아웃
+                  </LoadingButton>
                 </Link>
               </Grid>
             </Grid>
@@ -135,6 +109,6 @@ function Header() {
       </div>
     </HeaderBox>
   );
-}
+});
 
 export default Header;

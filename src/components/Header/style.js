@@ -3,6 +3,11 @@ import { Box, styled } from '@mui/material';
 export const HeaderBox = styled(Box)(
   () => `
   width: 100%;
+  flex-grow: 1;
+
+  #dummy-box {
+    flex-grow: 1;
+  }
   
   .header {
     background-color: none;
@@ -36,6 +41,12 @@ export const HeaderBox = styled(Box)(
   
   .header-link {
     text-decoration: none;
+  }
+
+  #profile-icon {
+    font-size: 36px;
+    color: #009688;
+    margin: auto;
   }
   
   #register-button {

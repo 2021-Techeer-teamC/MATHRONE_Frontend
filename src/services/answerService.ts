@@ -3,8 +3,8 @@ import axios from '../utils/axios';
 
 class gradingService {
   postAnswer(answer: any) {
-    return axios.put<answersList>(
-      `${process.env.REACT_APP_IP}/answer/problem`, // api 주소
+    return axios.post<answersList>(
+      `${process.env.REACT_APP_IP}/answer`, // api 주소
       answer,
     );
   }

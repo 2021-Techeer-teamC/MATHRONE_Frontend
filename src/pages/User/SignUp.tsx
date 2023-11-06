@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Button,
   CssBaseline,
@@ -8,48 +8,39 @@ import {
   Box,
   Typography,
   Container,
-} from "@mui/material/";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Logo from "../../components/Logo";
-import { SignUpDiv } from "./style";
-import userService from "../../services/userService";
+} from '@mui/material/';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import userService from '../../services/userService';
+import Logo from '../../components/Logo';
+import { useStore } from '../../store';
+import { SignUpDiv, FormBox } from './style';
 
 export default function SignUP() {
+  const { userStore } = useStore();
+  const { submitSignUp } = userStore;
+  const theme = createTheme();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const user_data: any = new FormData(event.currentTarget);
-
     try {
-      const res = await userService.signUp(
-        user_data.get("accountId"),
-        user_data.get("email"),
-        user_data.get("password")
+      await submitSignUp(
+        user_data.get('accountId'),
+        user_data.get('email'),
+        user_data.get('password'),
       );
-
-      console.log(JSON.stringify(res));
-
-      window.location.href = "/signin";
-
-      return res;
+      window.location.href = '/signin';
     } catch (error) {
-      console.log("error");
+      console.log('error');
     }
   };
-  const theme = createTheme();
 
   return (
     <SignUpDiv>
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
-          <Box
-            sx={{
-              marginTop: 8,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
+          <FormBox>
             <Logo />
             <Typography component="h1" variant="h5">
               회원가입
@@ -58,7 +49,7 @@ export default function SignUP() {
               component="form"
               noValidate
               onSubmit={handleSubmit}
-              sx={{ mt: 3 }}
+              className="signup-box"
             >
               <FormControl component="fieldset" variant="standard">
                 <Grid container spacing={2}>
@@ -100,14 +91,23 @@ export default function SignUP() {
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
                   size="large"
                 >
                   회원가입
                 </Button>
               </FormControl>
             </Box>
-          </Box>
+            <Box component="form" noValidate>
+              <Button
+                className="sns_login_button"
+                fullWidth
+                variant="contained"
+                // href={GOOGLE_OAUTH_URI}
+              >
+                구글아이디로 로그인/회원가입
+              </Button>
+            </Box>
+          </FormBox>
         </Container>
       </ThemeProvider>
     </SignUpDiv>

@@ -1,22 +1,30 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store';
+import { Typography, Paper, Button, Grid, Container } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
 import Logo from '../../components/Logo';
-import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar/index.js';
 import Footer from '../../components/Footer/index.js';
 import WorkbookSlider from '../../components/WorkbookSlider';
 import ProblemList from '../../components/ProblemList';
+import { Subtitle } from '../../components/Typography';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import profileService from '../../services/profileService';
 import './style.css';
 
 const theme = createTheme();
 
-export default function ProfilePage() {
-  const handleClickUpgradeButton = () => {
+const ProfilePage = observer(() => {
+  const { userStore } = useStore();
+  const { account, getProfile } = userStore;
+
+  useEffect(() => {
+    getProfile();
+  }, [getProfile]);
+
+  const handleUpgradeClick = () => {
     alert('click upgrade button');
   };
 
@@ -29,22 +37,27 @@ export default function ProfilePage() {
           <Grid container spacing={2}>
             <Grid item xs={6} md={5} className="profile-img-grid">
               <Logo />
-              {/* 이미지 없으면 */}
-              {/* <CgProfile className="profile-icon" /> */}
               <div className="profile-div">
-                <img
-                  className="profile-img"
-                  alt="profile_img"
-                  src="https://i.pinimg.com/550x/e4/08/8f/e4088ff707bfa7775a26b401fdecbe3e.jpg"
-                ></img>
+                {account.profileImg ? (
+                  <img
+                    className="profile-img"
+                    alt="profile_img"
+                    src={account.profileImg || ''}
+                  />
+                ) : (
+                  <AccountCircleIcon className="profile-icon" />
+                )}
               </div>
               <Typography className="profile-info-text">
-                서연주 / h01010@email.com / ranking 07
+                {`${account.id} / ${account.email}`}
+              </Typography>
+              <Typography className="profile-info-text">
+                {`순위: ${account.rankInfo.rank || '[없음]'}`}
               </Typography>
               <Button
                 className="subscription_button"
                 variant="contained"
-                onClick={handleClickUpgradeButton}
+                onClick={handleUpgradeClick}
               >
                 Premium Upgrade
               </Button>
@@ -53,12 +66,9 @@ export default function ProfilePage() {
               <ProblemList data={tryData} title={'시도한 문제'} />
             </Grid>
           </Grid>
-
           <hr className="horizontal-divider" />
           <div className="profile-try-problem-div">
-            <Typography className="profile-try-text">
-              최근에 푼 문제집
-            </Typography>
+            <Subtitle>시도 중인 문제집</Subtitle>
             <WorkbookSlider posts={itemData} />
           </div>
         </Paper>
@@ -69,7 +79,9 @@ export default function ProfilePage() {
       />
     </ThemeProvider>
   );
-}
+});
+
+export default ProfilePage;
 
 const itemData = [
   {
@@ -100,27 +112,30 @@ const itemData = [
 
 const tryData = [
   {
-    problem_id: '01-01-00001',
-    problem_num: '2',
-    workbook_title: '수능완성',
-    level: 1,
-    subject: '미적분',
-    chapter: '수열의 극한',
+    problemId: '04-01-00001',
+    problemNum: 1,
+    chapterId: '01',
+    workbookId: '04',
+    levelOfDiff: 2,
+    iscorrect: true,
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
   },
   {
-    problem_id: '01-01-00002',
-    problem_num: '4',
-    workbook_title: '수능완성',
-    level: 3,
-    subject: '미적분',
-    chapter: '수열의 극한',
+    problemId: '04-01-00001',
+    problemNum: 1,
+    chapterId: '01',
+    workbookId: '04',
+    levelOfDiff: 2,
+    iscorrect: true,
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
   },
   {
-    problem_id: '01-01-00003',
-    problem_num: '5',
-    workbook_title: '수능완성',
-    level: 2,
-    subject: '미적분',
-    chapter: '수열의 극한',
+    problemId: '04-01-00001',
+    problemNum: 1,
+    chapterId: '01',
+    workbookId: '04',
+    levelOfDiff: 2,
+    iscorrect: true,
+    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
   },
 ];
