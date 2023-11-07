@@ -1,18 +1,18 @@
-import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Radio from "@mui/material/Radio";
-import { Box, TextField } from "@mui/material";
-import { MenuItem, ControlledMenu } from "@szhsin/react-menu";
-import "@szhsin/react-menu/dist/index.css";
-import "@szhsin/react-menu/dist/transitions/slide.css";
-import grading from "../../../services/answerService";
-import { useNavigate } from "react-router-dom";
-import problems from "../../../types/problems";
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Radio from '@mui/material/Radio';
+import { Box, TextField } from '@mui/material';
+import { MenuItem, ControlledMenu } from '@szhsin/react-menu';
+import '@szhsin/react-menu/dist/index.css';
+import '@szhsin/react-menu/dist/transitions/slide.css';
+import grading from '../../../services/answerService';
+import { useNavigate } from 'react-router-dom';
+import problems from '../../../types/problems';
 
 interface myAnswerData {
   answerSubmitList: problems[];
@@ -27,28 +27,26 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
   const [inputs, setInputs] = React.useState(
     ([] = temp.map((probData: problems) => ({
       problemId: probData.problemId,
-      solution: "a",
-    })))
+      myAnswer: 'a',
+    }))),
   );
 
   const onChange = (value: string, prob_num: string) => {
     setInputs(
       inputs.map((answer) =>
-        answer.problemId === prob_num
-          ? { ...answer, solution: value }
-          : answer
-      )
+        answer.problemId === prob_num ? { ...answer, myAnswer: value } : answer,
+      ),
     );
   };
 
-  const submitAnswer = async(inputs: any, isAll:Boolean) => {
+  const submitAnswer = async (inputs: any, isAll: Boolean) => {
     const postData: myAnswerData = {
       answerSubmitList: inputs,
       isAll: isAll,
     }; //console.log(postData);
     try {
       const res = await grading.postAnswer(postData);
-      navigator("/result", { state: { answerData: res.data } });
+      navigator('/result', { state: { answerData: res.data } });
     } catch (error) {
       console.log(error);
     }
@@ -56,7 +54,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
   };
 
   return (
-    <Box ml={2} sx={{ width: "100%", overflow: "hidden" }}>
+    <Box ml={2} sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 600 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -91,13 +89,13 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                     align="center"
                     padding="none"
                   >
-                    {" "}
-                    {probData.problemNum}{" "}
+                    {' '}
+                    {probData.problemNum}{' '}
                   </TableCell>
                   <TableCell colSpan={5} align="center" padding="none">
                     <TextField
-                      sx={{ pt: "0px" }}
-                      value={inputs[probData.problemNum - 1].solution}
+                      sx={{ pt: '0px' }}
+                      value={inputs[probData.problemNum - 1].myAnswer}
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
                       }
@@ -116,72 +114,72 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                     align="center"
                     padding="none"
                   >
-                    {" "}
-                    {probData.problemNum}{" "}
+                    {' '}
+                    {probData.problemNum}{' '}
                   </TableCell>
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].solution) === 1
+                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 1
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
                       }
                       value={1}
                       name="radio-buttons"
-                      inputProps={{ "aria-label": "1" }}
+                      inputProps={{ 'aria-label': '1' }}
                     />
                   </TableCell>
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].solution) === 2
+                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 2
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
                       }
                       value={2}
                       name="radio-buttons"
-                      inputProps={{ "aria-label": "2" }}
+                      inputProps={{ 'aria-label': '2' }}
                     />
                   </TableCell>
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].solution) === 3
+                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 3
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
                       }
                       value={3}
                       name="radio-buttons"
-                      inputProps={{ "aria-label": "3" }}
+                      inputProps={{ 'aria-label': '3' }}
                     />
                   </TableCell>
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].solution) === 4
+                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 4
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
                       }
                       value={4}
                       name="radio-buttons"
-                      inputProps={{ "aria-label": "4" }}
+                      inputProps={{ 'aria-label': '4' }}
                     />
                   </TableCell>
                   <TableCell align="center" padding="none">
                     <Radio
                       checked={
-                        parseInt(inputs[probData.problemNum - 1].solution) === 5
+                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 5
                       }
                       onChange={(e) =>
                         onChange(e.target.value, probData.problemId)
                       }
                       value={5}
                       name="radio-buttons"
-                      inputProps={{ "aria-label": "5" }}
+                      inputProps={{ 'aria-label': '5' }}
                     />
                   </TableCell>
                 </TableRow>
@@ -192,13 +190,13 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
       </TableContainer>
       <div
         style={{
-          width: "100%",
-          marginTop: "10px",
+          width: '100%',
+          marginTop: '10px',
           borderRadius: 10,
-          backgroundColor: "#dfdfdf",
-          padding: "9px 18px",
-          fontSize: "16px",
-          color: "black",
+          backgroundColor: '#dfdfdf',
+          padding: '9px 18px',
+          fontSize: '16px',
+          color: 'black',
         }}
         ref={ref}
         className="btn"
@@ -207,28 +205,28 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
         Sumbit
       </div>
       <ControlledMenu
-        state={isOpen ? "open" : "closed"}
+        state={isOpen ? 'open' : 'closed'}
         anchorRef={ref}
         onMouseLeave={() => setOpen(false)}
         onClose={() => setOpen(false)}
-        direction={"top"}
-        align={"center"}
+        direction={'top'}
+        align={'center'}
       >
         <MenuItem
           onClick={() => {
             submitAnswer(inputs, false);
           }}
         >
-          {" "}
-          푼 것만 채점{" "}
+          {' '}
+          푼 것만 채점{' '}
         </MenuItem>
         <MenuItem
           onClick={() => {
             submitAnswer(inputs, true);
           }}
         >
-          {" "}
-          전부 다 채점{" "}
+          {' '}
+          전부 다 채점{' '}
         </MenuItem>
       </ControlledMenu>
     </Box>
