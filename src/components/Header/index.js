@@ -7,7 +7,6 @@ import '../../assets/styles/components.css';
 import Logo from '../Logo/index.tsx';
 import snsLoginService from '../../services/snsLoginService';
 import userService from '../../services/userService';
-import { KAKAO_LOGOUT_URL } from '../../pages/Oauth/OauthData';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store';
 import { HeaderBox } from './style';
@@ -21,16 +20,54 @@ const Header = observer(() => {
   );
   const [loading, setLoading] = useState(false);
 
-  const onLogoutClick = () => {
-    setLoading(true);
-    submitLogout().then(() => {
-      if (thirdParty === 'kakao') {
-        // kakao logout api call
-        window.location.href = KAKAO_LOGOUT_URL; //카카오 로그아웃
+  const onLogoutClick = async () => {
+    // localStorage.removeItem('accessToken');
+    // localStorage.removeItem('userId');
+    // localStorage.removeItem('thirdParty');
+    // localStorage.removeItem('snsAccessToken');
+
+    // setLoginStatus(false);
+
+    if (thirdParty === 'kakao') {
+      try {
+        //console.log(localStorage.getItem("accessToken"))
+
+        snsLoginService.signOutWithKakao().then((res) => {
+          window.location.href = `${process.env.REACT_APP_IP}/user/kakao/logout-request`; //카카오 로그아웃
+
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('userId');
+          localStorage.removeItem('thirdParty');
+          localStorage.removeItem('snsAccessToken');
+        });
+
+        //window.location.href = `${process.env.REACT_APP_IP}/user/kakao/logout-request`; //카카오 로그아웃
+      } catch (error) {
+        console.log('error');
       }
-      setLoading(false);
-      navigate('/signin');
-    });
+    } else if (thirdParty === 'google') {
+      try {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('userId');
+        localStorage.removeItem('thirdParty');
+        localStorage.removeItem('snsAccessToken');
+
+        //console.log(localStorage.getItem("accessToken"))
+
+        snsLoginService.signOutWithGoogle().then((res) => {
+          window.location.href = `${process.env.REACT_APP_IP}/user/google/logout-request`; //카카오 로그아웃
+
+          localStorage.removeItem('accessToken');
+          localStorage.removeItem('userId');
+          localStorage.removeItem('thirdParty');
+          localStorage.removeItem('snsAccessToken');
+        });
+
+        //window.location.href = `${process.env.REACT_APP_IP}/user/kakao/logout-request`; //카카오 로그아웃
+      } catch (error) {
+        console.log('error');
+      }
+    }
   };
 
   return (

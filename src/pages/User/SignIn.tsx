@@ -1,6 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useStore } from '../../store';
+import { observer } from 'mobx-react-lite';
 import LogoIcon from '../../components/Logo';
+import userService from '../../services/userService';
+import snsLoginService from '../../services/snsLoginService';
 import {
   Button,
   CssBaseline,
@@ -14,9 +18,6 @@ import {
 } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useStore } from '../../store';
-import { observer } from 'mobx-react-lite';
-import { GOOGLE_OAUTH_URI, KAKAO_AUTH_URL } from '../Oauth/OauthData';
 import { SignInDiv, FormBox } from './style';
 
 const theme = createTheme();
@@ -46,6 +47,20 @@ const SignInSide = observer(() => {
       console.log('error');
       setLoading(false);
     }
+  };
+
+  const handleKakaoSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    window.location.href = `${process.env.REACT_APP_IP}/user/kakao/login-request`;
+  };
+
+  const handleGoogleSignIn = async (
+    event: React.FormEvent<HTMLFormElement>,
+  ) => {
+    event.preventDefault();
+
+    window.location.href = `${process.env.REACT_APP_IP}/user/google/login-request`;
   };
 
   return (
@@ -120,25 +135,38 @@ const SignInSide = observer(() => {
                   로그인
                 </LoadingButton>
               </Box>
-              <Box component="form" noValidate>
+              <Box
+                component="form"
+                noValidate
+                sx={{ mt: 1 }}
+                onSubmit={handleGoogleSignIn}
+              >
                 <Button
-                  className="sns_login_button"
+                  id="sns_login_button"
+                  type="submit"
                   fullWidth
                   variant="contained"
-                  href={GOOGLE_OAUTH_URI}
+                  sx={{ mt: 3, mb: 1 }}
                 >
                   구글아이디로 로그인/회원가입
                 </Button>
+              </Box>
+              <Box
+                component="form"
+                noValidate
+                sx={{ mt: 1 }}
+                onSubmit={handleKakaoSignIn}
+              >
                 <Button
-                  className="sns_login_button"
+                  id="sns_login_button"
+                  type="submit"
                   fullWidth
                   variant="contained"
-                  href={KAKAO_AUTH_URL}
+                  sx={{ mt: 3, mb: 1 }}
                 >
                   카카오아이디로 로그인
                 </Button>
               </Box>
-              <Box component="form" noValidate></Box>
             </FormBox>
           </Grid>
         </Grid>

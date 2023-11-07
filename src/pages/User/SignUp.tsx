@@ -10,9 +10,9 @@ import {
   Container,
 } from '@mui/material/';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import userService from '../../services/userService';
 import Logo from '../../components/Logo';
 import { useStore } from '../../store';
-import { GOOGLE_OAUTH_URI } from '../Oauth/OauthData';
 import { SignUpDiv, FormBox } from './style';
 
 export default function SignUP() {
@@ -102,7 +102,7 @@ export default function SignUP() {
                 className="sns_login_button"
                 fullWidth
                 variant="contained"
-                href={GOOGLE_OAUTH_URI}
+                // href={GOOGLE_OAUTH_URI}
               >
                 구글아이디로 로그인/회원가입
               </Button>
