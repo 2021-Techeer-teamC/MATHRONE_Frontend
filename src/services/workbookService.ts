@@ -1,8 +1,11 @@
-import { workbookItem, workbookSidebarItem } from '../types/workbookItem';
+import {
+  workbookItem,
+  workbookSidebarItem,
+  workbookDetail,
+} from '../types/workbookItem';
 import axios from '../utils/axios';
 
 class WorkbookService {
-  //1. 출판사를 보내면 출판사 별 문제집을 반환
   getWorkbookList(
     publisher: string,
     sortType: string,
@@ -23,6 +26,12 @@ class WorkbookService {
   getWorkbookListSummary() {
     return axios.get<workbookSidebarItem[]>(
       `${process.env.REACT_APP_IP}/workbook/summary`,
+    );
+  }
+
+  getCurrentWorkbookDetail(workbookId: string) {
+    return axios.get<workbookDetail>(
+      `${process.env.REACT_APP_IP}/workbook/?id=${workbookId}`,
     );
   }
 

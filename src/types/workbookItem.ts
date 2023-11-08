@@ -7,6 +7,32 @@ export interface workbookItem {
   star: boolean;
 }
 
+export interface workbookDetail extends workbookItem {
+  summary: string;
+  category: string;
+  content: string;
+  type: string;
+  year: number;
+  month: number;
+  chapterGroup: [
+    {
+      group: string;
+      chapters: [
+        {
+          id: number;
+          name: string;
+        },
+      ];
+    },
+  ];
+  tags: [
+    {
+      id: number;
+      name: string;
+    },
+  ];
+}
+
 export interface workbookCountItem {
   publisher: string;
   category: string;

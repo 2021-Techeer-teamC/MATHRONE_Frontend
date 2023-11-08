@@ -1,8 +1,10 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import workbookService from '../../services/workbookService';
-import { workbookItem } from '../../types/workbookItem';
+import { workbookItem, workbookDetail } from '../../types/workbookItem';
 
 class WorkbookStore {
+  currentWorkbook: workbookDetail | null = null;
+
   triedWorkbooks: workbookItem[] | null = null;
 
   starWorkbooks: workbookItem[] | null = null;
@@ -10,6 +12,19 @@ class WorkbookStore {
   constructor() {
     makeAutoObservable(this);
   }
+
+  getCurrentWorkbook = async (workbookId: string) => {
+    try {
+      workbookService.getCurrentWorkbookDetail(workbookId).then((res) => {
+        runInAction(() => {
+          this.currentWorkbook = res.data;
+        });
+      });
+    } catch (error) {
+      console.error('Error: ', error);
+      return error;
+    }
+  };
 
   getTriedWorkbook = async () => {
     try {
