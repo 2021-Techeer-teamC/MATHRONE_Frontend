@@ -16,9 +16,9 @@ class WorkbookStore {
 
   currentWorkbook: workbookDetail | null = null;
 
-  triedWorkbooks: workbookItem[] | null = [];
+  triedWorkbooks: workbookItem[] = [];
 
-  starWorkbooks: workbookItem[] | null = [];
+  starWorkbooks: workbookItem[] = [];
 
   constructor() {
     makeAutoObservable(this);
