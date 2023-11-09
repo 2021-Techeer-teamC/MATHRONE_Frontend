@@ -9,9 +9,7 @@ import {
 } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store';
-import Header from '../../components/Header/index.js';
-import NavBar from '../../components/NavBar/index.js';
-import Footer from '../../components/Footer/index.js';
+import NavigationLayout from '../../components/layout/NavigationLayout';
 import CategorySidebar from './components/CategorySidebar';
 import SearchBar from './components/SearchBar';
 import WorkbookImgList from './components/WorkbookImgList';
@@ -27,7 +25,6 @@ const WorkbookList = observer(() => {
     categories,
     getWorkbookCategories,
   } = workbookStore;
-
   const [workbookFilter, setWorkbookFilter] = useState<workbookFilter>({
     publisher: 'all',
     sortType: 'star',
@@ -71,67 +68,66 @@ const WorkbookList = observer(() => {
 
   return (
     <div>
-      <Header />
-      <NavBar />
-      <Grid>
-        <SearchBar />
-      </Grid>
-      <WorkbookListContainer container spacing={3}>
-        <Grid item md={2} sx={{ mr: 2 }}>
-          <CategorySidebar
-            onCategoryClick={handleCategoryChange}
-            categories={categories}
-          />
-        </Grid>
-        <Grid item md={9} container>
-          <Grid item md={12} className="workbook-sort-div">
-            <span className="count-span">
-              {`${
-                workbookFilter.publisher === 'all'
-                  ? '전체'
-                  : workbookFilter.publisher
-              } (${workbookListTotalCount})`}
-            </span>
-            <FormControl className="sortType-form">
-              <NativeSelect
-                defaultValue={'star'}
-                inputProps={{
-                  name: 'category',
-                  id: 'uncontrolled-native',
-                }}
-                onChange={handleFilterChange}
-              >
-                <option value={'star'}>인기순</option>
-                <option value={'level'}>난이도순</option>
-              </NativeSelect>
-            </FormControl>
-          </Grid>
-          <Grid item md={12}>
-            <div>
-              <Paper className="workbook-img-list-paper" elevation={16}>
-                {loading ? (
-                  <CircularProgress />
-                ) : (
-                  <WorkbookImgList workbookList={workbookList} />
-                )}
-              </Paper>
-            </div>
-            <div className="dummy-div"></div>
-            <div className="pagination-div">
-              <Pagination
-                count={Math.ceil(workbookListTotalCount / 9)}
-                defaultPage={1}
-                page={workbookFilter.pageNum}
-                onChange={handlePageChange}
-              />
-            </div>
-          </Grid>
-        </Grid>
-      </WorkbookListContainer>
-
-      <Footer
-        title="Footer"
-        description="Something here to give the footer a purpose!"
+      <NavigationLayout
+        children={
+          <div>
+            <Grid>
+              <SearchBar />
+            </Grid>
+            <WorkbookListContainer container spacing={3}>
+              <Grid item md={2} sx={{ mr: 2 }}>
+                <CategorySidebar
+                  onCategoryClick={handleCategoryChange}
+                  categories={categories}
+                />
+              </Grid>
+              <Grid item md={9} container>
+                <Grid item md={12} className="workbook-sort-div">
+                  <span className="count-span">
+                    {`${
+                      workbookFilter.publisher === 'all'
+                        ? '전체'
+                        : workbookFilter.publisher
+                    } (${workbookListTotalCount})`}
+                  </span>
+                  <FormControl className="sortType-form">
+                    <NativeSelect
+                      defaultValue={'star'}
+                      inputProps={{
+                        name: 'category',
+                        id: 'uncontrolled-native',
+                      }}
+                      onChange={handleFilterChange}
+                    >
+                      <option value={'star'}>인기순</option>
+                      <option value={'level'}>난이도순</option>
+                    </NativeSelect>
+                  </FormControl>
+                </Grid>
+                <Grid item md={12}>
+                  <div>
+                    <Paper className="workbook-img-list-paper" elevation={16}>
+                      {loading ? (
+                        <CircularProgress />
+                      ) : (
+                        <WorkbookImgList workbookList={workbookList} />
+                      )}
+                    </Paper>
+                  </div>
+                  <div className="dummy-div"></div>
+                  <div className="pagination-div">
+                    <Pagination
+                      count={Math.ceil(workbookListTotalCount / 9)}
+                      defaultPage={1}
+                      page={workbookFilter.pageNum}
+                      onChange={handlePageChange}
+                    />
+                  </div>
+                </Grid>
+              </Grid>
+            </WorkbookListContainer>
+          </div>
+        }
       />
     </div>
   );
