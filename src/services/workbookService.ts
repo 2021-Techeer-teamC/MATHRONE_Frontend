@@ -1,6 +1,6 @@
 import {
   workbookItem,
-  workbookSidebarItem,
+  workbookCategoryItem,
   workbookDetail,
 } from '../types/workbookItem';
 import axios from '../utils/axios';
@@ -24,7 +24,7 @@ class WorkbookService {
   }
 
   getWorkbookListSummary() {
-    return axios.get<workbookSidebarItem[]>(
+    return axios.get<workbookCategoryItem[]>(
       `${process.env.REACT_APP_IP}/workbook/summary`,
     );
   }

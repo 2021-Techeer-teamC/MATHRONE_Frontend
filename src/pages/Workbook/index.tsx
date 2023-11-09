@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Grid,
   Paper,
@@ -7,63 +7,46 @@ import {
   Pagination,
   CircularProgress,
 } from '@mui/material';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store';
 import Header from '../../components/Header/index.js';
 import NavBar from '../../components/NavBar/index.js';
 import Footer from '../../components/Footer/index.js';
 import CategorySidebar from './components/CategorySidebar';
 import SearchBar from './components/SearchBar';
 import WorkbookImgList from './components/WorkbookImgList';
-import workbookService from '../../services/workbookService';
-import {
-  workbookSidebarItem,
-  workbookItem,
-  workbookListItem,
-} from '../../types/workbookItem';
+import { workbookFilter } from '../../types/workbookItem';
 import { WorkbookListContainer } from './style';
 
-export default function WorkBook() {
-  //파라미터 (sortType/publisher/pageNum)
-  //분류(book nav bar에서의 분류) 선택
-  const [workbookFilter, setWorkbookFilter] = useState<workbookListItem>({
+const WorkbookList = observer(() => {
+  const { workbookStore } = useStore();
+  const {
+    workbookList,
+    getWorkbookList,
+    workbookListTotalCount,
+    categories,
+    getWorkbookCategories,
+  } = workbookStore;
+
+  const [workbookFilter, setWorkbookFilter] = useState<workbookFilter>({
     publisher: 'all',
     sortType: 'star',
     category: 'all',
     pageNum: 1,
   });
-  const [loading, setLoading] = useState<boolean>(true);
-  const [workbookList, setWorkbookList] = useState<workbookItem[]>();
-  const [workbookCount, setWorkbookCount] = useState<number>();
-  const [workbookListSummary, setWorkbookListSummary] =
-    useState<workbookSidebarItem[]>();
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const handleChangeWorkbookFilter = (newValue: object) => {
+  const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    changeWorkbookFilter({ sortType: event.target.value });
+  };
+
+  const changeWorkbookFilter = (newValue: object) => {
     const newFilter = { ...workbookFilter, ...newValue };
     setWorkbookFilter(newFilter);
   };
 
-  useMemo(async () => {
-    const { publisher, category, sortType, pageNum } = workbookFilter;
-    setLoading(true);
-    workbookService
-      .getWorkbookList(publisher, sortType, category, pageNum)
-      .then((res) => {
-        setWorkbookList(res.data);
-        setLoading(false);
-      });
-    workbookService
-      .getWorkbookCount(publisher, category)
-      .then((res) => setWorkbookCount(res.data));
-    workbookService
-      .getWorkbookListSummary()
-      .then((res) => setWorkbookListSummary(res.data));
-  }, [workbookFilter]);
-
-  const selectSort = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    handleChangeWorkbookFilter({ sortType: event.target.value });
-  };
-
-  const selectMenuClick = (publisher: string, category: string) => {
-    handleChangeWorkbookFilter({
+  const handleCategoryChange = (publisher: string, category: string) => {
+    changeWorkbookFilter({
       publisher: publisher,
       category: category,
       pageNum: 1,
@@ -71,9 +54,20 @@ export default function WorkBook() {
     return;
   };
 
-  const selectPage = (event: React.ChangeEvent<unknown>, page: number) => {
-    handleChangeWorkbookFilter({ pageNum: page });
+  const handlePageChange = (
+    _event: React.ChangeEvent<unknown>,
+    page: number,
+  ) => {
+    changeWorkbookFilter({ pageNum: page });
   };
+
+  useEffect(() => {
+    setLoading(true);
+    getWorkbookList(workbookFilter).then(() => {
+      setLoading(false);
+    });
+    getWorkbookCategories();
+  }, [workbookFilter, getWorkbookList, getWorkbookCategories]);
 
   return (
     <div>
@@ -85,8 +79,8 @@ export default function WorkBook() {
       <WorkbookListContainer container spacing={3}>
         <Grid item md={2} sx={{ mr: 2 }}>
           <CategorySidebar
-            onMenuClick={selectMenuClick}
-            workbookListSummary={workbookListSummary || []}
+            onCategoryClick={handleCategoryChange}
+            categories={categories}
           />
         </Grid>
         <Grid item md={9} container>
@@ -96,7 +90,7 @@ export default function WorkBook() {
                 workbookFilter.publisher === 'all'
                   ? '전체'
                   : workbookFilter.publisher
-              } (${workbookCount || 0})`}
+              } (${workbookListTotalCount})`}
             </span>
             <FormControl className="sortType-form">
               <NativeSelect
@@ -105,7 +99,7 @@ export default function WorkBook() {
                   name: 'category',
                   id: 'uncontrolled-native',
                 }}
-                onChange={selectSort}
+                onChange={handleFilterChange}
               >
                 <option value={'star'}>인기순</option>
                 <option value={'level'}>난이도순</option>
@@ -118,17 +112,17 @@ export default function WorkBook() {
                 {loading ? (
                   <CircularProgress />
                 ) : (
-                  <WorkbookImgList workbookList={workbookList || []} />
+                  <WorkbookImgList workbookList={workbookList} />
                 )}
               </Paper>
             </div>
             <div className="dummy-div"></div>
             <div className="pagination-div">
               <Pagination
-                count={Math.ceil((workbookCount || 0) / 9)}
+                count={Math.ceil(workbookListTotalCount / 9)}
                 defaultPage={1}
                 page={workbookFilter.pageNum}
-                onChange={selectPage}
+                onChange={handlePageChange}
               />
             </div>
           </Grid>
@@ -141,4 +135,6 @@ export default function WorkBook() {
       />
     </div>
   );
-}
+});
+
+export default WorkbookList;

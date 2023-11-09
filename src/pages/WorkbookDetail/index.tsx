@@ -26,10 +26,17 @@ type WorkbookDetailProps = {
   name: string;
 };
 
+// type chapterGroup = {
+//   [
+//     Map<string, boolean>
+//   ]
+// };
+
 const WorkbookDetail = observer(({ name }: WorkbookDetailProps) => {
   const params = useParams();
   const { workbookStore } = useStore();
   const { getCurrentWorkbook, currentWorkbook } = workbookStore;
+  const [chapterOpen, setChapterOpen] = useState<Map<string, boolean>>();
   const [open, setOpen] = useState(true);
   const [workbookId, setWorkbookId] = useState<string>('');
   const greenProgress = green[500]; // #f44336
@@ -40,6 +47,13 @@ const WorkbookDetail = observer(({ name }: WorkbookDetailProps) => {
 
   useEffect(() => {
     getCurrentWorkbook(workbookId);
+    // TODO: chapter open map 생성
+    const chapterOpenMap = currentWorkbook?.chapterGroup.map((group) => {
+      // console.log(group);
+      let chapterOpenMap = {};
+      // chapterOpenMap[group.group] = true;
+    });
+    // setChapterOpen(chapterOpenMap);
   }, [getCurrentWorkbook, workbookId]);
 
   useEffect(() => {
@@ -64,7 +78,6 @@ const WorkbookDetail = observer(({ name }: WorkbookDetailProps) => {
             className="detail-img"
             component="img"
             sx={{ width: '250px', borderRadius: 2, boxShadow: 7 }}
-            // image="https://storage.googleapis.com/mathrone-bucket/thumbnail/sample_workbook_thumnail.png"
             image={currentWorkbook?.thumbnail}
             alt="workbook thumbnail"
           />
@@ -158,7 +171,7 @@ const WorkbookDetail = observer(({ name }: WorkbookDetailProps) => {
                     {chapterObj.chapters.map((chapter) => (
                       <ListItemButton
                         sx={{ pl: 6 }}
-                        // onClick={() => handleChapterClick('02')}
+                        onClick={() => handleChapterClick('02')}
                       >
                         <ListItemText primary={chapter.name} />
                       </ListItemButton>

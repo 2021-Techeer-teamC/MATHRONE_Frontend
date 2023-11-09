@@ -38,14 +38,14 @@ export interface workbookCountItem {
   category: string;
 }
 
-export interface workbookListItem {
+export interface workbookFilter {
   publisher: string;
   category: string;
   sortType: string;
   pageNum: number;
 }
 
-export interface workbookSidebarItem {
+export interface workbookCategoryItem {
   publisher: string;
   categories: string[];
   id: number;

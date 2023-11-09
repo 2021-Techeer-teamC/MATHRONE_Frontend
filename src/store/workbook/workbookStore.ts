@@ -1,17 +1,63 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import workbookService from '../../services/workbookService';
-import { workbookItem, workbookDetail } from '../../types/workbookItem';
+import {
+  workbookItem,
+  workbookDetail,
+  workbookFilter,
+  workbookCategoryItem,
+} from '../../types/workbookItem';
 
 class WorkbookStore {
+  workbookList: workbookItem[] = [];
+
+  workbookListTotalCount: number = 0;
+
+  categories: workbookCategoryItem[] = [];
+
   currentWorkbook: workbookDetail | null = null;
 
-  triedWorkbooks: workbookItem[] | null = null;
+  triedWorkbooks: workbookItem[] | null = [];
 
-  starWorkbooks: workbookItem[] | null = null;
+  starWorkbooks: workbookItem[] | null = [];
 
   constructor() {
     makeAutoObservable(this);
   }
+
+  getWorkbookList = async (workbookFilter: workbookFilter) => {
+    try {
+      const { publisher, category, sortType, pageNum } = workbookFilter;
+      workbookService
+        .getWorkbookList(publisher, sortType, category, pageNum)
+        .then((res) => {
+          runInAction(() => {
+            this.workbookList = res.data;
+          });
+        });
+      workbookService.getWorkbookCount(publisher, category).then((res) => {
+        runInAction(() => {
+          console.log(res.data);
+          this.workbookListTotalCount = res.data;
+        });
+      });
+    } catch (error) {
+      console.error('Error: ', error);
+      return error;
+    }
+  };
+
+  getWorkbookCategories = async () => {
+    try {
+      workbookService.getWorkbookListSummary().then((res) =>
+        runInAction(() => {
+          this.categories = res.data;
+        }),
+      );
+    } catch (error) {
+      console.error('Error: ', error);
+      return error;
+    }
+  };
 
   getCurrentWorkbook = async (workbookId: string) => {
     try {

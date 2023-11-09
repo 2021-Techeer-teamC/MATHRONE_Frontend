@@ -7,39 +7,31 @@ import {
   ListItemText,
   Collapse,
 } from '@mui/material';
-import {
-  MenuBook,
-  AutoStories,
-  // ExpandLess,
-  // ExpandMore,
-} from '@mui/icons-material';
+import { MenuBook, AutoStories } from '@mui/icons-material';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { SidebarList } from '../style';
-import { workbookSidebarItem } from '../../../types/workbookItem';
+import { workbookCategoryItem } from '../../../types/workbookItem';
 
 interface SidebarProps {
-  onMenuClick: (publisher: string, category: string) => void;
-  workbookListSummary: workbookSidebarItem[];
+  onCategoryClick: (publisher: string, category: string) => void;
+  categories: workbookCategoryItem[];
 }
 
 export default function CategorySidebar({
-  onMenuClick,
-  workbookListSummary,
+  onCategoryClick,
+  categories,
 }: SidebarProps) {
   const [open, setOpen] = useState<boolean[]>([]);
 
   useEffect(() => {
-    setOpen(new Array(workbookListSummary?.length).fill(true));
-  }, [workbookListSummary]);
+    setOpen(new Array(categories?.length).fill(true));
+  }, [categories]);
 
   const handlePublisherClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    _idx: number,
+    _event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     publisher: string,
   ) => {
-    // const newOpenArray = open.map((o, idx) => (idx === _idx ? !o : o));
-    // setOpen(newOpenArray);
-    onMenuClick(publisher, 'all');
+    onCategoryClick(publisher, 'all');
   };
 
   const handleCategoryClick = (
@@ -47,26 +39,24 @@ export default function CategorySidebar({
     publisher: string,
     category: string,
   ) => {
-    onMenuClick(publisher, category);
+    onCategoryClick(publisher, category);
   };
 
   return (
     <SidebarList aria-labelledby="nested-list-subheader">
-      <ListItemButton onClick={(e) => handlePublisherClick(e, -1, 'all')}>
+      <ListItemButton onClick={(e) => handlePublisherClick(e, 'all')}>
         <ListItemIcon>
           <MenuBook />
         </ListItemIcon>
         <ListItemText primary="전체" className="parent-category" />
       </ListItemButton>
       <Divider />
-      {workbookListSummary?.map((group) => {
+      {categories?.map((group) => {
         return (
           <>
             <ListItemButton
               key={group.id}
-              onClick={(e) =>
-                handlePublisherClick(e, group.id, group.publisher)
-              }
+              onClick={(e) => handlePublisherClick(e, group.publisher)}
             >
               <ListItemIcon>
                 <MenuBookIcon />
@@ -75,7 +65,6 @@ export default function CategorySidebar({
                 primary={group.publisher}
                 className="parent-category"
               />
-              {/* {open[group.id] ? <ExpandLess /> : <ExpandMore />} */}
             </ListItemButton>
             <Divider />
             <Collapse
