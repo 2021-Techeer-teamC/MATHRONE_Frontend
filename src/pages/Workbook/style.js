@@ -4,6 +4,10 @@ export const WorkbookListContainer = styled(Grid)(
   () => `
   padding: 40px;
 
+  .workbook-category-sidebar {
+    margin-right: 16px;
+  }
+
   .workbook-sort-div{
     margin-bottom: 30px;
     
@@ -114,7 +118,6 @@ export const WorkbookListContainer = styled(Grid)(
 export const SidebarList = styled(List)(
   () => `
     width: 100%;
-    margin-right: 16px;
     margin-top: 50px;
 
     .MuiListItemIcon-root {

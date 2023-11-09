@@ -35,7 +35,7 @@ export default function CategorySidebar({
   };
 
   const handleCategoryClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    _event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     publisher: string,
     category: string,
   ) => {

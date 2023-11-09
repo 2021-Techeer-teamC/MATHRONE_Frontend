@@ -71,11 +71,9 @@ const WorkbookList = observer(() => {
       <NavigationLayout
         children={
           <div>
-            <Grid>
-              <SearchBar />
-            </Grid>
+            <SearchBar />
             <WorkbookListContainer container spacing={3}>
-              <Grid item md={2} sx={{ mr: 2 }}>
+              <Grid item md={2} className="workbook-category-sidebar">
                 <CategorySidebar
                   onCategoryClick={handleCategoryChange}
                   categories={categories}
@@ -100,7 +98,8 @@ const WorkbookList = observer(() => {
                       onChange={handleFilterChange}
                     >
                       <option value={'star'}>인기순</option>
-                      <option value={'level'}>난이도순</option>
+                      {/* TODO: BE - 난이도순 정렬 요청 */}
+                      {/* <option value={'level'}>난이도순</option> */}
                     </NativeSelect>
                   </FormControl>
                 </Grid>
