@@ -75,10 +75,7 @@ const Main = observer(() => {
           </div>
         </main>
       </Container>
-      <Footer
-        title="Footer"
-        description="Something here to give the footer a purpose!"
-      />
+      <Footer />
     </ThemeProvider>
   );
 });

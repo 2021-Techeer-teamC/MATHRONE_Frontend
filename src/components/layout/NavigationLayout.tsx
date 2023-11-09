@@ -13,10 +13,7 @@ const NavigationLayout = ({ children }: NavigationLayoutProps) => {
       <Header />
       <NavBar />
       {children}
-      <Footer
-        title="Footer"
-        description="Something here to give the footer a purpose!"
-      />
+      <Footer />
     </div>
   );
 };

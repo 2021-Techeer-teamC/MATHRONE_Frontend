@@ -115,10 +115,7 @@ export default function Rankpage() {
             {myRank?.try_count}
           </Typography>
         </Card>
-        <Footer
-          title="Footer"
-          description="Something here to give the footer a purpose!"
-        />
+        <Footer />
       </Container>
     </div>
   );
