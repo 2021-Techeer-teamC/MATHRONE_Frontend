@@ -1,8 +1,7 @@
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store';
-import { CssBaseline, Container, Typography } from '@mui/material';
+import { CssBaseline, Container } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
@@ -12,7 +11,6 @@ import ProblemList from '../../components/ProblemList';
 import MainCarousel from './components/MainCarousel';
 import { Subtitle } from '../../components/Typography';
 import qs from 'qs';
-import snsLoginService from '../../services/snsLoginService';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import './style.css';
 
@@ -103,189 +101,6 @@ const addData = [
     img: 'https://storage.googleapis.com/mathrone-bucket/addthumb/2020.png',
     title: '수능완성',
     content: '2020학년도 수능 대비 수능완성과 함께',
-  },
-];
-
-const itemData = [
-  {
-    workbook_id: '01',
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
-    publisher: '교육청',
-    level: 1,
-    star: true,
-  },
-  {
-    workbook_id: '01',
-    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/02.jpg',
-    publisher: 'EBS',
-    level: 3,
-    star: true,
-  },
-  {
-    workbook_id: '01',
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/03.jpeg',
-    publisher: '교육청',
-    level: 1,
-    star: false,
-  },
-  {
-    workbook_id: '01',
-    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/04.jpg',
-    publisher: 'EBS',
-    level: 2,
-    star: false,
-  },
-  {
-    workbook_id: '01',
-    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/05.jpg',
-    publisher: 'EBS',
-    level: 2,
-    star: false,
-  },
-  {
-    workbook_id: '01',
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/06.jpg',
-    publisher: '평가원',
-    level: 2,
-    star: true,
-  },
-  {
-    workbook_id: '01',
-    title: '2021학년도 대학수학능력시험 문제지 수학 영역 (나형)',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/07.jpg',
-    publisher: '평가원',
-    level: 2,
-    star: false,
-  },
-  {
-    workbook_id: '01',
-    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/05.jpg',
-    publisher: 'EBS',
-    level: 3,
-    star: false,
-  },
-  {
-    workbook_id: '01',
-    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/02.jpg',
-    publisher: 'EBS',
-    level: 2,
-    star: false,
-  },
-  {
-    workbook_id: '01',
-    title: '2021학년도 대학수학능력시험 문제지 수학 영역 (나형)',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
-    publisher: '평가원',
-    level: 3,
-    star: false,
-  },
-  {
-    workbook_id: '01',
-    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/06.jpg',
-    publisher: 'EBS',
-    level: 3,
-    star: true,
-  },
-  {
-    workbook_id: '01',
-    title: '2021학년도 대학수학능력시험 문제지 수학 영역 (나형)',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/03.jpeg',
-    publisher: '평가원',
-    level: 3,
-    star: true,
-  },
-];
-
-const starData = [
-  {
-    workbook_id: '01',
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
-    publisher: '교육청',
-    level: 1,
-    star: true,
-  },
-  {
-    workbook_id: '01',
-    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/02.jpg',
-    publisher: 'EBS',
-    level: 3,
-    star: true,
-  },
-
-  {
-    workbook_id: '01',
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/06.jpg',
-    publisher: '평가원',
-    level: 2,
-    star: true,
-  },
-
-  {
-    workbook_id: '01',
-    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/06.jpg',
-    publisher: 'EBS',
-    level: 3,
-    star: true,
-  },
-  {
-    workbook_id: '01',
-    title: '2021학년도 대학수학능력시험 문제지 수학 영역 (나형)',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/03.jpeg',
-    publisher: '평가원',
-    level: 3,
-    star: true,
-  },
-];
-
-const tryData = [
-  {
-    problemId: '04-01-00001',
-    problemNum: 1,
-    chapterId: '01',
-    workbookId: '04',
-    levelOfDiff: 2,
-    iscorrect: true,
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
-  },
-  {
-    problemId: '04-01-00001',
-    problemNum: 2,
-    chapterId: '01',
-    workbookId: '04',
-    levelOfDiff: 2,
-    iscorrect: true,
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
-  },
-  {
-    problemId: '04-01-00001',
-    problemNum: 3,
-    chapterId: '01',
-    workbookId: '04',
-    levelOfDiff: 2,
-    iscorrect: true,
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
-  },
-  {
-    problemId: '04-01-00001',
-    problemNum: 4,
-    chapterId: '01',
-    workbookId: '04',
-    levelOfDiff: 2,
-    iscorrect: true,
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
   },
 ];
 
