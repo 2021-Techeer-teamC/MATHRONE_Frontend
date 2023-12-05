@@ -17,9 +17,7 @@ import {
   Collapse,
   LinearProgress,
 } from '@mui/material';
-import Header from '../../../components/Header';
-import NavBar from '../../../components/NavBar/index.js';
-import '../style.css';
+import { WorkbookDetailDiv, Progressbar } from '../style'
 
 const WorkbookDetail = observer(() => {
   const params = useParams();
@@ -58,7 +56,7 @@ const WorkbookDetail = observer(() => {
 
   return (
     <>
-      <div style={{ paddingBottom: '40px' }}>
+      <WorkbookDetailDiv>
         <Card className="detail-card-div" sx={{ display: 'flex' }}>
           <CardMedia
             className="detail-img"
@@ -80,12 +78,10 @@ const WorkbookDetail = observer(() => {
               {currentWorkbook?.title}
             </Typography>
             {/* TODO: workbook track */}
-            <LinearProgress
-              className="detail-progress-bar"
+            <Progressbar
               variant="determinate"
               value={40}
               color="success"
-              sx={{ mb: 2 }}
             />
             <Typography variant="body1" sx={{ mb: 2 }}>
               {/* TODO: 유형에 맞는 content 넣기 */}
@@ -167,7 +163,7 @@ const WorkbookDetail = observer(() => {
             ))}
           </Paper>
         </div>
-      </div>
+      </WorkbookDetailDiv>
     </>
   );
 });

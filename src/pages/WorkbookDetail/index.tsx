@@ -19,7 +19,6 @@ import {
 } from '@mui/material';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar/index.js';
-import './style.css';
 import Workbook from './Workbook';
 import Test from './Test';
 
