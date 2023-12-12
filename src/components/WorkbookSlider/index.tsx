@@ -28,6 +28,9 @@ const WorkbookSlider = ({ id, workbooks }: WorkbookSliderProps) => {
   useEffect(() => {
     const workbookItems = workbooks?.slice(firstIdx, lastIdx) || [];
     setFilteredWorkbooks(workbookItems);
+  }, [workbooks, firstIdx, lastIdx]);
+
+  useEffect(() => {
     if (firstIdx === 0) setDisableBtnF(true);
     if (workbooks && lastIdx + 1 > workbooks.length) setDisableBtnB(true);
   }, [workbooks, firstIdx, lastIdx]);
