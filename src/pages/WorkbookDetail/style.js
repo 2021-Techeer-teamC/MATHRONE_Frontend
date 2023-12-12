@@ -69,7 +69,7 @@ export const TestDetialDiv = styled.div`
   }
 
   .detail__level--test {
-    margin-top: 40px;
+    margin-top: 20px;
 
     .detail__level__button {
       border: 2px solid #009688;
@@ -79,6 +79,22 @@ export const TestDetialDiv = styled.div`
     .detail__level__button--selected {
       background-color: #009688;
       color: white;
+    }
+  }
+
+  .detail__tab--test {
+    margin-top: 40px;
+
+    .MuiTabs-root {
+      .MuiButtonBase-root {
+        padding: 12px 0px;
+        margin-right: 8px;
+        font-weight: bold;
+        color: #315c72;
+      }
+      .MuiTabs-indicator {
+        background-color: #315c72;
+      }
     }
   }
   
