@@ -36,7 +36,6 @@ class WorkbookStore {
         });
       workbookService.getWorkbookCount(publisher, category).then((res) => {
         runInAction(() => {
-          console.log(res.data);
           this.workbookListTotalCount = res.data;
         });
       });

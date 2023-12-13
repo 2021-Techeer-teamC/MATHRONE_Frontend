@@ -2,21 +2,6 @@ import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store';
 import { useParams } from 'react-router-dom';
-import { ExpandMore, ExpandLess } from '@mui/icons-material';
-import {
-  Grid,
-  Paper,
-  Card,
-  CardMedia,
-  CardContent,
-  Button,
-  Typography,
-  ListItemButton,
-  ListItemText,
-  List,
-  Collapse,
-  LinearProgress,
-} from '@mui/material';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar/index.js';
 import Workbook from './Workbook';
