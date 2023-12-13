@@ -31,7 +31,7 @@ class WorkbookService {
 
   getCurrentWorkbookDetail(workbookId: string) {
     return axios.get<workbookDetail>(
-      `${process.env.REACT_APP_IP}/workbook/?id=${workbookId}`,
+      `${process.env.REACT_APP_IP}/workbook/${workbookId}`,
     );
   }
 
