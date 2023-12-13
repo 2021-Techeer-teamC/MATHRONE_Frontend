@@ -71,6 +71,17 @@ class WorkbookStore {
     }
   };
 
+  initializeCurrentWorkbook = async () => {
+    try {
+      runInAction(() => {
+        this.currentWorkbook = null;
+      });
+    } catch (error) {
+      console.error('Error: ', error);
+      return error;
+    }
+  };
+
   getTriedWorkbook = async () => {
     try {
       workbookService.getWorkbookTry().then((res) => {
