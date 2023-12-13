@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useStore } from '../../store';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/Header';
@@ -10,7 +11,7 @@ import Test from './Test';
 const BookDetail = observer(() => {
   const params = useParams();
   const { workbookStore } = useStore();
-  const { getCurrentWorkbook, currentWorkbook } = workbookStore;
+  const { getCurrentWorkbook, initializeCurrentWorkbook, currentWorkbook } = workbookStore;
   const [workbookId, setWorkbookId] = useState<string>('');
 
   useEffect(() => {
@@ -19,17 +20,24 @@ const BookDetail = observer(() => {
 
   useEffect(() => {
     getCurrentWorkbook(workbookId);
-  }, [getCurrentWorkbook, workbookId]);
-
-  useEffect(() => {
-    console.log(currentWorkbook);
-  }, [currentWorkbook]);
+    return () => {
+      initializeCurrentWorkbook();
+    }
+  }, [getCurrentWorkbook, workbookId, initializeCurrentWorkbook]);
 
   return (
     <>
       <Header />
       <NavBar />
-      { currentWorkbook?.type === 'workbook'? <Workbook /> : <Test /> }
+      {
+        currentWorkbook? 
+          currentWorkbook?.type === 'workbook'?
+              <Workbook />
+            : <Test />
+          :
+          /* TODO: 로딩 컴포넌트 구체화 */
+          <CircularProgress color="inherit" />
+      }
     </>
   );
 });
