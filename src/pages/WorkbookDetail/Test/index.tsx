@@ -4,16 +4,10 @@ import { useStore } from '../../../store';
 import {
   Grid,
   Button,
-  Paper,
   Typography,
   Tab,
   Box,
-  ListItemText,
-  List,
-  Collapse,
-  ListItemButton
 } from '@mui/material';
-import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
@@ -24,16 +18,11 @@ const TestDetail = observer(() => {
   const { workbookStore } = useStore();
   const { currentWorkbook } = workbookStore;
   const [value, setValue] = useState<string>('test_mode');
-  const [open, setOpen] = useState(true);
 
   console.log(currentWorkbook);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
-  };
-
-  const handleChapterCollapseClick = () => {
-    setOpen(!open);
   };
 
   const handleChapterClick = (chapterId: string) => {
