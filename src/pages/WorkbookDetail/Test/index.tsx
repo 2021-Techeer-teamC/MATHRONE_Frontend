@@ -1,7 +1,19 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../store';
-import { Grid, Button, Typography, Tab, Box } from '@mui/material';
+import {
+  Grid,
+  Button,
+  Paper,
+  Typography,
+  Tab,
+  Box,
+  ListItemText,
+  List,
+  Collapse,
+  ListItemButton
+} from '@mui/material';
+import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
@@ -11,10 +23,21 @@ import { TestDetialDiv, Progressbar } from '../style';
 const TestDetail = observer(() => {
   const { workbookStore } = useStore();
   const { currentWorkbook } = workbookStore;
-  const [value, setValue] = useState('test_mode');
+  const [value, setValue] = useState<string>('test_mode');
+  const [open, setOpen] = useState(true);
+
+  console.log(currentWorkbook);
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
+  };
+
+  const handleChapterCollapseClick = () => {
+    setOpen(!open);
+  };
+
+  const handleChapterClick = (chapterId: string) => {
+    window.location.href = `/problem/${currentWorkbook?.workbookId}/${chapterId}`;
   };
 
   return (
@@ -70,20 +93,26 @@ const TestDetail = observer(() => {
                 aria-label="lab API tabs example"
               >
                 <Tab label="테스트 모드" value="test_mode" />
-                <Tab label="단원별 풀이 모드" value="chapter_mode" />
+                <Tab label="일반 풀이 모드" value="chapter_mode" />
               </TabList>
             </Box>
-            <TabPanel value="test_mode">
+            <TabPanel className="detail__tab__panel" value="test_mode">
+              <Typography variant="subtitle2" gutterBottom>
+                테스트 모드는 실제 모의고사 시간에 맞춰 타이머를 세팅 후 시험을 시작할 수 있는 모드입니다.
+              </Typography>
               <div className="detail__startBtn">
                 <Button variant="contained" endIcon={<PlayArrowIcon />}>
                   응시하기
                 </Button>
               </div>
             </TabPanel>
-            <TabPanel value="chapter_mode">
+            <TabPanel className="detail__tab__panel" value="chapter_mode">
+              <Typography variant="subtitle2" gutterBottom>
+                테스트 모드와 달리 일반 모드는 시간 제한 없이 모든 문제를 자유롭게 풀어볼 수 있는 모드입니다.
+              </Typography>
               <div className="detail__startBtn">
                 <Button variant="contained" endIcon={<PlayArrowIcon />}>
-                  단원별로 풀어보기
+                  일반 모드로 풀어보기
                 </Button>
               </div>
             </TabPanel>

@@ -96,6 +96,10 @@ export const TestDetialDiv = styled.div`
         background-color: #315c72;
       }
     }
+
+    .detail__tab__panel {
+      padding: 24px 0px;
+    }
   }
   
 `;
