@@ -19,15 +19,13 @@ const TestDetail = observer(() => {
   const { currentWorkbook } = workbookStore;
   const [value, setValue] = useState<string>('test_mode');
 
-  console.log(currentWorkbook);
-
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
   };
 
-  const handleChapterClick = (chapterId: string) => {
-    window.location.href = `/problem/${currentWorkbook?.workbookId}/${chapterId}`;
-  };
+  // const handleChapterClick = (chapterId: string) => {
+  //   window.location.href = `/problem/${currentWorkbook?.workbookId}/${chapterId}`;
+  // };
 
   return (
     <TestDetialDiv>
@@ -76,7 +74,7 @@ const TestDetail = observer(() => {
         </Grid>
         <div className="detail__tab--test">
           <TabContext value={value}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Box className="detail__tab__box">
               <TabList
                 onChange={handleChange}
                 aria-label="lab API tabs example"

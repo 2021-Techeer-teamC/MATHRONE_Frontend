@@ -85,6 +85,11 @@ export const TestDetialDiv = styled.div`
   .detail__tab--test {
     margin-top: 40px;
 
+    .detail__tab__box {
+      border-bottom: 1px solid;
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+
     .MuiTabs-root {
       .MuiButtonBase-root {
         padding: 12px 0px;
