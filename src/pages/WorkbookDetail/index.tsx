@@ -36,7 +36,7 @@ const BookDetail = observer(() => {
             : <Test />
           :
           /* TODO: 로딩 컴포넌트 구체화 */
-          <CircularProgress color="inherit" />
+          <CircularProgress color="inherit" disableShrink />
       }
     </>
   );
