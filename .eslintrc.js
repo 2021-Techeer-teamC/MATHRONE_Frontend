@@ -3,9 +3,14 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'prettier'],
   // extends: ['standard-with-typescript', 'prettier', 'plugin:prettier/recommended'],
-  extends: ['prettier', 'plugin:prettier/recommended'],
+  extends: [
+    'prettier',
+    'plugin:prettier/recommended',
+    "plugin:@typescript-eslint/parser"
+  ],
   parserOptions: {
-    project: './tsconfig.json',
+    project: ['tsconfig.json'],
+    createDefaultProgram: true,
   },
   rules: {
     '@typescript-eslint/semi': 'off',
