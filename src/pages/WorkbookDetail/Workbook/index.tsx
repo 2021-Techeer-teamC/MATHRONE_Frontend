@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../store';
-import { useParams } from 'react-router-dom';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import {
   Grid,
@@ -15,43 +14,21 @@ import {
   ListItemText,
   List,
   Collapse,
-  LinearProgress,
 } from '@mui/material';
 import { WorkbookDetailDiv, Progressbar } from '../style'
 
 const WorkbookDetail = observer(() => {
-  const params = useParams();
   const { workbookStore } = useStore();
-  const { getCurrentWorkbook, currentWorkbook } = workbookStore;
+  const { currentWorkbook } = workbookStore;
   const [chapterOpen, setChapterOpen] = useState<Map<string, boolean>>();
   const [open, setOpen] = useState(true);
-  const [workbookId, setWorkbookId] = useState<string>('');
-
-  useEffect(() => {
-    setWorkbookId(params.id || '');
-  }, [params.id]);
-
-  useEffect(() => {
-    getCurrentWorkbook(workbookId);
-    // TODO: chapter open map 생성
-    const chapterOpenMap = currentWorkbook?.chapterGroup.map((group) => {
-      // console.log(group);
-      let chapterOpenMap = {};
-      // chapterOpenMap[group.group] = true;
-    });
-    // setChapterOpen(chapterOpenMap);
-  }, [getCurrentWorkbook, currentWorkbook?.chapterGroup, workbookId]);
-
-  useEffect(() => {
-    console.log(currentWorkbook);
-  }, [currentWorkbook]);
 
   const handleClick = () => {
     setOpen(!open);
   };
 
   const handleChapterClick = (chapterId: string) => {
-    window.location.href = `/problem/${workbookId}/${chapterId}`;
+    window.location.href = `/problem/${currentWorkbook?.workbookId}/${chapterId}`;
   };
 
   return (
