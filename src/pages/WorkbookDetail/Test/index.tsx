@@ -1,13 +1,7 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../store';
-import {
-  Grid,
-  Button,
-  Typography,
-  Tab,
-  Box,
-} from '@mui/material';
+import { Grid, Button, Typography, Tab, Box } from '@mui/material';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
@@ -26,10 +20,7 @@ const TestDetail = observer(() => {
   return (
     <TestDetialDiv>
       <div className="detail__img--test">
-        <img
-          src={currentWorkbook?.thumbnail}
-          alt="test-workbook-thumbnail"
-        ></img>
+        <img src={currentWorkbook?.thumbnail} alt="test-workbook-thumbnail"></img>
       </div>
       <div className="detail__description">
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
@@ -54,10 +45,7 @@ const TestDetail = observer(() => {
               </Button>
             </Grid>
             <Grid item xs={2}>
-              <Button
-                className="detail__level__button detail__level__button--selected"
-                size="small"
-              >
+              <Button className="detail__level__button detail__level__button--selected" size="small">
                 중간
               </Button>
             </Grid>
@@ -71,10 +59,7 @@ const TestDetail = observer(() => {
         <div className="detail__tab--test">
           <TabContext value={value}>
             <Box className="detail__tab__box">
-              <TabList
-                onChange={handleChange}
-                aria-label="lab API tabs example"
-              >
+              <TabList onChange={handleChange} aria-label="lab API tabs example">
                 <Tab label="테스트 모드" value="test_mode" />
                 <Tab label="일반 풀이 모드" value="chapter_mode" />
               </TabList>

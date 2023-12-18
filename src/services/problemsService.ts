@@ -10,9 +10,7 @@ class problemsService {
   }
 
   getTriedProblems(onlyIncorrect: boolean) {
-    return axios.get<problemData[]>(
-      `${process.env.REACT_APP_IP}/problem/try?onlyIncorrect=${onlyIncorrect}`,
-    );
+    return axios.get<problemData[]>(`${process.env.REACT_APP_IP}/problem/try?onlyIncorrect=${onlyIncorrect}`);
   }
 }
 export default new problemsService();

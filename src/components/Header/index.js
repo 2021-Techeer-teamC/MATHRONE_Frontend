@@ -16,9 +16,7 @@ const Header = observer(() => {
   const navigate = useNavigate();
   const { userStore } = useStore();
   const { account, submitLogout, getProfile } = userStore;
-  const [thirdParty, setThirdParty] = useState(
-    localStorage.getItem('thirdParty'),
-  );
+  const [thirdParty, setThirdParty] = useState(localStorage.getItem('thirdParty'));
   const [loading, setLoading] = useState(false);
 
   const onLogoutClick = () => {

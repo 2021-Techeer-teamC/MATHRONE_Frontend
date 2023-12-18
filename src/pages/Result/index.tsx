@@ -1,18 +1,9 @@
 import Header from '../../components/Header';
 import { Box } from '@mui/system';
 import Card from '@mui/material/Card';
-import {
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
-import Chart from "./components/Chart";
-import { useLocation } from "react-router-dom";
+import { Grid, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
+import Chart from './components/Chart';
+import { useLocation } from 'react-router-dom';
 import answersList from '../../types/answers';
 
 interface score {
@@ -86,7 +77,7 @@ export default function Result() {
                         {answerData.correctAnswer}
                       </TableCell>
                       <TableCell align="center" padding="none">
-                        <Box sx={{ display: "flex", justifyContent: "center" }}>
+                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                           {answerData.correctAnswer === answerData.myAnswer ? (
                             <Card
                               sx={{

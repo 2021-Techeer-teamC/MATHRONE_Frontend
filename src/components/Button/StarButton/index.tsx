@@ -15,15 +15,7 @@ const StarButton = ({ workbookId, star }: StarButtonProps) => {
     else unStarWorkbook(workbookId);
   };
 
-  return (
-    <Rating
-      className="workbook-star"
-      max={1}
-      size="large"
-      defaultValue={star ? 1 : 0}
-      onClick={() => handleStarClick(workbookId, star)}
-    />
-  );
+  return <Rating className="workbook-star" max={1} size="large" defaultValue={star ? 1 : 0} onClick={() => handleStarClick(workbookId, star)} />;
 };
 
 export default StarButton;

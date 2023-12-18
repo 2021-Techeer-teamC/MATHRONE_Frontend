@@ -19,17 +19,13 @@ export default function ProblemDetail({ name }: WorkbookDetailProps) {
   const [num, setNum] = React.useState(1);
 
   useEffect(() => {
-    problemsService
-      .getProblems(params.workbookId, params.chapterId)
-      .then((response) => setProbDatas(response.data));
+    problemsService.getProblems(params.workbookId, params.chapterId).then((response) => setProbDatas(response.data));
   }, [params.workbookId, params.chapterId]);
 
   return data.length !== 0 ? (
     <Box>
       <Header />
-      <Container
-        style={{ alignItems: 'center', justifyContent: 'center', height: 100 }}
-      >
+      <Container style={{ alignItems: 'center', justifyContent: 'center', height: 100 }}>
         <Typography variant="h4" component="div" color="text.secondary">
           {name}
         </Typography>
@@ -39,12 +35,7 @@ export default function ProblemDetail({ name }: WorkbookDetailProps) {
           <AnswerSheet propsdata={data} />
         </Grid>
         <Grid item xs={8}>
-          <ProbImg
-            posts={data[num - 1]}
-            setNum={setNum}
-            num={num}
-            len={data.length}
-          />
+          <ProbImg posts={data[num - 1]} setNum={setNum} num={num} len={data.length} />
           <Pagination setNum={setNum} len={data.length} num={num} />
         </Grid>
         <Grid item xs={2} />

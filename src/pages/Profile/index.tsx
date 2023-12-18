@@ -18,8 +18,7 @@ const theme = createTheme();
 const ProfilePage = observer(() => {
   const { userStore, workbookStore, problemStore } = useStore();
   const { account, getProfile } = userStore;
-  const { triedWorkbooks, starWorkbooks, getStarWorkbook, getTriedWorkbook } =
-    workbookStore;
+  const { triedWorkbooks, starWorkbooks, getStarWorkbook, getTriedWorkbook } = workbookStore;
   const { getTriedProblems, triedProblems } = problemStore;
 
   useEffect(() => {
@@ -44,26 +43,14 @@ const ProfilePage = observer(() => {
               <Logo />
               <div className="profile-div">
                 {account.profileImg ? (
-                  <img
-                    className="profile-img"
-                    alt="profile_img"
-                    src={account.profileImg || ''}
-                  />
+                  <img className="profile-img" alt="profile_img" src={account.profileImg || ''} />
                 ) : (
                   <AccountCircleIcon className="profile-icon" />
                 )}
               </div>
-              <Typography className="profile-info-text">
-                {`${account.id} / ${account.email}`}
-              </Typography>
-              <Typography className="profile-info-text">
-                {`순위: ${account.rankInfo.rank || '[없음]'}`}
-              </Typography>
-              <Button
-                className="subscription_button"
-                variant="contained"
-                onClick={handleUpgradeClick}
-              >
+              <Typography className="profile-info-text">{`${account.id} / ${account.email}`}</Typography>
+              <Typography className="profile-info-text">{`순위: ${account.rankInfo.rank || '[없음]'}`}</Typography>
+              <Button className="subscription_button" variant="contained" onClick={handleUpgradeClick}>
                 Premium Upgrade
               </Button>
             </Grid>

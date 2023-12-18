@@ -4,7 +4,7 @@ import { LinearProgress } from '@mui/material';
 export const WorkbookDetailDiv = styled.div`
   padding-bottom: 40px;
 
-  .detail__card{
+  .detail__card {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -15,9 +15,10 @@ export const WorkbookDetailDiv = styled.div`
   .detail__img--workbook {
     margin-right: 20px;
     border-radius: 8px;
-    box-shadow: 0px 4px 5px -2px rgba(0,0,0,0.2),
-                0px 7px 10px 1px rgba(0,0,0,0.14),
-                0px 2px 16px 1px rgba(0,0,0,0.12);
+    box-shadow:
+      0px 4px 5px -2px rgba(0, 0, 0, 0.2),
+      0px 7px 10px 1px rgba(0, 0, 0, 0.14),
+      0px 2px 16px 1px rgba(0, 0, 0, 0.12);
     width: 250px;
   }
 
@@ -37,7 +38,7 @@ export const WorkbookDetailDiv = styled.div`
   .detail__chapters {
     background-color: white;
     padding: 10px;
-    
+
     .detail__chapters__paper {
       width: 60%;
       margin: auto;
@@ -53,7 +54,7 @@ export const TestDetialDiv = styled.div`
     overflow: hidden;
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.5) 3px 3px 10px inset;
-    
+
     img {
       position: absolute;
       z-index: -1;
@@ -118,7 +119,6 @@ export const TestDetialDiv = styled.div`
       padding: 24px 0px;
     }
   }
-  
 `;
 
 export const Progressbar = styled(LinearProgress)(

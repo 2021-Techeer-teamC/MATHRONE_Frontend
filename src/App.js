@@ -32,16 +32,9 @@ function App() {
           <Route path="/workbook" exact element={<Workbook />} />
           <Route path="/workbook/:id" element={<WorkbookDetail />} />
           <Route path="/rank" exact element={<Rank />} />
-          <Route
-            path="/oauth/callback/google"
-            exact
-            element={<OauthGoogle />}
-          />
+          <Route path="/oauth/callback/google" exact element={<OauthGoogle />} />
           <Route path="/oauth/callback/kakao" exact element={<OauthKakao />} />
-          <Route
-            path="/problem/:workbookId/:chapterId"
-            element={<ProblemDetail />}
-          />
+          <Route path="/problem/:workbookId/:chapterId" element={<ProblemDetail />} />
           {/*임시 테스트용*/}
           <Route path="/result" exact element={<Result />} />
           {/*임시 테스트용*/}

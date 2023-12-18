@@ -22,22 +22,23 @@ const BookDetail = observer(() => {
     getCurrentWorkbook(workbookId);
     return () => {
       initializeCurrentWorkbook();
-    }
+    };
   }, [getCurrentWorkbook, workbookId, initializeCurrentWorkbook]);
 
   return (
     <>
       <Header />
       <NavBar />
-      {
-        currentWorkbook? 
-          currentWorkbook?.type === 'workbook'?
-              <Workbook />
-            : <Test />
-          :
-          /* TODO: 로딩 컴포넌트 구체화 */
-          <CircularProgress color="inherit" disableShrink />
-      }
+      {currentWorkbook ? (
+        currentWorkbook?.type === 'workbook' ? (
+          <Workbook />
+        ) : (
+          <Test />
+        )
+      ) : (
+        /* TODO: 로딩 컴포넌트 구체화 */
+        <CircularProgress color="inherit" disableShrink />
+      )}
     </>
   );
 });
