@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { LinearProgress } from '@mui/material';
+import { LinearProgress, Grid } from '@mui/material';
 
 export const WorkbookDetailDiv = styled.div`
   padding-bottom: 40px;
@@ -81,20 +81,6 @@ export const TestDetialDiv = styled.div`
     }
   }
 
-  .detail__level--test {
-    margin-top: 20px;
-
-    .detail__level__button {
-      border: 2px solid #009688;
-      color: rgba(0, 0, 0, 0.6);
-    }
-
-    .detail__level__button--selected {
-      background-color: #009688;
-      color: white;
-    }
-  }
-
   .detail__tab--test {
     margin-top: 40px;
 
@@ -132,6 +118,22 @@ export const Progressbar = styled(LinearProgress)(
   
   .MuiLinearProgress-bar {
     background-color: #009688;
+  }
+  `,
+);
+
+export const LevelButtonGrid = styled(Grid)(
+  () => `
+  margin-top: 20px;
+
+  .detail__level__button {
+    border: 2px solid #009688;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .detail__level__button--selected {
+    background-color: #009688;
+    color: white;
   }
   `,
 );

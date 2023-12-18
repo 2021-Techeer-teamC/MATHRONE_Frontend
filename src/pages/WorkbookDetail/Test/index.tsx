@@ -7,6 +7,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { TestDetialDiv, Progressbar } from '../style';
+import LevelButton from '../components/LevelButton';
 
 const TestDetail = observer(() => {
   const { workbookStore } = useStore();
@@ -32,7 +33,7 @@ const TestDetail = observer(() => {
         {/* TODO: workbook track */}
         <Progressbar variant="determinate" value={40} />
         {/* TODO: workbook level 조회 */}
-        <Grid container className="detail__level--test">
+        {/* <Grid container className="detail__level--test">
           <Grid item xs={12}>
             <Typography variant="body2" sx={{ mb: 2 }}>
               <span className="detail-difficulty">난이도 : 보통(1283)</span>
@@ -55,7 +56,9 @@ const TestDetail = observer(() => {
               </Button>
             </Grid>
           </Grid>
-        </Grid>
+          
+        </Grid> */}
+        <LevelButton />
         <div className="detail__tab--test">
           <TabContext value={value}>
             <Box className="detail__tab__box">

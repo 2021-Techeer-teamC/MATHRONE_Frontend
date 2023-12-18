@@ -4,6 +4,7 @@ import { useStore } from '../../../store';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
 import { Grid, Paper, Card, CardMedia, CardContent, Button, Typography, ListItemButton, ListItemText, List, Collapse } from '@mui/material';
 import { WorkbookDetailDiv, Progressbar } from '../style';
+import LevelButton from '../components/LevelButton';
 
 const WorkbookDetail = observer(() => {
   const { workbookStore } = useStore();
@@ -56,29 +57,7 @@ const WorkbookDetail = observer(() => {
             {/* <Typography variant="body2"># 수학1 #수학2 #미적분</Typography> */}
             <Typography variant="body2">{currentWorkbook?.tags.map((tag) => <span># {tag.name}</span>)}</Typography>
             <hr></hr>
-            {/* TODO: workbook level 조회 */}
-            <Grid container>
-              <Grid item xs={12}>
-                <Typography variant="body2" sx={{ mb: 2 }}>
-                  <span className="detail__difficulty">난이도 : 보통(1283)</span>
-                </Typography>
-              </Grid>
-              <Grid item xs={2}>
-                <Button variant="contained" color="success" size="small">
-                  쉬움
-                </Button>
-              </Grid>
-              <Grid item xs={2}>
-                <Button variant="contained" color="success" size="small">
-                  중간
-                </Button>
-              </Grid>
-              <Grid item xs={2}>
-                <Button variant="contained" color="success" size="small">
-                  어려움
-                </Button>
-              </Grid>
-            </Grid>
+            <LevelButton />
           </CardContent>
         </Card>
         <div className="detail__chapters">
