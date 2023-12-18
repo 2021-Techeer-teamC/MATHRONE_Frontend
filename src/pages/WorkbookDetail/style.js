@@ -4,32 +4,44 @@ import { LinearProgress } from '@mui/material';
 export const WorkbookDetailDiv = styled.div`
   padding-bottom: 40px;
 
-  .detail-card-div {
+  .detail__card{
+    display: flex;
     align-items: center;
     justify-content: center;
     background-color: #e2e2e2 !important;
     width: 100%;
   }
 
-  .detail-img {
+  .detail__img--workbook {
     margin-right: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 5px -2px rgba(0,0,0,0.2),
+                0px 7px 10px 1px rgba(0,0,0,0.14),
+                0px 2px 16px 1px rgba(0,0,0,0.12);
+    width: 250px;
   }
 
-  .detail-content {
+  .detail__content {
     text-align: left !important;
+    width: 50%;
   }
 
-  .detail-difficulty {
+  .detail__content--publisher {
+    font-size: 14px;
+  }
+
+  .detail__difficulty {
     color: gray;
   }
 
-  .detail-chapter-div {
+  .detail__chapters {
     background-color: white;
-  }
-
-  .detail-chapter-paper {
-    width: 80%;
-    margin: auto;
+    padding: 10px;
+    
+    .detail__chapters__paper {
+      width: 60%;
+      margin: auto;
+    }
   }
 `;
 
@@ -116,6 +128,8 @@ export const Progressbar = styled(LinearProgress)(
   border-radius: 10px;
   height: 8px !important;
   background-color: #c2e8e4;
+  border: 2px solid #009688;
+  
   .MuiLinearProgress-bar {
     background-color: #009688;
   }

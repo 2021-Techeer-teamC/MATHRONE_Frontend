@@ -34,24 +34,22 @@ const WorkbookDetail = observer(() => {
   return (
     <>
       <WorkbookDetailDiv>
-        <Card className="detail-card-div" sx={{ display: 'flex' }}>
+        <Card className="detail__card">
           <CardMedia
-            className="detail-img"
+            className="detail__img--workbook"
             component="img"
-            sx={{ width: '250px', borderRadius: 2, boxShadow: 7 }}
             image={currentWorkbook?.thumbnail}
             alt="workbook thumbnail"
           />
-          <CardContent className="detail-content" sx={{ width: '50%' }}>
+          <CardContent className="detail__content">
             <Typography
-              sx={{ fontSize: 14 }}
+              className="detail__content--publisher"
               color="text.secondary"
               gutterBottom
             >
               {`${currentWorkbook?.publisher} - ${currentWorkbook?.category}`}
             </Typography>
             <Typography variant="h5" component="div" color="text.secondary">
-              {/*name*/}
               {currentWorkbook?.title}
             </Typography>
             {/* TODO: workbook track */}
@@ -90,12 +88,11 @@ const WorkbookDetail = observer(() => {
               ))}
             </Typography>
             <hr></hr>
-
             {/* TODO: workbook level 조회 */}
             <Grid container>
               <Grid item xs={12}>
                 <Typography variant="body2" sx={{ mb: 2 }}>
-                  <span className="detail-difficulty">난이도 : 보통(1283)</span>
+                  <span className="detail__difficulty">난이도 : 보통(1283)</span>
                 </Typography>
               </Grid>
               <Grid item xs={2}>
@@ -116,10 +113,10 @@ const WorkbookDetail = observer(() => {
             </Grid>
           </CardContent>
         </Card>
-        <div className="detail-chapter-div">
-          <Paper className="detail-chapter-paper" elevation={24}>
+        <div className="detail__chapters">
+          <Paper className="detail__chapters__paper" elevation={24}>
             {currentWorkbook?.chapterGroup.map((chapterObj) => (
-              <div className="chapter-group">
+              <div>
                 <ListItemButton onClick={handleClick}>
                   <ListItemText primary={chapterObj.group} />
                   {open ? <ExpandLess /> : <ExpandMore />}

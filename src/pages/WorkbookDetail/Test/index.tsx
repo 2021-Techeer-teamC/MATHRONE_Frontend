@@ -23,10 +23,6 @@ const TestDetail = observer(() => {
     setValue(newValue);
   };
 
-  // const handleChapterClick = (chapterId: string) => {
-  //   window.location.href = `/problem/${currentWorkbook?.workbookId}/${chapterId}`;
-  // };
-
   return (
     <TestDetialDiv>
       <div className="detail__img--test">
