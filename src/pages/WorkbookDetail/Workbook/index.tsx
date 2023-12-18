@@ -40,7 +40,7 @@ const WorkbookDetail = observer(() => {
       // chapterOpenMap[group.group] = true;
     });
     // setChapterOpen(chapterOpenMap);
-  }, [getCurrentWorkbook, workbookId]);
+  }, [getCurrentWorkbook, currentWorkbook?.chapterGroup, workbookId]);
 
   useEffect(() => {
     console.log(currentWorkbook);
