@@ -38,6 +38,7 @@ module.exports = {
 
   ignorePatterns: [".eslintrc.js"], 
   rules: {
+    "react/jsx-filename-extension": [1, { extensions: [".ts", ".tsx"] }],
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/semi': 'off',
     '@typescript-eslint/space-before-function-paren': 'off',

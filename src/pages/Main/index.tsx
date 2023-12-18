@@ -12,6 +12,7 @@ import MainCarousel from './components/MainCarousel';
 import { Subtitle } from '../../components/Typography';
 import qs from 'qs';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import problemData from '../../types/problems';
 import './style.css';
 
 const theme = createTheme();
@@ -95,4 +96,4 @@ const addData = [
   },
 ];
 
-const recData = [];
+const recData: problemData | never[] = [];

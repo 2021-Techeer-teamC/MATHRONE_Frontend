@@ -40,7 +40,7 @@ const WorkbookList = observer(() => {
   };
 
   const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
-    changeWorkbookFilter({ pageNum: page });
+    changeWorkbookFilter({ ...workbookFilter, pageNum: page });
   };
 
   useEffect(() => {
