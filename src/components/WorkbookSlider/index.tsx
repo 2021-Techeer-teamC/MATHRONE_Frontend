@@ -30,7 +30,7 @@ const WorkbookSlider = ({ id, workbooks }: WorkbookSliderProps) => {
 
   useEffect(() => {
     const resize = () => {
-      let value = Math.floor(firstIdx + (window.innerWidth - 200) / 280);
+      const value = Math.floor(firstIdx + (window.innerWidth - 200) / 280);
       if (value <= 4 && value >= 1) {
         //최대 범위
         setLastIdx(value);

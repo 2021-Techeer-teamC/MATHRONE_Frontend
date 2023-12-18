@@ -26,7 +26,7 @@ export default function Result() {
     answerData.correctAnswer === answerData.myAnswer ? correct++ : wrong++;
   });
 
-  var score: score[] = [
+  const score: score[] = [
     { title: 'correct', value: correct, color: '#73C23A' },
     { title: 'wrong', value: wrong, color: '#C13C37' },
   ];

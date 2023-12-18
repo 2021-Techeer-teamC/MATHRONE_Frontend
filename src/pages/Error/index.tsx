@@ -17,4 +17,4 @@ export default function Error(props: { sections: any }) {
   );
 }
 
-const recData: object[] = [];
+// const recData: object[] = [];

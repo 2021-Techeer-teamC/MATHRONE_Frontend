@@ -21,10 +21,10 @@ const WorkbookList = observer(() => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    changeWorkbookFilter({ sortType: event.target.value });
+    changeWorkbookFilter({ ...workbookFilter, sortType: event.target.value });
   };
 
-  const changeWorkbookFilter = (newValue: object) => {
+  const changeWorkbookFilter = (newValue: workbookFilter) => {
     const newFilter = { ...workbookFilter, ...newValue };
     setWorkbookFilter(newFilter);
   };
@@ -34,6 +34,7 @@ const WorkbookList = observer(() => {
       publisher: publisher,
       category: category,
       pageNum: 1,
+      sortType: 'star',
     });
     return;
   };

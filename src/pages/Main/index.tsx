@@ -95,4 +95,4 @@ const addData = [
   },
 ];
 
-const recData: object[] = [];
+const recData = [];

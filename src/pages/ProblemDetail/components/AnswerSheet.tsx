@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -16,7 +16,7 @@ import problems from '../../../types/problems';
 
 interface myAnswerData {
   answerSubmitList: problems[];
-  isAll: Boolean;
+  isAll: boolean;
 }
 
 const AnswerSheet = (props: { propsdata: problems[] }) => {
@@ -35,7 +35,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
     setInputs(inputs.map((answer) => (answer.problemId === prob_num ? { ...answer, myAnswer: value } : answer)));
   };
 
-  const submitAnswer = async (inputs: any, isAll: Boolean) => {
+  const submitAnswer = async (inputs: any, isAll: boolean) => {
     const postData: myAnswerData = {
       answerSubmitList: inputs,
       isAll: isAll,
