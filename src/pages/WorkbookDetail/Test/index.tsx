@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../store';
 import { Grid, Button, Typography, Tab, Box } from '@mui/material';
@@ -10,12 +11,17 @@ import { TestDetialDiv, Progressbar } from '../style';
 import LevelButton from '../components/LevelButton';
 
 const TestDetail = observer(() => {
+  const navigate = useNavigate();
   const { workbookStore } = useStore();
   const { currentWorkbook } = workbookStore;
   const [value, setValue] = useState<string>('test_mode');
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
+  };
+
+  const handleNormalModeClick = (_event: React.MouseEvent<HTMLButtonElement>) => {
+    navigate(`/problem/${currentWorkbook?.workbookId}`);
   };
 
   return (
@@ -37,7 +43,7 @@ const TestDetail = observer(() => {
         <div className="detail__tab--test">
           <TabContext value={value}>
             <Box className="detail__tab__box">
-              <TabList onChange={handleChange} aria-label="lab API tabs example">
+              <TabList onChange={handleTabChange} aria-label="lab API tabs example">
                 <Tab label="테스트 모드" value="test_mode" />
                 <Tab label="일반 풀이 모드" value="chapter_mode" />
               </TabList>
@@ -57,7 +63,7 @@ const TestDetail = observer(() => {
                 테스트 모드와 달리 일반 모드는 시간 제한 없이 모든 문제를 자유롭게 풀어볼 수 있는 모드입니다.
               </Typography>
               <div className="detail__startBtn">
-                <Button variant="contained" endIcon={<PlayArrowIcon />}>
+                <Button variant="contained" endIcon={<PlayArrowIcon />} onClick={handleNormalModeClick}>
                   일반 모드로 풀어보기
                 </Button>
               </div>
