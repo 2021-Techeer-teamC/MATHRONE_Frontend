@@ -34,7 +34,10 @@ function App() {
           <Route path="/rank" exact element={<Rank />} />
           <Route path="/oauth/callback/google" exact element={<OauthGoogle />} />
           <Route path="/oauth/callback/kakao" exact element={<OauthKakao />} />
-          <Route path="/problem/:workbookId/:chapterId" element={<ProblemDetail />} />
+          <Route path="problem/:workbookId">
+            <Route path=":chapterId" element={<ProblemDetail />} />
+            <Route path="" element={<ProblemDetail />} />
+          </Route>
           {/*임시 테스트용*/}
           <Route path="/result" exact element={<Result />} />
           {/*임시 테스트용*/}

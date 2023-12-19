@@ -6,7 +6,7 @@ const LevelButton = () => {
     <LevelButtonGrid container>
       <Grid item xs={12}>
         <Typography variant="body2" sx={{ mb: 2 }}>
-          <span className="detail-difficulty">난이도 : 보통(1283)</span>
+          <span>난이도 : 보통(1283)</span>
         </Typography>
       </Grid>
       <Grid item container justifyContent="flex-start">

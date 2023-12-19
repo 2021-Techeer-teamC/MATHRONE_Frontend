@@ -9,11 +9,7 @@ import problemsService from '../../services/problemsService';
 import problems from '../../types/problems';
 import ProbImg from './components/ProbImg';
 
-type WorkbookDetailProps = {
-  name: string; // 해당 문제집의 이름
-};
-
-export default function ProblemDetail({ name }: WorkbookDetailProps) {
+export default function ProblemDetail() {
   const params = useParams();
   const [data, setProbDatas] = React.useState<problems[]>([]);
   const [num, setNum] = React.useState(1);
@@ -25,11 +21,6 @@ export default function ProblemDetail({ name }: WorkbookDetailProps) {
   return data.length !== 0 ? (
     <Box>
       <Header />
-      <Container style={{ alignItems: 'center', justifyContent: 'center', height: 100 }}>
-        <Typography variant="h4" component="div" color="text.secondary">
-          {name}
-        </Typography>
-      </Container>
       <Grid container spacing={0} margin={5}>
         <Grid item xs={2}>
           <AnswerSheet propsdata={data} />
