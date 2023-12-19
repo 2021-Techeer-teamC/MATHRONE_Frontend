@@ -2,19 +2,21 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../store';
-import { Grid, Button, Typography, Tab, Box } from '@mui/material';
+import { TextField, InputAdornment, Button, Typography, Tab, Box } from '@mui/material';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { TestDetialDiv, Progressbar } from '../style';
 import LevelButton from '../components/LevelButton';
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 
 const TestDetail = observer(() => {
   const navigate = useNavigate();
   const { workbookStore } = useStore();
   const { currentWorkbook } = workbookStore;
   const [value, setValue] = useState<string>('test_mode');
+  const [timer, setTimer] = useState<number>(100);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
@@ -22,6 +24,10 @@ const TestDetail = observer(() => {
 
   const handleNormalModeClick = (_event: React.MouseEvent<HTMLButtonElement>) => {
     navigate(`/problem/${currentWorkbook?.workbookId}`);
+  };
+
+  const handleTimerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTimer(Number(event.target.value));
   };
 
   return (
@@ -52,6 +58,19 @@ const TestDetail = observer(() => {
               <Typography variant="subtitle2" gutterBottom>
                 테스트 모드는 실제 모의고사 시간에 맞춰 타이머를 세팅 후 시험을 시작할 수 있는 모드입니다.
               </Typography>
+              <div className="detail__timer">
+                <TextField
+                  id="test-time"
+                  label="제한시간"
+                  variant="standard"
+                  defaultValue={timer}
+                  InputProps={{
+                    endAdornment: <InputAdornment position="end">분</InputAdornment>,
+                  }}
+                  onChange={handleTimerChange}
+                />
+                <div className="detail__timer__label">원하는 소요시간을 입력하세요(기본 100분으로 설정되어있음)</div>
+              </div>
               <div className="detail__startBtn">
                 <Button variant="contained" endIcon={<PlayArrowIcon />}>
                   응시하기

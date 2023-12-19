@@ -71,6 +71,23 @@ export const TestDetialDiv = styled.div`
     padding: 40px;
   }
 
+  .detail__timer {
+    margin: 18px auto;
+
+    .detail__timer__label {
+      margin-top: 8px;
+      font-size: 12px;
+      color: gray;
+    }
+
+    .MuiInputBase-root:after {
+      border-bottom: 2px solid #009688;
+    }
+    .MuiFormLabel-root.Mui-focused {
+      color: #009688;
+    }
+  }
+
   .detail__startBtn {
     margin: 8px 0px;
     float: right;
