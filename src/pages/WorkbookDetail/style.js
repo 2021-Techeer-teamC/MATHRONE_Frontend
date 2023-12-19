@@ -129,6 +129,7 @@ export const LevelButtonGrid = styled(Grid)(
   .detail__level__button {
     border: 2px solid #009688;
     color: rgba(0, 0, 0, 0.6);
+    margin-right: 8px;
   }
 
   .detail__level__button--selected {
