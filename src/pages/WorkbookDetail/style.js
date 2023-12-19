@@ -120,6 +120,7 @@ export const TestDetialDiv = styled.div`
 
     .detail__tab__panel {
       padding: 24px 0px;
+      min-height: 180px;
     }
   }
 `;
