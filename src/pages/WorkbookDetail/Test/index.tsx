@@ -72,6 +72,7 @@ const TestDetail = observer(() => {
                 <div className="detail__timer__label">원하는 소요시간을 입력하세요(기본 100분으로 설정되어있음)</div>
               </div>
               <div className="detail__startBtn">
+                {/* TODO: 타이머 설정해서 시험 모드 구현하기 */}
                 <Button variant="contained" endIcon={<PlayArrowIcon />}>
                   응시하기
                 </Button>

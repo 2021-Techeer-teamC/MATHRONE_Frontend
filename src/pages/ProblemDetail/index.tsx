@@ -8,6 +8,7 @@ import { Container, Grid, Typography } from '@mui/material';
 import problemsService from '../../services/problemsService';
 import problems from '../../types/problems';
 import ProbImg from './components/ProbImg';
+import { ProblemDetailGrid } from './style';
 
 export default function ProblemDetail() {
   const params = useParams();
@@ -18,19 +19,25 @@ export default function ProblemDetail() {
     problemsService.getProblems(params.workbookId, params.chapterId).then((response) => setProbDatas(response.data));
   }, [params.workbookId, params.chapterId]);
 
-  return data.length !== 0 ? (
+  return (
     <Box>
       <Header />
-      <Grid container spacing={0} margin={5}>
-        <Grid item xs={2}>
-          <AnswerSheet propsdata={data} />
-        </Grid>
-        <Grid item xs={8}>
-          <ProbImg posts={data[num - 1]} setNum={setNum} num={num} len={data.length} />
-          <Pagination setNum={setNum} len={data.length} num={num} />
-        </Grid>
-        <Grid item xs={2} />
-      </Grid>
+      <ProblemDetailGrid container spacing={0} margin={5}>
+        {data.length !== 0 ? (
+          <>
+            <Grid item xs={2}>
+              <AnswerSheet propsdata={data} />
+            </Grid>
+            <Grid item xs={8}>
+              <ProbImg posts={data[num - 1]} setNum={setNum} num={num} len={data.length} />
+              <Pagination setNum={setNum} len={data.length} num={num} />
+            </Grid>
+            <Grid item xs={2} />
+          </>
+        ) : (
+          <div className="problem__box--loading">문제를 가져오고 있습니다....</div>
+        )}
+      </ProblemDetailGrid>
     </Box>
-  ) : null;
+  );
 }
