@@ -1,8 +1,11 @@
-import { workbookItem, workbookSidebarItem } from '../types/workbookItem';
+import {
+  workbookItem,
+  workbookCategoryItem,
+  workbookDetail,
+} from '../types/workbookItem';
 import axios from '../utils/axios';
 
 class WorkbookService {
-  //1. 출판사를 보내면 출판사 별 문제집을 반환
   getWorkbookList(
     publisher: string,
     sortType: string,
@@ -21,8 +24,38 @@ class WorkbookService {
   }
 
   getWorkbookListSummary() {
-    return axios.get<workbookSidebarItem[]>(
+    return axios.get<workbookCategoryItem[]>(
       `${process.env.REACT_APP_IP}/workbook/summary`,
+    );
+  }
+
+  getCurrentWorkbookDetail(workbookId: string) {
+    return axios.get<workbookDetail>(
+      `${process.env.REACT_APP_IP}/workbook/?id=${workbookId}`,
+    );
+  }
+
+  getWorkbookTry() {
+    return axios.get<workbookItem[]>(
+      `${process.env.REACT_APP_IP}/workbook/try`,
+    );
+  }
+
+  getWorkbookStar() {
+    return axios.get<workbookItem[]>(
+      `${process.env.REACT_APP_IP}/workbook/star`,
+    );
+  }
+
+  starWorkbook(workbookId: string) {
+    return axios.post(
+      `${process.env.REACT_APP_IP}/workbook/star/${workbookId}`,
+    );
+  }
+
+  unStarWorkbook(workbookId: string) {
+    return axios.delete(
+      `${process.env.REACT_APP_IP}/workbook/star/${workbookId}`,
     );
   }
 }

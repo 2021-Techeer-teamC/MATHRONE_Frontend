@@ -16,19 +16,19 @@ const ProblemList = ({ data, title }) => {
     <>
       <div className="problemlist-title-div">
         <UnderlinedSubtitle>{title}</UnderlinedSubtitle>
-        <ViewMoreLink underline="hover">{'더보기'}</ViewMoreLink>
+        <ViewMoreLink underline="hover">더보기</ViewMoreLink>
       </div>
       {data.length !== 0 ? (
         <List>
           {data.slice(0, 10).map((item) => (
             <ListItem>
               <ListItemText
-                primary={item.title + ' ' + item.problemNum + '번'}
-                secondary={`점수: ${item.levelOfDiff}`}
+                primary={item.workbook.title + ' ' + item.problemNum + '번'}
+                secondary={`점수: ${item.level}`}
               />
               <ListItemIcon
                 onClick={() =>
-                  handleViewProblemClick(item.workbookId, item.chapterId)
+                  handleViewProblemClick(item.workbook.id, item.chapter.id)
                 }
               >
                 <OpenInNewIcon />

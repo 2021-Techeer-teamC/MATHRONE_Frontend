@@ -7,22 +7,27 @@ import Logo from '../../components/Logo';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar/index.js';
 import Footer from '../../components/Footer/index.js';
-import WorkbookSlider from '../../components/WorkbookSlider';
+import WorkbookSlider from '../../components/WorkbookSlider/index';
 import ProblemList from '../../components/ProblemList';
 import { Subtitle } from '../../components/Typography';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import profileService from '../../services/profileService';
 import './style.css';
 
 const theme = createTheme();
 
 const ProfilePage = observer(() => {
-  const { userStore } = useStore();
+  const { userStore, workbookStore, problemStore } = useStore();
   const { account, getProfile } = userStore;
+  const { triedWorkbooks, starWorkbooks, getStarWorkbook, getTriedWorkbook } =
+    workbookStore;
+  const { getTriedProblems, triedProblems } = problemStore;
 
   useEffect(() => {
     getProfile();
-  }, [getProfile]);
+    getTriedWorkbook();
+    getStarWorkbook();
+    getTriedProblems(false, 3);
+  }, [getProfile, getTriedWorkbook, getTriedProblems, getStarWorkbook]);
 
   const handleUpgradeClick = () => {
     alert('click upgrade button');
@@ -32,7 +37,7 @@ const ProfilePage = observer(() => {
     <ThemeProvider theme={theme}>
       <Header />
       <NavBar />
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Paper elevation={3} className="profile-paper">
           <Grid container spacing={2}>
             <Grid item xs={6} md={5} className="profile-img-grid">
@@ -63,79 +68,23 @@ const ProfilePage = observer(() => {
               </Button>
             </Grid>
             <Grid item xs={6} md={7}>
-              <ProblemList data={tryData} title={'시도한 문제'} />
+              <ProblemList data={triedProblems} title="시도한 문제" />
             </Grid>
           </Grid>
           <hr className="horizontal-divider" />
-          <div className="profile-try-problem-div">
+          <div>
             <Subtitle>시도 중인 문제집</Subtitle>
-            <WorkbookSlider posts={itemData} />
+            <WorkbookSlider id="try-workbook" workbooks={triedWorkbooks} />
+          </div>
+          <div>
+            <Subtitle>즐겨찾기 문제집</Subtitle>
+            <WorkbookSlider id="star-workbook" workbooks={starWorkbooks} />
           </div>
         </Paper>
       </Container>
-      <Footer
-        title="Footer"
-        description="Something here to give the footer a purpose!"
-      />
+      <Footer />
     </ThemeProvider>
   );
 });
 
 export default ProfilePage;
-
-const itemData = [
-  {
-    workbook_id: '01',
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/01.jpg',
-    publisher: '교육청',
-    level: 1,
-    star: true,
-  },
-  {
-    workbook_id: '02',
-    title: '2021학년도 수능 연계교재 수능완성 수학영역 수학 가형',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/02.jpg',
-    publisher: 'EBS',
-    level: 3,
-    star: true,
-  },
-  {
-    workbook_id: '03',
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (가형)',
-    img: 'https://storage.googleapis.com/mathrone-bucket/test/03.jpeg',
-    publisher: '교육청',
-    level: 1,
-    star: false,
-  },
-];
-
-const tryData = [
-  {
-    problemId: '04-01-00001',
-    problemNum: 1,
-    chapterId: '01',
-    workbookId: '04',
-    levelOfDiff: 2,
-    iscorrect: true,
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
-  },
-  {
-    problemId: '04-01-00001',
-    problemNum: 1,
-    chapterId: '01',
-    workbookId: '04',
-    levelOfDiff: 2,
-    iscorrect: true,
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
-  },
-  {
-    problemId: '04-01-00001',
-    problemNum: 1,
-    chapterId: '01',
-    workbookId: '04',
-    levelOfDiff: 2,
-    iscorrect: true,
-    title: '2020학년도 10월 고3 전국연합학력평가 문제지 수학 영역 (나형)',
-  },
-];

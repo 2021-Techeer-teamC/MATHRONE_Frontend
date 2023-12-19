@@ -4,7 +4,33 @@ export interface workbookItem {
   thumbnail: string;
   publisher: string;
   level: string;
-  star: number;
+  star: boolean;
+}
+
+export interface workbookDetail extends workbookItem {
+  summary: string;
+  category: string;
+  content: string;
+  type: string;
+  year: number;
+  month: number;
+  chapterGroup: [
+    {
+      group: string;
+      chapters: [
+        {
+          id: number;
+          name: string;
+        },
+      ];
+    },
+  ];
+  tags: [
+    {
+      id: number;
+      name: string;
+    },
+  ];
 }
 
 export interface workbookCountItem {
@@ -12,14 +38,14 @@ export interface workbookCountItem {
   category: string;
 }
 
-export interface workbookListItem {
+export interface workbookFilter {
   publisher: string;
   category: string;
   sortType: string;
   pageNum: number;
 }
 
-export interface workbookSidebarItem {
+export interface workbookCategoryItem {
   publisher: string;
   categories: string[];
   id: number;

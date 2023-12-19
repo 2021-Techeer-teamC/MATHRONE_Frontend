@@ -4,8 +4,12 @@ export const WorkbookListContainer = styled(Grid)(
   () => `
   padding: 40px;
 
+  .workbook-category-sidebar {
+    margin-right: 16px;
+  }
+
   .workbook-sort-div{
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     
     .MuiFormControl-root {
       min-width: 120;
@@ -27,6 +31,9 @@ export const WorkbookListContainer = styled(Grid)(
   .workbook-img-list-paper {
     min-height: 400px;
     margin-bottom: 20px;
+    padding: 16px;
+    border-radius: 20px;
+    border: 4px solid #315c72;
 
     .MuiCircularProgress-root  {
       margin-top: 150px;
@@ -44,6 +51,17 @@ export const WorkbookListContainer = styled(Grid)(
 
     .workbook-item {
       margin-bottom: 8px !important;
+    }
+
+    .workbook-img-div {
+      position: relative;
+      .workbook-star {
+        position: absolute !important;
+        bottom: 30px;
+        right: 60px;
+        // transform: translate(530%, 800%);
+        z-index: 3;
+      }
     }
 
     .workbook-img {
@@ -99,8 +117,18 @@ export const WorkbookListContainer = styled(Grid)(
 
 export const SidebarList = styled(List)(
   () => `
-    margin-right: 16px;
-    margin-top: 40px;
+    width: 100%;
+    margin-top: 50px;
+
+    .MuiListItemIcon-root {
+      margin-left: 0px !important;
+    }
+
+    .parent-category {
+      .MuiTypography-root {
+        font-size: 15px;
+      }
+    }
 
     .subWorkbook-button {
       padding-left: 32px;

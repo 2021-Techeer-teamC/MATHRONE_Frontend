@@ -7,76 +7,64 @@ import {
   ListItemText,
   Collapse,
 } from '@mui/material';
-import {
-  MenuBook,
-  AutoStories,
-  ExpandLess,
-  ExpandMore,
-} from '@mui/icons-material';
+import { MenuBook, AutoStories } from '@mui/icons-material';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { SidebarList } from '../style';
-import { workbookSidebarItem } from '../../../types/workbookItem';
+import { workbookCategoryItem } from '../../../types/workbookItem';
 
 interface SidebarProps {
-  onMenuClick: (publisher: string, category: string) => void;
-  workbookListSummary: workbookSidebarItem[];
+  onCategoryClick: (publisher: string, category: string) => void;
+  categories: workbookCategoryItem[];
 }
 
-export default function WorkbookSidebar({
-  onMenuClick,
-  workbookListSummary,
+export default function CategorySidebar({
+  onCategoryClick,
+  categories,
 }: SidebarProps) {
   const [open, setOpen] = useState<boolean[]>([]);
 
   useEffect(() => {
-    setOpen(new Array(workbookListSummary?.length).fill(true));
-  }, [workbookListSummary]);
+    setOpen(new Array(categories?.length).fill(true));
+  }, [categories]);
 
   const handlePublisherClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    _idx: number,
+    _event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     publisher: string,
   ) => {
-    const newOpenArray = open.map((o, idx) => (idx === _idx ? !o : o));
-    setOpen(newOpenArray);
-    onMenuClick(publisher, 'all');
+    onCategoryClick(publisher, 'all');
   };
 
   const handleCategoryClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    _event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     publisher: string,
     category: string,
   ) => {
-    onMenuClick(publisher, category);
+    onCategoryClick(publisher, category);
   };
 
   return (
     <SidebarList aria-labelledby="nested-list-subheader">
-      <ListItemButton
-        onClick={(e) => handlePublisherClick(e, -1, 'all')}
-        className="sidebar-menu"
-      >
+      <ListItemButton onClick={(e) => handlePublisherClick(e, 'all')}>
         <ListItemIcon>
           <MenuBook />
         </ListItemIcon>
-        <ListItemText primary="전체" />
+        <ListItemText primary="전체" className="parent-category" />
       </ListItemButton>
       <Divider />
-      {workbookListSummary?.map((group) => {
+      {categories?.map((group) => {
         return (
           <>
             <ListItemButton
               key={group.id}
-              onClick={(e) =>
-                handlePublisherClick(e, group.id, group.publisher)
-              }
-              className="sidebar-menu"
+              onClick={(e) => handlePublisherClick(e, group.publisher)}
             >
               <ListItemIcon>
                 <MenuBookIcon />
               </ListItemIcon>
-              <ListItemText primary={group.publisher} />
-              {open[group.id] ? <ExpandLess /> : <ExpandMore />}
+              <ListItemText
+                primary={group.publisher}
+                className="parent-category"
+              />
             </ListItemButton>
             <Divider />
             <Collapse
