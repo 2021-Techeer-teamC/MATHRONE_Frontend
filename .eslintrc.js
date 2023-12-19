@@ -1,19 +1,4 @@
 module.exports = {
-  // root: true,
-  // parser: '@typescript-eslint/parser',
-  // plugins: ["@typescript-eslint", "prettier"],
-  // // extends: ['standard-with-typescript', 'prettier', 'plugin:prettier/recommended'],
-  // extends: [
-  //   'prettier',
-  //   'plugin:prettier/recommended',
-  //   "plugin:@typescript-eslint/parser"
-  // ],
-  // parserOptions: {
-  //   project: './tsconfig.json',
-  //   sourceType: 'module',
-  //   tsconfigRootDir: __dirname,
-  // },
-  // ignorePatterns: [".eslintrc.js"],
   root: true,
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint", "prettier"],
@@ -42,5 +27,6 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/semi': 'off',
     '@typescript-eslint/space-before-function-paren': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
   },
 };
