@@ -3,20 +3,17 @@ import { observer } from 'mobx-react-lite';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useStore } from '../../store';
 import { useParams } from 'react-router-dom';
+import { green } from '@mui/material/colors';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar/index.js';
 import Workbook from './Workbook';
 import Test from './Test';
 
-const BookDetail = observer(() => {
+const WorkbookDetail = observer(() => {
   const params = useParams();
   const { workbookStore } = useStore();
   const { getCurrentWorkbook, initializeCurrentWorkbook, currentWorkbook } = workbookStore;
-  const [workbookId, setWorkbookId] = useState<string>('');
-
-  useEffect(() => {
-    setWorkbookId(params.id || '');
-  }, [params.id]);
+  const workbookId: string = params.id || '';
 
   useEffect(() => {
     getCurrentWorkbook(workbookId);
@@ -43,4 +40,4 @@ const BookDetail = observer(() => {
   );
 });
 
-export default BookDetail;
+export default WorkbookDetail;

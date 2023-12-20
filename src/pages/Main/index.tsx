@@ -96,4 +96,4 @@ const addData = [
   },
 ];
 
-const recData: problemData | never[] = [];
+const recData: [] = [];

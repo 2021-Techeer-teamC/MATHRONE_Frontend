@@ -22,17 +22,17 @@ export default function ProblemDetail() {
   return (
     <Box>
       <Header />
-      <ProblemDetailGrid container spacing={0} margin={5}>
+      <ProblemDetailGrid container>
         {data.length !== 0 ? (
           <>
             <Grid item xs={2}>
               <AnswerSheet propsdata={data} />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={10}>
               <ProbImg posts={data[num - 1]} setNum={setNum} num={num} len={data.length} />
               <Pagination setNum={setNum} len={data.length} num={num} />
             </Grid>
-            <Grid item xs={2} />
+            {/* <Grid item xs={2} /> */}
           </>
         ) : (
           <div className="problem__box--loading">문제를 가져오고 있습니다....</div>
