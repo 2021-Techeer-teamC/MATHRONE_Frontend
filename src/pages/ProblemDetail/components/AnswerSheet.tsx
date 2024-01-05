@@ -154,8 +154,10 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
       </TableContainer>
       <div
         style={{
-          width: '100%',
+          width: '80%',
           marginTop: '10px',
+          marginRight: 'auto',
+          marginLeft: 'auto',
           borderRadius: 10,
           backgroundColor: '#dfdfdf',
           padding: '9px 18px',

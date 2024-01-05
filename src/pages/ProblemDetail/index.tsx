@@ -7,7 +7,7 @@ import { Box } from '@mui/system';
 import { Container, Grid, Typography } from '@mui/material';
 import problemsService from '../../services/problemsService';
 import problems from '../../types/problems';
-import ProbImg from './components/ProbImg';
+import ProblemCarousel from './components/ProblemCarousel';
 import { ProblemDetailGrid } from './style';
 
 export default function ProblemDetail() {
@@ -22,17 +22,16 @@ export default function ProblemDetail() {
   return (
     <Box>
       <Header />
-      <ProblemDetailGrid container>
+      <ProblemDetailGrid container spacing={4}>
         {data.length !== 0 ? (
           <>
-            <Grid item xs={2}>
-              <AnswerSheet propsdata={data} />
-            </Grid>
-            <Grid item xs={10}>
-              <ProbImg posts={data[num - 1]} setNum={setNum} num={num} len={data.length} />
+            <Grid item xs={9}>
+              <ProblemCarousel posts={data[num - 1]} setNum={setNum} num={num} len={data.length} />
               <Pagination setNum={setNum} len={data.length} num={num} />
             </Grid>
-            {/* <Grid item xs={2} /> */}
+            <Grid item xs={3}>
+              <AnswerSheet propsdata={data} />
+            </Grid>
           </>
         ) : (
           <div className="problem__box--loading">문제를 가져오고 있습니다....</div>

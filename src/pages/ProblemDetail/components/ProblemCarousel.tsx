@@ -9,7 +9,7 @@ export interface Props {
   len: number;
 }
 
-const ProbImg = ({ posts, setNum, num, len }: Props) => {
+const ProblemCarousel = ({ posts, setNum, num, len }: Props) => {
   return (
     <Box
       sx={{
@@ -19,6 +19,7 @@ const ProbImg = ({ posts, setNum, num, len }: Props) => {
         p: 1,
         m: 1,
         height: '80%',
+        gap: '20px',
       }}
     >
       <Button onClick={() => (num === 1 ? null : setNum(num - 1))}>이전</Button>
@@ -28,4 +29,4 @@ const ProbImg = ({ posts, setNum, num, len }: Props) => {
   );
 };
 
-export default ProbImg;
+export default ProblemCarousel;
