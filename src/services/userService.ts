@@ -6,7 +6,7 @@ class UserService {
   signIn(accountId: string | null, password: string | null) {
     return axios.post<signInUserItem>(
       `${process.env.REACT_APP_IP}/user/login`,
-      { accountId: accountId, password: password },
+      { nickname: accountId, password: password },
       {
         headers: {
           'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ class UserService {
   ) {
     return axios.post<signUpUserItem>(
       `${process.env.REACT_APP_IP}/user/signup`,
-      { accountId: accountId, email: email, password: password },
+      { nickname: accountId, email: email, password: password },
       {
         headers: {
           'Content-Type': 'application/json',

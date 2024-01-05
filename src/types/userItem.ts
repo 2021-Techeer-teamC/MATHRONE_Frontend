@@ -5,7 +5,7 @@ export interface signInUserItem {
   accessTokenExpiresIn: number;
   userInfo: {
     userId: string;
-    accountId: string;
+    nickname: string;
   };
   snsInfo: {
     tokenType: string;
@@ -19,5 +19,5 @@ export interface signInUserItem {
 }
 
 export interface signUpUserItem {
-  accountId: string;
+  nickname: string;
 }

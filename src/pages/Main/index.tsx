@@ -51,7 +51,7 @@ const Main = observer(() => {
           </div>
           <div className="try-carousel">
             <Subtitle>
-              {account.id
+              {account.nickname
                 ? '시도 중인 문제집'
                 : '유저들이 가장 많이 시도한 문제집'}
             </Subtitle>
@@ -59,7 +59,7 @@ const Main = observer(() => {
           </div>
           <div className="star-carousel">
             <Subtitle>
-              {account.id
+              {account.nickname
                 ? '즐겨찾기 문제집'
                 : '유저들이 가장 많이 즐겨찾는 문제집'}
             </Subtitle>

@@ -54,7 +54,7 @@ const ProfilePage = observer(() => {
                 )}
               </div>
               <Typography className="profile-info-text">
-                {`${account.id} / ${account.email}`}
+                {`${account.nickname} / ${account.email}`}
               </Typography>
               <Typography className="profile-info-text">
                 {`순위: ${account.rankInfo.rank || '[없음]'}`}
