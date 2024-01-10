@@ -1,18 +1,35 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import Pagination from './components/Pagination';
 import Header from '../../components/Header';
 import AnswerSheet from './components/AnswerSheet';
 import { useStore } from '../../store';
-import { Box } from '@mui/system';
-import { Grid } from '@mui/material';
-import ProblemCarousel from './components/ProblemCarousel';
-import { ProblemDetailGrid } from './style';
+import { useParams } from 'react-router-dom'
+import { Box, Grid, IconButton } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { ProblemDetailGrid, ProblemCarouselBox } from './style';
 
 const ProblemDetail = observer(()  => {
+  const params = useParams();
   const { problemStore } = useStore();
-  const { problemList } = problemStore;
+  const { problemList, getProblemList } = problemStore;
   const [num, setNum] = useState<number>(1);
+
+  const goPreviousProblem = (_e: React.MouseEvent<HTMLButtonElement>) => {
+    if(num !== 1) setNum((prev) => prev - 1);
+  }
+
+  const goNextProblem = (_e: React.MouseEvent<HTMLButtonElement>) => {
+    if(num !== problemList.length) setNum((prev) => prev + 1);
+  }
+
+  useEffect(() => {
+    // problemList가 없는 경우 데이터 패치
+    if(problemList.length === 0 && params.workbookId && params.chapterId) {
+      getProblemList(params.workbookId, params.chapterId);
+    }
+  }, []);
 
   return (
     <Box>
@@ -20,11 +37,19 @@ const ProblemDetail = observer(()  => {
       <ProblemDetailGrid container spacing={4}>
         {problemList.length !== 0 ? (
           <>
-            <Grid className="problem__box--left" item xs={9}>
-              <ProblemCarousel posts={problemList[num - 1]} setNum={setNum} num={num} len={problemList.length} />
-              <Pagination setNum={setNum} len={problemList.length} num={num} />
+            <Grid className="problem__box--problems" item xs={9}>
+              <ProblemCarouselBox>
+                <IconButton onClick={(e) => goPreviousProblem(e)}>
+                  <ArrowBackIosNewIcon />
+                </IconButton>
+                <Box component="img" src={problemList[num - 1].problemImg}></Box>
+                <IconButton onClick={(e) => goNextProblem(e)}>
+                  <ArrowForwardIosIcon />
+                </IconButton>
+              </ProblemCarouselBox>
+              <Pagination handlePageChange={setNum} total={problemList.length} num={num} />
             </Grid>
-            <Grid item xs={3}>
+            <Grid className="problem__box--answers" item xs={3}>
               <AnswerSheet propsdata={problemList} />
             </Grid>
           </>

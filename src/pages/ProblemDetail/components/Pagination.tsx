@@ -4,15 +4,22 @@ import '../../../../node_modules/rc-pagination/assets/index.css';
 import { PaginationDiv } from '../style';
 
 interface Props {
-  setNum: React.Dispatch<React.SetStateAction<number>>;
-  len: number;
+  handlePageChange: React.Dispatch<React.SetStateAction<number>>;
+  total: number;
   num: number;
 }
 
-const ProbPagination = ({ setNum, len, num }: Props) => {
+const ProbPagination = ({ handlePageChange, total, num }: Props) => {
   return (
     <PaginationDiv>
-      <Pagination simple defaultCurrent={1} current={num} total={len} pageSize={1} onChange={setNum} />
+      <Pagination
+        simple
+        defaultCurrent={1}
+        pageSize={1}
+        current={num}
+        total={total}
+        onChange={handlePageChange}
+      />
     </PaginationDiv>
   );
 };

@@ -5,7 +5,7 @@ export const ProblemDetailGrid = styled(Grid)(
   () => `
 	padding: 20px 30px;
 
-	.problem__box--left {
+	.problem__box--problems {
 		position: relative;
 	}
 
