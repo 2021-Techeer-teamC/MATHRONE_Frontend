@@ -12,20 +12,20 @@ import '@szhsin/react-menu/dist/index.css';
 import '@szhsin/react-menu/dist/transitions/slide.css';
 import grading from '../../../services/answerService';
 import { useNavigate } from 'react-router-dom';
-import problems from '../../../types/problems';
+import problemItem from '../../../types/problems';
 
 interface myAnswerData {
-  answerSubmitList: problems[];
+  answerSubmitList: problemItem[];
   isAll: boolean;
 }
 
-const AnswerSheet = (props: { propsdata: problems[] }) => {
+const AnswerSheet = (props: { propsdata: problemItem[] }) => {
   const navigator = useNavigate();
   const ref = React.useRef(null);
   const [isOpen, setOpen] = React.useState(false);
   const temp = Array.from(props.propsdata);
   const [inputs, setInputs] = React.useState(
-    ([] = temp.map((probData: problems) => ({
+    ([] = temp.map((probData: problemItem) => ({
       problemId: probData.problemId,
       myAnswer: 'a',
     }))),
@@ -75,7 +75,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
               </TableCell>
             </TableRow>
           </TableHead>
-          {props.propsdata.map((probData: problems) => (
+          {props.propsdata.map((probData: problemItem) => (
             <TableBody key={probData.problemNum}>
               {probData.multiple === false ? (
                 <TableRow>

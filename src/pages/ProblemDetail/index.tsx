@@ -6,13 +6,13 @@ import { useParams } from 'react-router-dom';
 import { Box } from '@mui/system';
 import { Grid } from '@mui/material';
 import problemsService from '../../services/problemsService';
-import problems from '../../types/problems';
+import problemItem from '../../types/problems';
 import ProblemCarousel from './components/ProblemCarousel';
 import { ProblemDetailGrid } from './style';
 
 export default function ProblemDetail() {
   const params = useParams();
-  const [data, setProbDatas] = useState<problems[]>([]);
+  const [data, setProbDatas] = useState<problemItem[]>([]);
   const [num, setNum] = useState<number>(1);
 
   useEffect(() => {

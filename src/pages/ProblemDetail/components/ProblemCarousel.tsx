@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Box, IconButton } from '@mui/material';
-import problems from '../../../types/problems';
+import problemItem from '../../../types/problems';
 import { ProblemCarouselBox } from '../style';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export interface Props {
-  posts: problems;
+  posts: problemItem;
   setNum: React.Dispatch<React.SetStateAction<number>>;
   num: number;
   len: number;

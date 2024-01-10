@@ -1,9 +1,9 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import problemService from '../../services/problemsService';
-import problemData from '../../types/problems';
+import problemItem from '../../types/problems';
 
 class ProblemStore {
-  triedProblems: problemData[] | [] = [];
+  triedProblems: problemItem[] | [] = [];
 
   constructor() {
     makeAutoObservable(this);
