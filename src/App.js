@@ -1,7 +1,6 @@
 import './App.css';
 import Main from './pages/Main';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import SignIn from './pages/User/SignIn.tsx';
 import SignUp from './pages/User/SignUp.tsx';
 import InfoPage from './pages/InfoPage.js';

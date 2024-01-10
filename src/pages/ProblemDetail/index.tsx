@@ -1,36 +1,32 @@
 import { useState, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import Pagination from './components/ProbPagination';
 import Header from '../../components/Header';
 import AnswerSheet from './components/AnswerSheet';
-import { useParams } from 'react-router-dom';
+import { useStore } from '../../store';
 import { Box } from '@mui/system';
 import { Grid } from '@mui/material';
-import problemsService from '../../services/problemsService';
 import problemItem from '../../types/problems';
 import ProblemCarousel from './components/ProblemCarousel';
 import { ProblemDetailGrid } from './style';
 
-export default function ProblemDetail() {
-  const params = useParams();
-  const [data, setProbDatas] = useState<problemItem[]>([]);
+const ProblemDetail = observer(()  => {
+  const { problemStore } = useStore();
+  const { problemList } = problemStore;
   const [num, setNum] = useState<number>(1);
-
-  useEffect(() => {
-    problemsService.getProblems(params.workbookId, params.chapterId).then((response) => setProbDatas(response.data));
-  }, [params.workbookId, params.chapterId]);
 
   return (
     <Box>
       <Header />
       <ProblemDetailGrid container spacing={4}>
-        {data.length !== 0 ? (
+        {problemList.length !== 0 ? (
           <>
             <Grid item xs={9}>
-              <ProblemCarousel posts={data[num - 1]} setNum={setNum} num={num} len={data.length} />
-              <Pagination setNum={setNum} len={data.length} num={num} />
+              <ProblemCarousel posts={problemList[num - 1]} setNum={setNum} num={num} len={problemList.length} />
+              <Pagination setNum={setNum} len={problemList.length} num={num} />
             </Grid>
             <Grid item xs={3}>
-              <AnswerSheet propsdata={data} />
+              <AnswerSheet propsdata={problemList} />
             </Grid>
           </>
         ) : (
@@ -39,4 +35,6 @@ export default function ProblemDetail() {
       </ProblemDetailGrid>
     </Box>
   );
-}
+})
+
+export default ProblemDetail;
