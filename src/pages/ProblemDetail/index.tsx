@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import Pagination from './components/ProbPagination';
+import Pagination from './components/Pagination';
 import Header from '../../components/Header';
 import AnswerSheet from './components/AnswerSheet';
 import { useStore } from '../../store';
 import { Box } from '@mui/system';
 import { Grid } from '@mui/material';
-import problemItem from '../../types/problems';
 import ProblemCarousel from './components/ProblemCarousel';
 import { ProblemDetailGrid } from './style';
 
@@ -21,7 +20,7 @@ const ProblemDetail = observer(()  => {
       <ProblemDetailGrid container spacing={4}>
         {problemList.length !== 0 ? (
           <>
-            <Grid item xs={9}>
+            <Grid className="problem__box--left" item xs={9}>
               <ProblemCarousel posts={problemList[num - 1]} setNum={setNum} num={num} len={problemList.length} />
               <Pagination setNum={setNum} len={problemList.length} num={num} />
             </Grid>

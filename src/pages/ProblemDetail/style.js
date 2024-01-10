@@ -5,6 +5,10 @@ export const ProblemDetailGrid = styled(Grid)(
   () => `
 	padding: 20px 30px;
 
+	.problem__box--left {
+		position: relative;
+	}
+
 	.problem__box--loading {
 		margin: auto;
 		text-align: center;
@@ -14,6 +18,9 @@ export const ProblemDetailGrid = styled(Grid)(
 
 export const PaginationDiv = styled.div`
 	margin-top: 40px;
+	position: absolute;
+	bottom: 0;
+	right: 40%;
 `;
 
 export const ProblemCarouselBox = styled(Box)(
@@ -24,5 +31,6 @@ export const ProblemCarouselBox = styled(Box)(
 	padding: 1px;
 	margin: 1px;
 	gap: 20px;
+	min-height: 80%;
   `,
 );
