@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Grid } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 
 export const ProblemDetailGrid = styled(Grid)(
   () => `
@@ -15,3 +15,14 @@ export const ProblemDetailGrid = styled(Grid)(
 export const PaginationDiv = styled.div`
 	margin-top: 40px;
 `;
+
+export const ProblemCarouselBox = styled(Box)(
+  () => `
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1px;
+	margin: 1px;
+	gap: 20px;
+  `,
+);

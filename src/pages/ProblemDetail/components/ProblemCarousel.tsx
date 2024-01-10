@@ -1,6 +1,9 @@
 import * as React from 'react';
-import { Box, Button } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import problems from '../../../types/problems';
+import { ProblemCarouselBox } from '../style';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 export interface Props {
   posts: problems;
@@ -11,21 +14,15 @@ export interface Props {
 
 const ProblemCarousel = ({ posts, setNum, num, len }: Props) => {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        p: 1,
-        m: 1,
-        height: '80%',
-        gap: '20px',
-      }}
-    >
-      <Button onClick={() => (num === 1 ? null : setNum(num - 1))}>이전</Button>
-      <Box component="img" src={posts.problemImg} sx={{ overflow: 'hidden' }}></Box>
-      <Button onClick={() => (num === len ? null : setNum(num + 1))}>다음</Button>
-    </Box>
+    <ProblemCarouselBox>
+      <IconButton onClick={() => (num === 1 ? null : setNum(num - 1))}>
+        <ArrowBackIosNewIcon />
+      </IconButton>
+      <Box component="img" src={posts.problemImg}></Box>
+      <IconButton onClick={() => (num === len ? null : setNum(num + 1))}>
+        <ArrowForwardIosIcon />
+      </IconButton>
+    </ProblemCarouselBox>
   );
 };
 

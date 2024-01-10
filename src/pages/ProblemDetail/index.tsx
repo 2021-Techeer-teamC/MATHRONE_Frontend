@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Pagination from './components/ProbPagination';
 import Header from '../../components/Header';
 import AnswerSheet from './components/AnswerSheet';
 import { useParams } from 'react-router-dom';
 import { Box } from '@mui/system';
-import { Container, Grid, Typography } from '@mui/material';
+import { Grid } from '@mui/material';
 import problemsService from '../../services/problemsService';
 import problems from '../../types/problems';
 import ProblemCarousel from './components/ProblemCarousel';
@@ -12,8 +12,8 @@ import { ProblemDetailGrid } from './style';
 
 export default function ProblemDetail() {
   const params = useParams();
-  const [data, setProbDatas] = React.useState<problems[]>([]);
-  const [num, setNum] = React.useState(1);
+  const [data, setProbDatas] = useState<problems[]>([]);
+  const [num, setNum] = useState<number>(1);
 
   useEffect(() => {
     problemsService.getProblems(params.workbookId, params.chapterId).then((response) => setProbDatas(response.data));
