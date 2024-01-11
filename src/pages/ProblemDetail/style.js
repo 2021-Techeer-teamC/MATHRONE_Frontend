@@ -69,5 +69,15 @@ export const SubmitButtonBox = styled(Box)(
 	width: 80%;
 	margin: 20px auto 0px auto;
 	justify-content: space-between;
+
+	.MuiButtonBase-root {
+		width: 45%;
+		border-radius: 10px;
+		color: white;
+		background: #315c72;
+		:hover {
+			background: #009688;
+		}
+	}
   `,
 );
