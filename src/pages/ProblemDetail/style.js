@@ -36,6 +36,12 @@ export const ProblemCarouselBox = styled(Box)(
 	margin: 1px;
 	gap: 20px;
 	height: 80%;
+	width: 100%;
+
+	img {
+		max-height: 600px;
+		max-width: 70%;
+	}
   `,
 );
 

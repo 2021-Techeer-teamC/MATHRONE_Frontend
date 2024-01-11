@@ -41,7 +41,7 @@ const ProblemDetail = observer(()  => {
                 <IconButton onClick={(e) => goPreviousProblem(e)}>
                   <ArrowBackIosNewIcon />
                 </IconButton>
-                <Box component="img" src={currentProblem?.problemImg}></Box>
+                <Box component="img" src={currentProblem?.problemImg} />
                 <IconButton onClick={(e) => goNextProblem(e)}>
                   <ArrowForwardIosIcon />
                 </IconButton>
