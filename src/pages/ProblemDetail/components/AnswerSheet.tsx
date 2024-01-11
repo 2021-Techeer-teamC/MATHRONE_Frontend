@@ -20,7 +20,7 @@ import {
   SubmitButtonBox
 } from '../style';
 
-const TableHeader = [
+const TableHeader: string[] = [
   '①',
   '②',
   '③',
@@ -42,8 +42,8 @@ const AnswerSheet = ({ problems }: AnswerSheetProps) => {
     }))),
   );
 
-  const onChange = (value: string, prob_num: string) => {
-    setInputs(inputs.map((answer) => (answer.problemId === prob_num ? { ...answer, myAnswer: value } : answer)));
+  const handleAnswerChange = (value: string, problemId: string) => {
+    setInputs(inputs.map((answer) => (answer.problemId === problemId ? { ...answer, myAnswer: value } : answer)));
   };
 
   const submitAnswer = async (inputs: any, isAll: boolean) => {
@@ -84,9 +84,8 @@ const AnswerSheet = ({ problems }: AnswerSheetProps) => {
                     <TableCellCenter colSpan={5}>
                       <TextField
                         className="table__cell--textfield"
-                        sx={{ pt: '0px' }}
                         value={inputs[problem.problemNum - 1].myAnswer}
-                        onChange={(e) => onChange(e.target.value, problem.problemId)}
+                        onChange={(e) => handleAnswerChange(e.target.value, problem.problemId)}
                         type="number"
                         size="small"
                         variant="standard"
@@ -98,7 +97,7 @@ const AnswerSheet = ({ problems }: AnswerSheetProps) => {
                       <TableCellCenter>
                         <Radio
                           checked={Number(inputs[problem.problemNum - 1].myAnswer) === Number(idx+1)}
-                          onChange={(e) => onChange(e.target.value, problem.problemId)}
+                          onChange={(e) => handleAnswerChange(e.target.value, problem.problemId)}
                           value={idx+1}
                           name="radio-buttons"
                           id={`table-cell-${headerKey}`}

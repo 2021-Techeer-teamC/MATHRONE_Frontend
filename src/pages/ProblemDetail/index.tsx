@@ -13,15 +13,14 @@ import { ProblemDetailGrid, ProblemCarouselBox } from './style';
 const ProblemDetail = observer(()  => {
   const params = useParams();
   const { problemStore } = useStore();
-  const { problemList, getProblemList } = problemStore;
-  const [num, setNum] = useState<number>(1);
+  const { problemList, getProblemList, currentProblem, currentProblemIdx, setCurrentProblem } = problemStore;
 
   const goPreviousProblem = (_e: React.MouseEvent<HTMLButtonElement>) => {
-    if(num !== 1) setNum((prev) => prev - 1);
+    if( currentProblemIdx !== 0 ) setCurrentProblem(currentProblemIdx - 1);
   }
 
   const goNextProblem = (_e: React.MouseEvent<HTMLButtonElement>) => {
-    if(num !== problemList.length) setNum((prev) => prev + 1);
+    if( currentProblemIdx !== problemList.length-1 ) setCurrentProblem(currentProblemIdx + 1);
   }
 
   useEffect(() => {
@@ -42,14 +41,14 @@ const ProblemDetail = observer(()  => {
                 <IconButton onClick={(e) => goPreviousProblem(e)}>
                   <ArrowBackIosNewIcon />
                 </IconButton>
-                <Box component="img" src={problemList[num - 1].problemImg}></Box>
+                <Box component="img" src={currentProblem?.problemImg}></Box>
                 <IconButton onClick={(e) => goNextProblem(e)}>
                   <ArrowForwardIosIcon />
                 </IconButton>
               </ProblemCarouselBox>
-              <Pagination handlePageChange={setNum} total={problemList.length} num={num} />
+              <Pagination handlePageChange={(page) => setCurrentProblem(page-1)} total={problemList.length} num={currentProblemIdx+1} />
             </Grid>
-            <Grid className="problem__box--answers" item xs={3} style={{boxSizing: 'border-box'}}>
+            <Grid className="problem__box--answers" item xs={3}>
               <AnswerSheet problems={problemList} />
             </Grid>
           </>

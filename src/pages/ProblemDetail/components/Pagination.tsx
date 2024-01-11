@@ -4,7 +4,7 @@ import '../../../../node_modules/rc-pagination/assets/index.css';
 import { PaginationDiv } from '../style';
 
 interface Props {
-  handlePageChange: React.Dispatch<React.SetStateAction<number>>;
+  handlePageChange: (page: number) => void;
   total: number;
   num: number;
 }

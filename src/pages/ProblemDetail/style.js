@@ -13,6 +13,10 @@ export const ProblemDetailGrid = styled(Grid)(
 		margin: auto;
 		text-align: center;
 	}
+
+	.problem__box--answers {
+		box-sizing: border-box;
+	}
   `,
 );
 
