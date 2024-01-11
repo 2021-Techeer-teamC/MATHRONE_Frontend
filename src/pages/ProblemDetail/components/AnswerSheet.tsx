@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {
   Table,
   TableBody,
@@ -30,9 +30,10 @@ const TableHeader: string[] = [
 
 type AnswerSheetProps = {
   problems: problemItem[],
+  handleProblemChange: (problemId: number) => void,
 }
 
-const AnswerSheet = ({ problems }: AnswerSheetProps) => {
+const AnswerSheet = ({ problems, handleProblemChange}: AnswerSheetProps) => {
   const navigate = useNavigate();
   const temp = Array.from(problems);
   const [inputs, setInputs] = useState(
@@ -76,9 +77,14 @@ const AnswerSheet = ({ problems }: AnswerSheetProps) => {
           {problems.map((problem: problemItem) => (
             <TableBody key={problem.problemNum}>
               <TableRow>
-                <TableCell component="th" scope="row" align="center" padding="none">
+                <TableCellCenter
+                  className="table__cell--number"
+                  component="th"
+                  scope="row"
+                  onClick={() => handleProblemChange(problem.problemNum - 1)}
+                >
                   {problem.problemNum}
-                </TableCell>
+                </TableCellCenter>
                 {
                   problem.multiple === false ? (
                     <TableCellCenter colSpan={5}>

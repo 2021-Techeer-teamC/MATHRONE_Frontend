@@ -49,7 +49,7 @@ const ProblemDetail = observer(()  => {
               <Pagination handlePageChange={(page) => setCurrentProblem(page-1)} total={problemList.length} num={currentProblemIdx+1} />
             </Grid>
             <Grid className="problem__box--answers" item xs={3}>
-              <AnswerSheet problems={problemList} />
+              <AnswerSheet problems={problemList} handleProblemChange={setCurrentProblem}/>
             </Grid>
           </>
         ) : (

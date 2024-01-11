@@ -35,7 +35,7 @@ export const ProblemCarouselBox = styled(Box)(
 	padding: 1px;
 	margin: 1px;
 	gap: 20px;
-	min-height: 80%;
+	height: 80%;
   `,
 );
 
@@ -50,6 +50,7 @@ export const AnswerSheetBox = styled(Box)(
 		0px 2px 1px -1px rgba(0,0,0,0.2),
 		0px 1px 1px 0px rgba(0,0,0,0.14),
 		0px 1px 3px 0px rgba(0,0,0,0.12);
+	
 	.MuiTableContainer-root {
 		max-height: 600px;
 	}
@@ -67,9 +68,16 @@ export const TableContainerBox = styled(TableContainer)(
 );
 
 export const TableCellCenter = styled(TableCell)(
-  () => `
+  ({className}) => `
 	text-align: center;
 	padding: 0px;
+
+	${className==='table__cell--number' && 
+		`:hover {
+			color: #BCDCC4;
+			cursor: pointer;
+		}`
+	}
 
 	.table__cell--textfield {
 		padding-top: 0px;
