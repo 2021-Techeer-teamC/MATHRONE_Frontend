@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'
 import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store';
 import Pagination from './components/Pagination';
 import Header from '../../components/Header';
 import AnswerSheet from './components/AnswerSheet';
-import { useStore } from '../../store';
-import { useParams } from 'react-router-dom'
 import { Box, Grid, IconButton } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -34,7 +34,7 @@ const ProblemDetail = observer(()  => {
   return (
     <Box>
       <Header />
-      <ProblemDetailGrid container spacing={4}>
+      <ProblemDetailGrid container>
         {problemList.length !== 0 ? (
           <>
             <Grid className="problem__box--problems" item xs={9}>
@@ -49,8 +49,8 @@ const ProblemDetail = observer(()  => {
               </ProblemCarouselBox>
               <Pagination handlePageChange={setNum} total={problemList.length} num={num} />
             </Grid>
-            <Grid className="problem__box--answers" item xs={3}>
-              <AnswerSheet propsdata={problemList} />
+            <Grid className="problem__box--answers" item xs={3} style={{boxSizing: 'border-box'}}>
+              <AnswerSheet problems={problemList} />
             </Grid>
           </>
         ) : (
