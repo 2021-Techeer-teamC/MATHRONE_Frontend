@@ -39,7 +39,13 @@ export const AnswerSheetBox = styled(Box)(
   () => `
 	margin-left: 16px;
 	margin-right: 20px;
-
+	border: 5px;
+	padding: 15px;
+	border-radius: 10px;
+	box-shadow:
+		0px 2px 1px -1px rgba(0,0,0,0.2),
+		0px 1px 1px 0px rgba(0,0,0,0.14),
+		0px 1px 3px 0px rgba(0,0,0,0.12);
 	.MuiTableContainer-root {
 		max-height: 600px;
 	}
@@ -60,6 +66,15 @@ export const TableCellCenter = styled(TableCell)(
   () => `
 	text-align: center;
 	padding: 0px;
+
+	.table__cell--textfield {
+		padding-top: 0px;
+		width: 90%;
+	}
+
+	.MuiRadio-root.Mui-checked {
+		color: #315c72;
+	}
   `,
 );
 

@@ -83,6 +83,7 @@ const AnswerSheet = ({ problems }: AnswerSheetProps) => {
                   problem.multiple === false ? (
                     <TableCellCenter colSpan={5}>
                       <TextField
+                        className="table__cell--textfield"
                         sx={{ pt: '0px' }}
                         value={inputs[problem.problemNum - 1].myAnswer}
                         onChange={(e) => onChange(e.target.value, problem.problemId)}
