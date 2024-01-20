@@ -21,7 +21,7 @@ export const ProblemDetailGrid = styled(Grid)(
 );
 
 export const PaginationDiv = styled.div`
-	margin-top: 40px;
+	margin-top: 10px;
 	position: absolute;
 	bottom: 0;
 	right: 40%;
@@ -39,7 +39,7 @@ export const ProblemCarouselBox = styled(Box)(
 	width: 100%;
 
 	img {
-		max-height: 600px;
+		max-height: 500px;
 		max-width: 70%;
 	}
   `,
@@ -58,7 +58,7 @@ export const AnswerSheetBox = styled(Box)(
 		0px 1px 3px 0px rgba(0,0,0,0.12);
 	
 	.MuiTableContainer-root {
-		max-height: 600px;
+		max-height: 550px;
 	}
   `,
 );
