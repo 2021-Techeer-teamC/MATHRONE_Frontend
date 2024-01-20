@@ -38,13 +38,13 @@ const ProblemDetail = observer(()  => {
           <>
             <Grid className="problem__box--problems" item xs={9}>
               <ProblemCarouselBox>
-                <IconButton onClick={(e) => goPreviousProblem(e)}>
+                <IconButton disabled={currentProblemIdx === 0} onClick={(e) => goPreviousProblem(e)}>
                   <ArrowBackIosNewIcon />
                 </IconButton>
                 <div className="problem__image__div">
                   <img src={currentProblem?.problemImg} alt="problem-image" />
                 </div>
-                <IconButton onClick={(e) => goNextProblem(e)}>
+                <IconButton disabled={currentProblemIdx === problemList.length-1} onClick={(e) => goNextProblem(e)}>
                   <ArrowForwardIosIcon />
                 </IconButton>
               </ProblemCarouselBox>
