@@ -38,9 +38,15 @@ export const ProblemCarouselBox = styled(Box)(
 	height: 80%;
 	width: 100%;
 
+	.problem__image__div {
+	  height: 500px;
+	  width: 70%;
+	}
+
 	img {
-		max-height: 500px;
-		max-width: 70%;
+	  width: 100%;
+  	  height: 100%;
+	  object-fit: contain;
 	}
   `,
 );
