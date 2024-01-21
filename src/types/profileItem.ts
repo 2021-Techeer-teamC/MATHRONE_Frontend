@@ -1,6 +1,6 @@
 export default interface profileItem {
   userId: number | null;
-  id: string;
+  nickname: string;
   password: string;
   profileImg: string | null;
   exp: number;

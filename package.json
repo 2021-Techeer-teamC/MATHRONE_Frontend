@@ -16,6 +16,8 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/react-router-dom": "^5.3.3",
     "axios": "0.24.0",
+    "eslint": "^7.11.0",
+    "eslint-config-react-app": "^7.0.1",
     "markdown-to-jsx": "^7.1.5",
     "mobx": "^6.10.0",
     "mobx-react-lite": "^4.0.3",
