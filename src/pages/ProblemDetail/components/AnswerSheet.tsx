@@ -1,24 +1,23 @@
-import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableRow,
   Radio,
   TextField,
   Button
 } from '@mui/material';
-import grading from '../../../services/answerService';
 import problemItem from '../../../types/problems';
-import { userAnswerItem } from '../../../types/answers';
 import {
   AnswerSheetBox,
   TableContainerBox,
   TableCellCenter,
   SubmitButtonBox
 } from '../style';
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../../store';
+import { useEffect } from 'react';
 
 const TableHeader: string[] = [
   '①',
@@ -33,32 +32,25 @@ type AnswerSheetProps = {
   handleProblemChange: (problemId: number) => void,
 }
 
-const AnswerSheet = ({ problems, handleProblemChange}: AnswerSheetProps) => {
+const AnswerSheet = observer(({ problems, handleProblemChange}: AnswerSheetProps) => {
   const navigate = useNavigate();
-  const temp = Array.from(problems);
-  const [inputs, setInputs] = useState(
-    ([] = temp.map((probData: problemItem) => ({
-      problemId: probData.problemId,
-      myAnswer: 'a',
-    }))),
-  );
+  const { answerStore } = useStore();
+  const { changeAnswer, initializeAnswerList, userAnswerList, submitAnswerList } = answerStore;
 
-  const handleAnswerChange = (value: string, problemId: string) => {
-    setInputs(inputs.map((answer) => (answer.problemId === problemId ? { ...answer, myAnswer: value } : answer)));
+  const handleAnswerChange = (input: string, problemId: string) => {
+    changeAnswer(input, problemId);
   };
 
-  const submitAnswer = async (inputs: any, isAll: boolean) => {
-    const postData: userAnswerItem = {
-      answerSubmitList: inputs,
-      isAll: isAll,
-    };
-    try {
-      const res = await grading.postAnswer(postData);
-      navigate('/result', { state: { answerData: res.data } });
-    } catch (error) {
-      console.log(error);
-    }
+  const submitAnswer = (isAll: boolean) => {
+    submitAnswerList(isAll).then((res) => {
+      console.log(res);
+      // navigate('/result', { state: { answerData: res } });
+    })
   };
+
+  useEffect(() => {
+    initializeAnswerList(problems);
+  },[])
 
   return (
     <AnswerSheetBox>
@@ -90,7 +82,7 @@ const AnswerSheet = ({ problems, handleProblemChange}: AnswerSheetProps) => {
                     <TableCellCenter colSpan={5}>
                       <TextField
                         className="table__cell--textfield"
-                        value={inputs[problem.problemNum - 1].myAnswer}
+                        value={userAnswerList[problem.problemNum - 1]?.myAnswer}
                         onChange={(e) => handleAnswerChange(e.target.value, problem.problemId)}
                         type="number"
                         size="small"
@@ -102,7 +94,7 @@ const AnswerSheet = ({ problems, handleProblemChange}: AnswerSheetProps) => {
                     TableHeader.map((headerKey, idx) => 
                       <TableCellCenter>
                         <Radio
-                          checked={Number(inputs[problem.problemNum - 1].myAnswer) === Number(idx+1)}
+                          checked={Number(userAnswerList[problem.problemNum - 1]?.myAnswer) === Number(idx+1)}
                           onChange={(e) => handleAnswerChange(e.target.value, problem.problemId)}
                           value={idx+1}
                           name="radio-buttons"
@@ -119,14 +111,15 @@ const AnswerSheet = ({ problems, handleProblemChange}: AnswerSheetProps) => {
         </Table>
       </TableContainerBox>
       <SubmitButtonBox>
-        <Button onClick={() => submitAnswer(inputs, false)}>
+        <Button onClick={() => submitAnswer(false)}>
           푼 것만 채점
         </Button>
-        <Button onClick={() => submitAnswer(inputs, true)}>
+        <Button onClick={() => submitAnswer(true)}>
           전부 다 채점
         </Button>
       </SubmitButtonBox>
     </AnswerSheetBox>
   );
-};
+});
+
 export default AnswerSheet;
