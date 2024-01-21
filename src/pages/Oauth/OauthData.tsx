@@ -1,5 +1,3 @@
-import qs from 'qs';
-
 const CLIENT_ID = '510387731827-nn7phkh1dd5oi8fdvjc7g5dv0sdq28i7.apps.googleusercontent.com';
 const REDIRECT_URI = 'http://localhost:3000/oauth/callback/google';
 const SCOPE = 'https://www.googleapis.com/auth/userinfo.profile,https://www.googleapis.com/auth/userinfo.email'.replaceAll(',', ' ');

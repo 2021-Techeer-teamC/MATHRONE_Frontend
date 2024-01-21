@@ -16,7 +16,6 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/react-router-dom": "^5.3.3",
     "axios": "0.24.0",
-    "eslint-config-standard-with-typescript": "^43.0.0",
     "markdown-to-jsx": "^7.1.5",
     "mobx": "^6.10.0",
     "mobx-react-lite": "^4.0.3",
@@ -42,12 +41,6 @@
     "build": "react-scripts --max_old_space_size=1024 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
