@@ -48,9 +48,17 @@ const ProfilePage = observer(() => {
                   <AccountCircleIcon className="profile-icon" />
                 )}
               </div>
-              <Typography className="profile-info-text">{`${account.id} / ${account.email}`}</Typography>
-              <Typography className="profile-info-text">{`순위: ${account.rankInfo.rank || '[없음]'}`}</Typography>
-              <Button className="subscription_button" variant="contained" onClick={handleUpgradeClick}>
+              <Typography className="profile-info-text">
+                {`${account.nickname} / ${account.email}`}
+              </Typography>
+              <Typography className="profile-info-text">
+                {`순위: ${account.rankInfo.rank || '[없음]'}`}
+              </Typography>
+              <Button
+                className="subscription_button"
+                variant="contained"
+                onClick={handleUpgradeClick}
+              >
                 Premium Upgrade
               </Button>
             </Grid>

@@ -6,7 +6,7 @@ import profileItem from '../../types/profileItem';
 class UserStore {
   account: profileItem = {
     userId: -1, // ex) userId: 17
-    id: '', // ex) accountId: tester
+    nickname: '', // ex) accountId: tester
     password: '',
     profileImg: '',
     exp: 0,
@@ -34,7 +34,7 @@ class UserStore {
           this.account = {
             ...this.account,
             userId: Number(res.data.userInfo.userId),
-            id: res.data.userInfo.accountId,
+            nickname: res.data.userInfo.nickname,
           };
         });
       });
@@ -65,7 +65,7 @@ class UserStore {
         runInAction(() => {
           this.account = {
             userId: -1, // ex) userId: 17
-            id: '', // ex) accountId: tester
+            nickname: '', // ex) accountId: tester
             password: '',
             profileImg: '',
             exp: 0,
