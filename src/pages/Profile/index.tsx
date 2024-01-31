@@ -40,7 +40,7 @@ const ProfilePage = observer(() => {
         <Paper elevation={3} className="profile-paper">
           <Grid container spacing={2}>
             <Grid item xs={6} md={5} className="profile-img-grid">
-              <Logo />
+              유저정보
               <div className="profile-div">
                 {account.profileImg ? (
                   <img className="profile-img" alt="profile_img" src={account.profileImg || ''} />

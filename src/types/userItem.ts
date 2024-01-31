@@ -5,7 +5,8 @@ export interface signInUserItem {
   accessTokenExpiresIn: number;
   userInfo: {
     userId: string;
-    nickname: string;
+    // nickname: string;
+    accountId: string;
   };
   snsInfo: {
     tokenType: string;
