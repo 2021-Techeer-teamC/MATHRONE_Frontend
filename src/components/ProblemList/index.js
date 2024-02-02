@@ -31,7 +31,7 @@ const ProblemList = ({ data, title }) => {
         </List>
       ) : (
         <div className="problemlist-no-data">
-          <img src={Pencil} width="100px" alt="pencil" />
+          <img src={Pencil} width="50px" alt="pencil" />
           <label className="problemlist-label-none">충분한 데이터가 수집되지 않았습니다.</label>
         </div>
       )}

@@ -69,7 +69,7 @@ const WorkbookSlider = ({ id, workbooks }: WorkbookSliderProps) => {
         </WorkbookSliderData>
       ) : (
         <WorkbookSliderNoneData>
-          <img src={Pencil} width="100px" alt="no-img" />
+          <img src={Pencil} width="50px" alt="no-img" />
           <label>등록된 문제집이 없습니다.</label>
         </WorkbookSliderNoneData>
       )}

@@ -1,8 +1,3 @@
-.profile-paper {
-  margin: 40px;
-  padding: 40px;
-}
-
 .profile-img-grid {
   margin-top: auto !important;
   margin-bottom: auto !important;
@@ -16,10 +11,11 @@
 
 .profile-div {
   margin: 15px auto;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 30%;
   overflow: hidden;
+  border-radius: 50%;
   border: 3px solid #009688;
   box-shadow: 0px 10px 10px #808080;
 }
@@ -31,35 +27,44 @@
   color: #315c72;
 }
 
-.profile-info-text {
-  font-size: 15px !important;
-  font-family: 'NotoSans' !important;
-  margin-bottom: 8px;
+.profile__info {
+  font-family: "NotoSans-Medium";
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: column wrap;
+  width: 100%;
 }
 
-.subscription_button {
-  margin-top: 16px !important;
+.profile__info div {
+  margin-bottom: 5px;
+}
+
+.profile__info p {
+  margin: 0px;
+}
+
+.profile__info label {
+  color: rgb(0, 0, 0, 0.5);
+  margin: 0px;
+  font-size: 12px;
+}
+
+.profile__info--name {
+  font-size: 23px !important;
+  margin-bottom: 16px !important;
+}
+
+.profile__info--text {
+  font-size: 15px !important;
+  margin-bottom: 16px !important;
+}
+
+.profile__subscription__button {
+  margin-top: 8px !important;
   background-color: #009688 !important;
 }
 
-.subscription_button:hover {
+.profile__subscription__button:hover {
   background-color: #009688 !important;
   opacity: 0.7;
-}
-
-.horizontal-divider {
-  background: #315c72;
-  height: 5px;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  border: none;
-}
-
-.profile-try-text {
-  font-family: 'NotoSans-Bold';
-  padding: 5px;
-  text-align: left;
-  font-size: 25px;
-  font-weight: 500;
-  margin-bottom: 20px;
 }
