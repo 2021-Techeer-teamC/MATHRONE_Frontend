@@ -34,8 +34,7 @@ class UserStore {
           this.account = {
             ...this.account,
             userId: Number(res.data.userInfo.userId),
-            // nickname: res.data.userInfo.nickname,
-            nickname: res.data.userInfo.accountId,
+            nickname: res.data.userInfo.nickname,
           };
         });
       });

@@ -19,7 +19,7 @@ export default function Oauth2RedirectLoading(props: { sections: any }) {
         localStorage.setItem('accessToken', res.data.accessToken);
 
         localStorage.setItem('userId', res.data.userInfo.userId);
-        localStorage.setItem('nickname', res.data.userInfo.accountId);
+        localStorage.setItem('nickname', res.data.userInfo.nickname);
         localStorage.setItem('thirdParty', 'google');
       });
     } catch (error) {
