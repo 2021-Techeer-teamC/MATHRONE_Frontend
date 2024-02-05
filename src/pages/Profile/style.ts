@@ -1,5 +1,4 @@
-import styledc from 'styled-components';
-import { styled, Grid } from '@mui/material';
+import { styled, Grid, Button } from '@mui/material';
 
 export const ProfileImgDiv = styled(Grid)(
 	() => `
@@ -26,7 +25,7 @@ export const ProfileImgDiv = styled(Grid)(
 	  object-fit: cover;
 	}
 
-	.profile-icon {
+	.profile__icon {
 	  font-size: 53px !important;
 	  color: #315c72;
 	  margin: auto;
@@ -40,5 +39,42 @@ export const ProfileImgDiv = styled(Grid)(
 	  color: white;
 	}
 
+	`
+);
+
+export const ProfileInfoBox = styled(Grid)(
+	() => `
+	font-family: "NotoSans-Medium";
+	margin-left: 20px !important;
+	box-sizing: border-box;
+	display: flex;
+	flex-flow: column wrap;
+	width: 100%;
+
+	div {
+	  margin-bottom: 5px;
+	}
+
+	p {
+  	  margin: 0px;
+	}
+
+	label {
+	  color: rgb(0, 0, 0, 0.5);
+	  margin: 0px;
+	  font-size: 12px;
+	}
+	`
+);
+
+export const SubscriptionBtn = styled(Button)(
+	() => `
+    margin-top: 8px !important;
+    background-color: #009688 !important;
+
+	&:hover {
+	  background-color: #009688 !important;
+	  opacity: 0.7;
+	}
 	`
 )

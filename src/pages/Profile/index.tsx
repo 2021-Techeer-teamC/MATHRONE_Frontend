@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store';
-import { Button, Grid, Container, IconButton } from '@mui/material';
+import { Grid, Container, IconButton } from '@mui/material';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar/index.js';
@@ -12,14 +12,14 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import WorkbookSection from './section/WorkbookSection';
 import ProblemSection from './section/ProblemSection';
 import { FlexDiv } from '../../components/shared-style';
-import { ProfileImgDiv } from './style';
-import './style.css';
+import { formatPhoneNumber } from '../../utils/StringFormatter';
+import { ProfileImgDiv, SubscriptionBtn, ProfileInfoBox } from './style';
 
 const ProfilePage = observer(() => {
   const { userStore, workbookStore, problemStore } = useStore();
   const { account, getProfile } = userStore;
-  const { triedWorkbooks, starWorkbooks, getStarWorkbook, getTriedWorkbook } = workbookStore;
-  const { getTriedProblems, triedProblems } = problemStore;
+  const { getStarWorkbook, getTriedWorkbook } = workbookStore;
+  const { getTriedProblems } = problemStore;
   const [ showImgEditBtn, setShowImgEditBtn ] = useState<boolean>(false);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const ProfilePage = observer(() => {
               <Grid item xs={12} md={12} container justifyContent="flex-start">
                 <Subtitle>회원 정보</Subtitle>
               </Grid>
-              <Grid item className="profile-img-grid">
+              <Grid item>
                 <ProfileImgDiv onMouseOver={() => handleProfileMouseHover(true)} onMouseLeave={() => handleProfileMouseHover(false)}>
                   {account.profileImg ? (
                     <img
@@ -56,7 +56,7 @@ const ProfilePage = observer(() => {
                       src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR6DPolDNEPEtY6CSsYjEZqjGlbZDjvJIOwg&usqp=CAU'}
                     />
                   ) : (
-                    <AccountCircleIcon className="profile-icon" />
+                    <AccountCircleIcon className="profile__icon" />
                   )}
                   {showImgEditBtn &&
                     <IconButton className="profile__button--edit" aria-label="delete" size="small">
@@ -65,7 +65,7 @@ const ProfilePage = observer(() => {
                   }
                 </ProfileImgDiv>
               </Grid>
-              <Grid item xs={12} md={6} className="profile__info">
+              <ProfileInfoBox item xs={12} md={6}>
                 <FlexDiv>
                   <div className="first__col">
                     <label>Email Address</label>
@@ -73,8 +73,7 @@ const ProfilePage = observer(() => {
                   </div>
                   <div>
                     <label>Phone Number</label>
-                    {/* <p>{account.phoneNum}</p> */}
-                    <p>010-1134-1390</p>
+                    <p>{account.phoneNum? formatPhoneNumber(account.phoneNum) : '정보가 없습니다'}</p>
                   </div>
                 </FlexDiv>
                 <FlexDiv>
@@ -94,18 +93,17 @@ const ProfilePage = observer(() => {
                       account.premium?
                         <p>...구독 정보...</p>
                       : <p>
-                          <Button
-                            className="profile__subscription__button"
+                          <SubscriptionBtn
                             variant="contained"
                             onClick={handleUpgradeClick}
                           >
                             Premium Upgrade
-                          </Button>
+                          </SubscriptionBtn>
                       </p>
                     }
                   </div>
                 </FlexDiv>
-              </Grid>
+              </ProfileInfoBox>
             </Grid>
           }
         />
