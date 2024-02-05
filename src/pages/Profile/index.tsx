@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store';
-import { Button, Grid, Container } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Button, Grid, Container, IconButton } from '@mui/material';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar/index.js';
 import Footer from '../../components/Footer/index.js';
@@ -12,15 +12,15 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import WorkbookSection from './section/WorkbookSection';
 import ProblemSection from './section/ProblemSection';
 import { FlexDiv } from '../../components/shared-style';
+import { ProfileImgDiv } from './style';
 import './style.css';
-
-const theme = createTheme();
 
 const ProfilePage = observer(() => {
   const { userStore, workbookStore, problemStore } = useStore();
   const { account, getProfile } = userStore;
   const { triedWorkbooks, starWorkbooks, getStarWorkbook, getTriedWorkbook } = workbookStore;
   const { getTriedProblems, triedProblems } = problemStore;
+  const [ showImgEditBtn, setShowImgEditBtn ] = useState<boolean>(false);
 
   useEffect(() => {
     getProfile();
@@ -33,8 +33,12 @@ const ProfilePage = observer(() => {
     alert('click upgrade button');
   };
 
+  const handleProfileMouseHover = (over: boolean) => {
+    setShowImgEditBtn(over);
+  }
+
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Header />
       <NavBar />
       <Container>
@@ -45,19 +49,27 @@ const ProfilePage = observer(() => {
                 <Subtitle>회원 정보</Subtitle>
               </Grid>
               <Grid item className="profile-img-grid">
-                <div className="profile-div">
+                <ProfileImgDiv onMouseOver={() => handleProfileMouseHover(true)} onMouseLeave={() => handleProfileMouseHover(false)}>
                   {account.profileImg ? (
-                    <img className="profile-img" alt="profile_img" src={account.profileImg || ''} />
+                    <img
+                      alt={"profile_img"}
+                      src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR6DPolDNEPEtY6CSsYjEZqjGlbZDjvJIOwg&usqp=CAU'}
+                    />
                   ) : (
                     <AccountCircleIcon className="profile-icon" />
                   )}
-                </div>
+                  {showImgEditBtn &&
+                    <IconButton className="profile__button--edit" aria-label="delete" size="small">
+                      <ModeEditIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                </ProfileImgDiv>
               </Grid>
               <Grid item xs={12} md={6} className="profile__info">
                 <FlexDiv>
                   <div className="first__col">
                     <label>Email Address</label>
-                    <p>{account.email}</p>
+                    <p>{account.email || '정보가 없습니다'}</p>
                   </div>
                   <div>
                     <label>Phone Number</label>
@@ -101,7 +113,7 @@ const ProfilePage = observer(() => {
         <ElevationPaper children={<WorkbookSection />} />
       </Container>
       <Footer />
-    </ThemeProvider>
+    </>
   );
 });
 
