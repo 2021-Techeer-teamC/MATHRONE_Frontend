@@ -1,3 +1,4 @@
+import styledc from 'styled-components';
 import { styled, Grid, Button } from '@mui/material';
 
 export const ProfileImgDiv = styled(Grid)(
@@ -15,14 +16,8 @@ export const ProfileImgDiv = styled(Grid)(
 	text-align: center;
 	align-items: center;
 	
-	&:hover {
+	&: hover {
 		background: rgb(1, 1, 1, 0.4);
-	}
-
-	img {
-      width: 100%;
-	  height: 100%;
-	  object-fit: cover;
 	}
 
 	.profile__icon {
@@ -33,14 +28,22 @@ export const ProfileImgDiv = styled(Grid)(
 
 	.profile__button--edit {
 	  position: absolute;
-	  top: 45%;
+	  top: 40%;
 	  left: 40%;
 	  z-index: 100;
 	  color: white;
 	}
-
 	`
 );
+
+export const ProfileImg = styledc.div<{src: string, hover: boolean}>`
+  width: 150px;
+  height: 150px;
+  border-radius: 30%;
+  background-image: url(${(props) => props.src});
+  background-size: cover;
+  opacity: ${(props) => props.hover? '0.5' : '1'};
+`;
 
 export const ProfileInfoBox = styled(Grid)(
 	() => `

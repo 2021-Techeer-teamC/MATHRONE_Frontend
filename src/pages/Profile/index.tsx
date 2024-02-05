@@ -13,7 +13,7 @@ import WorkbookSection from './section/WorkbookSection';
 import ProblemSection from './section/ProblemSection';
 import { FlexDiv } from '../../components/shared-style';
 import { formatPhoneNumber } from '../../utils/StringFormatter';
-import { ProfileImgDiv, SubscriptionBtn, ProfileInfoBox } from './style';
+import { ProfileImgDiv, SubscriptionBtn, ProfileInfoBox, ProfileImg } from './style';
 
 const ProfilePage = observer(() => {
   const { userStore, workbookStore, problemStore } = useStore();
@@ -49,17 +49,20 @@ const ProfilePage = observer(() => {
                 <Subtitle>회원 정보</Subtitle>
               </Grid>
               <Grid item>
-                <ProfileImgDiv onMouseOver={() => handleProfileMouseHover(true)} onMouseLeave={() => handleProfileMouseHover(false)}>
+                <ProfileImgDiv
+                  onMouseOver={() => handleProfileMouseHover(true)}
+                  onMouseLeave={() => handleProfileMouseHover(false)}
+                >
                   {account.profileImg ? (
-                    <img
-                      alt={"profile_img"}
-                      src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR6DPolDNEPEtY6CSsYjEZqjGlbZDjvJIOwg&usqp=CAU'}
+                    <ProfileImg
+                      hover={showImgEditBtn}
+                      src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR6DPolDNEPEtY6CSsYjEZqjGlbZDjvJIOwg&usqp=CAU'
                     />
                   ) : (
                     <AccountCircleIcon className="profile__icon" />
                   )}
                   {showImgEditBtn &&
-                    <IconButton className="profile__button--edit" aria-label="delete" size="small">
+                    <IconButton className="profile__button--edit" aria-label="delete" size="medium">
                       <ModeEditIcon fontSize="inherit" />
                     </IconButton>
                   }
