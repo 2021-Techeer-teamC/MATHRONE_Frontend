@@ -29,7 +29,7 @@ export const ProfileImgDiv = styled(Grid)(
 	.profile__button--edit {
 	  position: absolute;
 	  top: 40%;
-	  left: 40%;
+	  left: 35%;
 	  z-index: 100;
 	  color: white;
 	}
