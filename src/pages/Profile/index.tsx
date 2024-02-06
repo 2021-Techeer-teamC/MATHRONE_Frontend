@@ -11,6 +11,7 @@ import { Subtitle } from '../../components/Typography';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import WorkbookSection from './section/WorkbookSection';
 import ProblemSection from './section/ProblemSection';
+import Modal from '../../components/Modal';
 import { FlexDiv } from '../../components/shared-style';
 import { formatPhoneNumber } from '../../utils/StringFormatter';
 import { ProfileImgDiv, SubscriptionBtn, ProfileInfoBox, ProfileImg } from './style';
@@ -21,6 +22,7 @@ const ProfilePage = observer(() => {
   const { getStarWorkbook, getTriedWorkbook } = workbookStore;
   const { getTriedProblems } = problemStore;
   const [ showImgEditBtn, setShowImgEditBtn ] = useState<boolean>(false);
+  const [ showImgModal, setShowImgModal ] = useState<boolean>(false);
 
   useEffect(() => {
     getProfile();
@@ -35,6 +37,10 @@ const ProfilePage = observer(() => {
 
   const handleProfileMouseHover = (over: boolean) => {
     setShowImgEditBtn(over);
+  }
+
+  const handleImgEditClick = () => {
+    setShowImgModal(true);
   }
 
   return (
@@ -62,7 +68,12 @@ const ProfilePage = observer(() => {
                     <AccountCircleIcon className="profile__icon" />
                   )}
                   {showImgEditBtn &&
-                    <IconButton className="profile__button--edit" aria-label="delete" size="medium">
+                    <IconButton
+                      className="profile__button--edit"
+                      aria-label="delete"
+                      size="medium"
+                      onClick={handleImgEditClick}
+                    >
                       <ModeEditIcon fontSize="inherit" />
                     </IconButton>
                   }
@@ -112,6 +123,11 @@ const ProfilePage = observer(() => {
         />
         <ElevationPaper children={<ProblemSection />} />
         <ElevationPaper children={<WorkbookSection />} />
+        <Modal
+          title='프로필 이미지 업로드'
+          open={showImgModal}
+          handleModalClose={()=> setShowImgModal(false)}
+        />
       </Container>
       <Footer />
     </>
