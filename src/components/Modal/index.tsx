@@ -14,6 +14,7 @@ import {
   StyledModal,
   ModalCloseButton,
   ModalSubmitButton,
+  ImgUploadForm,
 } from './style';
 // https://www.youtube.com/watch?app=desktop&v=FtpN8QI9PuA&ab_channel=CharlesKasasira
 // https://codesandbox.io/p/sandbox/react-image-crop-demo-with-react-hooks-y831o?file=%2Fsrc%2FApp.tsx%3A38%2C43
@@ -77,7 +78,7 @@ const ImgUploadModal = ({title, open, handleModalClose}: ImgUploadModalProps) =>
 	</ModalCloseButton>
 	<DialogContent dividers>
 	  <ImgUploadFormDiv>
-		<form
+		<ImgUploadForm
 		  onClick={handleImgUploadFormClick}
 		>
 		  <input
@@ -91,7 +92,7 @@ const ImgUploadModal = ({title, open, handleModalClose}: ImgUploadModalProps) =>
 		{fileSrc ?
 		  <img src={fileSrc} alt={fileName} /> : <p>클릭하여 이미지 파일을 선택해주세요</p>
 		}
-		</form>
+		</ImgUploadForm>
 	  </ImgUploadFormDiv>
 	  <p className="modal__text">
 		<span>{fileName}</span>

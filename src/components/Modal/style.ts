@@ -40,18 +40,30 @@ export const ModalCloseButton = styled(IconButton)(
   `
 );
 
+export const ImgUploadForm = styledc.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed red;
+  height: 300px;
+  width: 500px;
+  cursor: pointer;
+  border-radius: 5px;
+`;
+
 export const ImgUploadFormDiv = styledc.div`
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 1px dashed black;
-    height: 300px;
-    width: 500px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
+  // form {
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   align-items: center;
+  //   border: 1px dashed black;
+  //   height: 300px;
+  //   width: 500px;
+  //   cursor: pointer;
+  //   border-radius: 5px;
+  // }
 
   img {
     height: 300px;
