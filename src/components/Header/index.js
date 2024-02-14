@@ -43,7 +43,7 @@ const Header = observer(() => {
         <Logo />
         <Box id="dummy-box" />
         <Box sx={{ display: { xs: 'flex' } }}>
-          {!account.id ? (
+          {!account.nickname ? (
             <Grid container spacing={1}>
               <Grid item xs={6} md={7}>
                 <Link to="/signup" className="header-link">
