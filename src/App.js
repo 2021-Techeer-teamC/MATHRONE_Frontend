@@ -1,5 +1,6 @@
 import './App.css';
 import Main from './pages/Main';
+import { useStore } from './store';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SignIn from './pages/User/SignIn.tsx';
 import SignUp from './pages/User/SignUp.tsx';
@@ -18,6 +19,8 @@ import Fail from './pages/Payment/result/Fail';
 import Cancel from './pages/Payment/result/Cancel';
 
 function App() {
+  const { userStore } = useStore();
+  const { account } = userStore;
   return (
     <Router>
       <div className="App">
@@ -26,11 +29,9 @@ function App() {
           <Route path="/error" exact element={<Error />} />
           <Route path="/signin" exact element={<SignIn />} />
           <Route path="/signup" exact element={<SignUp />} />
-          <Route path="/profile" exact element={<Profile />} />
           <Route path="/info" exact element={<InfoPage />} />
           <Route path="/workbook" exact element={<Workbook />} />
           <Route path="/workbook/:id" element={<WorkbookDetail />} />
-          <Route path="/rank" exact element={<Rank />} />
           <Route path="/oauth/callback/google" exact element={<OauthGoogle />} />
           <Route path="/oauth/callback/kakao" exact element={<OauthKakao />} />
           <Route path="problem/:workbookId">
@@ -43,6 +44,15 @@ function App() {
           <Route path="/payment/success" exact element={<Success />} />
           <Route path="/payment/fail" exact element={<Fail />} />
           <Route path="/payment/cancel" exact element={<Cancel />} />
+          {/* needs authorized */}
+          {
+            account.nickname && 
+              <>
+                <Route path="/profile" exact element={<Profile />} />
+                <Route path="/rank" exact element={<Rank />} />
+              </>
+          }
+          <Route path="*" element={<h1>404</h1>} />
         </Routes>
       </div>
     </Router>
