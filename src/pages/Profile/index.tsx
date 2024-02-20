@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store';
-import { Grid, Container, IconButton } from '@mui/material';
+import { Grid, Container, IconButton, Button } from '@mui/material';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar/index.js';
@@ -12,17 +12,27 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import WorkbookSection from './section/WorkbookSection';
 import ProblemSection from './section/ProblemSection';
 import Modal from '../../components/Modal';
-import { FlexDiv } from '../../components/shared-style';
-import { formatPhoneNumber } from '../../utils/StringFormatter';
-import { ProfileImgDiv, SubscriptionBtn, ProfileInfoBox, ProfileImg } from './style';
+import { profileEditRequestItem } from '../../types/profileItem';
+import {
+  ProfileImgDiv,
+  ProfileInfoBox,
+  ProfileImg,
+  ProfileEditButton
+} from './style';
+import ProfileInfoSection from './section/ProfileInfoSection';
 
 const ProfilePage = observer(() => {
   const { userStore, workbookStore, problemStore } = useStore();
-  const { account, getProfile } = userStore;
+  const { account, getProfile, editProfile } = userStore;
   const { getStarWorkbook, getTriedWorkbook } = workbookStore;
   const { getTriedProblems } = problemStore;
   const [ showImgEditBtn, setShowImgEditBtn ] = useState<boolean>(false);
   const [ showImgModal, setShowImgModal ] = useState<boolean>(false);
+  const [ editMode, setEditMode ] = useState<boolean>(false);
+  const [ newProfile, setNewProfile ] = useState<profileEditRequestItem | null>({
+    nickname: null,
+    phoneNum: null
+  });
 
   useEffect(() => {
     getProfile();
@@ -31,16 +41,30 @@ const ProfilePage = observer(() => {
     getTriedProblems(false, 3);
   }, [getProfile, getTriedWorkbook, getTriedProblems, getStarWorkbook]);
 
-  const handleUpgradeClick = () => {
-    alert('click upgrade button');
-  };
+  useEffect(() => {
+    const accountInfo = {
+      nickname: account?.nickname,
+      phoneNum: account?.phoneNum,
+    }
+    setNewProfile(accountInfo);
+  }, [account])
 
   const handleProfileMouseHover = (over: boolean) => {
-    setShowImgEditBtn(over);
+    if(!editMode) setShowImgEditBtn(over);
   }
 
   const handleImgEditClick = () => {
     setShowImgModal(true);
+  }
+
+  const handleEditOrSaveClick = () => {
+    if(editMode) editProfile(newProfile);
+    setEditMode(prev => !prev);
+    setShowImgEditBtn(prev => !prev);
+  }
+
+  const handleProfileEdit = (profileInfo: any) => {
+    setNewProfile({...newProfile, ...profileInfo}); 
   }
 
   return (
@@ -50,7 +74,7 @@ const ProfilePage = observer(() => {
       <Container>
         <ElevationPaper 
           children={
-            <Grid container spacing={3} justifyContent="flex-start" alignItems="center">
+            <Grid style={{position: 'relative'}} container spacing={3} justifyContent="flex-start" alignItems="center">
               <Grid item xs={12} md={12} container justifyContent="flex-start">
                 <Subtitle>회원 정보</Subtitle>
               </Grid>
@@ -79,45 +103,12 @@ const ProfilePage = observer(() => {
                   }
                 </ProfileImgDiv>
               </Grid>
-              <ProfileInfoBox item xs={12} md={6}>
-                <FlexDiv>
-                  <div className="first__col">
-                    <label>Email Address</label>
-                    <p>{account.email || '정보가 없습니다'}</p>
-                  </div>
-                  <div>
-                    <label>Phone Number</label>
-                    <p>{account.phoneNum? formatPhoneNumber(account.phoneNum) : '정보가 없습니다'}</p>
-                  </div>
-                </FlexDiv>
-                <FlexDiv>
-                  <div className="first__col">
-                    <label>Rank</label>
-                    <p>{account.rankInfo.rank || '정보가 없습니다'}</p>
-                  </div>
-                  <div>
-                    <label>Score</label>
-                    <p>{account.rankInfo.score || '정보가 없습니다'}</p>
-                  </div>
-                </FlexDiv>
-                <FlexDiv>
-                  <div>
-                    <label>Subscription</label>
-                    {
-                      account.premium?
-                        <p>...구독 정보...</p>
-                      : <p>
-                          <SubscriptionBtn
-                            variant="contained"
-                            onClick={handleUpgradeClick}
-                          >
-                            Premium Upgrade
-                          </SubscriptionBtn>
-                      </p>
-                    }
-                  </div>
-                </FlexDiv>
+              <ProfileInfoBox item xs={12} md={8}>
+                <ProfileInfoSection account={account} editMode={editMode} handleProfileEdit={handleProfileEdit} />
               </ProfileInfoBox>
+              <ProfileEditButton size="small" onClick={handleEditOrSaveClick}>
+                {editMode? 'save' : 'edit'}
+              </ProfileEditButton>
             </Grid>
           }
         />

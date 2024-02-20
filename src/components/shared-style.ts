@@ -4,7 +4,7 @@ export const FlexDiv = styled.div`
   display: flex;
   gap: 50px;
 
-  & .first__col {
-    width: 200px;
+  & .flex__col--fixed {
+    width: 170px;
   }
 `;

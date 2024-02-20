@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import profileService from '../../services/profileService';
 import userService from '../../services/userService';
-import profileItem from '../../types/profileItem';
+import { profileItem, profileEditRequestItem } from '../../types/profileItem';
 
 class UserStore {
   account: profileItem = {
@@ -103,6 +103,18 @@ class UserStore {
       return error;
     }
   };
+
+  editProfile = async (newProfile: profileEditRequestItem | null) => {
+    try {
+      if(null) return;
+      console.log(newProfile);
+      return true;
+    } catch (error) {
+      console.error('Error: ', error);
+      return error;
+    }
+  };
+
 }
 
 export default UserStore;

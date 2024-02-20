@@ -67,6 +67,12 @@ export const ProfileInfoBox = styled(Grid)(
 	  margin: 0px;
 	  font-size: 12px;
 	}
+
+	.MuiFormControl-root {
+	  margin-bottom: 0px;
+	  width: 180px;
+	  font-family: "NotoSans-Medium" !important;
+	}
 	`
 );
 
@@ -79,5 +85,15 @@ export const SubscriptionBtn = styled(Button)(
 	  background-color: #009688 !important;
 	  opacity: 0.7;
 	}
+	`
+)
+
+export const ProfileEditButton = styled(Button)(
+	() => `
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	color: #009688;
+	text-decoration: underline;
 	`
 )

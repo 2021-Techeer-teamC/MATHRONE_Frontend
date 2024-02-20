@@ -45,7 +45,7 @@ export const ImgUploadForm = styledc.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px dashed red;
+  border: 2px dashed #009688;
   height: 300px;
   width: 500px;
   cursor: pointer;
@@ -53,18 +53,6 @@ export const ImgUploadForm = styledc.form`
 `;
 
 export const ImgUploadFormDiv = styledc.div`
-  // form {
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: center;
-  //   align-items: center;
-  //   border: 1px dashed black;
-  //   height: 300px;
-  //   width: 500px;
-  //   cursor: pointer;
-  //   border-radius: 5px;
-  // }
-
   img {
     height: 300px;
     object-fit: contain;

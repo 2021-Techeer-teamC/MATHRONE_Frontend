@@ -1,9 +1,9 @@
-import profile from '../types/profileItem';
+import { profileItem } from '../types/profileItem';
 import axios from '../utils/axios';
 
 class profileService {
   getMyProfile() {
-    return axios.get<profile>(`${process.env.REACT_APP_IP}/profile/my-profile`);
+    return axios.get<profileItem>(`${process.env.REACT_APP_IP}/profile/my-profile`);
   }
 }
 export default new profileService();
