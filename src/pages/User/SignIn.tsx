@@ -56,7 +56,7 @@ const SignInSide = observer(() => {
           />
           <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
             <SignInFormBox>
-              <LogoIcon />
+              <LogoIcon/>
               <Subtitle>
                 로그인
               </Subtitle>

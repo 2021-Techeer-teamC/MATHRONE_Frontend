@@ -13,6 +13,7 @@ export const LogoText = styled.div<LogoTextProps>`
   letter-spacing: 0em;
   text-align: center;
   filter: drop-shadow(1px 1px 1px beige);
+  margin-bottom: 10px;
 
   a {
 	text-decoration: none;
