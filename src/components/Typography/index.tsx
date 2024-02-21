@@ -5,10 +5,17 @@ export const TitleBase = styledc.span`
   font-family: "NotoSans-Medium";
   font-weight: 300;
 `;
+
 export const Subtitle = styledc(TitleBase)`
   font-size: 20px;
   line-height: 1.334;
   text-align: left;
+`;
+
+export const SmallSubtitle = styledc(TitleBase)`
+  font-size: 15px;
+  line-height: 1.334;
+  text-align: center;
 `;
 
 export const UnderlinedSubtitle = styledc(TitleBase)`

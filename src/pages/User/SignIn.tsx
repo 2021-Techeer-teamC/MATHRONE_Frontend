@@ -1,13 +1,17 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import LogoIcon from '../../components/Logo';
-import { Button, CssBaseline, TextField, FormControlLabel, Checkbox, Paper, Box, Grid, Typography } from '@mui/material';
+import { Button, Divider, CssBaseline, TextField, FormControlLabel, Checkbox, Paper, Box, Grid, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useStore } from '../../store';
 import { observer } from 'mobx-react-lite';
 import { GOOGLE_OAUTH_URI, KAKAO_AUTH_URL } from '../Oauth/OauthData';
-import { SignInDiv, FormBox } from './style';
+import { FlexDiv } from '../../components/shared-style';
+import { Subtitle, SmallSubtitle } from '../../components/Typography';
+import { SignInDiv, FormBox, SocialLoginButton } from './style';
+import GoogleLoginIcon from '../../assets/image/google_login_icon.png';
+import KakaoLoginIcon from '../../assets/image/kakao_login_icon.png';
 
 const theme = createTheme();
 
@@ -53,26 +57,34 @@ const SignInSide = observer(() => {
           <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
             <FormBox id="signin-formbox">
               <LogoIcon />
-              <Typography component="h1" variant="h5">
+              <Subtitle>
                 로그인
-              </Typography>
-              <Box component="form" noValidate onSubmit={handleSubmit}>
+              </Subtitle>
+              <Box className="signin__formbox__inputs" component="form" noValidate onSubmit={handleSubmit}>
                 <TextField margin="normal" required fullWidth id="accountId" label="Account ID" name="accountId" autoComplete="text" autoFocus />
                 <TextField margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password" />
-                <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="로그인 정보 유지하기" />
-                <LoadingButton type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} id="login_button" loading={loading}>
+                {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="로그인 정보 유지하기" /> */}
+                <LoadingButton id="login_button" type="submit" fullWidth variant="contained" sx={{ mt: 2 }} loading={loading}>
                   로그인
                 </LoadingButton>
+                <Link to="/signup">
+                  <Button className="signup__button" size="medium">
+                    회원가입
+                  </Button>
+                </Link>
               </Box>
-              <Box component="form" noValidate>
-                <Button className="sns_login_button" fullWidth variant="contained" href={GOOGLE_OAUTH_URI}>
-                  구글아이디로 로그인/회원가입
-                </Button>
-                <Button className="sns_login_button" fullWidth variant="contained" href={KAKAO_AUTH_URL}>
-                  카카오아이디로 로그인
-                </Button>
+              <Divider flexItem />
+              <Box className="signin__box__social">
+                <SmallSubtitle>소셜 로그인</SmallSubtitle>
+                <FlexDiv gap={1}>
+                  <SocialLoginButton href={GOOGLE_OAUTH_URI}>
+                    <img alt="social-icon" src={GoogleLoginIcon} />
+                  </SocialLoginButton>
+                  <SocialLoginButton href={KAKAO_AUTH_URL}>
+                    <img alt="social-icon" src={KakaoLoginIcon} />
+                  </SocialLoginButton>
+                </FlexDiv>
               </Box>
-              <Box component="form" noValidate></Box>
             </FormBox>
           </Grid>
         </Grid>

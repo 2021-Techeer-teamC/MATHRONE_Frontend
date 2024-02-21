@@ -45,12 +45,12 @@ const Header = observer(() => {
             <Grid container spacing={1}>
               <Grid item xs={6} md={7}>
                 <Link to="/signup" className="header-link">
-                  <Button id="register-button">회원가입</Button>
+                  <Button variant="contained" id="register-button" className="header__button">회원가입</Button>
                 </Link>
               </Grid>
               <Grid item xs={6} md={5}>
                 <Link to="/signin" className="header-link">
-                  <Button id="login-button">로그인</Button>
+                  <Button variant="contained" id="login-button" className="header__button">로그인</Button>
                 </Link>
               </Grid>
             </Grid>
@@ -63,7 +63,7 @@ const Header = observer(() => {
               </Grid>
               <Grid item xs={6} md={7}>
                 <Link to="/" className="header-link" onClick={onLogoutClick}>
-                  <LoadingButton id="login-button" loading={loading}>
+                  <LoadingButton variant="contained" id="login-button" className="header__button" loading={loading}>
                     로그아웃
                   </LoadingButton>
                 </Link>

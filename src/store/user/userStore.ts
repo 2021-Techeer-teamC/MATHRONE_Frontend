@@ -40,6 +40,7 @@ class UserStore {
           nickname: res.data.userInfo.nickname,
         };
       });
+      await this.getProfile();
       return res;
     } catch (error) {
       this.alertStore.setAlertOpen('error', '로그인에 실패하였습니다')
