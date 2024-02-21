@@ -4,7 +4,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Logo from '../../components/Logo';
 import { useStore } from '../../store';
 import { GOOGLE_OAUTH_URI } from '../Oauth/OauthData';
-import { SignUpDiv, FormBox } from './style';
+import { SignUpDiv, SignInFormBox } from './style';
 
 export default function SignUP() {
   const { userStore } = useStore();
@@ -27,7 +27,7 @@ export default function SignUP() {
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
-          <FormBox>
+          <SignInFormBox>
             <Logo />
             <Typography component="h1" variant="h5">
               회원가입
@@ -55,7 +55,7 @@ export default function SignUP() {
                 구글아이디로 로그인/회원가입
               </Button>
             </Box>
-          </FormBox>
+          </SignInFormBox>
         </Container>
       </ThemeProvider>
     </SignUpDiv>

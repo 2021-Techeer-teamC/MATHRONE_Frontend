@@ -11,11 +11,6 @@ export const SignInDiv = styledc.div`
     }
   }
 
-  #signin-formbox {
-    margin-left: 32px;
-    margin-right: 32px;
-  }
-
   .signin__formbox__inputs {
     margin-top: 50px !important;
     margin-bottom: 50px;
@@ -29,8 +24,10 @@ export const SignInDiv = styledc.div`
   }
 `;
 
-export const FormBox = styledc(Box)(
+export const SignInFormBox = styledc(Box)(
   () => `
+  margin-left: 32px;
+  margin-right: 32px;
   font-family: "NotoSans-Medium";
   margin-top: 64px;
   display: flex;
@@ -76,7 +73,7 @@ export const SignUpDiv = styledc.div`
 `;
 
 export const SocialLoginButton = styledc.a`
-  margin-top: 40px;
+  margin-top: 30px;
 
   img {
     display: block;

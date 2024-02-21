@@ -9,7 +9,7 @@ import { observer } from 'mobx-react-lite';
 import { GOOGLE_OAUTH_URI, KAKAO_AUTH_URL } from '../Oauth/OauthData';
 import { FlexDiv } from '../../components/shared-style';
 import { Subtitle, SmallSubtitle } from '../../components/Typography';
-import { SignInDiv, FormBox, SocialLoginButton } from './style';
+import { SignInDiv, SignInFormBox, SocialLoginButton } from './style';
 import GoogleLoginIcon from '../../assets/image/google_login_icon.png';
 import KakaoLoginIcon from '../../assets/image/kakao_login_icon.png';
 
@@ -55,7 +55,7 @@ const SignInSide = observer(() => {
             }}
           />
           <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-            <FormBox id="signin-formbox">
+            <SignInFormBox>
               <LogoIcon />
               <Subtitle>
                 로그인
@@ -85,7 +85,7 @@ const SignInSide = observer(() => {
                   </SocialLoginButton>
                 </FlexDiv>
               </Box>
-            </FormBox>
+            </SignInFormBox>
           </Grid>
         </Grid>
       </ThemeProvider>

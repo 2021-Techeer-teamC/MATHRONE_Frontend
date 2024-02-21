@@ -1,19 +1,18 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-//import "../../assets/styles/components.css";
-import './style.css';
+// import './style.css';
+import { LogoText } from './style';
 
-// 로고 파일 css 분리작업해야함, 회원가입 로고 넣어야함
-function Logo() {
+const Logo = () => {
   return (
-    <div className="logo-div">
-      <Link to="/" style={{ textDecoration: 'none', color: '#151515' }}>
+    <LogoText size={30}>
+      <Link to="/">
         MATHRONE
-        <span style={{ color: '#315C72', fontSize: '40px' }}>
+        <span className="logo__text--dot">
           <strong>.</strong>
         </span>
       </Link>
-    </div>
+    </LogoText>
   );
 }
 
