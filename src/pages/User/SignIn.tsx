@@ -21,16 +21,12 @@ const SignInSide = observer(() => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const user_data: any = new FormData(event.currentTarget);
-
     try {
       setLoading(true);
-      const res = await submitSignIn(user_data.get('accountId'), user_data.get('password')).then(() => {
-        navigate('/');
-        setLoading(false);
-      });
-      return res;
+      await submitSignIn(user_data.get('accountId'), user_data.get('password'));
+      navigate('/');
+      setLoading(false);
     } catch (error) {
-      console.log('error');
       setLoading(false);
     }
   };

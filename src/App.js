@@ -17,6 +17,7 @@ import OauthKakao from './pages/Oauth/Oauth2KakaoRedirect';
 import Success from './pages/Payment/result/Success';
 import Fail from './pages/Payment/result/Fail';
 import Cancel from './pages/Payment/result/Cancel';
+import SnackbarAlert from './components/Alert';
 
 function App() {
   const { userStore } = useStore();
@@ -54,6 +55,7 @@ function App() {
           }
           <Route path="*" element={<h1>404</h1>} />
         </Routes>
+        <SnackbarAlert />
       </div>
     </Router>
   );
