@@ -61,6 +61,12 @@ export const HeaderBox = styled(Box)(
     background-color: #315c72;
   }
 
+  #button__logout {
+    width: 100px;
+    color: white;
+    background-color: #315c72;
+  }
+
   .header__button {
     border-radius: 10px;
 

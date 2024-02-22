@@ -27,7 +27,7 @@ const Header = observer(() => {
         window.location.href = KAKAO_LOGOUT_URL; //카카오 로그아웃
       }
       setLoading(false);
-      navigate('/signin');
+      navigate('/account/signin');
     });
   };
 
@@ -56,14 +56,14 @@ const Header = observer(() => {
             </Grid>
           ) : (
             <Grid container spacing={1}>
-              <Grid item xs={6} md={5}>
+              <Grid item xs={6} md={4}>
                 <Link to="/profile" className="header-link">
                   <CgProfile id="profile-icon" />
                 </Link>
               </Grid>
-              <Grid item xs={6} md={7}>
+              <Grid item xs={6} md={8}>
                 <Link to="/" className="header-link" onClick={onLogoutClick}>
-                  <LoadingButton variant="contained" id="login-button" className="header__button" loading={loading}>
+                  <LoadingButton variant="contained" fullWidth id="button__logout" className="header__button" loading={loading}>
                     로그아웃
                   </LoadingButton>
                 </Link>
