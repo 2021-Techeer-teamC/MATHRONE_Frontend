@@ -1,9 +1,6 @@
 import './App.css';
 import Main from './pages/Main';
-import { useStore } from './store';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SignIn from './pages/User/section/SignIn.tsx';
-import SignUp from './pages/User/section/SignUp.tsx';
 import InfoPage from './pages/InfoPage.js';
 import Workbook from './pages/Workbook';
 import WorkbookDetail from './pages/WorkbookDetail';
@@ -21,8 +18,7 @@ import SnackbarAlert from './components/Alert';
 import User from './pages/User';
 
 function App() {
-  const { userStore } = useStore();
-  const { account } = userStore;
+
   return (
     <Router>
       <div className="App">
@@ -45,14 +41,8 @@ function App() {
           <Route path="/payment/success" exact element={<Success />} />
           <Route path="/payment/fail" exact element={<Fail />} />
           <Route path="/payment/cancel" exact element={<Cancel />} />
-          {/* needs authorized */}
-          {
-            account.nickname && 
-              <>
-                <Route path="/profile" exact element={<Profile />} />
-                <Route path="/rank" exact element={<Rank />} />
-              </>
-          }
+          <Route path="/profile" exact element={<Profile />} />
+          <Route path="/rank" exact element={<Rank />} />
           <Route path="*" element={<h1>404</h1>} />
         </Routes>
         <SnackbarAlert />

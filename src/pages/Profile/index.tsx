@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import { Navigate } from 'react-router-dom';
 import { useStore } from '../../store';
-import { Grid, Container, IconButton, Button } from '@mui/material';
+import { Grid, Container, IconButton } from '@mui/material';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar/index.js';
@@ -22,9 +23,10 @@ import {
 import ProfileInfoSection from './section/ProfileInfoSection';
 
 const ProfilePage = observer(() => {
-  const { userStore, workbookStore, problemStore } = useStore();
+  const { userStore, workbookStore, alertStore, problemStore } = useStore();
   const { account, getProfile, editProfile } = userStore;
   const { getStarWorkbook, getTriedWorkbook } = workbookStore;
+  const { setAlertOpen } = alertStore;
   const { getTriedProblems } = problemStore;
   const [ showImgEditBtn, setShowImgEditBtn ] = useState<boolean>(false);
   const [ showImgModal, setShowImgModal ] = useState<boolean>(false);
@@ -65,6 +67,11 @@ const ProfilePage = observer(() => {
 
   const handleProfileEdit = (profileInfo: any) => {
     setNewProfile({...newProfile, ...profileInfo}); 
+  }
+
+  if(!account.nickname) {
+    setAlertOpen('warning', '로그인이 필요합니다.');
+    return <Navigate to="/account/signin" />;
   }
 
   return (
