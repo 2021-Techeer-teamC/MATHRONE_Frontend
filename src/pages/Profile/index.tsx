@@ -31,7 +31,7 @@ const ProfilePage = observer(() => {
   const [ showImgEditBtn, setShowImgEditBtn ] = useState<boolean>(false);
   const [ showImgModal, setShowImgModal ] = useState<boolean>(false);
   const [ editMode, setEditMode ] = useState<boolean>(false);
-  const [ newProfile, setNewProfile ] = useState<profileEditRequestItem | null>({
+  const [ newProfile, setNewProfile ] = useState<profileEditRequestItem>({
     nickname: null,
     phoneNum: null
   });
@@ -69,7 +69,7 @@ const ProfilePage = observer(() => {
     setNewProfile({...newProfile, ...profileInfo}); 
   }
 
-  if(!account.nickname) {
+  if(!localStorage.getItem('accountId')) {
     setAlertOpen('warning', '로그인이 필요합니다.');
     return <Navigate to="/account/signin" />;
   }

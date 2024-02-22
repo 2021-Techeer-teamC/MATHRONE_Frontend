@@ -104,18 +104,21 @@ class UserStore {
       return true;
     } catch (error) {
       console.error('Error: ', error);
-      return error;
+      throw error;
     }
   };
 
-  editProfile = async (newProfile: profileEditRequestItem | null) => {
+  editProfile = async (newProfile: profileEditRequestItem) => {
     try {
-      if(null) return;
-      console.log(newProfile);
+      if(newProfile?.nickname !== this.account.nickname || newProfile?.phoneNum !== this.account.phoneNum) {
+        await profileService.updateProfile(newProfile);
+        this.getProfile();
+      }
       return true;
     } catch (error) {
       console.error('Error: ', error);
-      return error;
+      this.alertStore.setAlertOpen('error', '프로필 수정에 실패하였습니다')
+      throw error;
     }
   };
 
