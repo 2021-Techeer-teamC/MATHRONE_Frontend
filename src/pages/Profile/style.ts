@@ -73,6 +73,13 @@ export const ProfileInfoBox = styled(Grid)(
 	  width: 180px;
 	  font-family: "NotoSans-Medium" !important;
 	}
+
+	input[type=number]::-webkit-inner-spin-button, 
+	input[type=number]::-webkit-outer-spin-button { 
+	  -webkit-appearance: none; 
+	  margin: 0; 
+	}
+
 	`
 );
 

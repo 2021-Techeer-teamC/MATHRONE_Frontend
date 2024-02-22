@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField } from '@mui/material';
 import { profileItem } from '../../../../types/profileItem';
 import { FlexDiv } from '../../../../components/shared-style';
 import { SubscriptionBtn } from '../../style';
 import { formatPhoneNumber } from '../../../../utils/StringFormatter';
+import { validatePhoneNum } from '../../../../utils/Validator';
 
 type ProfileInfoSectionProps = {
   account: profileItem,
@@ -14,8 +15,13 @@ type ProfileInfoSectionProps = {
 const ProfileInfoSection = ({ account, editMode, handleProfileEdit }: ProfileInfoSectionProps) => {
   // TEST: re-rendering test
   // console.log('rendering');
+  const [phoneNumError, setPhoneNumError] = useState<boolean>(false);
 
   const handleInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	if(e.target.name === 'phoneNum') {
+		if(!validatePhoneNum(e.target.value)) setPhoneNumError(true);
+		else setPhoneNumError(false);	
+	}
 	const newInfo = {
 	  [e.target.name]: e.target.value
 	};
@@ -36,7 +42,7 @@ const ProfileInfoSection = ({ account, editMode, handleProfileEdit }: ProfileInf
 		<div className="flex__col--fixed">
 		  <label>Phone Number</label>
 		  {
-			!editMode? 
+			!editMode ? 
 			  <p>{account.phoneNum? formatPhoneNumber(account.phoneNum) : '정보가 없습니다'}</p>
 			  : <TextField
 				  id="phoneNum"
@@ -46,13 +52,15 @@ const ProfileInfoSection = ({ account, editMode, handleProfileEdit }: ProfileInf
 				  size="small"
 				  type="number"
 				  onChange={handleInfoChange}
+				  error={phoneNumError}
+				  helperText={phoneNumError && "잘못된 형식입니다"}
         		/>
 		  }
 		</div>
 		<div>
 		  <label>Nickname</label>
 		  {
-			!editMode? 
+			!editMode ? 
 			  <p>{account.nickname? account.nickname : '정보가 없습니다'}</p>
 			  : <TextField
 				  id="nickname"
