@@ -4,7 +4,7 @@ import { profileItem } from '../../../../types/profileItem';
 import { FlexDiv } from '../../../../components/shared-style';
 import { SubscriptionBtn } from '../../style';
 import { formatPhoneNumber } from '../../../../utils/StringFormatter';
-import { validatePhoneNum } from '../../../../utils/Validator';
+import { validatePhoneNum, validateNull } from '../../../../utils/Validator';
 
 type ProfileInfoSectionProps = {
   account: profileItem,
@@ -37,13 +37,13 @@ const ProfileInfoSection = ({ account, editMode, handleProfileEdit }: ProfileInf
 	  <FlexDiv>
 	    <div className="flex__col--fixed">
 		  <label>Email Address</label>
-		  <p>{account.email || '정보가 없습니다'}</p>
+		  <p>{validateNull(account.email)}</p>
 		</div>
 		<div className="flex__col--fixed">
 		  <label>Phone Number</label>
 		  {
 			!editMode ? 
-			  <p>{account.phoneNum? formatPhoneNumber(account.phoneNum) : '정보가 없습니다'}</p>
+			  <p>{validateNull(formatPhoneNumber(account.phoneNum))}</p>
 			  : <TextField
 				  id="phoneNum"
 				  name="phoneNum"
@@ -61,7 +61,7 @@ const ProfileInfoSection = ({ account, editMode, handleProfileEdit }: ProfileInf
 		  <label>Nickname</label>
 		  {
 			!editMode ? 
-			  <p>{account.nickname? account.nickname : '정보가 없습니다'}</p>
+			  <p>{validateNull(account.nickname)}</p>
 			  : <TextField
 				  id="nickname"
 				  name="nickname"
@@ -77,11 +77,11 @@ const ProfileInfoSection = ({ account, editMode, handleProfileEdit }: ProfileInf
 	  <FlexDiv>
 		<div className="flex__col--fixed">
 		  <label>Rank</label>
-		  <p>{account.rankInfo.rank || '정보가 없습니다'}</p>
+		  <p>{validateNull(account.rankInfo.rank)}</p>
 		</div>
 		<div>
 		  <label>Score</label>
-		  <p>{account.rankInfo.score || '정보가 없습니다'}</p>
+		  <p>{validateNull(account.rankInfo.score)}</p>
 		</div>
 	  </FlexDiv>
 	  <FlexDiv>

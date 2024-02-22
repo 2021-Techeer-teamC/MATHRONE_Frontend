@@ -4,3 +4,7 @@ export const validatePhoneNum = (phoneNum: string) => {
   if(phoneNum.length !== 11) return false;
   return true;
 }
+
+export const validateNull = (value: string | number | null | undefined) => {
+  return value || '정보가 없습니다'
+}
