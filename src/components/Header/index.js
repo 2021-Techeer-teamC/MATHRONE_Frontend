@@ -44,12 +44,12 @@ const Header = observer(() => {
           {!account.nickname ? (
             <Grid container spacing={1}>
               <Grid item xs={6} md={7}>
-                <Link to="/signup" className="header-link">
+                <Link to="/account/signup" className="header-link">
                   <Button variant="contained" id="register-button" className="header__button">회원가입</Button>
                 </Link>
               </Grid>
               <Grid item xs={6} md={5}>
-                <Link to="/signin" className="header-link">
+                <Link to="/account/signin" className="header-link">
                   <Button variant="contained" id="login-button" className="header__button">로그인</Button>
                 </Link>
               </Grid>

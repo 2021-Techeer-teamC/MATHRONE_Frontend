@@ -3,9 +3,13 @@ import { Link } from 'react-router-dom';
 // import './style.css';
 import { LogoText } from './style';
 
-const Logo = () => {
+type LogoProps = {
+  size?: number;
+}
+
+const Logo = ({size}: LogoProps) => {
   return (
-    <LogoText size={30}>
+    <LogoText size={size}>
       <Link to="/">
         MATHRONE
         <span className="logo__text--dot">

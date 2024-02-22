@@ -2,8 +2,8 @@ import './App.css';
 import Main from './pages/Main';
 import { useStore } from './store';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SignIn from './pages/User/SignIn.tsx';
-import SignUp from './pages/User/SignUp.tsx';
+import SignIn from './pages/User/section/SignIn.tsx';
+import SignUp from './pages/User/section/SignUp.tsx';
 import InfoPage from './pages/InfoPage.js';
 import Workbook from './pages/Workbook';
 import WorkbookDetail from './pages/WorkbookDetail';
@@ -18,6 +18,7 @@ import Success from './pages/Payment/result/Success';
 import Fail from './pages/Payment/result/Fail';
 import Cancel from './pages/Payment/result/Cancel';
 import SnackbarAlert from './components/Alert';
+import User from './pages/User';
 
 function App() {
   const { userStore } = useStore();
@@ -28,8 +29,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Main />} />
           <Route path="/error" exact element={<Error />} />
-          <Route path="/signin" exact element={<SignIn />} />
-          <Route path="/signup" exact element={<SignUp />} />
+          <Route path="/account/:path" element={<User />} />
           <Route path="/info" exact element={<InfoPage />} />
           <Route path="/workbook" exact element={<Workbook />} />
           <Route path="/workbook/:id" element={<WorkbookDetail />} />

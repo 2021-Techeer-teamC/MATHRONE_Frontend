@@ -6,7 +6,7 @@ interface LogoTextProps {
 
 export const LogoText = styled.div<LogoTextProps>`
   font-family: "ABeeZee";
-  font-size: ${(props)=> props.size || '20'}px;
+  font-size: ${(props)=> props.size? props.size : 20}px;
   font-style: italic;
   font-weight: 400;
   line-height: 28px;
