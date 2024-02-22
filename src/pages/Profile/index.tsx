@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Navigate } from 'react-router-dom';
 import { useStore } from '../../store';
@@ -31,10 +31,14 @@ const ProfilePage = observer(() => {
   const [ showImgEditBtn, setShowImgEditBtn ] = useState<boolean>(false);
   const [ showImgModal, setShowImgModal ] = useState<boolean>(false);
   const [ editMode, setEditMode ] = useState<boolean>(false);
-  const [ newProfile, setNewProfile ] = useState<profileEditRequestItem>({
+  // const [ newProfile, setNewProfile ] = useState<profileEditRequestItem>({
+  //   nickname: null,
+  //   phoneNum: null
+  // });
+  const newProfile = useRef<profileEditRequestItem>({
     nickname: null,
     phoneNum: null
-  });
+  })
 
   useEffect(() => {
     getProfile();
@@ -48,8 +52,9 @@ const ProfilePage = observer(() => {
       nickname: account?.nickname,
       phoneNum: account?.phoneNum,
     }
-    setNewProfile(accountInfo);
-  }, [account])
+    // setNewProfile(accountInfo);
+    newProfile.current = accountInfo;
+  }, [account]);
 
   const handleProfileMouseHover = (over: boolean) => {
     if(!editMode) setShowImgEditBtn(over);
@@ -60,13 +65,14 @@ const ProfilePage = observer(() => {
   }
 
   const handleEditOrSaveClick = () => {
-    if(editMode) editProfile(newProfile);
+    if(editMode) editProfile(newProfile.current);
     setEditMode(prev => !prev);
     setShowImgEditBtn(prev => !prev);
   }
 
   const handleProfileEdit = (profileInfo: any) => {
-    setNewProfile({...newProfile, ...profileInfo}); 
+    // setNewProfile({...newProfile, ...profileInfo}); 
+    newProfile.current = {...newProfile.current, ...profileInfo};
   }
 
   if(!localStorage.getItem('accountId')) {

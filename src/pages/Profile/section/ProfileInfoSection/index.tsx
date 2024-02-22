@@ -12,6 +12,9 @@ type ProfileInfoSectionProps = {
 }
 
 const ProfileInfoSection = ({ account, editMode, handleProfileEdit }: ProfileInfoSectionProps) => {
+  // TEST: re-rendering test
+  // console.log('rendering');
+
   const handleInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 	const newInfo = {
 	  [e.target.name]: e.target.value
