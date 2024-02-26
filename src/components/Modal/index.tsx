@@ -1,13 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
-  styled,
-  Dialog,
-  Button,
   DialogTitle,
   DialogContent,
   DialogActions,
   IconButton,
 } from '@mui/material';
+import { useStore } from '../../store';
 import CloseIcon from '@mui/icons-material/Close';
 import {
   ImgUploadFormDiv,
@@ -16,11 +14,7 @@ import {
   ModalSubmitButton,
   ImgUploadForm,
 } from './style';
-// https://www.youtube.com/watch?app=desktop&v=FtpN8QI9PuA&ab_channel=CharlesKasasira
-// https://codesandbox.io/p/sandbox/react-image-crop-demo-with-react-hooks-y831o?file=%2Fsrc%2FApp.tsx%3A38%2C43
-// https://www.npmjs.com/package/react-image-crop
-// https://velog.io/@rkio/styled-components-attrs
-// https://coding-factory.tistory.com/919
+import profileService from '../../services/profileService';
 
 type ImgUploadModalProps = {
   title: string,
@@ -29,22 +23,23 @@ type ImgUploadModalProps = {
 }
 
 const ImgUploadModal = ({title, open, handleModalClose}: ImgUploadModalProps) => {
+  const { userStore } = useStore();
+  const { editProfileImg } = userStore;
   const inputButton = useRef<HTMLInputElement>(null);
+  const [fileObj, setFileObj] = useState<File | null>(null);
   const [fileSrc, setFileSrc] = useState<string>('');
   const [fileName, setFileName] = useState<string>('No selected file');
+  
   const handleClose = () => {
-	setFileSrc('');
+	handleImgClearClick();
     handleModalClose();
   };
 
   const onSelectFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      const reader = new FileReader();
-      reader.addEventListener('load', () =>
-        setFileSrc(reader.result?.toString() || ''),
-      )
-      reader.readAsDataURL(e.target.files[0]);
+	  setFileSrc(URL.createObjectURL(e.target.files[0]));
 	  setFileName(e.target.files[0].name);
+	  setFileObj(e.target.files[0]);
     }
   }
 
@@ -57,9 +52,24 @@ const ImgUploadModal = ({title, open, handleModalClose}: ImgUploadModalProps) =>
 	setFileSrc('');
   }
 
-  const handleImgSubmit = () => {
-    // api request for updating profile image;
+  const handleImgSubmit = async () => {
+    try {
+	  if(!fileSrc) {
+		throw new Error('이미지 파일이 없습니다');
+	  }
+      await editProfileImg(fileObj);
+	  handleClose();
+    } catch (error) {
+      console.error('Error: ', error);
+	  handleClose();
+    }
   }
+
+  useEffect(() => {
+	return(() => {
+	  if(fileSrc) URL.revokeObjectURL(fileSrc);
+	})
+  })
 
   return (
 	<StyledModal
@@ -79,6 +89,7 @@ const ImgUploadModal = ({title, open, handleModalClose}: ImgUploadModalProps) =>
 	<DialogContent dividers>
 	  <ImgUploadFormDiv>
 		<ImgUploadForm
+		  encType="multipart/form-data"
 		  onClick={handleImgUploadFormClick}
 		>
 		  <input
@@ -110,7 +121,7 @@ const ImgUploadModal = ({title, open, handleModalClose}: ImgUploadModalProps) =>
 	  </p>
 	</DialogContent>
 	<DialogActions>
-	  <ModalSubmitButton autoFocus onClick={handleClose}>
+	  <ModalSubmitButton autoFocus onClick={handleImgSubmit}>
 	    저장하기
 	  </ModalSubmitButton>
 	</DialogActions>
@@ -119,3 +130,12 @@ const ImgUploadModal = ({title, open, handleModalClose}: ImgUploadModalProps) =>
 }
 
 export default ImgUploadModal;
+
+/*
+REFERENCE:
+https://www.youtube.com/watch?app=desktop&v=FtpN8QI9PuA&ab_channel=CharlesKasasira
+https://codesandbox.io/p/sandbox/react-image-crop-demo-with-react-hooks-y831o?file=%2Fsrc%2FApp.tsx%3A38%2C43
+https://www.npmjs.com/package/react-image-crop
+https://velog.io/@rkio/styled-components-attrs
+https://coding-factory.tistory.com/919
+*/

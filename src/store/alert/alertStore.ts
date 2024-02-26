@@ -1,9 +1,10 @@
 import { makeAutoObservable, runInAction } from 'mobx';
+import type { Color } from '@material-ui/lab/Alert'
 
 class AlertStore {
   alertOpen:boolean = false;
 
-  serverity:string = 'error';
+  serverity:Color = 'error';
 
   message:string = '에러가 발생했습니다.';
 
@@ -17,7 +18,7 @@ class AlertStore {
     this.alertOpen = false;
   };
 
-  setAlertOpen = (serverity: string, message: string, linkTo?: string) => {
+  setAlertOpen = (serverity: Color, message: string, linkTo?: string) => {
 	runInAction(() => {
 	  this.serverity = serverity;
 	  this.alertOpen = true;

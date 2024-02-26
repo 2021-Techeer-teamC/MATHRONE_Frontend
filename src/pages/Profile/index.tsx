@@ -99,7 +99,7 @@ const ProfilePage = observer(() => {
                   {account.profileImg ? (
                     <ProfileImg
                       hover={showImgEditBtn}
-                      src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSR6DPolDNEPEtY6CSsYjEZqjGlbZDjvJIOwg&usqp=CAU'
+                      src={account.profileImg}
                     />
                   ) : (
                     <AccountCircleIcon className="profile__icon" />

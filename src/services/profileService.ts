@@ -18,5 +18,19 @@ class profileService {
       },
     );
   }
+
+  updateProfileImg(newProfileImg: File | null) {
+    if(newProfileImg) {
+      const formData = new FormData();
+      formData.append(
+          "profileImg",
+          newProfileImg
+      );
+      return axios.post(
+        '/profile/img',
+        formData,
+      );
+    }
+  }
 }
 export default new profileService();

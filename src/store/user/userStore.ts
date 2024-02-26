@@ -122,6 +122,18 @@ class UserStore {
     }
   };
 
+  editProfileImg = async (newProfileImg: File | null) => {
+    try {
+      await profileService.updateProfileImg(newProfileImg);
+      this.getProfile();
+      this.alertStore.setAlertOpen('success', '프로필 수정에 성공하였습니다')
+    } catch (error) {
+      console.error('Error: ', error);
+      this.alertStore.setAlertOpen('error', '프로필 수정에 실패하였습니다')
+      throw error;
+    }
+  };
+
 }
 
 export default UserStore;

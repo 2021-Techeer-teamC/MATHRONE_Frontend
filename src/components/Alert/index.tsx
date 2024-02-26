@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { Snackbar, Alert } from '@mui/material';
+import { Alert } from '@mui/material';
 import { useStore } from '../../store';
 import { StyledSnackbar } from './style';
 
@@ -24,8 +24,8 @@ const SnackbarAlert = observer(() => {
 	>
 		<Alert
 		  onClose={handleClose}
-		  severity="error"
-		  color="error"
+		  severity={serverity}
+		  color={serverity}
 		  sx={{ width: '100%' }}
 		>
 		  {message}
