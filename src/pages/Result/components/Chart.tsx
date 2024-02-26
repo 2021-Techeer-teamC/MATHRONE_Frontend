@@ -28,8 +28,7 @@ export default function Chart(props: Props) {
         fontSize: '8px',
         height: '450px',
       }}
-      // radius={PieChart.defaultProps.radius - 6}
-      radius={44}
+      radius={34}
       lineWidth={60}
       segmentsStyle={{ transition: 'stroke .3s', cursor: 'pointer' }}
       segmentsShift={(index) => (index === selected ? 6 : 1)}
