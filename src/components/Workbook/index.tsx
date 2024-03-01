@@ -17,11 +17,7 @@ const Workbook = ({ workbook, type }: WorkbookProps) => {
 
   return (
     <WorkbookDiv>
-      <img
-        className="workbook-thumbnail"
-        alt="workbook-thumbnail"
-        src={workbook.thumbnail}
-      />
+      <img className="workbook-thumbnail" alt="workbook-thumbnail" src={workbook.thumbnail} />
       <StarButton workbookId={workbook.workbookId} star={workbook.star} />
       <div className="workbook-thumbnail-overlay" onClick={handleWorkbookClick}>
         <div className="workbook-title">{workbook.title}</div>

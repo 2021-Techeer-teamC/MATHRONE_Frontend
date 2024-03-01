@@ -1,54 +1,65 @@
-import React, { useEffect } from 'react';
-import Pagination from './components/ProbPagination';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'
+import { observer } from 'mobx-react-lite';
+import { useStore } from '../../store';
+import Pagination from './components/Pagination';
 import Header from '../../components/Header';
 import AnswerSheet from './components/AnswerSheet';
-import { useParams } from 'react-router-dom';
-import { Box } from '@mui/system';
-import { Container, Grid, Typography } from '@mui/material';
-import problemsService from '../../services/problemsService';
-import problems from '../../types/problems';
-import ProbImg from './components/ProbImg';
+import { Box, Grid, IconButton } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { ProblemDetailGrid, ProblemCarouselBox } from './style';
 
-type WorkbookDetailProps = {
-  name: string; // 해당 문제집의 이름
-};
-
-export default function ProblemDetail({ name }: WorkbookDetailProps) {
+const ProblemDetail = observer(()  => {
   const params = useParams();
-  const [data, setProbDatas] = React.useState<problems[]>([]);
-  const [num, setNum] = React.useState(1);
+  const { problemStore } = useStore();
+  const { problemList, getProblemList, currentProblem, currentProblemIdx, setCurrentProblem } = problemStore;
+
+  const goPreviousProblem = (_e: React.MouseEvent<HTMLButtonElement>) => {
+    if( currentProblemIdx !== 0 ) setCurrentProblem(currentProblemIdx - 1);
+  }
+
+  const goNextProblem = (_e: React.MouseEvent<HTMLButtonElement>) => {
+    if( currentProblemIdx !== problemList.length-1 ) setCurrentProblem(currentProblemIdx + 1);
+  }
 
   useEffect(() => {
-    problemsService
-      .getProblems(params.workbookId, params.chapterId)
-      .then((response) => setProbDatas(response.data));
-  }, [params.workbookId, params.chapterId]);
+    // problemList가 없는 경우 데이터 패치
+    if(problemList.length === 0 && params.workbookId && params.chapterId) {
+      getProblemList(params.workbookId, params.chapterId);
+    }
+  }, []);
 
-  return data.length !== 0 ? (
+  return (
     <Box>
       <Header />
-      <Container
-        style={{ alignItems: 'center', justifyContent: 'center', height: 100 }}
-      >
-        <Typography variant="h4" component="div" color="text.secondary">
-          {name}
-        </Typography>
-      </Container>
-      <Grid container spacing={0} margin={5}>
-        <Grid item xs={2}>
-          <AnswerSheet propsdata={data} />
-        </Grid>
-        <Grid item xs={8}>
-          <ProbImg
-            posts={data[num - 1]}
-            setNum={setNum}
-            num={num}
-            len={data.length}
-          />
-          <Pagination setNum={setNum} len={data.length} num={num} />
-        </Grid>
-        <Grid item xs={2} />
-      </Grid>
+      <ProblemDetailGrid container>
+        {problemList.length !== 0 ? (
+          <>
+            <Grid className="problem__box--problems" item xs={9}>
+              <ProblemCarouselBox>
+                <IconButton disabled={currentProblemIdx === 0} onClick={(e) => goPreviousProblem(e)}>
+                  <ArrowBackIosNewIcon />
+                </IconButton>
+                <div className="problem__image__div">
+                  <img src={currentProblem?.problemImg} alt="problem-image" />
+                </div>
+                <IconButton disabled={currentProblemIdx === problemList.length-1} onClick={(e) => goNextProblem(e)}>
+                  <ArrowForwardIosIcon />
+                </IconButton>
+              </ProblemCarouselBox>
+              <Pagination handlePageChange={(page) => setCurrentProblem(page-1)} total={problemList.length} num={currentProblemIdx+1} />
+            </Grid>
+            <Grid className="problem__box--answers" item xs={3}>
+              <AnswerSheet problems={problemList} handleProblemChange={setCurrentProblem}/>
+            </Grid>
+          </>
+        ) : (
+          <div className="problem__box--loading">문제를 가져오고 있습니다....</div>
+        )}
+      </ProblemDetailGrid>
     </Box>
-  ) : null;
-}
+  );
+})
+
+export default ProblemDetail;

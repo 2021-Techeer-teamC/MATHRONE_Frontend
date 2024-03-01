@@ -4,13 +4,7 @@ import { ResultHeaderBox } from '../style';
 
 const ResultHeader = () => {
   return (
-    <ResultHeaderBox
-      container
-      display="flex"
-      direction="row"
-      justifyContent="center"
-      alignItems="center"
-    >
+    <ResultHeaderBox container display="flex" direction="row" justifyContent="center" alignItems="center">
       <Logo />
       <div className="circle_div">
         <div className="circle " />

@@ -1,9 +1,11 @@
 import { makeAutoObservable, runInAction } from 'mobx';
 import profileService from '../../services/profileService';
 import userService from '../../services/userService';
-import profileItem from '../../types/profileItem';
+import { profileItem, profileEditRequestItem } from '../../types/profileItem';
 
 class UserStore {
+  alertStore;
+
   account: profileItem = {
     userId: -1, // ex) userId: 17
     nickname: '', // ex) accountId: tester
@@ -22,32 +24,34 @@ class UserStore {
     },
   };
 
-  constructor() {
+  constructor({alertStore}: any) {
     makeAutoObservable(this);
+    this.alertStore = alertStore;
   }
 
   submitSignIn = async (id: string, password: string) => {
     try {
-      userService.signIn(id, password).then((res) => {
-        localStorage.setItem('accessToken', res.data.accessToken);
-        runInAction(() => {
-          this.account = {
-            ...this.account,
-            userId: Number(res.data.userInfo.userId),
-            nickname: res.data.userInfo.nickname,
-          };
-        });
+      const res = await userService.signIn(id, password);
+      localStorage.setItem('accessToken', res.data.accessToken);
+      runInAction(() => {
+        this.account = {
+          ...this.account,
+          userId: Number(res.data.userInfo.userId),
+          nickname: res.data.userInfo.nickname,
+        };
       });
+      await this.getProfile();
+      return res;
     } catch (error) {
-      console.error('Error: ', error);
-      return error;
+      this.alertStore.setAlertOpen('error', '로그인에 실패하였습니다')
+      console.error(error);
+      throw error;
     }
   };
 
   submitSignUp = async (id: string, email: string, password: string) => {
     try {
       const res = userService.signUp(id, email, password);
-      console.log(id, email, password);
       return res;
     } catch (error) {
       console.error('Error: ', error);
@@ -100,9 +104,36 @@ class UserStore {
       return true;
     } catch (error) {
       console.error('Error: ', error);
-      return error;
+      throw error;
     }
   };
+
+  editProfile = async (newProfile: profileEditRequestItem) => {
+    try {
+      if(newProfile?.nickname !== this.account.nickname || newProfile?.phoneNum !== this.account.phoneNum) {
+        await profileService.updateProfile(newProfile);
+        this.getProfile();
+      }
+      return true;
+    } catch (error) {
+      console.error('Error: ', error);
+      this.alertStore.setAlertOpen('error', '프로필 수정에 실패하였습니다')
+      throw error;
+    }
+  };
+
+  editProfileImg = async (newProfileImg: File | null) => {
+    try {
+      await profileService.updateProfileImg(newProfileImg);
+      this.getProfile();
+      this.alertStore.setAlertOpen('success', '프로필 수정에 성공하였습니다')
+    } catch (error) {
+      console.error('Error: ', error);
+      this.alertStore.setAlertOpen('error', '프로필 수정에 실패하였습니다')
+      throw error;
+    }
+  };
+
 }
 
 export default UserStore;

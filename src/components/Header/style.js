@@ -51,22 +51,28 @@ export const HeaderBox = styled(Box)(
   
   #register-button {
     width: 90px;
-    border-radius: 100px;
     color: #000000de;
     background-color: #bcdcc4;
-  }
-  #register-button:hover {
-    background-color: #009688;
   }
   
   #login-button {
     width: 70px;
-    border-radius: 100px;
     color: white;
     background-color: #315c72;
   }
-  #login-button:hover {
-    background-color: #009688;
+
+  #button__logout {
+    width: 100px;
+    color: white;
+    background-color: #315c72;
+  }
+
+  .header__button {
+    border-radius: 10px;
+
+    &: hover {
+      opacity: 0.7;
+    }
   }
   `,
 );

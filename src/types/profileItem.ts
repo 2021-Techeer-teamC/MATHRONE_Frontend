@@ -1,6 +1,6 @@
-export default interface profileItem {
+export interface profileItem {
   userId: number | null;
-  nickname: string;
+  nickname: string | null;
   password: string;
   profileImg: string | null;
   exp: number;
@@ -14,4 +14,9 @@ export default interface profileItem {
     score: number | null;
     trycnt: number | null;
   };
+}
+
+export interface profileEditRequestItem {
+  nickname: string | null;
+  phoneNum: string | null;
 }

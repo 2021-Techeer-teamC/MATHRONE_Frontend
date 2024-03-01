@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  List,
-  Divider,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Collapse,
-} from '@mui/material';
+import { List, Divider, ListItemButton, ListItemIcon, ListItemText, Collapse } from '@mui/material';
 import { MenuBook, AutoStories } from '@mui/icons-material';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { SidebarList } from '../style';
@@ -17,28 +10,18 @@ interface SidebarProps {
   categories: workbookCategoryItem[];
 }
 
-export default function CategorySidebar({
-  onCategoryClick,
-  categories,
-}: SidebarProps) {
+export default function CategorySidebar({ onCategoryClick, categories }: SidebarProps) {
   const [open, setOpen] = useState<boolean[]>([]);
 
   useEffect(() => {
     setOpen(new Array(categories?.length).fill(true));
   }, [categories]);
 
-  const handlePublisherClick = (
-    _event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    publisher: string,
-  ) => {
+  const handlePublisherClick = (_event: React.MouseEvent<HTMLDivElement, MouseEvent>, publisher: string) => {
     onCategoryClick(publisher, 'all');
   };
 
-  const handleCategoryClick = (
-    _event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    publisher: string,
-    category: string,
-  ) => {
+  const handleCategoryClick = (_event: React.MouseEvent<HTMLDivElement, MouseEvent>, publisher: string, category: string) => {
     onCategoryClick(publisher, category);
   };
 
@@ -54,41 +37,22 @@ export default function CategorySidebar({
       {categories?.map((group) => {
         return (
           <>
-            <ListItemButton
-              key={group.id}
-              onClick={(e) => handlePublisherClick(e, group.publisher)}
-            >
+            <ListItemButton key={group.id} onClick={(e) => handlePublisherClick(e, group.publisher)}>
               <ListItemIcon>
                 <MenuBookIcon />
               </ListItemIcon>
-              <ListItemText
-                primary={group.publisher}
-                className="parent-category"
-              />
+              <ListItemText primary={group.publisher} className="parent-category" />
             </ListItemButton>
             <Divider />
-            <Collapse
-              in={open[group.id]}
-              timeout="auto"
-              unmountOnExit
-              key={group.publisher}
-            >
+            <Collapse in={open[group.id]} timeout="auto" unmountOnExit key={group.publisher}>
               {group.categories.map((category, categoryIdx) => {
                 return (
                   <List component="div" disablePadding key={categoryIdx}>
-                    <ListItemButton
-                      className="subWorkbook-button"
-                      onClick={(e) =>
-                        handleCategoryClick(e, group.publisher, category)
-                      }
-                    >
+                    <ListItemButton className="subWorkbook-button" onClick={(e) => handleCategoryClick(e, group.publisher, category)}>
                       <ListItemIcon>
                         <AutoStories fontSize="small" />
                       </ListItemIcon>
-                      <ListItemText
-                        primary={category}
-                        className="subWorkbook-title"
-                      />
+                      <ListItemText primary={category} className="subWorkbook-title" />
                     </ListItemButton>
                   </List>
                 );

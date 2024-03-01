@@ -17,11 +17,7 @@ const Success = () => {
             <Typography variant="h5" gutterBottom>
               결제에 성공하였습니다
             </Typography>
-            <Button
-              variant="contained"
-              className="success_button"
-              onClick={() => navigate('/')}
-            >
+            <Button variant="contained" className="success_button" onClick={() => navigate('/')}>
               Home으로 돌아가기
             </Button>
           </Grid>

@@ -1,8 +1,8 @@
-import { ComponentProps, useState } from "react";
-import { PieChart } from "react-minimal-pie-chart";
+import { ComponentProps, useState } from 'react';
+import { PieChart } from 'react-minimal-pie-chart';
 
 type Props = {
-  data: ComponentProps<typeof PieChart>["data"];
+  data: ComponentProps<typeof PieChart>['data'];
 };
 
 export default function Chart(props: Props) {
@@ -14,7 +14,7 @@ export default function Chart(props: Props) {
     if (hovered === i) {
       return {
         ...entry,
-        color: "grey",
+        color: 'grey',
       };
     }
     return entry;
@@ -24,22 +24,21 @@ export default function Chart(props: Props) {
     <PieChart
       data={data}
       style={{
-        fontFamily:
-          '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif',
-        fontSize: "8px",
-        height: "450px",
+        fontFamily: '"Nunito Sans", -apple-system, Helvetica, Arial, sans-serif',
+        fontSize: '8px',
+        height: '450px',
       }}
       radius={34}
       lineWidth={60}
-      segmentsStyle={{ transition: "stroke .3s", cursor: "pointer" }}
+      segmentsStyle={{ transition: 'stroke .3s', cursor: 'pointer' }}
       segmentsShift={(index) => (index === selected ? 6 : 1)}
       animate
-      label={({ dataEntry }) => dataEntry.percentage? Math.round(dataEntry.percentage) + "%": ""}
+      label={({ dataEntry }) => (dataEntry.percentage ? Math.round(dataEntry.percentage) + '%' : '')}
       labelPosition={100 - lineWidth / 2}
       labelStyle={{
-        fill: "#fff",
+        fill: '#fff',
         opacity: 0.75,
-        pointerEvents: "none",
+        pointerEvents: 'none',
       }}
       onClick={(_, index) => {
         setSelected(index === selected ? undefined : index);
