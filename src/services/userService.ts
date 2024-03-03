@@ -14,7 +14,6 @@ class UserService {
       },
     );
   }
-
   signUp(accountId: string | null, email: string | null, password: string | null) {
     return axios.post<signUpUserItem>(
       `${process.env.REACT_APP_IP}/user/signup`,

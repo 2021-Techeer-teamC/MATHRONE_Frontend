@@ -1,6 +1,7 @@
 // 리다이렉트될 화면
 // OAuth2RedirectHandeler.js
-import { useLayoutEffect } from 'react';
+
+import * as React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { useEffect } from 'react';
@@ -11,8 +12,7 @@ import { ConstructionTwoTone } from '@mui/icons-material';
 export default function Oauth2KakaoRedirect(props: { sections: any }) {
   // Ouathcode
   const code = new URL(window.location.href).searchParams.get('code');
-  
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     try {
       snsLoginService.signInWithKakao(code).then((res) => {
         console.log(JSON.stringify(res));
