@@ -18,8 +18,7 @@ const theme = createTheme();
 const ProfilePage = observer(() => {
   const { userStore, workbookStore, problemStore } = useStore();
   const { account, getProfile } = userStore;
-  const { triedWorkbooks, starWorkbooks, getStarWorkbook, getTriedWorkbook } =
-    workbookStore;
+  const { triedWorkbooks, starWorkbooks, getStarWorkbook, getTriedWorkbook } = workbookStore;
   const { getTriedProblems, triedProblems } = problemStore;
 
   useEffect(() => {
@@ -44,11 +43,7 @@ const ProfilePage = observer(() => {
               <Logo />
               <div className="profile-div">
                 {account.profileImg ? (
-                  <img
-                    className="profile-img"
-                    alt="profile_img"
-                    src={account.profileImg || ''}
-                  />
+                  <img className="profile-img" alt="profile_img" src={account.profileImg || ''} />
                 ) : (
                   <AccountCircleIcon className="profile-icon" />
                 )}

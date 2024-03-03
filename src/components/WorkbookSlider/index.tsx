@@ -15,12 +15,8 @@ type WorkbookSliderProps = {
 const WorkbookSlider = ({ id, workbooks }: WorkbookSliderProps) => {
   const [firstIdx, setFirstIdx] = useState<number>(0);
   //defalut로 보여질 갯수 + 1개
-  const [lastIdx, setLastIdx] = useState<number>(
-    Math.floor((window.innerWidth - 200) / 280)
-  );
-  const [filteredWorkbooks, setFilteredWorkbooks] = useState<
-    workbookItem[] | null
-  >([]);
+  const [lastIdx, setLastIdx] = useState<number>(Math.floor((window.innerWidth - 200) / 280));
+  const [filteredWorkbooks, setFilteredWorkbooks] = useState<workbookItem[] | null>([]);
   const [disableBtnF, setDisableBtnF] = useState<boolean>(true);
   const [disableBtnB, setDisableBtnB] = useState<boolean>(false);
 
@@ -63,23 +59,11 @@ const WorkbookSlider = ({ id, workbooks }: WorkbookSliderProps) => {
     <>
       {workbooks?.length ? (
         <WorkbookSliderData>
-          <IconButton
-            aria-label="arrow"
-            size="large"
-            onClick={moveForward}
-            disabled={disableBtnF}
-          >
+          <IconButton aria-label="arrow" size="large" onClick={moveForward} disabled={disableBtnF}>
             <ArrowBackIosNewIcon />
           </IconButton>
-          {filteredWorkbooks?.map((item) => (
-            <Workbook workbook={item} type="workbook-slider" />
-          ))}
-          <IconButton
-            aria-label="arrow"
-            size="large"
-            onClick={moveBackward}
-            disabled={disableBtnB}
-          >
+          {filteredWorkbooks?.map((item) => <Workbook workbook={item} type="workbook-slider" />)}
+          <IconButton aria-label="arrow" size="large" onClick={moveBackward} disabled={disableBtnB}>
             <ArrowForwardIosIcon />
           </IconButton>
         </WorkbookSliderData>

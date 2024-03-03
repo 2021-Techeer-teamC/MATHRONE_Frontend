@@ -16,7 +16,7 @@ import problems from '../../../types/problems';
 
 interface myAnswerData {
   answerSubmitList: problems[];
-  isAll: Boolean;
+  isAll: boolean;
 }
 
 const AnswerSheet = (props: { propsdata: problems[] }) => {
@@ -32,14 +32,10 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
   );
 
   const onChange = (value: string, prob_num: string) => {
-    setInputs(
-      inputs.map((answer) =>
-        answer.problemId === prob_num ? { ...answer, myAnswer: value } : answer,
-      ),
-    );
+    setInputs(inputs.map((answer) => (answer.problemId === prob_num ? { ...answer, myAnswer: value } : answer)));
   };
 
-  const submitAnswer = async (inputs: any, isAll: Boolean) => {
+  const submitAnswer = async (inputs: any, isAll: boolean) => {
     const postData: myAnswerData = {
       answerSubmitList: inputs,
       isAll: isAll,
@@ -83,12 +79,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
             <TableBody key={probData.problemNum}>
               {probData.multiple === false ? (
                 <TableRow>
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    align="center"
-                    padding="none"
-                  >
+                  <TableCell component="th" scope="row" align="center" padding="none">
                     {' '}
                     {probData.problemNum}{' '}
                   </TableCell>
@@ -96,9 +87,7 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                     <TextField
                       sx={{ pt: '0px' }}
                       value={inputs[probData.problemNum - 1].myAnswer}
-                      onChange={(e) =>
-                        onChange(e.target.value, probData.problemId)
-                      }
+                      onChange={(e) => onChange(e.target.value, probData.problemId)}
                       type="number"
                       size="small"
                       variant="standard"
@@ -108,23 +97,14 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                 </TableRow>
               ) : (
                 <TableRow>
-                  <TableCell
-                    component="th"
-                    scope="row"
-                    align="center"
-                    padding="none"
-                  >
+                  <TableCell component="th" scope="row" align="center" padding="none">
                     {' '}
                     {probData.problemNum}{' '}
                   </TableCell>
                   <TableCell align="center" padding="none">
                     <Radio
-                      checked={
-                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 1
-                      }
-                      onChange={(e) =>
-                        onChange(e.target.value, probData.problemId)
-                      }
+                      checked={parseInt(inputs[probData.problemNum - 1].myAnswer) === 1}
+                      onChange={(e) => onChange(e.target.value, probData.problemId)}
                       value={1}
                       name="radio-buttons"
                       inputProps={{ 'aria-label': '1' }}
@@ -132,12 +112,8 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   </TableCell>
                   <TableCell align="center" padding="none">
                     <Radio
-                      checked={
-                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 2
-                      }
-                      onChange={(e) =>
-                        onChange(e.target.value, probData.problemId)
-                      }
+                      checked={parseInt(inputs[probData.problemNum - 1].myAnswer) === 2}
+                      onChange={(e) => onChange(e.target.value, probData.problemId)}
                       value={2}
                       name="radio-buttons"
                       inputProps={{ 'aria-label': '2' }}
@@ -145,12 +121,8 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   </TableCell>
                   <TableCell align="center" padding="none">
                     <Radio
-                      checked={
-                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 3
-                      }
-                      onChange={(e) =>
-                        onChange(e.target.value, probData.problemId)
-                      }
+                      checked={parseInt(inputs[probData.problemNum - 1].myAnswer) === 3}
+                      onChange={(e) => onChange(e.target.value, probData.problemId)}
                       value={3}
                       name="radio-buttons"
                       inputProps={{ 'aria-label': '3' }}
@@ -158,12 +130,8 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   </TableCell>
                   <TableCell align="center" padding="none">
                     <Radio
-                      checked={
-                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 4
-                      }
-                      onChange={(e) =>
-                        onChange(e.target.value, probData.problemId)
-                      }
+                      checked={parseInt(inputs[probData.problemNum - 1].myAnswer) === 4}
+                      onChange={(e) => onChange(e.target.value, probData.problemId)}
                       value={4}
                       name="radio-buttons"
                       inputProps={{ 'aria-label': '4' }}
@@ -171,12 +139,8 @@ const AnswerSheet = (props: { propsdata: problems[] }) => {
                   </TableCell>
                   <TableCell align="center" padding="none">
                     <Radio
-                      checked={
-                        parseInt(inputs[probData.problemNum - 1].myAnswer) === 5
-                      }
-                      onChange={(e) =>
-                        onChange(e.target.value, probData.problemId)
-                      }
+                      checked={parseInt(inputs[probData.problemNum - 1].myAnswer) === 5}
+                      onChange={(e) => onChange(e.target.value, probData.problemId)}
                       value={5}
                       name="radio-buttons"
                       inputProps={{ 'aria-label': '5' }}

@@ -16,11 +16,7 @@ class UserService {
     );
   }
   //SignUp.tsx
-  signUp(
-    accountId: string | null,
-    email: string | null,
-    password: string | null,
-  ) {
+  signUp(accountId: string | null, email: string | null, password: string | null) {
     return axios.post<signUpUserItem>(
       `${process.env.REACT_APP_IP}/user/signup`,
       { nickname: accountId, email: email, password: password },
@@ -34,9 +30,7 @@ class UserService {
   }
 
   logOut() {
-    return axios.post<signUpUserItem>(
-      `${process.env.REACT_APP_IP}/user/logout`,
-    );
+    return axios.post<signUpUserItem>(`${process.env.REACT_APP_IP}/user/logout`);
   }
 }
 

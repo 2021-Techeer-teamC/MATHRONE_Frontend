@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Grid,
-  Paper,
-  FormControl,
-  NativeSelect,
-  Pagination,
-  CircularProgress,
-} from '@mui/material';
+import { Grid, Paper, FormControl, NativeSelect, Pagination, CircularProgress } from '@mui/material';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../store';
 import NavigationLayout from '../../components/layout/NavigationLayout';
@@ -18,13 +11,7 @@ import { WorkbookListContainer } from './style';
 
 const WorkbookList = observer(() => {
   const { workbookStore } = useStore();
-  const {
-    workbookList,
-    getWorkbookList,
-    workbookListTotalCount,
-    categories,
-    getWorkbookCategories,
-  } = workbookStore;
+  const { workbookList, getWorkbookList, workbookListTotalCount, categories, getWorkbookCategories } = workbookStore;
   const [workbookFilter, setWorkbookFilter] = useState<workbookFilter>({
     publisher: 'all',
     sortType: 'star',
@@ -34,10 +21,10 @@ const WorkbookList = observer(() => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    changeWorkbookFilter({ sortType: event.target.value });
+    changeWorkbookFilter({ ...workbookFilter, sortType: event.target.value });
   };
 
-  const changeWorkbookFilter = (newValue: object) => {
+  const changeWorkbookFilter = (newValue: workbookFilter) => {
     const newFilter = { ...workbookFilter, ...newValue };
     setWorkbookFilter(newFilter);
   };
@@ -47,15 +34,13 @@ const WorkbookList = observer(() => {
       publisher: publisher,
       category: category,
       pageNum: 1,
+      sortType: 'star',
     });
     return;
   };
 
-  const handlePageChange = (
-    _event: React.ChangeEvent<unknown>,
-    page: number,
-  ) => {
-    changeWorkbookFilter({ pageNum: page });
+  const handlePageChange = (_event: React.ChangeEvent<unknown>, page: number) => {
+    changeWorkbookFilter({ ...workbookFilter, pageNum: page });
   };
 
   useEffect(() => {
@@ -74,20 +59,11 @@ const WorkbookList = observer(() => {
             <SearchBar />
             <WorkbookListContainer container spacing={3}>
               <Grid item md={2} className="workbook-category-sidebar">
-                <CategorySidebar
-                  onCategoryClick={handleCategoryChange}
-                  categories={categories}
-                />
+                <CategorySidebar onCategoryClick={handleCategoryChange} categories={categories} />
               </Grid>
               <Grid item md={9} container>
                 <Grid item md={12} className="workbook-sort-div">
-                  <span className="count-span">
-                    {`${
-                      workbookFilter.publisher === 'all'
-                        ? '전체'
-                        : workbookFilter.publisher
-                    } (${workbookListTotalCount})`}
-                  </span>
+                  <span className="count-span">{`${workbookFilter.publisher === 'all' ? '전체' : workbookFilter.publisher} (${workbookListTotalCount})`}</span>
                   <FormControl className="sortType-form">
                     <NativeSelect
                       defaultValue={'star'}
@@ -106,21 +82,12 @@ const WorkbookList = observer(() => {
                 <Grid item md={12}>
                   <div>
                     <Paper className="workbook-img-list-paper" elevation={16}>
-                      {loading ? (
-                        <CircularProgress />
-                      ) : (
-                        <WorkbookImgList workbookList={workbookList} />
-                      )}
+                      {loading ? <CircularProgress /> : <WorkbookImgList workbookList={workbookList} />}
                     </Paper>
                   </div>
                   <div className="dummy-div"></div>
                   <div className="pagination-div">
-                    <Pagination
-                      count={Math.ceil(workbookListTotalCount / 9)}
-                      defaultPage={1}
-                      page={workbookFilter.pageNum}
-                      onChange={handlePageChange}
-                    />
+                    <Pagination count={Math.ceil(workbookListTotalCount / 9)} defaultPage={1} page={workbookFilter.pageNum} onChange={handlePageChange} />
                   </div>
                 </Grid>
               </Grid>

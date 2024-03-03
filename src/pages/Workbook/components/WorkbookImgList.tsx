@@ -16,33 +16,19 @@ const WorkbookImgList = ({ workbookList }: BookListProps) => {
         <Grid item md={4} className="workbook-item">
           <div className="workbook-img-div">
             <Link to={`/workbook/${item.workbookId}`}>
-              <img
-                className="workbook-img"
-                src={item.thumbnail}
-                alt={item.title}
-                loading="lazy"
-              />
+              <img className="workbook-img" src={item.thumbnail} alt={item.title} loading="lazy" />
             </Link>
             <StarButton workbookId={item.workbookId} star={item.star} />
           </div>
           <div className="workbook-desc">
             <div className="workbook-title-div">
               <Link to={`/workbook/${item.workbookId}`}>
-                <Typography
-                  className="workbook-title"
-                  variant="subtitle1"
-                  gutterBottom
-                >
+                <Typography className="workbook-title" variant="subtitle1" gutterBottom>
                   {item.title}
                 </Typography>
               </Link>
             </div>
-            <Typography
-              className="workbook-publisher"
-              variant="caption"
-              display="block"
-              gutterBottom
-            >
+            <Typography className="workbook-publisher" variant="caption" display="block" gutterBottom>
               [{item.publisher}]
             </Typography>
           </div>

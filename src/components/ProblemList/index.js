@@ -22,15 +22,8 @@ const ProblemList = ({ data, title }) => {
         <List>
           {data.slice(0, 10).map((item) => (
             <ListItem>
-              <ListItemText
-                primary={item.workbook.title + ' ' + item.problemNum + '번'}
-                secondary={`점수: ${item.level}`}
-              />
-              <ListItemIcon
-                onClick={() =>
-                  handleViewProblemClick(item.workbook.id, item.chapter.id)
-                }
-              >
+              <ListItemText primary={item.workbook.title + ' ' + item.problemNum + '번'} secondary={`점수: ${item.level}`} />
+              <ListItemIcon onClick={() => handleViewProblemClick(item.workbook.id, item.chapter.id)}>
                 <OpenInNewIcon />
               </ListItemIcon>
             </ListItem>
@@ -39,9 +32,7 @@ const ProblemList = ({ data, title }) => {
       ) : (
         <div className="problemlist-no-data">
           <img src={Pencil} width="100px" alt="pencil" />
-          <label className="problemlist-label-none">
-            충분한 데이터가 수집되지 않았습니다.
-          </label>
+          <label className="problemlist-label-none">충분한 데이터가 수집되지 않았습니다.</label>
         </div>
       )}
     </>
