@@ -11,7 +11,7 @@ import ProblemList from '../../components/ProblemList';
 import MainCarousel from './components/MainCarousel';
 import { Subtitle } from '../../components/Typography';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
-import problemData from '../../types/problems';
+import problemItem from '../../types/problems';
 import './style.css';
 
 const theme = createTheme();
@@ -50,7 +50,7 @@ const Main = observer(() => {
           </div>
           <div className="try-carousel">
             <Subtitle>
-              {account.nickname
+              {account.userId
                 ? '시도 중인 문제집'
                 : '유저들이 가장 많이 시도한 문제집'}
             </Subtitle>
@@ -58,7 +58,7 @@ const Main = observer(() => {
           </div>
           <div className="star-carousel">
             <Subtitle>
-              {account.nickname
+              {account.userId
                 ? '즐겨찾기 문제집'
                 : '유저들이 가장 많이 즐겨찾는 문제집'}
             </Subtitle>

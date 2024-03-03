@@ -2,7 +2,6 @@ import { signInUserItem, signUpUserItem } from '../types/userItem';
 import axios from '../utils/axios';
 
 class UserService {
-  //Signin.tsx
   signIn(accountId: string | null, password: string | null) {
     return axios.post<signInUserItem>(
       `${process.env.REACT_APP_IP}/user/login`,
@@ -15,7 +14,6 @@ class UserService {
       },
     );
   }
-  //SignUp.tsx
   signUp(accountId: string | null, email: string | null, password: string | null) {
     return axios.post<signUpUserItem>(
       `${process.env.REACT_APP_IP}/user/signup`,
@@ -28,6 +26,19 @@ class UserService {
       },
     );
   }
+
+  // accountId(accountId: string | null, email: string | null, password: string | null) {
+  //   return axios.post<signUpUserItem>(
+  //     `${process.env.REACT_APP_IP}/user/signup`,
+  //     { nickname: accountId, email: email, password: password },
+  //     {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Accept: 'application/json',
+  //       },
+  //     },
+  //   );
+  // }
 
   logOut() {
     return axios.post<signUpUserItem>(`${process.env.REACT_APP_IP}/user/logout`);

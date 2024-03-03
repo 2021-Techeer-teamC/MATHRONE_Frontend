@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useStore } from '../../../store';
 import { ExpandMore, ExpandLess } from '@mui/icons-material';
@@ -7,7 +8,9 @@ import { WorkbookDetailDiv, Progressbar } from '../style';
 import LevelButton from '../components/LevelButton';
 
 const WorkbookDetail = observer(() => {
-  const { workbookStore } = useStore();
+  const { workbookStore, problemStore } = useStore();
+  const navigate = useNavigate();
+  const { getProblemList } = problemStore;
   const { currentWorkbook } = workbookStore;
   const [chapterOpen, setChapterOpen] = useState<Map<string, boolean>>();
   const [open, setOpen] = useState(true);
@@ -17,7 +20,10 @@ const WorkbookDetail = observer(() => {
   };
 
   const handleChapterClick = (chapterId: string) => {
-    window.location.href = `/problem/${currentWorkbook?.workbookId}/${chapterId}`;
+    if(currentWorkbook?.workbookId) {
+      getProblemList(currentWorkbook.workbookId, chapterId);
+    }
+    navigate(`/problem/${currentWorkbook?.workbookId}/${chapterId}`);
   };
 
   return (

@@ -17,14 +17,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 100px;
+  margin-top: 40px;
 }
 
 .problemlist-label-none {
   text-align: center;
   align-items: center;
   color: #434343;
-  padding-top: 40px;
 }
 
 .MuiListItemIcon-root {

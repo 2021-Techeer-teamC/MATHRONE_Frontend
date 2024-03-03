@@ -1,9 +1,6 @@
 import './App.css';
 import Main from './pages/Main';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import SignIn from './pages/User/SignIn.tsx';
-import SignUp from './pages/User/SignUp.tsx';
 import InfoPage from './pages/InfoPage.js';
 import Workbook from './pages/Workbook';
 import WorkbookDetail from './pages/WorkbookDetail';
@@ -17,21 +14,21 @@ import OauthKakao from './pages/Oauth/Oauth2KakaoRedirect';
 import Success from './pages/Payment/result/Success';
 import Fail from './pages/Payment/result/Fail';
 import Cancel from './pages/Payment/result/Cancel';
+import SnackbarAlert from './components/Alert';
+import User from './pages/User';
 
 function App() {
+
   return (
     <Router>
       <div className="App">
         <Routes>
           <Route path="/" exact element={<Main />} />
           <Route path="/error" exact element={<Error />} />
-          <Route path="/signin" exact element={<SignIn />} />
-          <Route path="/signup" exact element={<SignUp />} />
-          <Route path="/profile" exact element={<Profile />} />
+          <Route path="/account/:path" element={<User />} />
           <Route path="/info" exact element={<InfoPage />} />
           <Route path="/workbook" exact element={<Workbook />} />
           <Route path="/workbook/:id" element={<WorkbookDetail />} />
-          <Route path="/rank" exact element={<Rank />} />
           <Route path="/oauth/callback/google" exact element={<OauthGoogle />} />
           <Route path="/oauth/callback/kakao" exact element={<OauthKakao />} />
           <Route path="problem/:workbookId">
@@ -44,7 +41,11 @@ function App() {
           <Route path="/payment/success" exact element={<Success />} />
           <Route path="/payment/fail" exact element={<Fail />} />
           <Route path="/payment/cancel" exact element={<Cancel />} />
+          <Route path="/profile" exact element={<Profile />} />
+          <Route path="/rank" exact element={<Rank />} />
+          <Route path="*" element={<h1>404</h1>} />
         </Routes>
+        <SnackbarAlert />
       </div>
     </Router>
   );

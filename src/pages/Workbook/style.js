@@ -51,6 +51,7 @@ export const WorkbookListContainer = styled(Grid)(
 
     .workbook-item {
       margin-bottom: 8px !important;
+      text-align: center;
     }
 
     .workbook-img-div {
