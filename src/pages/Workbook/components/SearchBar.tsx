@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 
 function SearchBar() {
   return (
-    <div className="searchbar-div">
+    <div className="searchbar-div" style={{textAlign: 'center'}}>
       <Box
         component="form"
         sx={{
