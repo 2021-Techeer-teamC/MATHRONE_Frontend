@@ -10,8 +10,8 @@ import WorkbookSlider from '../../components/WorkbookSlider/index';
 import ProblemList from '../../components/ProblemList';
 import MainCarousel from './components/MainCarousel';
 import { Subtitle } from '../../components/Typography';
+import qs from 'qs';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
-import problemItem from '../../types/problems';
 import './style.css';
 
 const theme = createTheme();
@@ -19,7 +19,8 @@ const theme = createTheme();
 const Main = observer(() => {
   const { userStore, workbookStore } = useStore();
   const { account } = userStore;
-  const { getTriedWorkbook, triedWorkbooks, starWorkbooks, getStarWorkbook } = workbookStore;
+  const { getTriedWorkbook, triedWorkbooks, starWorkbooks, getStarWorkbook } =
+    workbookStore;
   // 화면 크기
   // const size = {
   //   width: window.innerWidth || document.body.clientWidth,
@@ -50,7 +51,7 @@ const Main = observer(() => {
           </div>
           <div className="try-carousel">
             <Subtitle>
-              {account.userId
+              {account.nickname
                 ? '시도 중인 문제집'
                 : '유저들이 가장 많이 시도한 문제집'}
             </Subtitle>
@@ -58,7 +59,7 @@ const Main = observer(() => {
           </div>
           <div className="star-carousel">
             <Subtitle>
-              {account.userId
+              {account.nickname
                 ? '즐겨찾기 문제집'
                 : '유저들이 가장 많이 즐겨찾는 문제집'}
             </Subtitle>
@@ -103,4 +104,4 @@ const addData = [
   },
 ];
 
-const recData: [] = [];
+const recData: object[] = [];

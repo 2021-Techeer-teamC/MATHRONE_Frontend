@@ -1,11 +1,22 @@
-import styledc from 'styled-components';
-import { Box, Paper, Grid, styled } from '@mui/material';
+import styled from 'styled-components';
+import { Box } from '@mui/material';
 
-export const FormBox = styledc(Box)(
+export const SignInDiv = styled.div`
+  #login_button {
+    background: #315c72;
+    :hover {
+      background: #009688;
+    }
+  }
+
+  #signin-formbox {
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+`;
+
+export const FormBox = styled(Box)(
   () => `
-  margin-left: 32px;
-  margin-right: 32px;
-  font-family: "NotoSans-Medium";
   margin-top: 64px;
   display: flex;
   flex-direction: column;
@@ -15,26 +26,19 @@ export const FormBox = styledc(Box)(
     margin-top: 16px;
   }
 
-  #login_button {
-    margin-bottom: 10px;
-    background: #315c72;
+  .sns_login_button {
+    margin-top: 16px;
+    margin-bottom: 8px;
+    background: #a84949;
     :hover {
-      background: #009688;
+      background: #fc1225;
     }
+    width: 250px;
   }
+  `,
+);
 
-  .formbox__inputs {
-    margin-top: 50px !important;
-    margin-bottom: 50px;
-  }
-
-  .signup__button {
-    float: right;
-    color: rgb(0, 0, 0, 0.8);
-    text-decoration: underline;
-    font-family: "NotoSans-Medium";
-  }
-
+export const SignUpDiv = styled.div`
   #signup_button {
     background: #315c72;
     margin-top: 24px;
@@ -43,35 +47,8 @@ export const FormBox = styledc(Box)(
       background: #009688;
     }
   }
-  `,
-);
 
-export const SocialLoginBox = styled(Box)(
-  () => `
-  display: flex;
-  margin-top: 50px;
-  flex-direction: column;
-  justify-content: center;
-
-  .social__buttons {
-    display: flex;
-    justify-content: center;
-  }
-  `,
-);
-
-export const SocialLoginButton = styledc.a`
-  margin-top: 30px;
-
-  img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
-    filter: drop-shadow(5px 5px 5px gray);
-  }
-
-  img:hover {
-    opacity: 0.7;  
+  .signup-box {
+    margin-top: 64px !important;
   }
 `;

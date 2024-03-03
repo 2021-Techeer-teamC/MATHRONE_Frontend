@@ -16,7 +16,9 @@ const Header = observer(() => {
   const navigate = useNavigate();
   const { userStore } = useStore();
   const { account, submitLogout, getProfile } = userStore;
-  const [thirdParty, setThirdParty] = useState(localStorage.getItem('thirdParty'));
+  const [thirdParty, setThirdParty] = useState(
+    localStorage.getItem('thirdParty'),
+  );
   const [loading, setLoading] = useState(false);
 
   const onLogoutClick = () => {
@@ -27,7 +29,7 @@ const Header = observer(() => {
         window.location.href = KAKAO_LOGOUT_URL; //카카오 로그아웃
       }
       setLoading(false);
-      navigate('/account/signin');
+      navigate('/signin');
     });
   };
 
@@ -44,26 +46,26 @@ const Header = observer(() => {
           {!account.nickname ? (
             <Grid container spacing={1}>
               <Grid item xs={6} md={7}>
-                <Link to="/account/signup" className="header-link">
-                  <Button variant="contained" id="register-button" className="header__button">회원가입</Button>
+                <Link to="/signup" className="header-link">
+                  <Button id="register-button">회원가입</Button>
                 </Link>
               </Grid>
               <Grid item xs={6} md={5}>
-                <Link to="/account/signin" className="header-link">
-                  <Button variant="contained" id="login-button" className="header__button">로그인</Button>
+                <Link to="/signin" className="header-link">
+                  <Button id="login-button">로그인</Button>
                 </Link>
               </Grid>
             </Grid>
           ) : (
             <Grid container spacing={1}>
-              <Grid item xs={6} md={4}>
+              <Grid item xs={6} md={5}>
                 <Link to="/profile" className="header-link">
                   <CgProfile id="profile-icon" />
                 </Link>
               </Grid>
-              <Grid item xs={6} md={8}>
+              <Grid item xs={6} md={7}>
                 <Link to="/" className="header-link" onClick={onLogoutClick}>
-                  <LoadingButton variant="contained" fullWidth id="button__logout" className="header__button" loading={loading}>
+                  <LoadingButton id="login-button" loading={loading}>
                     로그아웃
                   </LoadingButton>
                 </Link>

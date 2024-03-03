@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Card, Box, Typography, Container, CardContent, CardMedia } from '@mui/material';
+import {
+  Card,
+  Box,
+  Typography,
+  Container,
+  CardContent,
+  CardMedia,
+} from '@mui/material';
 import './style.css';
 import Header from '../../components/Header';
 import NavBar from '../../components/NavBar';
@@ -33,7 +40,12 @@ export default function Rankpage() {
         <Box sx={{ display: 'flex', paddingBottom: 0.1 }}>
           <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', pt: 5 }}>
-              <CardMedia component="img" sx={{ width: 90, pr: 2 }} image={Trophy} alt="Live from space album cover" />
+              <CardMedia
+                component="img"
+                sx={{ width: 90, pr: 2 }}
+                image={Trophy}
+                alt="Live from space album cover"
+              />
               <Typography variant="h4">Ranking</Typography>
             </Box>
             <CardContent>

@@ -16,7 +16,11 @@ const Fail = () => {
             <Typography variant="h5" gutterBottom>
               결제에 실패했습니다.
             </Typography>
-            <Button variant="contained" className="fail_button" onClick={() => navigate('/')}>
+            <Button
+              variant="contained"
+              className="fail_button"
+              onClick={() => navigate('/')}
+            >
               결제 페이지로 돌아가기
             </Button>
           </Grid>

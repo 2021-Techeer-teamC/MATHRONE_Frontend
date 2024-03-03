@@ -8,7 +8,10 @@ export default function InfoPage(props) {
       <Header title="MATHrone" />
       <NavBar />
       <h1>Info Page</h1>
-      <Footer title="Footer" description="Something here to give the footer a purpose!" />
+      <Footer
+        title="Footer"
+        description="Something here to give the footer a purpose!"
+      />
     </>
   );
 }

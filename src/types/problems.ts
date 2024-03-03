@@ -1,4 +1,4 @@
-export default interface problemItem {
+export default interface problemData {
     problemId: string;
     problemNum: number;
     chapterId: string;

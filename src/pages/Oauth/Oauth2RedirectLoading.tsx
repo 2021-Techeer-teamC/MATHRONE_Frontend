@@ -1,27 +1,31 @@
 // 리다이렉트될 화면
 // OAuth2RedirectHandeler.js
 
+import * as React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 import snsLoginService from '../../services/snsLoginService';
 import userService from '../../services/userService';
 
 export default function Oauth2RedirectLoading(props: { sections: any }) {
   // Ouathcode
-  const code = new URL(window.location.href).searchParams.get('code');
+  let code = new URL(window.location.href).searchParams.get('code');
 
-  useLayoutEffect(() => {
+  // @ts-ignore
+  useEffect(async () => {
     try {
-      snsLoginService.signInWithGoogle(code).then((res) => {
-        window.location.href = '/';
+      const res = await snsLoginService.signInWithGoogle(code);
 
-        localStorage.setItem('accessToken', res.data.accessToken);
+      window.location.href = '/';
 
-        localStorage.setItem('userId', res.data.userInfo.userId);
-        localStorage.setItem('nickname', res.data.userInfo.nickname);
-        localStorage.setItem('thirdParty', 'google');
-      });
+      localStorage.setItem('accessToken', res.data.accessToken);
+
+      localStorage.setItem('userId', res.data.userInfo.userId);
+      localStorage.setItem('nickname', res.data.userInfo.nickname);
+      localStorage.setItem('thirdParty', 'google');
+
+      return res;
     } catch (error) {
       window.location.href = `/Error`;
     }
