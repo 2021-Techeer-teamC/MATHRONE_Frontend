@@ -1,5 +1,4 @@
 import { GOOGLE_OAUTH_URI, KAKAO_AUTH_URL } from '../../Oauth/OauthData';
-import { FlexDiv } from '../../../components/shared-style';
 import { SmallSubtitle } from '../../../components/Typography';
 import { SocialLoginBox, SocialLoginButton } from '../style';
 import GoogleLoginIcon from '../../../assets/image/google_login_icon.png';

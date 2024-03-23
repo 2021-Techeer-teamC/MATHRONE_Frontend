@@ -21,3 +21,7 @@ export interface signInUserItem {
 export interface signUpUserItem {
   nickname: string;
 }
+
+export interface nicknameValidationRequestItem {
+  userAccountId: string;
+}

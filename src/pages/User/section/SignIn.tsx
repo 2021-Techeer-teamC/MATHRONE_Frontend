@@ -1,17 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import LogoIcon from '../../../components/Logo';
-import { Button, Divider, TextField, Box, Typography } from '@mui/material';
+import { Button, TextField, Box, Typography } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { createTheme } from '@mui/material/styles';
 import { useStore } from '../../../store';
 import { observer } from 'mobx-react-lite';
-import { GOOGLE_OAUTH_URI, KAKAO_AUTH_URL } from '../../Oauth/OauthData';
-import { FlexDiv } from '../../../components/shared-style';
-import { SmallSubtitle } from '../../../components/Typography';
-import { FormBox, SocialLoginButton } from '../style';
-import GoogleLoginIcon from '../../../assets/image/google_login_icon.png';
-import KakaoLoginIcon from '../../../assets/image/kakao_login_icon.png';
+import { FormBox } from '../style';
 
 const SignInSide = observer(() => {
   const navigate = useNavigate();
