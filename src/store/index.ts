@@ -9,7 +9,7 @@ const alertStore = new AlertStore();
 const userStore = new UserStore({alertStore});
 const workbookStore = new WorkbookStore();
 const problemStore = new ProblemStore();
-const answerStore = new AnswerStore();
+const answerStore = new AnswerStore({alertStore});
 
 export const store = {
   userStore,

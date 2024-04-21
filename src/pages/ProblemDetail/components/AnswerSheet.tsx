@@ -41,10 +41,10 @@ const AnswerSheet = observer(({ problems, handleProblemChange}: AnswerSheetProps
     changeAnswer(input, problemId);
   };
 
-  const submitAnswer = (isAll: boolean) => {
-    submitAnswerList(isAll).then((res) => {
-      console.log(res);
-      // navigate('/result', { state: { answerData: res } });
+  const submitAnswer = async (isAll: boolean) => {
+    await submitAnswerList(isAll).then((res) => {
+      // console.log('answer submitted');
+      navigate('/result', { state: { answerData: res } });
     })
   };
 
