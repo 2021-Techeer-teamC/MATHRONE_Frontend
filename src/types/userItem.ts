@@ -20,8 +20,15 @@ export interface signInUserItem {
 
 export interface signUpUserItem {
   nickname: string;
+  email: string;
+  emailVerifyCode: string;
+  password: string;
 }
 
 export interface nicknameValidationRequestItem {
   userAccountId: string;
+}
+
+export interface sendingEmailRequestItem {
+  email: string;
 }

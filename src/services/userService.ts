@@ -14,10 +14,10 @@ class UserService {
       },
     );
   }
-  signUp(accountId: string | null, email: string | null, password: string | null) {
+  signUp(userData: any) {
     return axios.post<signUpUserItem>(
       `${process.env.REACT_APP_IP}/user/signup`,
-      { nickname: accountId, email: email, password: password },
+      userData,
       {
         headers: {
           'Content-Type': 'application/json',
@@ -30,6 +30,20 @@ class UserService {
   isNicknameValid(nickname: string) {
     return axios.get<nicknameValidationRequestItem>(
       `/user/check/accountId?userAccountId=${nickname}`,
+    );
+  }
+
+  requestSendingEmailCode(email: string) {
+    return axios.post<nicknameValidationRequestItem>(
+      `/user/email-verify`,
+      { email: email },
+    );
+  }
+
+  verifyEmailCode(email: string) {
+    return axios.post<nicknameValidationRequestItem>(
+      `/user/email-verify`,
+      { email: email },
     );
   }
 

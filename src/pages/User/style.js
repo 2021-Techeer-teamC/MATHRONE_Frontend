@@ -1,7 +1,18 @@
 import styledc from 'styled-components';
 import { Box, Button, styled } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
 
 export const DarkGreenButton = styled(Button)(
+  () => `
+  background: #315c72;
+
+  &:hover {
+    background: #009688;
+  }
+  `,
+);
+
+export const LoadingDarkGreenButton = styled(LoadingButton)(
   () => `
   background: #315c72;
 
@@ -53,6 +64,13 @@ export const IdCheckButton = styled(DarkGreenButton)(
   padding: 8px !important;
   `
 );
+
+export const EmailSendingButton = styled(LoadingDarkGreenButton)(
+  () => `
+  margin-left: 8px;
+  padding: 8px !important;
+  `
+)
 
 export const SignupButton = styled(DarkGreenButton)(
   () => `
