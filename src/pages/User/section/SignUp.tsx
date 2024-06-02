@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import {
   Button,
@@ -55,7 +56,9 @@ export default function SignUP() {
       setAlertOpen("success", "회원가입 되었습니다.");
       navigate("/account/signin");
     } catch (error) {
-      setAlertOpen('error', error.response.data.message)
+      if (axios.isAxiosError(error) && error.response) {
+        setAlertOpen('error', error.response.data.message);
+      }
     }
   };
 
