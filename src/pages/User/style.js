@@ -1,5 +1,26 @@
 import styledc from 'styled-components';
-import { Box, Paper, Grid, styled } from '@mui/material';
+import { Box, Button, styled } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
+
+export const DarkGreenButton = styled(Button)(
+  () => `
+  background: #315c72;
+
+  &:hover {
+    background: #009688;
+  }
+  `,
+);
+
+export const LoadingDarkGreenButton = styled(LoadingButton)(
+  () => `
+  background: #315c72;
+
+  &:hover {
+    background: #009688;
+  }
+  `,
+);
 
 export const FormBox = styledc(Box)(
   () => `
@@ -34,16 +55,28 @@ export const FormBox = styledc(Box)(
     text-decoration: underline;
     font-family: "NotoSans-Medium";
   }
-
-  #signup_button {
-    background: #315c72;
-    margin-top: 24px;
-    margin-bottom: 16px;
-    :hover {
-      background: #009688;
-    }
-  }
   `,
+);
+
+export const IdCheckButton = styled(DarkGreenButton)(
+  () => `
+  margin-left: 8px;
+  padding: 8px !important;
+  `
+);
+
+export const EmailSendingButton = styled(LoadingDarkGreenButton)(
+  () => `
+  margin-left: 8px;
+  padding: 8px !important;
+  `
+)
+
+export const SignupButton = styled(DarkGreenButton)(
+  () => `
+  margin-top: 24px;
+  margin-bottom: 16px;
+  `
 );
 
 export const SocialLoginBox = styled(Box)(

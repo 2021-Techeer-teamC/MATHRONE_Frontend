@@ -4,10 +4,13 @@ import problemItem from '../../types/problems';
 import answerService from '../../services/answerService';
 
 class AnswerStore {
+  alertStore;
+
   userAnswerList: userAnswerItem[] | [] = [];
 
-  constructor() {
+  constructor({alertStore}: any) {
     makeAutoObservable(this);
+    this.alertStore = alertStore;
   }
 
   initializeAnswerList = async (problemList: problemItem[]) => {
@@ -41,19 +44,24 @@ class AnswerStore {
     }
   };
 
-  submitAnswerList = async (isAll: boolean) => {
+  submitAnswerList = async (checkAll: boolean) => {
     try {
       const answerObj: userAnswerSubmitItem = {
-        answerSubmitList: this.userAnswerList,
-        isAll: isAll
+        answerSubmitList:
+          checkAll ? 
+            this.userAnswerList.map((answer: userAnswerItem) => {
+              // TEMP: myAnswer non empty value
+              if(answer.myAnswer === "") return { problemId: answer.problemId, myAnswer: "999" }
+              else return answer;
+            })
+            : this.userAnswerList.filter((answer)=> answer.myAnswer !== ""),
       };
-      answerService.postAnswer(answerObj).then((res) => {
-        console.log(res);
-        return res.data;
-      })
+      const res = await answerService.postAnswer(answerObj, checkAll);
+      return res;
     } catch (error) {
-      console.error('Error: ', error);
-      return error;
+      // console.log(error.response);
+      this.alertStore.setAlertOpen('error', '채점에 문제가 생겼습니다.');
+      throw error;
     }
   };
 }

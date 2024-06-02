@@ -13,5 +13,4 @@ export interface userAnswerItem {
 
 export interface userAnswerSubmitItem {
   answerSubmitList: userAnswerItem[];
-  isAll: boolean;
 };

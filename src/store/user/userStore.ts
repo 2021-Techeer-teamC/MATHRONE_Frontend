@@ -49,13 +49,14 @@ class UserStore {
     }
   };
 
-  submitSignUp = async (id: string, email: string, password: string) => {
+  submitSignUp = async (userData: any) => {
     try {
-      const res = userService.signUp(id, email, password);
+      const res = userService.signUp(userData);
       return res;
     } catch (error) {
+      this.alertStore.setAlertOpen('error', '회원가입에 실패하였습니다')
       console.error('Error: ', error);
-      return error;
+      throw error;
     }
   };
 
