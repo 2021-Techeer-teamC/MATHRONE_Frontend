@@ -55,7 +55,7 @@ export default function SignUP() {
       setAlertOpen("success", "회원가입 되었습니다.");
       navigate("/account/signin");
     } catch (error) {
-      console.log("error");
+      setAlertOpen('error', error.response.data.message)
     }
   };
 
@@ -97,13 +97,14 @@ export default function SignUP() {
               "이메일이 전송되었습니다.\n이메일로 전송된 인증코드를 넣어 인증해주세요.",
             );
             setEmailSendingTried(true);
-            setIsEmailVerificationSending(false);
           });
       } else {
         setAlertOpen("error", "사용할 이메일을 입력해주세요.");
       }
+      setIsEmailVerificationSending(false);
     } catch (error) {
       setAlertOpen("error", "유효하지 않은 이메일입니다.");
+      setIsEmailVerificationSending(false);
       console.log(error);
     }
   };
